@@ -96,7 +96,7 @@ export default function Hero() {
         <div className="absolute inset-0 z-[1] flex items-center justify-center pointer-events-none">
            <canvas
              ref={canvasRef}
-             className="w-full h-full object-cover mix-blend-darken opacity-90" 
+             className="w-full h-full object-contain mix-blend-darken opacity-90" 
            />
         </div>
 
