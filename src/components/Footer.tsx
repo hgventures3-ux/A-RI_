@@ -109,6 +109,8 @@ export default function Footer() {
               <ul className="space-y-2.5">
                 {(links as string[]).map((link: string) => {
                   const slug = link
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "")
                     .toLowerCase()
                     .replace(/[^a-z0-9]+/g, "-")
                     .replace(/(^-|-$)/g, "");
@@ -140,21 +142,21 @@ export default function Footer() {
             {s.copyright}
           </p>
           <div className="flex items-center gap-4">
-            <a
-              href="#"
+            <Link
+              href={`/legal/${s.returnPolicy.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`}
               className="text-xs text-[#FFFFFF]/25 transition-colors hover:text-[#FFFFFF]/50"
               style={{ fontFamily: "var(--font-lora)" }}
             >
               {s.returnPolicy}
-            </a>
+            </Link>
             <span className="text-[#FFFFFF]/10">·</span>
-            <a
-              href="#"
+            <Link
+              href={`/legal/${s.privacy.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`}
               className="text-xs text-[#FFFFFF]/25 transition-colors hover:text-[#FFFFFF]/50"
               style={{ fontFamily: "var(--font-lora)" }}
             >
               {s.privacy}
-            </a>
+            </Link>
             <span className="text-[#FFFFFF]/10">·</span>
             <span
               className="text-xs text-[#FFFFFF]/15"
