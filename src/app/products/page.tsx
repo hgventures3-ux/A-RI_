@@ -5,6 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 /* ──────────────────────────── Translations ──────────────────────────── */
 
@@ -225,126 +227,7 @@ export default function ProductsPage() {
         }}
       >
         {/* ═══════════════════════ NAVBAR ═══════════════════════ */}
-        <header className="fixed top-0 inset-x-0 z-50">
-          <nav
-            className="flex items-center justify-between px-6 md:px-12 py-3 backdrop-blur-md border-b"
-            style={{
-              backgroundColor: "rgba(254,248,246,0.85)",
-              borderColor: "#cec5bb",
-            }}
-          >
-            {/* Brand */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
-            >
-              <Link href="/">
-                <span
-                  className="text-xl font-semibold tracking-[0.25em] uppercase cursor-pointer"
-                  style={{
-                    fontFamily: "var(--font-playfair), var(--font-inter), serif",
-                    color: "#675d4e",
-                  }}
-                >
-                  AÉRI
-                </span>
-              </Link>
-            </motion.div>
-
-            {/* Nav Links */}
-            <motion.div
-              initial={{ opacity: 0, y: -12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="hidden md:flex items-center gap-8 text-xs tracking-[0.18em] uppercase font-medium"
-              style={{ color: "#4c463e" }}
-            >
-              <Link
-                href="/products"
-                className="transition-colors hover:text-[#675d4e]"
-                style={{ color: "#675d4e", fontWeight: 700 }}
-              >
-                {d.nav.boutique}
-              </Link>
-              <Link
-                href="/pro"
-                className="transition-colors hover:text-[#675d4e]"
-              >
-                {d.nav.espacesPro}
-              </Link>
-              <Link
-                href="/lab"
-                className="transition-colors hover:text-[#675d4e]"
-              >
-                {d.nav.laboratoire}
-              </Link>
-              <Link
-                href="/contact"
-                className="transition-colors hover:text-[#675d4e]"
-              >
-                {d.nav.contact}
-              </Link>
-            </motion.div>
-
-            {/* Right icons */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.15 }}
-              className="flex items-center gap-4"
-            >
-              {/* Language toggle */}
-              <button
-                onClick={toggle}
-                className="text-xs tracking-widest uppercase font-semibold px-3 py-1 rounded-full border transition-colors"
-                style={{
-                  borderColor: "#cec5bb",
-                  color: "#675d4e",
-                }}
-              >
-                {lang === "fr" ? "EN" : "FR"}
-              </button>
-
-              {/* Cart icon */}
-              <button aria-label="Cart" className="p-1.5" style={{ color: "#675d4e" }}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <circle cx="9" cy="21" r="1" />
-                  <circle cx="20" cy="21" r="1" />
-                  <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-                </svg>
-              </button>
-
-              {/* Account icon */}
-              <button aria-label="Account" className="p-1.5" style={{ color: "#675d4e" }}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                  <circle cx="12" cy="7" r="4" />
-                </svg>
-              </button>
-            </motion.div>
-          </nav>
-        </header>
+        <Navbar />
 
         {/* ═══════════════════════ HERO ═══════════════════════ */}
         <section className="pt-36 pb-16 md:pt-44 md:pb-20 px-6 md:px-12 max-w-5xl mx-auto text-center">
@@ -615,41 +498,7 @@ export default function ProductsPage() {
         </section>
 
         {/* ═══════════════════════ FOOTER ═══════════════════════ */}
-        <footer
-          className="py-16 px-6 md:px-12"
-          style={{ backgroundColor: "#32302f", color: "#e6e1df" }}
-        >
-          <div className="max-w-6xl mx-auto">
-            <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-10 mb-12">
-              <span
-                className="text-2xl font-bold tracking-[0.25em] uppercase"
-                style={{
-                  fontFamily:
-                    "var(--font-playfair), var(--font-inter), serif",
-                }}
-              >
-                AÉRI
-              </span>
-              <div className="flex flex-wrap gap-x-8 gap-y-3 text-xs tracking-[0.15em] uppercase" style={{ color: "#cec5bb" }}>
-                {d.footer.links.map((link) => (
-                  <a
-                    key={link}
-                    href="#"
-                    className="hover:text-white transition-colors"
-                  >
-                    {link}
-                  </a>
-                ))}
-              </div>
-            </div>
-            <div
-              className="border-t pt-8 text-center text-xs tracking-[0.2em] uppercase"
-              style={{ borderColor: "#4c463e", color: "#cec5bb" }}
-            >
-              {d.footer.copy}
-            </div>
-          </div>
-        </footer>
+        <Footer />
       </main>
 
       {/* ═══════════════════════ WAITLIST MODAL ═══════════════════════ */}
