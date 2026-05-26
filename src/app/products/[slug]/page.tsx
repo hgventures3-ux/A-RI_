@@ -154,7 +154,7 @@ const productData: Record<
 };
 
 /* ─── animation helpers ─── */
-const fadeUp = {
+const fadeUp: any = {
   hidden: { opacity: 0, y: 36 },
   visible: (d: number = 0) => ({
     opacity: 1,
@@ -163,7 +163,7 @@ const fadeUp = {
   }),
 };
 
-const fadeIn = {
+const fadeIn: any = {
   hidden: { opacity: 0 },
   visible: (d: number = 0) => ({
     opacity: 1,
@@ -428,10 +428,9 @@ export default function ProductDetailPage() {
               <input
                 type="email"
                 placeholder="your@email.com"
-                className="flex-1 px-5 py-3 rounded-xl focus:outline-none focus:ring-2 text-sm"
+                className="flex-1 px-5 py-3 rounded-xl focus:outline-none focus:ring-2 text-sm focus:ring-[#675d4e]/30"
                 style={{
                   border: "1px solid rgba(29,27,26,0.1)",
-                  focusRingColor: "rgba(103,93,78,0.3)",
                   fontFamily: "var(--font-inter), sans-serif",
                 }}
               />
