@@ -99,6 +99,16 @@ export default function Hero() {
            />
         </div>
 
+        {/* Watermark Cover for Veo Logo */}
+        <div 
+          className="absolute bottom-3 right-3 md:bottom-5 md:right-5 z-[5] bg-[#EAE0D3]/90 backdrop-blur-md px-3 py-1.5 md:px-5 md:py-2 rounded flex items-center justify-center"
+          style={{ boxShadow: "0 2px 10px rgba(0,0,0,0.03)" }}
+        >
+           <span className="text-[10px] md:text-xs tracking-[0.25em] uppercase font-bold text-[#4c463e]" style={{ fontFamily: "var(--font-montserrat), sans-serif" }}>
+             AÉRI
+           </span>
+        </div>
+
         {/* Top Header / Nav Area */}
         <Navbar />
 
