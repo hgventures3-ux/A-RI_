@@ -7,7 +7,7 @@ import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-mot
 import { useLanguage } from "@/context/LanguageContext";
 import t from "@/translations";
 
-const FRAME_COUNT = 240;
+const FRAME_COUNT = 233;
 
 export default function Hero() {
   const { lang } = useLanguage();
