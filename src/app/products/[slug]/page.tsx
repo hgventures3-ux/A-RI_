@@ -5,6 +5,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 /* ─── product catalogue ─── */
 const productData: Record<
@@ -64,39 +66,39 @@ const productData: Record<
   },
   "herbes-de-provence": {
     title: "Herbes de Provence",
-    tagline: "The Mediterranean Garden",
+    tagline: "Le Jardin Méditerranéen",
     heroDesc:
-      "Thyme, rosemary, savory, oregano, and basil — the aromatic soul of Southern France captured in every air-popped Makhana seed.",
+      "Thym, romarin, sarriette, origan et basilic — l'âme aromatique du Sud de la France capturée dans chaque graine de Makhana soufflée à l'air.",
     image: "/flavor_herbes.png",
     color: "#F5F7F0",
-    story: "The herbes de Provence blend is a love letter to the sun-drenched hillsides of Southern France, where wild herbs grow in abundance among the lavender fields. Our proprietary blend uses only whole dried herbs, hand-selected from certified organic farms in the Luberon valley. Each herb is harvested at peak potency and gently dried to preserve its essential oils. When combined with the neutral, airy canvas of Makhana, the herbs sing — delivering an aromatic experience that transports you to a Provençal garden with every handful.",
+    story: "Le mélange d'herbes de Provence est une lettre d'amour aux collines ensoleillées du Sud de la France, où les herbes sauvages poussent en abondance parmi les champs de lavande. Notre mélange exclusif utilise uniquement des herbes entières séchées, soigneusement sélectionnées dans des fermes biologiques certifiées de la vallée du Luberon. Chaque herbe est récoltée à pleine maturité et séchée délicatement pour préserver ses huiles essentielles. Associées à la toile neutre et aérée du Makhana, les herbes chantent — offrant une expérience aromatique qui vous transporte dans un jardin provençal à chaque poignée.",
     process:
-      "The Makhana seeds undergo our signature zero-oil popping process, then receive a fine coating of premium extra virgin olive oil sourced from century-old groves in Andalusia. The herbes de Provence are then precisely measured and tumbled with the seeds in small batches to ensure even distribution. Each batch is tasted by our quality team before packaging.",
+      "Les graines de Makhana subissent notre processus exclusif de soufflage à zéro huile, puis reçoivent un léger enrobage d'huile d'olive extra vierge premium issue d'oliviers centenaires d'Andalousie. Les herbes de Provence sont ensuite précisément dosées et mélangées avec les graines en petits lots pour assurer une distribution uniforme. Chaque lot est dégusté par notre équipe qualité avant conditionnement.",
     ingredients:
-      "Popped Euryale Ferox seeds (Makhana) (88%), extra virgin olive oil (5%), herbes de Provence blend (thyme, rosemary, savory, oregano, basil) (5%), sea salt (2%).",
+      "Graines d'Euryale Ferox soufflées (Makhana) (88%), huile d'olive extra vierge (5%), mélange d'herbes de Provence (thym, romarin, sarriette, origan, basilic) (5%), sel de mer (2%).",
     allergens:
-      "Naturally gluten-free. No nuts. No soy. No dairy. Produced in a facility that handles tree nuts and sesame.",
+      "Naturellement sans gluten. Sans noix. Sans soja. Sans produits laitiers. Fabriqué dans un établissement qui traite des noix et du sésame.",
     nutrition: [
-      { label: "Energy", value: "115 kcal" },
-      { label: "Protein", value: "3.2 g" },
-      { label: "Total Fat", value: "2.1 g" },
-      { label: "Carbohydrates", value: "21 g" },
-      { label: "Dietary Fiber", value: "1.6 g" },
+      { label: "Énergie", value: "115 kcal" },
+      { label: "Protéines", value: "3,2 g" },
+      { label: "Lipides Totaux", value: "2,1 g" },
+      { label: "Glucides", value: "21 g" },
+      { label: "Fibres Alimentaires", value: "1,6 g" },
       { label: "Sodium", value: "150 mg" },
       { label: "Calcium", value: "28 mg" },
-      { label: "Iron", value: "1.0 mg" },
+      { label: "Fer", value: "1,0 mg" },
     ],
     pairings: [
-      "Ideal with a chilled rosé from Provence",
-      "Complements goat cheese and olive tapenade",
-      "A gourmet alternative to croutons in salads",
-      "Serve alongside grilled vegetables and dips",
+      "Idéal avec un rosé frais de Provence",
+      "Complète parfaitement le chèvre et la tapenade d'olives",
+      "Une alternative gastronomique aux croûtons dans les salades",
+      "À servir avec des légumes grillés et des sauces",
     ],
     storage:
-      "Store in a cool, dry place away from direct sunlight. Once opened, reseal tightly and consume within 7 days for optimal crunch.",
-    weight: "30g per serving · 90g per pack",
+      "Conserver dans un endroit frais et sec, à l'abri de la lumière directe du soleil. Une fois ouvert, refermer hermétiquement et consommer dans les 7 jours pour un craquant optimal.",
+    weight: "30g par portion · 90g par sachet",
     origin:
-      "Makhana: Bihar, India · Herbs: Luberon, France · Olive Oil: Andalusia, Spain",
+      "Makhana : Bihar, Inde · Herbes : Luberon, France · Huile d'Olive : Andalousie, Espagne",
   },
   "black-truffle": {
     title: "Black Truffle",
@@ -139,6 +141,82 @@ const productData: Record<
     tagline: "The Next Chapter",
     heroDesc:
       "Something extraordinary is in development. A new flavor experience that will push the boundaries of what a snack can be.",
+    image: "/flavor_mystery.png",
+    color: "#F5F5F7",
+    story: "",
+    process: "",
+    ingredients: "",
+    allergens: "",
+    nutrition: [],
+    pairings: [],
+    storage: "",
+    weight: "",
+    origin: "",
+  },
+  "sel-de-l-himalaya": {
+    title: "Sel de l'Himalaya",
+    tagline: "Pureté Sublime, Élevée",
+    heroDesc: "L'élégance intemporelle du sel rose de l'Himalaya rencontre le craquant éthéré du Makhana soufflé à la main. Un chef-d'œuvre minimaliste pour le palais exigeant.",
+    image: "/flavor_salt.png",
+    color: "#FDF6F0",
+    story: "Extrait des anciennes mines de sel de Khewra au pied de l'Himalaya, notre sel rose contient plus de 84 oligo-éléments préservés depuis 250 millions d'années. Associé à la texture délicate et aérée des meilleures graines de Makhana du Bihar, il crée un snack à la fois profondément simple et profondément satisfaisant. C'est la saveur qui a lancé notre aventure — un hommage à la philosophie selon laquelle les meilleurs ingrédients n'ont besoin que d'eux-mêmes.",
+    process: "Chaque graine de Makhana est récoltée à la main dans les étangs préservés du Bihar, séchée au soleil pendant 48 heures, puis soufflée par des méthodes traditionnelles de chaleur — sans huile, sans machines. Les graines sont ensuite légèrement vaporisées d'huile d'olive extra vierge pressée à froid et saupoudrées de sel rose de l'Himalaya finement moulu. Le résultat est un snack avec moins de 2% de matières grasses qui délivre un craquant satisfaisant à chaque bouchée.",
+    ingredients: "Graines d'Euryale Ferox soufflées (Makhana) (92%), huile d'olive extra vierge pressée à froid (5%), sel rose de l'Himalaya (3%).",
+    allergens: "Naturellement sans gluten. Sans noix. Sans soja. Sans produits laitiers. Fabriqué dans un établissement qui traite des noix et du sésame.",
+    nutrition: [
+      { label: "Énergie", value: "110 kcal" },
+      { label: "Protéines", value: "3,0 g" },
+      { label: "Lipides Totaux", value: "1,8 g" },
+      { label: "Glucides", value: "21 g" },
+      { label: "Fibres Alimentaires", value: "1,4 g" },
+      { label: "Sodium", value: "180 mg" },
+      { label: "Calcium", value: "25 mg" },
+      { label: "Fer", value: "0,8 mg" },
+    ],
+    pairings: [
+      "S'accorde magnifiquement avec un Chablis ou un Sauvignon Blanc frais",
+      "Excellent aux côtés d'un houmous ou d'un tzatziki",
+      "Un ajout raffiné à tout plateau de fromages",
+      "Parfait avec de l'eau pétillante et une tranche de citron",
+    ],
+    storage: "Conserver dans un endroit frais et sec, à l'abri de la lumière directe du soleil. Une fois ouvert, refermer hermétiquement et consommer dans les 7 jours pour un craquant optimal.",
+    weight: "30g par portion · 90g par sachet",
+    origin: "Makhana : Bihar, Inde · Sel : Khewra, Pakistan · Huile d'Olive : Andalousie, Espagne",
+  },
+  "truffe-noire": {
+    title: "Truffe Noire",
+    tagline: "L'Or Noir de l'Apéro",
+    heroDesc: "L'arôme envoûtant de la truffe noire du Périgord, sublimé par la légèreté nuageuse du Makhana. Le luxe accessible, redéfini.",
+    image: "/flavor_truffle.png",
+    color: "#F5F3F0",
+    story: "La truffe noire du Périgord (Tuber Melanosporum) est le joyau de la gastronomie française depuis des siècles. Prisée par les chefs du monde entier pour son arôme profond, terreux et légèrement musqué, elle transforme tout plat qu'elle touche en quelque chose d'extraordinaire. Nous avons travaillé avec des artisans truffiers de la Dordogne pour développer un assaisonnement exclusif qui capture l'essence de la truffe fraîchement râpée. Associé au craquant éthéré du Makhana soufflé à la main et à un murmure de sel de Guérande, c'est notre création la plus indulgente — la preuve que luxe et santé peuvent coexister magnifiquement.",
+    process: "Notre assaisonnement à la truffe est élaboré à partir de véritables morceaux de truffe noire d'été (Tuber Aestivum) combinés à un arôme naturel de truffe dérivé de la prestigieuse variété du Périgord. Les graines de Makhana sont d'abord légèrement enrobées d'huile d'olive extra vierge, puis le mélange à la truffe est soigneusement appliqué dans notre installation à température contrôlée pour préserver les composés aromatiques volatils. Enfin, une délicate touche de sel de Guérande récolté à la main ajoute une complexité minérale.",
+    ingredients: "Graines d'Euryale Ferox soufflées (Makhana) (86%), huile d'olive extra vierge (6%), morceaux de truffe noire d'été (Tuber Aestivum) (3%), arôme naturel de truffe (2%), sel de Guérande (3%).",
+    allergens: "Naturellement sans gluten. Sans noix. Sans soja. Sans produits laitiers. Contient de la truffe. Fabriqué dans un établissement qui traite des noix et du sésame.",
+    nutrition: [
+      { label: "Énergie", value: "118 kcal" },
+      { label: "Protéines", value: "3,5 g" },
+      { label: "Lipides Totaux", value: "2,5 g" },
+      { label: "Glucides", value: "20,5 g" },
+      { label: "Fibres Alimentaires", value: "1,5 g" },
+      { label: "Sodium", value: "160 mg" },
+      { label: "Calcium", value: "22 mg" },
+      { label: "Fer", value: "0,9 mg" },
+    ],
+    pairings: [
+      "Exceptionnel avec un verre de Bourgogne vieilli ou de Barolo",
+      "Sublime aux côtés d'un Comté affiné ou d'un Parmigiano-Reggiano",
+      "Élève tout plateau de charcuterie à des sommets gastronomiques",
+      "Parfait avec du champagne pour les célébrations",
+    ],
+    storage: "Conserver dans un endroit frais et sec, à l'abri de la lumière directe du soleil. Une fois ouvert, refermer hermétiquement et consommer dans les 5 jours pour préserver l'arôme de truffe.",
+    weight: "30g par portion · 90g par sachet",
+    origin: "Makhana : Bihar, Inde · Truffe : Dordogne, France · Sel : Guérande, France",
+  },
+  "bientot": {
+    title: "Bientôt…",
+    tagline: "Le Prochain Chapitre",
+    heroDesc: "Quelque chose d'extraordinaire est en cours de développement. Une nouvelle expérience gustative qui repoussera les limites de ce qu'un snack peut être.",
     image: "/flavor_mystery.png",
     color: "#F5F5F7",
     story: "",
@@ -221,57 +299,8 @@ export default function ProductDetailPage() {
       }}
     >
       {/* ════════ FIXED NAVBAR ════════ */}
-      <header
-        className="fixed top-0 left-0 right-0 z-[50] w-full flex justify-between items-center px-6 md:px-12 py-4 backdrop-blur-xl border-b"
-        style={{
-          backgroundColor: "rgba(254,248,246,0.8)",
-          borderColor: "rgba(29,27,26,0.05)",
-        }}
-      >
-        <motion.div
-          initial={{ opacity: 0, y: -16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-        >
-          <Link href="/">
-            <h2
-              className="text-xl tracking-[0.25em] uppercase font-semibold cursor-pointer"
-              style={{
-                color: "#1d1b1a",
-                fontFamily: "var(--font-montserrat), sans-serif",
-              }}
-            >
-              AÉRI
-            </h2>
-          </Link>
-        </motion.div>
-
-        <motion.nav
-          initial={{ opacity: 0, y: -16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          className="hidden md:flex gap-8 text-xs tracking-[0.2em] uppercase font-medium"
-          style={{ color: "rgba(29,27,26,0.55)" }}
-        >
-          <Link
-            href="/brand"
-            className="hover:opacity-100 transition-opacity"
-            style={{ opacity: 0.7 }}
-          >
-            The Brand
-          </Link>
-          <Link href="/products" style={{ color: "#1d1b1a", opacity: 1 }}>
-            Products
-          </Link>
-          <Link
-            href="/contact"
-            className="hover:opacity-100 transition-opacity"
-            style={{ opacity: 0.7 }}
-          >
-            Contact
-          </Link>
-        </motion.nav>
-      </header>
+      {/* Navbar */}
+      <Navbar />
 
       {/* ════════ HERO ════════ */}
       <section
@@ -838,6 +867,7 @@ export default function ProductDetailPage() {
           </section>
         </>
       )}
+      <Footer />
     </main>
   );
 }

@@ -4,6 +4,8 @@ import React from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 const pages: Record<string, { title: string; sections: { heading: string; body: string }[] }> = {
   "return-policy": {
@@ -59,6 +61,58 @@ const pages: Record<string, { title: string; sections: { heading: string; body: 
       { heading: "9. Contact & Complaints", body: "If you have any questions, concerns, or complaints about this Privacy Policy or our data practices, please contact us at: privacy@aeri-snack.com. If you are not satisfied with our response, you have the right to lodge a complaint with the CNIL (Commission Nationale de l'Informatique et des Libertés), the French data protection authority: www.cnil.fr. This Privacy Policy was last updated on May 19, 2026, and may be revised periodically." },
     ]
   },
+  "politique-de-retour": {
+    title: "Politique de Retour",
+    sections: [
+      { heading: "Vue d'ensemble", body: "Chez AÉRI, votre satisfaction est notre priorité absolue. Nous garantissons la qualité de chaque produit que nous vendons. Cette Politique de Retour décrit les conditions dans lesquelles vous pouvez demander un retour, un échange ou un remboursement pour les produits achetés via notre site officiel ou nos partenaires revendeurs agréés." },
+      { heading: "Éligibilité aux Retours", body: "En raison de la nature périssable de nos produits alimentaires, les retours ne sont acceptés que dans les circonstances suivantes : (a) le produit a été endommagé lors de la livraison, (b) le produit reçu est incorrect ou différent de ce qui a été commandé, (c) le produit présente des signes de manipulation ou d'emballage compromis à la livraison, ou (d) le produit a expiré avant la date 'meilleure avant' indiquée. Pour être éligible à un retour, vous devez nous contacter dans les 7 jours calendaires suivant la réception de votre commande. Toutes les réclamations doivent être accompagnées de preuves photographiques (emballage endommagé, produit incorrect, etc.)." },
+      { heading: "Articles Non Remboursables", body: "Nous ne pouvons pas accepter les retours pour : les produits ouverts et partiellement consommés (sauf défaut de qualité évident), les produits achetés il y a plus de 7 jours, les produits mal conservés (exposés à la chaleur, à l'humidité ou aux rayons directs du soleil), ou les produits achetés auprès de revendeurs tiers non autorisés. Les cartes cadeaux et les articles promotionnels ne sont pas remboursables." },
+      { heading: "Processus de Remboursement", body: "Une fois que nous avons reçu et vérifié votre demande de retour, nous traiterons votre remboursement dans un délai de 5 à 10 jours ouvrables. Les remboursements sont effectués sur le mode de paiement original utilisé lors du paiement. Pour les paiements par carte de crédit, veuillez prévoir 5 à 7 jours ouvrables supplémentaires pour que le remboursement apparaisse sur votre relevé. Les frais d'expédition ne sont pas remboursables, sauf si le retour est dû à notre erreur." },
+      { heading: "Politique d'Échange", body: "Si vous souhaitez échanger un produit contre une saveur ou une taille différente, veuillez contacter notre équipe du service client. Les échanges sont soumis à la disponibilité des produits. Si le produit de remplacement est d'une valeur supérieure, la différence vous sera facturée." },
+      { heading: "Comment Initier un Retour", body: "Pour initier un retour, veuillez nous envoyer un e-mail à returns@aeri-snack.com avec votre numéro de commande, une description du problème et des preuves photographiques. Notre équipe du service client répondra dans les 24 heures ouvrables avec des instructions. Ne renvoyez aucun produit sans avoir préalablement reçu un numéro d'Autorisation de Retour (RA) de notre équipe." },
+      { heading: "Commandes Internationales", body: "Pour les commandes expédiées en dehors de la France, les frais de retour sont à la charge du client, sauf si le retour est dû à une erreur de notre part. Les remboursements internationaux peuvent prendre jusqu'à 15 jours ouvrables en raison des procédures bancaires transfrontalières." },
+    ]
+  },
+  "cgv": {
+    title: "Conditions Générales de Vente (B2B)",
+    sections: [
+      { heading: "1. Champ d'Application", body: "Les présentes Conditions Générales de Vente (CGV) régissent toutes les relations commerciales entre H&G Ventures Private Limited (exploitant la marque AÉRI) et ses partenaires professionnels (acheteurs B2B, distributeurs, revendeurs, établissements de restauration et hôtels). Toute commande passée implique l'acceptation sans réserve des présentes CGV. Ces conditions prévalent sur tout autre document du partenaire commercial, sauf accord contraire express et écrit de la part d'AÉRI." },
+      { heading: "2. Produits et Disponibilité", body: "Nos produits sont proposés dans la limite des stocks disponibles. En cas d'indisponibilité d'un produit après passation de la commande, AÉRI s'engage à en informer le partenaire dans les meilleurs délais et à lui proposer une solution alternative (substitution de produit, délai de livraison prolongé ou remboursement). Tous les produits sont conformes aux réglementations alimentaires européennes (UE) et aux certifications FSSAI, NABL et IEC en vigueur." },
+      { heading: "3. Prix et Modalités de Paiement", body: "Tous les prix sont exprimés en Euros (€) hors taxes (HT) et sont susceptibles d'être modifiés sans préavis. Les prix applicables sont ceux figurant sur le bon de commande confirmé. Le paiement est exigible selon les modalités convenues dans le contrat-cadre ou, à défaut, à 30 jours date de facture. En cas de retard de paiement, des pénalités de retard seront appliquées au taux légal en vigueur, augmenté de 5 points, ainsi qu'une indemnité forfaitaire de recouvrement de 40 €." },
+      { heading: "4. Livraison et Transfert de Risques", body: "Les délais de livraison sont donnés à titre indicatif. Les livraisons s'effectuent selon les Incoterms convenus (CIF ou FOB). Le transfert de risques s'opère conformément aux Incoterms applicables. AÉRI ne saurait être tenu responsable des retards imputables aux transporteurs, aux douanes ou à des événements de force majeure." },
+      { heading: "5. Réclamations et Garanties", body: "Toute réclamation relative à un défaut apparent ou à une non-conformité doit être formulée par écrit dans les 72 heures suivant la réception de la marchandise. Les réclamations tardives ne seront pas prises en compte. En cas de défaut avéré, AÉRI s'engage à remplacer les produits défectueux ou à émettre un avoir, à sa discrétion exclusive. La responsabilité d'AÉRI est limitée au montant de la commande concernée." },
+      { heading: "6. Propriété Intellectuelle", body: "Toutes les marques, logos, noms commerciaux, designs et autres éléments de propriété intellectuelle d'AÉRI sont la propriété exclusive de H&G Ventures Private Limited. Toute utilisation non autorisée est strictement interdite. Le partenaire s'engage à utiliser les supports marketing fournis par AÉRI conformément aux directives de la marque." },
+      { heading: "7. Confidentialité", body: "Les parties s'engagent à maintenir confidentielle toute information commerciale, technique et financière échangée dans le cadre de leur relation d'affaires, pendant une durée de 3 ans après la fin du contrat. Cette obligation ne s'applique pas aux informations déjà publiques ou dont la divulgation est imposée par la loi." },
+      { heading: "8. Droit Applicable et Juridiction", body: "Les présentes CGV sont soumises au droit français. Tout litige relatif à leur interprétation ou à leur exécution sera soumis, à défaut de règlement amiable, à la compétence exclusive du Tribunal de Commerce de Paris." },
+    ]
+  },
+  "mentions-legales": {
+    title: "Mentions Légales",
+    sections: [
+      { heading: "Éditeur du Site", body: "Le site www.aeri-snack.com est édité par H&G Ventures Private Limited, société constituée selon les lois indiennes. Siège social : Bihar, Inde. Opérations européennes : 75008 Paris, France. Numéro d'immatriculation : disponible sur demande. Numéro de licence FSSAI : disponible sur demande. IEC (Code Import Export) : enregistré et actif." },
+      { heading: "Directeur de la Publication", body: "Le directeur de la publication du site www.aeri-snack.com est le Directeur Général de H&G Ventures Private Limited. Pour toute demande éditoriale : editorial@aeri-snack.com." },
+      { heading: "Hébergement", body: "Ce site est hébergé par Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis. L'infrastructure d'hébergement est conforme aux exigences du RGPD en matière de traitement et de stockage des données. Toutes les données transmises entre votre navigateur et nos serveurs sont chiffrées via le protocole TLS 1.3." },
+      { heading: "Propriété Intellectuelle", body: "L'ensemble du contenu de ce site — textes, images, graphiques, logos, icônes, photographies, vidéos, sons, logiciels et codes — est la propriété exclusive de H&G Ventures Private Limited, sauf mention contraire. Toute reproduction, représentation, modification, publication, adaptation ou exploitation de tout ou partie de ce contenu, par quelque moyen que ce soit, sans l'autorisation écrite préalable de H&G Ventures Private Limited, est strictement interdite et constitue une contrefaçon punissable en vertu des articles L.335-2 et suivants du Code de la propriété intellectuelle français." },
+      { heading: "Protection des Données Personnelles", body: "Conformément au Règlement Général sur la Protection des Données (RGPD - UE 2016/679) et à la loi Informatique et Libertés, vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation du traitement et de portabilité de vos données personnelles. Vous disposez également d'un droit d'opposition au traitement de vos données. Pour exercer ces droits, veuillez contacter notre Délégué à la Protection des Données à : privacy@aeri-snack.com." },
+      { heading: "Cookies", body: "Ce site utilise des cookies pour améliorer votre expérience de navigation, analyser le trafic du site et personnaliser le contenu. En continuant à utiliser ce site, vous consentez à notre utilisation des cookies conformément à notre Politique de Cookies. Vous pouvez gérer vos préférences en matière de cookies via les paramètres de votre navigateur à tout moment. Les cookies essentiels au fonctionnement du site ne peuvent pas être désactivés." },
+      { heading: "Liens Hypertextes", body: "Ce site peut contenir des liens hypertextes vers des sites tiers. H&G Ventures Private Limited n'a aucun contrôle sur le contenu de ces sites externes et n'accepte aucune responsabilité quant à leur contenu ou à leurs pratiques. L'inclusion d'un lien ne constitue pas une approbation du site lié par AÉRI." },
+      { heading: "Droit Applicable et Juridiction", body: "Les présentes mentions légales sont régies par le droit français. Tout litige relatif à l'utilisation de ce site sera soumis à la compétence exclusive des tribunaux compétents de Paris, France. Ces mentions légales ont été mises à jour le 19 mai 2026." },
+    ]
+  },
+  "confidentialite": {
+    title: "Politique de Confidentialité",
+    sections: [
+      { heading: "1. Introduction", body: "H&G Ventures Private Limited, exploitant sous la marque AÉRI ('nous', 'notre'), s'engage à protéger votre vie privée et vos données personnelles. Cette Politique de Confidentialité explique comment nous collectons, utilisons, stockons et protégeons vos informations personnelles lorsque vous visitez notre site (www.aeri-snack.com), effectuez un achat, vous abonnez à notre newsletter ou interagissez avec nous de quelque manière que ce soit. Cette politique est conforme au Règlement Général sur la Protection des Données (RGPD - UE 2016/679) et à la loi française Informatique et Libertés." },
+      { heading: "2. Responsable du Traitement", body: "Le responsable du traitement de vos données personnelles est : H&G Ventures Private Limited, exploitant sous la marque AÉRI. Bureau européen : 75008 Paris, France. E-mail : privacy@aeri-snack.com. Si vous avez des questions sur la manière dont nous traitons vos données, vous pouvez contacter notre Délégué à la Protection des Données à l'adresse e-mail ci-dessus." },
+      { heading: "3. Données Collectées", body: "Nous collectons les informations que vous nous fournissez directement, notamment : votre nom, adresse e-mail, adresse postale et numéro de téléphone lors de la création d'un compte ou d'une commande ; vos informations de paiement (traitées en toute sécurité via notre prestataire de paiement — nous ne stockons pas les numéros de carte bancaire) ; votre historique de commandes et vos préférences de produits ; les communications que vous nous envoyez. Nous collectons également automatiquement certaines informations techniques lorsque vous visitez notre site, notamment : l'adresse IP, le type et la version du navigateur, le système d'exploitation, les pages consultées et les données de cookies." },
+      { heading: "4. Utilisation des Données", body: "Nous utilisons vos données personnelles aux fins suivantes : (a) traiter et exécuter vos commandes, y compris la livraison et le paiement ; (b) communiquer avec vous concernant vos commandes et votre service client ; (c) vous envoyer des communications marketing (uniquement avec votre consentement explicite) ; (d) personnaliser votre expérience sur notre site ; (e) analyser l'utilisation du site et améliorer nos services ; (f) respecter nos obligations légales, y compris les exigences fiscales et comptables ; et (g) prévenir la fraude et protéger la sécurité de notre plateforme." },
+      { heading: "5. Partage des Données", body: "Nous ne vendons pas vos données personnelles à des tiers. Nous pouvons partager vos informations avec : (a) des prestataires de services qui nous aident à exploiter notre activité (processeurs de paiement, sociétés d'expédition, fournisseurs de services e-mail) — ces prestataires sont contractuellement tenus de protéger vos données ; (b) les autorités légales lorsque la loi, une ordonnance judiciaire ou une obligation réglementaire l'exige ; et (c) des conseillers professionnels. Tous les prestataires tiers sont conformes au RGPD." },
+      { heading: "6. Conservation des Données", body: "Nous conservons vos données personnelles uniquement le temps nécessaire pour atteindre les objectifs pour lesquels elles ont été collectées : les informations de compte sont conservées pendant la durée de votre compte plus 3 ans après sa clôture ; les données de commande et de transaction sont conservées pendant 10 ans conformément à la loi fiscale française ; les préférences marketing sont conservées jusqu'à ce que vous retiriez votre consentement." },
+      { heading: "7. Vos Droits", body: "En vertu du RGPD, vous disposez des droits suivants : Droit d'accès, Droit de rectification, Droit à l'effacement, Droit à la limitation du traitement, Droit à la portabilité des données, Droit d'opposition et Droit de retrait du consentement pour les communications marketing. Pour exercer l'un de ces droits, veuillez nous contacter à privacy@aeri-snack.com. Nous répondrons dans un délai de 30 jours." },
+      { heading: "8. Sécurité", body: "Nous mettons en œuvre des mesures techniques et organisationnelles appropriées pour protéger vos données personnelles contre tout accès, modification, divulgation ou destruction non autorisés. En cas de violation de données présentant un risque pour vos droits et libertés, nous vous en informerons ainsi que l'autorité de surveillance compétente dans les 72 heures conformément au RGPD." },
+      { heading: "9. Contact et Réclamations", body: "Pour toute question, préoccupation ou réclamation concernant cette Politique de Confidentialité ou nos pratiques en matière de données, veuillez nous contacter à : privacy@aeri-snack.com. Si vous n'êtes pas satisfait de notre réponse, vous avez le droit de déposer une réclamation auprès de la CNIL (Commission Nationale de l'Informatique et des Libertés) : www.cnil.fr. Cette Politique de Confidentialité a été mise à jour le 19 mai 2026." },
+    ]
+  },
 };
 
 export default function LegalDynamicPage() {
@@ -80,16 +134,7 @@ export default function LegalDynamicPage() {
   return (
     <main className="min-h-screen bg-[#F5F5F7] text-[#111111] font-sans">
       {/* Navbar */}
-      <header className="fixed top-0 left-0 right-0 z-[40] w-full flex justify-between items-center px-6 md:px-12 py-3 bg-white/80 backdrop-blur-md border-b border-[#111111]/5">
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-          <Link href="/"><h2 className="text-xl tracking-widest uppercase font-semibold cursor-pointer">AÉRI</h2></Link>
-        </motion.div>
-        <motion.nav initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }} className="hidden md:flex gap-8 text-xs tracking-widest uppercase font-medium text-[#111111]/70">
-          <Link href="/brand" className="hover:text-[#111111] transition-colors">The Brand</Link>
-          <Link href="/products" className="hover:text-[#111111] transition-colors">Products</Link>
-          <Link href="/contact" className="hover:text-[#111111] transition-colors">Contact</Link>
-        </motion.nav>
-      </header>
+      <Navbar />
 
       {/* Hero */}
       <section className="pt-40 pb-16 px-6 md:px-12 max-w-4xl mx-auto text-center">
@@ -114,6 +159,7 @@ export default function LegalDynamicPage() {
           </div>
         </div>
       </section>
+      <Footer />
     </main>
   );
 }

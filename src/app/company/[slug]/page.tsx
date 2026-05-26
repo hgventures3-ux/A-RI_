@@ -4,6 +4,8 @@ import React from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 
 /* ─── Full content for each company page ─── */
 const pages: Record<string, { title: string; badge: string; subtitle: string; sections: { heading: string; body: string }[]; cta?: { text: string; href: string } }> = {
@@ -123,6 +125,58 @@ const pages: Record<string, { title: string; badge: string; subtitle: string; se
     ],
     cta: { text: "Send a Professional Inquiry", href: "/contact" }
   },
+  "notre-histoire": {
+    title: "Notre Histoire",
+    badge: "Héritage · Vision · Raison d'Être",
+    subtitle: "Des anciens étangs du Bihar aux tables gastronomiques de Paris — l'aventure AÉRI est une ode au respect, à l'innovation et à la quête incessante de la perfection.",
+    sections: [
+      { heading: "Aux Origines", body: "AÉRI est né d'un constat simple : le snack le plus nutritif au monde était aussi le plus méconnu. Le Makhana — la graine soufflée de l'Euryale Ferox — est consommé à travers l'Asie depuis plus de 3 000 ans. Dans les foyers indiens, il est un incontournable des fêtes et des jeûnes. En Ayurveda, il est vénéré pour ses propriétés apaisantes, sa richesse en protéines et sa capacité à soutenir l'énergie sans la lourdeur des snacks conventionnels. Pourtant, en dehors de l'Asie, presque personne n'en avait entendu parler. Nous avons décidé de changer cela. Non en dépouillant le Makhana de son héritage, mais en lui offrant la scène qu'il mérite — en l'introduisant sur le marché européen avec le même soin, le même respect et le même art de vivre qui définissent la gastronomie française." },
+      { heading: "La Philosophie AÉRI", body: "Nous croyons que manger sainement ne doit jamais signifier faire des compromis sur le goût, la texture ou l'élégance. L'industrie du snacking regorge de produits qui se cachent derrière des étiquettes 'naturelles' tout en chargeant leurs recettes d'huiles raffinées, d'arômes artificiels et de sodium excessif. AÉRI adopte l'approche inverse. Nous partons de l'un des ingrédients les plus parfaits de la nature — une graine naturellement riche en protéines, pauvre en graisses, et totalement exempte de gluten, de cholestérol et d'additifs artificiels. Nous la sublimions ensuite avec les meilleurs ingrédients qu'offre l'Europe : huile d'olive extra vierge de vieux oliviers andalous, herbes de Provence de la vallée du Luberon, truffe noire du Périgord et sel de Guérande récolté à la main. Le résultat n'est pas juste un snack — c'est un manifeste. La preuve que l'indulgence et le bien-être peuvent, et doivent, coexister." },
+      { heading: "Notre Partenariat avec le Bihar", body: "Chaque produit AÉRI commence sa vie dans les étangs d'eau douce du Bihar, en Inde — une région qui produit plus de 90% du Makhana mondial. Nous travaillons directement avec les communautés agricoles locales sur 1 000 acres de zones humides préservées, garantissant des salaires équitables, des pratiques de récolte durables et une traçabilité complète de la graine à l'étagère. Notre partenariat avec Hybite Foods, acteur établi dans la transformation du Makhana, nous permet de maintenir les plus hauts standards de qualité tout en soutenant les moyens de subsistance de milliers de familles. Ce n'est pas seulement du commerce — c'est un pont entre deux civilisations, unies par un amour commun de la nourriture, de la tradition et de l'artisanat." },
+      { heading: "Perspectives d'Avenir", body: "AÉRI est bien plus qu'une marque. C'est un mouvement pour redéfinir ce que signifie le snacking premium au XXIe siècle. Nous préparons actuellement notre lancement dans la grande distribution française, en commençant par Carrefour, avant de nous étendre aux épiceries fines, aux palaces et aux restaurants étoilés Michelin. Notre équipe R&D développe de nouveaux profils de saveurs qui honorent les traditions culinaires asiatiques et européennes. Et nous investissons dans la recherche pour valider davantage les bienfaits du Makhana pour la santé, en partenariat avec des instituts de nutrition européens. L'avenir du snacking est plus léger, plus sain et infiniment plus passionnant. Bienvenue chez AÉRI." }
+    ],
+    cta: { text: "Découvrir Nos Produits", href: "/products" }
+  },
+  "transparence": {
+    title: "Transparence",
+    badge: "Éthique · Traçabilité · Responsabilité",
+    subtitle: "Chez AÉRI, la transparence n'est pas une stratégie marketing — c'est un principe fondateur. Chaque grain que nous vendons est testé, documenté et traçable jusqu'à l'étang dans lequel il a été récolté.",
+    sections: [
+      { heading: "Traçabilité de la Graine à l'Étagère", body: "Chaque lot de Makhana AÉRI se voit attribuer un numéro de lot unique au moment de la récolte. Ce numéro suit le produit à chaque étape de son voyage : séchage au soleil, soufflage, assaisonnement, emballage, contrôle qualité et expédition. Grâce à notre système de traçabilité, nous pouvons identifier avec précision l'étang, l'agriculteur et la date de transformation correspondant à chaque sachet d'AÉRI dans votre épicerie. Ce niveau de détail est rare dans l'industrie du snacking — et nous pensons qu'il devrait être la norme, pas l'exception." },
+      { heading: "Approvisionnement Éthique", body: "Nous nous approvisionnons exclusivement dans les zones humides préservées du Bihar, en Inde, où la culture du Makhana est une tradition centenaire. Nos pratiques d'approvisionnement sont guidées par trois principes : rémunération équitable des agriculteurs (nous payons 15 à 20% au-dessus des tarifs du marché), durabilité environnementale (aucun pesticide ou engrais chimique n'est utilisé dans nos étangs), et développement communautaire (une partie de nos revenus finance des initiatives éducatives et sanitaires locales). Nous n'avons pas recours au travail des enfants, et chaque maillon de notre chaîne d'approvisionnement est régulièrement audité par des agences indépendantes." },
+      { heading: "Tests en Laboratoire", body: "Avant que tout lot d'AÉRI ne quitte l'Inde, il subit des tests rigoureux dans des laboratoires accrédités NABL (conformes aux normes ISO/IEC 17025). Nos tests couvrent les niveaux d'oxyde d'éthylène (EtO), les métaux lourds (plomb, cadmium, arsenic, mercure), les résidus de pesticides et la sécurité microbiologique (Salmonella, E. coli, Aflatoxines). Chaque résultat de test doit se situer bien en deçà des limites réglementaires de l'Union européenne avant que nous n'autorisions l'expédition. Les rapports de laboratoire complets sont disponibles en téléchargement pour nos partenaires professionnels via le portail B2B." },
+      { heading: "Emballage & Impact Environnemental", body: "Notre emballage est conçu pour être aussi responsable que notre approvisionnement. Nous utilisons des matériaux recyclables dans la mesure du possible et travaillons activement vers un emballage 100% compostable d'ici 2027. Notre logistique d'expédition est optimisée pour minimiser l'empreinte carbone — nous consolidons les envois et privilégions le fret maritime pour les commandes en gros, en réservant le fret aérien aux livraisons urgentes. Nous explorons également des programmes de compensation carbone pour atteindre une logistique neutre en carbone d'ici 2028." },
+      { heading: "Politique de la Porte Ouverte", body: "Nous accueillons les questions, les audits et les visites. Si vous êtes un distributeur, un détaillant ou un journaliste qui souhaite voir nos opérations en direct — des étangs du Bihar à notre unité d'assaisonnement — nous le ferons. La transparence, c'est n'avoir rien à cacher." }
+    ],
+    cta: { text: "Voir Nos Certifications", href: "/company/certifications" }
+  },
+  "certifications-fr": {
+    title: "Certifications",
+    badge: "Conformité · Sécurité · Confiance",
+    subtitle: "Chaque produit AÉRI est soutenu par des certifications reconnues internationalement et des tests de laboratoire rigoureux. Parce que la confiance se construit sur des preuves, pas des promesses.",
+    sections: [
+      { heading: "Licence Centrale FSSAI", body: "La Licence Centrale de la Food Safety and Standards Authority of India (FSSAI) est le niveau le plus élevé de certification de sécurité alimentaire en Inde. Elle confirme que nos installations de production, nos processus et nos produits répondent à toutes les exigences réglementaires pour la fabrication et l'exportation alimentaires. Chaque lot de Makhana est testé et certifié avant de quitter notre installation." },
+      { heading: "Certification FoSTaC", body: "FoSTaC (Food Safety Training and Certification) est une certification obligatoire garantissant que tout le personnel impliqué dans la manipulation des aliments est formé en hygiène et protocoles de sécurité. Chaque membre de notre équipe détient un certificat FoSTaC valide, renouvelé tous les 12 mois." },
+      { heading: "Enregistrement APEDA", body: "L'enregistrement APEDA certifie que nos produits répondent aux standards requis pour l'exportation de produits agricoles indiens, permettant à nos produits de porter la mention 'Produit d'Inde' en toute légitimité." },
+      { heading: "Code IEC (Import Export)", body: "Notre Code Import Export enregistré assure une traçabilité douanière complète pour chaque envoi du Bihar vers la France, fournissant une chaîne documentaire ininterrompue de l'étang à l'étagère." },
+      { heading: "Conformité Union Européenne", body: "Nos produits sont entièrement conformes aux Règlements UE n°178/2002, n°1881/2006 et n°1169/2011, incluant une stricte conformité aux limites EtO, seuils de métaux lourds, LMR pesticides et exigences d'étiquetage." },
+      { heading: "Tests NABL", body: "Tous les tests analytiques sont réalisés dans des laboratoires accrédités NABL selon les normes ISO/IEC 17025. Notre panel couvre : EtO, métaux lourds, résidus de pesticides et tests microbiologiques." }
+    ],
+    cta: { text: "Contacter pour les Rapports", href: "/contact" }
+  },
+  "espace-pro": {
+    title: "Espace Professionnel",
+    badge: "B2B · Partenariats · Export",
+    subtitle: "AÉRI propose des solutions B2B complètes pour les distributeurs, détaillants, hôtels et restaurants à travers l'Europe. Découvrez des formats flexibles, une tarification compétitive et une logistique de classe mondiale.",
+    sections: [
+      { heading: "Marque Blanche & Marque Privée", body: "Tirez parti de notre expertise en matière d'approvisionnement, de transformation et d'assaisonnement du Makhana pour créer votre propre gamme de produits à votre marque. Nous gérons tout, du développement de la recette et de la production à la conception de l'emballage et à la documentation de conformité. Notre service de marque blanche est idéal pour les détaillants, les chaînes hôtelières et les entreprises de restauration collective souhaitant proposer un snack premium et sain sous leur propre marque. Les quantités minimales de commande sont flexibles, et nous pouvons personnaliser l'assaisonnement, la taille de l'emballage et l'étiquetage selon vos spécifications exactes." },
+      { heading: "Tarification par Volume & Quantité Minimale", body: "Nous proposons des structures de prix dégressifs pour les commandes en volume, avec des remises significatives pour les contrats récurrents. Notre quantité minimale de commande standard pour les marchés européens commence à 500 unités par SKU, mais nous pouvons accommoder des commandes d'essai plus petites pour de nouveaux partenariats. Tous les prix incluent les tests d'assurance qualité, l'étiquetage conforme UE et la documentation. Pour les commandes de gros volume (10 000+ unités), nous proposons des runs de production dédiés avec des spécifications personnalisées." },
+      { heading: "Logistique Mondiale", body: "Notre équipe logistique gère l'expédition de bout en bout depuis notre installation de transformation au Bihar jusqu'à n'importe quelle destination en Europe. Nous supportons les Incoterms CIF (Coût, Assurance et Fret) et FOB (Franco à Bord). Le fret maritime est notre mode d'expédition standard, avec des délais de transit de 25 à 30 jours vers les principaux ports européens. Le fret aérien est disponible pour les commandes urgentes avec une livraison en 5 à 7 jours. Tous les envois comprennent une documentation douanière complète, des certificats phytosanitaires et une assistance au dédouanement européen." },
+      { heading: "Dossier Documentaire", body: "Chaque partenaire B2B reçoit un dossier documentaire complet comprenant : des fiches techniques détaillées des produits (TDS), des certificats d'analyse (COA) pour chaque lot, les certificats de conformité FSSAI et UE, les déclarations allergènes, les rapports d'analyse nutritionnelle, les études de durée de vie et les spécifications d'emballage. Tous les documents sont disponibles en anglais et en français." },
+      { heading: "Opportunités de Partenariat", body: "Nous recherchons activement des partenariats avec des détaillants premium, des épiceries biologiques, des chaînes hôtelières de luxe, des restaurants Michelin, des programmes de bien-être en entreprise et des distributeurs alimentaires spécialisés en France, Belgique, Suisse et dans l'ensemble de l'UE. Si vous partagez notre engagement envers la qualité, la transparence et l'innovation, nous serions ravis d'échanger avec vous." }
+    ],
+    cta: { text: "Envoyer une Demande Professionnelle", href: "/contact" }
+  },
 };
 
 export default function CompanyDynamicPage() {
@@ -144,16 +198,7 @@ export default function CompanyDynamicPage() {
   return (
     <main className="min-h-screen bg-[#F5F5F7] text-[#111111] font-sans">
       {/* Navbar */}
-      <header className="fixed top-0 left-0 right-0 z-[40] w-full flex justify-between items-center px-6 md:px-12 py-3 bg-white/80 backdrop-blur-md border-b border-[#111111]/5">
-        <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-          <Link href="/"><h2 className="text-xl tracking-widest uppercase font-semibold cursor-pointer">AÉRI</h2></Link>
-        </motion.div>
-        <motion.nav initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }} className="hidden md:flex gap-8 text-xs tracking-widest uppercase font-medium text-[#111111]/70">
-          <Link href="/brand" className="hover:text-[#111111] transition-colors">The Brand</Link>
-          <Link href="/products" className="hover:text-[#111111] transition-colors">Products</Link>
-          <Link href="/contact" className="hover:text-[#111111] transition-colors">Contact</Link>
-        </motion.nav>
-      </header>
+      <Navbar />
 
       {/* Hero */}
       <section className="pt-40 pb-16 px-6 md:px-12 max-w-4xl mx-auto text-center">
@@ -182,6 +227,7 @@ export default function CompanyDynamicPage() {
           )}
         </div>
       </section>
+      <Footer />
     </main>
   );
 }
