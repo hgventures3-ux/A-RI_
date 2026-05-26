@@ -1,0 +1,24 @@
+@import "tailwindcss";
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #111111;
+  --font-montserrat: var(--font-inter);
+  --font-playfair: var(--font-inter);
+  --font-lora: var(--font-inter);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-montserrat: var(--font-inter);
+  --font-playfair: var(--font-inter);
+  --font-lora: var(--font-inter);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+}
