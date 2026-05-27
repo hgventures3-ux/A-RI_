@@ -82,14 +82,22 @@ export default function EspacePro() {
   const servicesRef = useRef<HTMLDivElement>(null);
   const servicesInView = useInView(servicesRef, { once: true, amount: 0.2 });
 
-  const [formData, setFormData] = useState({ name: "", company: "", message: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    company: "",
+    email: "",
+    siret: "",
+    channel: "",
+    volume: "",
+    message: "",
+  });
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 4000);
-    setFormData({ name: "", company: "", message: "" });
+    setFormData({ name: "", company: "", email: "", siret: "", channel: "", volume: "", message: "" });
   };
 
   const localizedStats = s.stats;
@@ -216,7 +224,7 @@ export default function EspacePro() {
             </div>
           </div>
 
-          {/* ── Trust Signal + Modi Quote ── */}
+          {/* ── Modi Endorsement — B2B Only ── */}
           <div className="max-w-4xl mx-auto px-6 mb-16 md:mb-24">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -225,18 +233,18 @@ export default function EspacePro() {
               transition={{ duration: 0.7 }}
               className="relative p-8 md:p-12 rounded-2xl bg-[#111111] text-center"
             >
-              <span
-                className="absolute top-4 left-6 text-7xl leading-none text-[#FFFFFF]/5 pointer-events-none"
-                style={{ fontFamily: "var(--font-playfair)" }}
+              <h3
+                className="text-lg md:text-xl font-bold text-white/90 mb-6"
+                style={{ fontFamily: "var(--font-didot)" }}
               >
-                &ldquo;
-              </span>
+                Un Super-aliment Reconnu par la Leadership Nationale
+              </h3>
 
               <p
                 className="text-base md:text-lg text-[#FFFFFF]/70 leading-relaxed max-w-2xl mx-auto mb-6"
                 style={{ fontFamily: "var(--font-lora)" }}
               >
-                {s.trustText}
+                Reconnu comme un super-aliment essentiel par les leaders de la santé en Inde, le Makhana fait désormais partie du quotidien de millions de personnes.
               </p>
 
               <div className="flex items-center justify-center gap-3">
@@ -327,70 +335,85 @@ export default function EspacePro() {
                 >
                   <h4
                     className="text-lg font-bold text-[#111111] mb-1"
-                    style={{ fontFamily: "var(--font-montserrat)" }}
+                    style={{ fontFamily: "var(--font-didot)" }}
                   >
-                    {s.formTitle}
+                    Demande Professionnelle
                   </h4>
                   <p
                     className="text-xs text-[#111111]/40 mb-6"
-                    style={{ fontFamily: "var(--font-lora)" }}
+                    style={{ fontFamily: "var(--font-montserrat)" }}
                   >
-                    {s.formSub}
+                    Nous répondons sous 24h ouvrées.
                   </p>
 
                   <div className="space-y-4">
+                    {/* Nom complet */}
                     <div>
-                      <label
-                        className="block text-xs font-semibold tracking-wide uppercase text-[#111111]/50 mb-1.5"
-                        style={{ fontFamily: "var(--font-montserrat)" }}
-                      >
-                        {s.formName}
+                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#111111]/50 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                        Nom complet
                       </label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.name}
-                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder={s.formNamePh}
-                        className="w-full px-4 py-3 rounded-xl bg-[#FFFFFF]/30 border border-[#111111]/8 text-sm text-[#111111] placeholder:text-[#111111]/25 focus:outline-none focus:border-[#111111]/25 focus:ring-1 focus:ring-[#111111]/10 transition-all"
-                        style={{ fontFamily: "var(--font-lora)" }}
-                      />
+                      <input type="text" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="Votre nom complet" className="w-full px-4 py-3 rounded-xl bg-[#FFFFFF]/30 border border-[#111111]/8 text-sm text-[#111111] placeholder:text-[#111111]/25 focus:outline-none focus:border-[#111111]/25 focus:ring-1 focus:ring-[#111111]/10 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
                     </div>
 
+                    {/* Nom de l'entreprise */}
                     <div>
-                      <label
-                        className="block text-xs font-semibold tracking-wide uppercase text-[#111111]/50 mb-1.5"
-                        style={{ fontFamily: "var(--font-montserrat)" }}
-                      >
-                        {s.formCompany}
+                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#111111]/50 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                        Nom de l&apos;entreprise
                       </label>
-                      <input
-                        type="text"
-                        required
-                        value={formData.company}
-                        onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                        placeholder={s.formCompanyPh}
-                        className="w-full px-4 py-3 rounded-xl bg-[#FFFFFF]/30 border border-[#111111]/8 text-sm text-[#111111] placeholder:text-[#111111]/25 focus:outline-none focus:border-[#111111]/25 focus:ring-1 focus:ring-[#111111]/10 transition-all"
-                        style={{ fontFamily: "var(--font-lora)" }}
-                      />
+                      <input type="text" required value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} placeholder="Nom de votre entreprise" className="w-full px-4 py-3 rounded-xl bg-[#FFFFFF]/30 border border-[#111111]/8 text-sm text-[#111111] placeholder:text-[#111111]/25 focus:outline-none focus:border-[#111111]/25 focus:ring-1 focus:ring-[#111111]/10 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
                     </div>
 
+                    {/* E-mail professionnel */}
                     <div>
-                      <label
-                        className="block text-xs font-semibold tracking-wide uppercase text-[#111111]/50 mb-1.5"
-                        style={{ fontFamily: "var(--font-montserrat)" }}
-                      >
-                        {s.formMessage}
+                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#111111]/50 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                        Adresse e-mail professionnelle
                       </label>
-                      <textarea
-                        required
-                        rows={4}
-                        value={formData.message}
-                        onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        placeholder={s.formMessagePh}
-                        className="w-full px-4 py-3 rounded-xl bg-[#FFFFFF]/30 border border-[#111111]/8 text-sm text-[#111111] placeholder:text-[#111111]/25 focus:outline-none focus:border-[#111111]/25 focus:ring-1 focus:ring-[#111111]/10 transition-all resize-none"
-                        style={{ fontFamily: "var(--font-lora)" }}
-                      />
+                      <input type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="pro@entreprise.com" className="w-full px-4 py-3 rounded-xl bg-[#FFFFFF]/30 border border-[#111111]/8 text-sm text-[#111111] placeholder:text-[#111111]/25 focus:outline-none focus:border-[#111111]/25 focus:ring-1 focus:ring-[#111111]/10 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
+                    </div>
+
+                    {/* SIRET / VAT */}
+                    <div>
+                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#111111]/50 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                        N° SIRET ou TVA intracommunautaire
+                      </label>
+                      <input type="text" required value={formData.siret} onChange={(e) => setFormData({ ...formData, siret: e.target.value })} placeholder="Ex: 123 456 789 00012" className="w-full px-4 py-3 rounded-xl bg-[#FFFFFF]/30 border border-[#111111]/8 text-sm text-[#111111] placeholder:text-[#111111]/25 focus:outline-none focus:border-[#111111]/25 focus:ring-1 focus:ring-[#111111]/10 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
+                    </div>
+
+                    {/* Distribution Channels Dropdown */}
+                    <div>
+                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#111111]/50 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                        Canaux de Distribution
+                      </label>
+                      <select required value={formData.channel} onChange={(e) => setFormData({ ...formData, channel: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-[#FFFFFF]/30 border border-[#111111]/8 text-sm text-[#111111] focus:outline-none focus:border-[#111111]/25 focus:ring-1 focus:ring-[#111111]/10 transition-all" style={{ fontFamily: "var(--font-montserrat)" }}>
+                        <option value="">Sélectionnez un canal</option>
+                        <option value="grandes-surfaces">Grandes Surfaces</option>
+                        <option value="epiceries-fines">Épiceries Fines</option>
+                        <option value="reseau-bio">Réseau Bio</option>
+                        <option value="grossiste">Grossiste</option>
+                        <option value="fitness-gym">Secteur Fitness / Gym</option>
+                      </select>
+                    </div>
+
+                    {/* Volume Dropdown */}
+                    <div>
+                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#111111]/50 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                        Volume Annuel Estimé (palettes)
+                      </label>
+                      <select required value={formData.volume} onChange={(e) => setFormData({ ...formData, volume: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-[#FFFFFF]/30 border border-[#111111]/8 text-sm text-[#111111] focus:outline-none focus:border-[#111111]/25 focus:ring-1 focus:ring-[#111111]/10 transition-all" style={{ fontFamily: "var(--font-montserrat)" }}>
+                        <option value="">Sélectionnez un volume</option>
+                        <option value="1-5">1 – 5 palettes</option>
+                        <option value="5-20">5 – 20 palettes</option>
+                        <option value="20-50">20 – 50 palettes</option>
+                        <option value="50+">50+ palettes</option>
+                      </select>
+                    </div>
+
+                    {/* Message */}
+                    <div>
+                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#111111]/50 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                        Message et besoins spécifiques
+                      </label>
+                      <textarea required rows={4} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder="Ex. Marque Blanche, Private Label, Référencement national" className="w-full px-4 py-3 rounded-xl bg-[#FFFFFF]/30 border border-[#111111]/8 text-sm text-[#111111] placeholder:text-[#111111]/25 focus:outline-none focus:border-[#111111]/25 focus:ring-1 focus:ring-[#111111]/10 transition-all resize-none" style={{ fontFamily: "var(--font-montserrat)" }} />
                     </div>
                   </div>
 
@@ -398,10 +421,10 @@ export default function EspacePro() {
                     type="submit"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="mt-6 w-full py-3.5 rounded-xl bg-[#111111] text-[#FFFFFF] text-sm font-semibold tracking-wide transition-colors hover:bg-[#111111]/90 cursor-pointer"
+                    className="mt-6 w-full py-3.5 rounded-xl bg-[#1C1C1C] text-[#FFFFFF] text-sm font-semibold tracking-wide transition-colors hover:bg-[#333] cursor-pointer"
                     style={{ fontFamily: "var(--font-montserrat)" }}
                   >
-                    {submitted ? s.formSuccess : s.formBtn}
+                    {submitted ? "✓ Demande envoyée !" : "Envoyer la demande"}
                   </motion.button>
                 </form>
               </motion.div>

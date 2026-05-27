@@ -3,14 +3,37 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform, useMotionValueEvent } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
-import t from "@/translations";
 import Navbar from "@/components/Navbar";
 
 const FRAME_COUNT = 233;
 
+const heroText = {
+  fr: {
+    ticker: "• Livraison gratuite sur votre première commande • Free shipping on your first delivery •",
+    headline: "AÉRI : L'Apéro Soufflé d'Exception.",
+    subheadline: "Croustillant, noble, et naturellement sain. Découvrez la super-graine d'origine indienne qui réinvente vos débuts de soirée.",
+    cta: "ACHETER MAINTENANT",
+    disclaimer: "Représentation botanique illustrative.",
+  },
+  en: {
+    ticker: "• Free shipping on your first delivery • Livraison gratuite sur votre première commande •",
+    headline: "AÉRI: The Ultimate Gourmet Puff.",
+    subheadline: "Crunchy, noble, and naturally healthy. Discover the Indian super-seed that reinvents your evening rituals.",
+    cta: "SHOP NOW",
+    disclaimer: "Illustrative botanical representation.",
+  },
+  hi: {
+    ticker: "• आपके पहले ऑर्डर पर मुफ़्त डिलीवरी • Free shipping on your first delivery •",
+    headline: "AÉRI: बेमिसाल गॉर्मे स्नैक।",
+    subheadline: "कुरकुरा, शानदार, और प्राकृतिक रूप से स्वस्थ। भारतीय सुपर-सीड की खोज करें जो आपकी शाम को बदल दे।",
+    cta: "अभी खरीदें",
+    disclaimer: "सचित्र वानस्पतिक प्रतिनिधित्व।",
+  },
+};
+
 export default function Hero() {
   const { lang } = useLanguage();
-  const s = t.hero[lang];
+  const s = heroText[lang as keyof typeof heroText] || heroText.fr;
 
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -52,7 +75,6 @@ export default function Hero() {
       const ctx = canvas.getContext("2d");
       const img = images[0];
       
-      // Set canvas dimensions to match the image resolution
       canvas.width = img.naturalWidth;
       canvas.height = img.naturalHeight;
       
@@ -89,6 +111,24 @@ export default function Hero() {
       className="relative w-full h-[400vh]"
       style={{ background: '#000000' }}
     >
+      {/* Infinite Marquee Ticker */}
+      <div className="fixed top-0 left-0 right-0 z-[50] bg-[#1C1C1C] text-white overflow-hidden">
+        <div className="flex whitespace-nowrap animate-marquee py-2.5">
+          <span className="text-xs tracking-widest uppercase px-8" style={{ fontFamily: "var(--font-montserrat)" }}>
+            {s.ticker}
+          </span>
+          <span className="text-xs tracking-widest uppercase px-8" style={{ fontFamily: "var(--font-montserrat)" }}>
+            {s.ticker}
+          </span>
+          <span className="text-xs tracking-widest uppercase px-8" style={{ fontFamily: "var(--font-montserrat)" }}>
+            {s.ticker}
+          </span>
+          <span className="text-xs tracking-widest uppercase px-8" style={{ fontFamily: "var(--font-montserrat)" }}>
+            {s.ticker}
+          </span>
+        </div>
+      </div>
+
       <div className="sticky top-0 left-0 w-full h-screen overflow-hidden flex flex-col justify-between" style={{ background: 'linear-gradient(180deg, #FDF8F0 0%, #F9F0E3 35%, #F5E6D0 65%, #EDE0D4 100%)' }}>
         
         {/* Canvas for image sequence */}
@@ -99,20 +139,57 @@ export default function Hero() {
            />
         </div>
 
-        {/* Watermark Cover for Veo Logo */}
-        <div 
-          className="absolute bottom-3 right-3 md:bottom-5 md:right-5 z-[5] bg-[#EAE0D3]/90 backdrop-blur-md px-3 py-1.5 md:px-5 md:py-2 rounded flex items-center justify-center"
-          style={{ boxShadow: "0 2px 10px rgba(0,0,0,0.03)" }}
-        >
-           <span className="text-[10px] md:text-xs tracking-[0.25em] uppercase font-bold text-[#4c463e]" style={{ fontFamily: "var(--font-montserrat), sans-serif" }}>
-             AÉRI
-           </span>
-        </div>
-
         {/* Top Header / Nav Area */}
         <Navbar />
 
+        {/* Hero Copy & CTA */}
+        <motion.div
+          style={{ opacity: textOpacity }}
+          className="z-10 flex flex-col items-center justify-center text-center px-6 flex-1"
+        >
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.2, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 text-[#1C1C1C]"
+            style={{ fontFamily: "var(--font-didot)" }}
+          >
+            {s.headline}
+          </motion.h1>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.8 }}
+            className="text-sm md:text-base lg:text-lg max-w-2xl leading-relaxed mb-8 text-[#4c463e]"
+            style={{ fontFamily: "var(--font-montserrat)" }}
+          >
+            {s.subheadline}
+          </motion.p>
 
+          <motion.a
+            href="/products"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.1 }}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            className="px-8 py-3.5 bg-[#1C1C1C] text-white text-sm font-semibold tracking-[0.2em] uppercase rounded-lg transition-all hover:bg-[#333] shadow-lg"
+            style={{ fontFamily: "var(--font-montserrat)" }}
+          >
+            {s.cta}
+          </motion.a>
+        </motion.div>
+
+        {/* Botanical Disclaimer */}
+        <div className="z-10 text-center pb-2">
+          <span 
+            className="text-[10px] tracking-wide text-[#4c463e]/50"
+            style={{ fontFamily: "var(--font-montserrat)" }}
+          >
+            {s.disclaimer}
+          </span>
+        </div>
 
         {/* Bottom scroll indicator */}
         <motion.div
