@@ -37,7 +37,7 @@ const pages: Record<string, { title: string; sections: { heading: string; body: 
   "legal-notice": {
     title: "Legal Notice",
     sections: [
-      { heading: "Company Information", body: "AÉRI is a registered trademark and brand operated by H&G Ventures Private Limited, a company incorporated under the laws of India. Registered Office: Bihar, India. European Operations: 75008 Paris, France. Company Registration Number: Available upon request. FSSAI License Number: Available upon request. IEC (Import Export Code): Registered and active." },
+      { heading: "Company Information", body: "AÉRI is a registered trademark and brand operated by H&G Ventures Private Limited, a company incorporated under the laws of India. Registered Office: H&G Ventures Private Limited — European Representation: 15 rue du Louvre, 75001 Paris, France. Company Registration Number: Available upon request. FSSAI License Number: Available upon request. IEC (Import Export Code): Registered and active." },
       { heading: "Publication Director", body: "The publication director (Directeur de la publication) for the website www.aeri-snack.com is the Managing Director of H&G Ventures Private Limited. For editorial inquiries, please contact: editorial@aeri-snack.com." },
       { heading: "Website Hosting", body: "This website is hosted on Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, United States. The hosting infrastructure complies with GDPR requirements for data processing and storage. All data transmitted between your browser and our servers is encrypted using TLS 1.3 protocol." },
       { heading: "Intellectual Property Rights", body: "The entire content of this website — including text, images, graphics, logos, icons, photographs, videos, audio, software, and code — is the exclusive property of H&G Ventures Private Limited unless otherwise stated. Any reproduction, representation, modification, publication, adaptation, or exploitation of all or part of this content, by any means, without the prior written authorization of H&G Ventures Private Limited, is strictly prohibited and constitutes copyright infringement punishable under Articles L.335-2 and following of the French Intellectual Property Code." },
@@ -64,6 +64,7 @@ const pages: Record<string, { title: string; sections: { heading: string; body: 
   "politique-de-retour": {
     title: "Politique de Retour",
     sections: [
+      { heading: "Droit de Rétractation", body: "Conformément à l'article L.221-18 du Code de la Consommation, vous disposez d'un délai de 14 jours calendaires à compter de la réception de votre commande pour exercer votre droit de rétractation, sans avoir à justifier de motif ni à payer de pénalité." },
       { heading: "Vue d'ensemble", body: "Chez AÉRI, votre satisfaction est notre priorité absolue. Nous garantissons la qualité de chaque produit que nous vendons. Cette Politique de Retour décrit les conditions dans lesquelles vous pouvez demander un retour, un échange ou un remboursement pour les produits achetés via notre site officiel ou nos partenaires revendeurs agréés." },
       { heading: "Éligibilité aux Retours", body: "En raison de la nature périssable de nos produits alimentaires, les retours ne sont acceptés que dans les circonstances suivantes : (a) le produit a été endommagé lors de la livraison, (b) le produit reçu est incorrect ou différent de ce qui a été commandé, (c) le produit présente des signes de manipulation ou d'emballage compromis à la livraison, ou (d) le produit a expiré avant la date 'meilleure avant' indiquée. Pour être éligible à un retour, vous devez nous contacter dans les 7 jours calendaires suivant la réception de votre commande. Toutes les réclamations doivent être accompagnées de preuves photographiques (emballage endommagé, produit incorrect, etc.)." },
       { heading: "Articles Non Remboursables", body: "Nous ne pouvons pas accepter les retours pour : les produits ouverts et partiellement consommés (sauf défaut de qualité évident), les produits achetés il y a plus de 7 jours, les produits mal conservés (exposés à la chaleur, à l'humidité ou aux rayons directs du soleil), ou les produits achetés auprès de revendeurs tiers non autorisés. Les cartes cadeaux et les articles promotionnels ne sont pas remboursables." },
@@ -89,7 +90,7 @@ const pages: Record<string, { title: string; sections: { heading: string; body: 
   "mentions-legales": {
     title: "Mentions Légales",
     sections: [
-      { heading: "Éditeur du Site", body: "Le site www.aeri-snack.com est édité par H&G Ventures Private Limited, société constituée selon les lois indiennes. Siège social : Bihar, Inde. Opérations européennes : 75008 Paris, France. Numéro d'immatriculation : disponible sur demande. Numéro de licence FSSAI : disponible sur demande. IEC (Code Import Export) : enregistré et actif." },
+      { heading: "Éditeur du Site", body: "Le site www.aeri-snack.com est édité par H&G Ventures Private Limited, société constituée selon les lois indiennes. Siège social : H&G Ventures Private Limited — Représentation européenne : 15 rue du Louvre, 75001 Paris, France. Numéro d'immatriculation : disponible sur demande. Numéro de licence FSSAI : disponible sur demande. IEC (Code Import Export) : enregistré et actif." },
       { heading: "Directeur de la Publication", body: "Le directeur de la publication du site www.aeri-snack.com est le Directeur Général de H&G Ventures Private Limited. Pour toute demande éditoriale : editorial@aeri-snack.com." },
       { heading: "Hébergement", body: "Ce site est hébergé par Vercel Inc., 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis. L'infrastructure d'hébergement est conforme aux exigences du RGPD en matière de traitement et de stockage des données. Toutes les données transmises entre votre navigateur et nos serveurs sont chiffrées via le protocole TLS 1.3." },
       { heading: "Propriété Intellectuelle", body: "L'ensemble du contenu de ce site — textes, images, graphiques, logos, icônes, photographies, vidéos, sons, logiciels et codes — est la propriété exclusive de H&G Ventures Private Limited, sauf mention contraire. Toute reproduction, représentation, modification, publication, adaptation ou exploitation de tout ou partie de ce contenu, par quelque moyen que ce soit, sans l'autorisation écrite préalable de H&G Ventures Private Limited, est strictement interdite et constitue une contrefaçon punissable en vertu des articles L.335-2 et suivants du Code de la propriété intellectuelle français." },
@@ -132,7 +133,7 @@ export default function LegalDynamicPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#F5F5F7] text-[#111111] font-sans">
+    <main className="min-h-screen bg-[#FFFFFF] text-[#1C1C1C] font-sans">
       {/* Navbar */}
       <Navbar />
 

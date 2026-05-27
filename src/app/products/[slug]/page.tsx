@@ -60,7 +60,7 @@ const productData: Record<
     ],
     storage:
       "Store in a cool, dry place away from direct sunlight. Once opened, reseal tightly and consume within 7 days for optimal crunch.",
-    weight: "Pack Size: 30g | 100g",
+    weight: "Pack Size: 50g",
     origin:
       "Makhana: Bihar, India · Salt: Khewra, Pakistan · Olive Oil: Andalusia, Spain",
   },
@@ -96,7 +96,7 @@ const productData: Record<
     ],
     storage:
       "Conserver dans un endroit frais et sec, à l'abri de la lumière directe du soleil. Une fois ouvert, refermer hermétiquement et consommer dans les 7 jours pour un craquant optimal.",
-    weight: "Format : 30g | 100g",
+    weight: "Format : 50g",
     origin:
       "Makhana : Bihar, Inde · Herbes : Luberon, France · Huile d'Olive : Andalousie, Espagne",
   },
@@ -132,7 +132,7 @@ const productData: Record<
     ],
     storage:
       "Store in a cool, dry place away from direct sunlight. Once opened, reseal tightly and consume within 5 days to preserve truffle aroma.",
-    weight: "Pack Size: 30g | 100g",
+    weight: "Pack Size: 50g",
     origin:
       "Makhana: Bihar, India · Truffle: Dordogne, France · Salt: Guérande, France",
   },
@@ -180,7 +180,7 @@ const productData: Record<
       "Parfait avec de l'eau pétillante et une tranche de citron",
     ],
     storage: "Conserver dans un endroit frais et sec, à l'abri de la lumière directe du soleil. Une fois ouvert, refermer hermétiquement et consommer dans les 7 jours pour un craquant optimal.",
-    weight: "Format : 30g | 100g",
+    weight: "Format : 50g",
     origin: "Makhana : Bihar, Inde · Sel : Khewra, Pakistan · Huile d'Olive : Andalousie, Espagne",
   },
   "truffe-noire": {
@@ -210,7 +210,7 @@ const productData: Record<
       "Parfait avec du champagne pour les célébrations",
     ],
     storage: "Conserver dans un endroit frais et sec, à l'abri de la lumière directe du soleil. Une fois ouvert, refermer hermétiquement et consommer dans les 5 jours pour préserver l'arôme de truffe.",
-    weight: "Format : 30g | 100g",
+    weight: "Format : 50g",
     origin: "Makhana : Bihar, Inde · Truffe : Dordogne, France · Sel : Guérande, France",
   },
   "bientot": {
@@ -288,6 +288,7 @@ export default function ProductDetailPage() {
   }
 
   const isComingSoon = slug === "coming-soon";
+  const isFrench = ["sel-de-l-himalaya", "herbes-de-provence", "truffe-noire", "bientot"].includes(slug);
 
   return (
     <main
@@ -492,7 +493,7 @@ export default function ProductDetailPage() {
                 className="text-3xl md:text-4xl font-bold mb-8"
                 style={{ fontFamily: "var(--font-playfair), serif" }}
               >
-                The Story
+                {isFrench ? "L\u2019Histoire" : "The Story"}
               </motion.h2>
               <motion.p
                 variants={fadeUp}
@@ -528,7 +529,7 @@ export default function ProductDetailPage() {
                 className="text-3xl md:text-4xl font-bold mb-8"
                 style={{ fontFamily: "var(--font-playfair), serif" }}
               >
-                How It&apos;s Made
+                {isFrench ? "Notre Procédé" : "How It\u0027s Made"}
               </motion.h2>
               <motion.p
                 variants={fadeUp}
@@ -568,7 +569,7 @@ export default function ProductDetailPage() {
                   className="text-2xl font-bold mb-1"
                   style={{ fontFamily: "var(--font-playfair), serif" }}
                 >
-                  Nutritional Values
+                  {isFrench ? "Valeurs Nutritionnelles" : "Nutritional Values"}
                 </h3>
                 <span
                   className="text-xs block mb-7"
@@ -628,7 +629,7 @@ export default function ProductDetailPage() {
                     className="text-xl font-bold mb-3"
                     style={{ fontFamily: "var(--font-playfair), serif" }}
                   >
-                    Ingredients
+                    {isFrench ? "Ingrédients" : "Ingredients"}
                   </h3>
                   <p
                     className="text-[15px] leading-relaxed"
@@ -658,7 +659,7 @@ export default function ProductDetailPage() {
                     className="text-xl font-bold mb-3"
                     style={{ fontFamily: "var(--font-playfair), serif" }}
                   >
-                    Allergen Information
+                    {isFrench ? "Informations Allergènes" : "Allergen Information"}
                   </h3>
                   <p
                     className="text-[15px] leading-relaxed"
@@ -694,7 +695,7 @@ export default function ProductDetailPage() {
                   className="text-xl font-bold mb-5"
                   style={{ fontFamily: "var(--font-playfair), serif" }}
                 >
-                  Pairing Suggestions
+                  {isFrench ? "Suggestions d\u0027Accords" : "Pairing Suggestions"}
                 </h3>
                 <ul className="space-y-3">
                   {product.pairings.map((p, i) => (
@@ -735,7 +736,7 @@ export default function ProductDetailPage() {
                   className="text-xl font-bold mb-4"
                   style={{ fontFamily: "var(--font-playfair), serif" }}
                 >
-                  Storage
+                  {isFrench ? "Conservation" : "Storage"}
                 </h3>
                 <p
                   className="text-sm leading-relaxed mb-8"
@@ -751,7 +752,7 @@ export default function ProductDetailPage() {
                   className="text-xl font-bold mb-4"
                   style={{ fontFamily: "var(--font-playfair), serif" }}
                 >
-                  Pack Size
+                  {isFrench ? "Format" : "Pack Size"}
                 </h3>
                 <p
                   className="text-sm"
@@ -781,7 +782,7 @@ export default function ProductDetailPage() {
                   className="text-xl font-bold mb-4"
                   style={{ fontFamily: "var(--font-playfair), serif" }}
                 >
-                  Origin &amp; Traceability
+                  {isFrench ? "Origine & Traçabilité" : "Origin & Traceability"}
                 </h3>
                 <p
                   className="text-sm leading-relaxed"
@@ -836,7 +837,7 @@ export default function ProductDetailPage() {
                   fontFamily: "var(--font-playfair), serif",
                 }}
               >
-                Ready to Taste?
+                {isFrench ? "Découvrez Notre Collection" : "Ready to Taste?"}
               </motion.h2>
               <motion.p
                 variants={fadeUp}
@@ -847,7 +848,7 @@ export default function ProductDetailPage() {
                   fontFamily: "var(--font-lora), serif",
                 }}
               >
-                Experience the perfect balance of tradition and innovation.
+                {isFrench ? "L\u0027équilibre parfait entre tradition et innovation." : "Experience the perfect balance of tradition and innovation."}
               </motion.p>
               <motion.div variants={fadeUp} custom={0.2}>
                 <Link
@@ -860,7 +861,7 @@ export default function ProductDetailPage() {
                     letterSpacing: "0.05em",
                   }}
                 >
-                  Explore All Flavors
+                  {isFrench ? "Découvrir Toutes les Saveurs" : "Explore All Flavors"}
                 </Link>
               </motion.div>
             </motion.div>

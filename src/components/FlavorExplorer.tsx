@@ -239,6 +239,13 @@ export default function FlavorExplorer() {
                       >
                         {product.category}
                       </span>
+                      {product.id !== "raw" && (
+                        <span
+                          className="absolute top-4 right-4 text-[9px] tracking-[0.1em] uppercase font-semibold px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200"
+                        >
+                          {d.roastedBadge}
+                        </span>
+                      )}
                     </div>
 
                     <div className="px-6 pb-6 pt-3">

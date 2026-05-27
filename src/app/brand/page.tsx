@@ -29,7 +29,7 @@ const pageTranslations = {
       },
       {
         title: "La Fondatrice",
-        body: "« Après une décennie dans le marketing du luxe, j'ai voulu créer ce qui manquait à l'apéritif français : une véritable élégance nutritionnelle. AÉRI est le pont entre l'héritage de mon enfance et l'exigence de la gastronomie contemporaine. »",
+        body: "Après l'obtention de son Master en France, notre fondatrice a vécu le rituel sacré de l'apéro en tant qu'étudiante urbaine à Paris. C'est là qu'elle a constaté l'absence cruelle de snacks sains, clean-label et véritablement gourmands sur les tables françaises. De cette frustration est née une conviction : il fallait construire une chaîne d'approvisionnement complète, du Bihar jusqu'à la France, pour offrir au marché européen ce qu'il n'avait jamais eu.\n\nDerrière AÉRI se trouve un héritage familial de plus de 25 ans dans la fabrication industrielle à haute capacité et le négoce de matières premières à travers l'Inde. Cette expertise opérationnelle — de l'ingénierie de la durée de conservation à la logistique conteneurisée — confère à AÉRI l'autorité et la scalabilité nécessaires pour approvisionner les plus grandes chaînes de distribution européennes en volume.",
         image: "/founder.jpg"
       }
     ],
@@ -63,7 +63,7 @@ const pageTranslations = {
       },
       {
         title: "The Founder",
-        body: "“After a decade in luxury marketing, I wanted to create what was missing from the French apéritif: true nutritional elegance. AÉRI is the bridge between the heritage of my childhood and the demands of contemporary gastronomy.”",
+        body: "After completing her Master's degree in France, our founder lived the sacred apéro ritual firsthand as an urban student in Paris. It was there she identified the glaring absence of healthy, clean-label, and truly gourmet snacks on French tables. From that frustration, a conviction was born: to build a complete supply chain, from Bihar to France, to offer the European market what it had never had.\n\nBehind AÉRI lies a family legacy of over 25 years in high-capacity industrial manufacturing and raw materials trading across India. This operational expertise — from shelf-life engineering to containerised logistics — gives AÉRI the authority and scalability to supply Europe's largest retail chains at volume.",
         image: "/founder.jpg"
       }
     ],
@@ -104,12 +104,14 @@ export default function BrandPage() {
         <motion.h1 
           initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}
           className="text-5xl md:text-7xl font-bold tracking-tight mb-6"
+          style={{ fontFamily: "var(--font-didot)" }}
         >
           {t.title}
         </motion.h1>
         <motion.p 
           initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.3 }}
           className="text-lg md:text-xl text-[#6E6E73] max-w-3xl mx-auto leading-relaxed"
+          style={{ fontFamily: "var(--font-montserrat)" }}
         >
           {t.subtitle}
         </motion.p>
@@ -132,8 +134,8 @@ export default function BrandPage() {
               </div>
             </div>
             <div className="w-full md:w-1/2 flex flex-col justify-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#111111]">{section.title}</h2>
-              <p className="text-[#111111]/70 leading-relaxed text-lg">{section.body}</p>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#111111]" style={{ fontFamily: "var(--font-didot)" }}>{section.title}</h2>
+              <p className="text-[#111111]/70 leading-relaxed text-lg" style={{ fontFamily: "var(--font-montserrat)" }}>{section.body}</p>
             </div>
           </motion.div>
         ))}
@@ -144,7 +146,7 @@ export default function BrandPage() {
         <motion.div 
           initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8 }}
         >
-          <h2 className="text-4xl font-bold mb-6 text-[#111111]">{t.missionTitle}</h2>
+          <h2 className="text-4xl font-bold mb-6 text-[#111111]" style={{ fontFamily: "var(--font-didot)" }}>{t.missionTitle}</h2>
           <p className="text-xl text-[#6E6E73] max-w-3xl mx-auto leading-relaxed mb-16">
             "{t.missionBody}"
           </p>

@@ -33,7 +33,7 @@ export default function AperoArticle() {
     }
   };
 
-  const t = content[lang];
+  const t = content[lang as keyof typeof content] || content.en;
 
   return (
     <main className="min-h-screen bg-[#FFFFFF] pt-32 pb-24 px-6">

@@ -9,20 +9,26 @@ const navText = {
   fr: {
     brand: "La Marque",
     products: "Produits",
+    mission: "Notre Raison d'Être",
     contact: "Contact",
     findUs: "Où nous trouver",
+    pro: "Espace Pro",
   },
   en: {
     brand: "The Brand",
     products: "Products",
+    mission: "Our Mission",
     contact: "Contact",
     findUs: "Where to Find Us",
+    pro: "Trade Portal",
   },
   hi: {
     brand: "ब्रांड",
     products: "उत्पाद",
+    mission: "हमारा मिशन",
     contact: "संपर्क",
     findUs: "हमें खोजें",
+    pro: "व्यापार पोर्टल",
   },
 };
 
@@ -76,6 +82,12 @@ export default function Navbar() {
         <Link href="/ou-nous-trouver" className="hover:text-[#1C1C1C] transition-colors">
           {s.findUs}
         </Link>
+        <Link href="/mission" className="hover:text-[#1C1C1C] transition-colors">
+          {s.mission}
+        </Link>
+        <Link href="/espace-pro" className="hover:text-[#1C1C1C] transition-colors">
+          {s.pro}
+        </Link>
         <Link href="/contact" className="hover:text-[#1C1C1C] transition-colors">
           {s.contact}
         </Link>
@@ -124,6 +136,8 @@ export default function Navbar() {
           <Link href="/brand" onClick={() => setMobileOpen(false)} className="text-xs tracking-widest uppercase font-medium text-[#1C1C1C]/70 hover:text-[#1C1C1C]">{s.brand}</Link>
           <Link href="/products" onClick={() => setMobileOpen(false)} className="text-xs tracking-widest uppercase font-medium text-[#1C1C1C]/70 hover:text-[#1C1C1C]">{s.products}</Link>
           <Link href="/ou-nous-trouver" onClick={() => setMobileOpen(false)} className="text-xs tracking-widest uppercase font-medium text-[#1C1C1C]/70 hover:text-[#1C1C1C]">{s.findUs}</Link>
+          <Link href="/mission" onClick={() => setMobileOpen(false)} className="text-xs tracking-widest uppercase font-medium text-[#1C1C1C]/70 hover:text-[#1C1C1C]">{s.mission}</Link>
+          <Link href="/espace-pro" onClick={() => setMobileOpen(false)} className="text-xs tracking-widest uppercase font-medium text-[#1C1C1C]/70 hover:text-[#1C1C1C]">{s.pro}</Link>
           <Link href="/contact" onClick={() => setMobileOpen(false)} className="text-xs tracking-widest uppercase font-medium text-[#1C1C1C]/70 hover:text-[#1C1C1C]">{s.contact}</Link>
         </motion.div>
       )}

@@ -56,7 +56,7 @@ export default function Superfood() {
       {/* Soft gradient background overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#FFFFFF] via-[#FFFFFF] to-[#eaddca] opacity-80 pointer-events-none" />
 
-      {/* Floating Lotus Particles (Subtle) */}
+      {/* Floating Particles (Subtle) */}
       <motion.div
         style={{ y: parallaxY }}
         className="absolute inset-0 pointer-events-none overflow-hidden"

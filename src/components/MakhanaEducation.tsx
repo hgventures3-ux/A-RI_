@@ -1,193 +1,144 @@
 "use client";
 
 import { useRef } from "react";
-import Image from "next/image";
 import { motion, useInView } from "framer-motion";
-import { useLanguage } from "@/context/LanguageContext";
-import t from "@/translations";
 
-const stepImages = ["/step1_superhero.png", "/step2_wetlands.png", "/step3_floating.png"];
+const steps = [
+  {
+    num: "01",
+    title: "La Graine Super-Héroïque",
+    body: "C\u2019est une graine de makhana. Non, pas la plante classique de votre jardin, la version super-aliment d\u2019origine védique.",
+  },
+  {
+    num: "02",
+    title: "De l\u2019Étang à l\u2019Apéro",
+    body: "Cultivé sur 1 000 acres de zones humides préservées en partenariat exclusif avec Hybite Foods pour garantir une traçabilité à 100%. Sans intermédiaires.",
+  },
+  {
+    num: "03",
+    title: "Plus léger que l\u2019air",
+    body: "Adieu la sensation de \u2018brique\u2019 dans l\u2019estomac après l\u2019apéro. AÉRI est si léger que vous pourriez presque vous envoler.",
+  },
+];
 
-/* ────────────────────────────────────────────────────────
-   Individual step card — animates on scroll
-   ──────────────────────────────────────────────────────── */
-function StepCard({
-  step,
-  index,
-  total,
-  stepLabel,
-}: {
-  step: { headline: string; body: string; badge: string };
-  index: number;
-  total: number;
-  stepLabel: string;
-}) {
+function StepCard({ step, index }: { step: typeof steps[number]; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.35 });
-  const isEven = index % 2 === 0;
-  const num = String(index + 1).padStart(2, "0");
+  const isInView = useInView(ref, { once: true, amount: 0.3 });
 
   return (
-    <div ref={ref} className="relative w-full max-w-6xl mx-auto">
-      {index < total - 1 && (
-        <motion.div
-          initial={{ scaleY: 0 }}
-          animate={isInView ? { scaleY: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="hidden md:block absolute left-1/2 -translate-x-1/2 -bottom-16 w-[1px] h-16 bg-[#6E6E73]/30 origin-top"
-        />
-      )}
-
-      <div
-        className={`flex flex-col ${
-          isEven ? "md:flex-row" : "md:flex-row-reverse"
-        } items-center gap-10 md:gap-16`}
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 40 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay: index * 0.15, ease: [0.25, 0.46, 0.45, 0.94] }}
+      style={{
+        flex: "1 1 0%",
+        minWidth: 0,
+        padding: "2.5rem 2rem",
+        borderRadius: "1.5rem",
+        backgroundColor: "#ffffff",
+        boxShadow: "0 4px 24px -6px rgba(29,27,26,0.08)",
+        border: "1px solid rgba(29,27,26,0.06)",
+        display: "flex",
+        flexDirection: "column" as const,
+        gap: "1rem",
+      }}
+    >
+      <span
+        style={{
+          fontFamily: "var(--font-didot, var(--font-playfair), serif)",
+          fontSize: "3rem",
+          fontWeight: 700,
+          lineHeight: 1,
+          color: "#D4AF37",
+        }}
       >
-        {/* ── Image Side ── */}
-        <motion.div
-          initial={{ opacity: 0, x: isEven ? -60 : 60 }}
-          animate={isInView ? { opacity: 1, x: 0 } : {}}
-          transition={{ duration: 0.9, ease: "easeOut" }}
-          className="relative w-full md:w-1/2 flex justify-center"
-        >
-          <div className="relative w-[280px] h-[280px] md:w-[400px] md:h-[400px] rounded-3xl overflow-hidden">
-            <Image
-              src={stepImages[index]}
-              alt={step.headline}
-              fill
-              className="object-cover"
-            />
-            <div className="absolute inset-0 rounded-3xl ring-1 ring-[#6E6E73]/10" />
-          </div>
-        </motion.div>
-
-        {/* ── Text Side ── */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.9, delay: 0.2, ease: "easeOut" }}
-          className="w-full md:w-1/2 text-center md:text-left"
-        >
-          <motion.span
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="inline-block text-xs font-semibold tracking-[0.3em] uppercase text-[#6E6E73] mb-4"
-            style={{ fontFamily: "var(--font-montserrat)" }}
-          >
-            {stepLabel} {num}
-          </motion.span>
-
-          <h3
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#111111] mb-5 leading-tight"
-            style={{ fontFamily: "var(--font-montserrat)" }}
-          >
-            {step.headline}
-          </h3>
-
-          <p
-            className="text-base md:text-lg leading-relaxed text-[#111111]/75 mb-6 max-w-lg"
-            style={{ fontFamily: "var(--font-lora)" }}
-          >
-            {step.body}
-          </p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.5, delay: 0.5 }}
-          >
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#6E6E73]/10 text-[#6E6E73] text-sm font-medium tracking-wide border border-[#6E6E73]/15">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-              {step.badge}
-            </span>
-          </motion.div>
-        </motion.div>
-      </div>
-    </div>
+        {step.num}
+      </span>
+      <h3
+        style={{
+          fontFamily: "var(--font-didot, var(--font-playfair), serif)",
+          fontSize: "1.35rem",
+          fontWeight: 700,
+          color: "#1d1b1a",
+          lineHeight: 1.3,
+        }}
+      >
+        {step.title}
+      </h3>
+      <p
+        style={{
+          fontFamily: "var(--font-montserrat, var(--font-inter), sans-serif)",
+          fontSize: "0.95rem",
+          lineHeight: 1.75,
+          color: "rgba(29,27,26,0.65)",
+        }}
+      >
+        {step.body}
+      </p>
+    </motion.div>
   );
 }
 
-/* ────────────────────────────────────────────────────────
-   Main Section
-   ──────────────────────────────────────────────────────── */
 export default function MakhanaEducation() {
-  const { lang } = useLanguage();
-  const s = t.education[lang];
-
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const headerInView = useInView(sectionRef, { once: true, amount: 0.2 });
+  const headerRef = useRef<HTMLDivElement>(null);
+  const headerInView = useInView(headerRef, { once: true, amount: 0.3 });
 
   return (
     <section
       id="about"
-      className="relative w-full py-24 md:py-36 overflow-hidden bg-[#F5F5F7]"
+      style={{
+        width: "100%",
+        padding: "6rem 1.5rem",
+        backgroundColor: "#F5E6D3",
+        overflow: "hidden",
+      }}
     >
-
-      {/* ── Section Header ── */}
-      <div ref={sectionRef} className="relative z-20 text-center px-6 mb-20 md:mb-28">
-        <motion.span
-          initial={{ opacity: 0, y: 20 }}
-          animate={headerInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-          className="inline-block text-xs font-semibold tracking-[0.4em] uppercase text-[#6E6E73] mb-4"
-          style={{ fontFamily: "var(--font-montserrat)" }}
-        >
-          {s.label}
-        </motion.span>
-
+      {/* Section Title */}
+      <div ref={headerRef} style={{ textAlign: "center", marginBottom: "4rem" }}>
         <motion.h2
           initial={{ opacity: 0, y: 30 }}
           animate={headerInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.9, delay: 0.15 }}
-          className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#111111] mb-6"
-          style={{ fontFamily: "var(--font-playfair)" }}
+          transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
+          style={{
+            fontFamily: "var(--font-didot, var(--font-playfair), serif)",
+            fontSize: "clamp(2rem, 5vw, 3.25rem)",
+            fontWeight: 700,
+            color: "#1d1b1a",
+            margin: 0,
+          }}
         >
-          {s.title}
+          Qu&apos;est-ce que le Makhana&nbsp;?
         </motion.h2>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={headerInView ? { opacity: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.35 }}
-          className="text-lg md:text-xl text-[#111111]/60 max-w-2xl mx-auto whitespace-pre-line"
-          style={{ fontFamily: "var(--font-lora)" }}
-        >
-          {s.subtitle}
-        </motion.p>
-
-        <motion.div
-          initial={{ scaleX: 0 }}
-          animate={headerInView ? { scaleX: 1 } : {}}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-8 mx-auto w-24 h-[2px] bg-[#6E6E73]/40 origin-center"
-        />
       </div>
 
-      {/* ── Steps ── */}
-      <div className="relative z-20 flex flex-col gap-20 md:gap-28 px-6">
-        {s.steps.map((step: { headline: string; body: string; badge: string }, i: number) => (
-          <StepCard key={i} step={step} index={i} total={s.steps.length} stepLabel={s.stepLabel} />
+      {/* 3-Column Layout */}
+      <div
+        style={{
+          maxWidth: "72rem",
+          margin: "0 auto",
+          display: "flex",
+          flexDirection: "row" as const,
+          gap: "1.5rem",
+          flexWrap: "wrap" as const,
+        }}
+      >
+        {steps.map((step, i) => (
+          <StepCard key={step.num} step={step} index={i} />
         ))}
       </div>
 
-      {/* ── Bottom CTA ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 0.8 }}
-        className="relative z-20 text-center mt-20 md:mt-28 px-6"
-      >
-        <p
-          className="text-base md:text-lg italic text-[#111111]/50 max-w-xl mx-auto"
-          style={{ fontFamily: "var(--font-lora)" }}
-        >
-          {s.closing}
-        </p>
-      </motion.div>
+      {/* Responsive: stack on mobile */}
+      <style>{`
+        @media (max-width: 768px) {
+          #about > div:last-of-type {
+            flex-direction: column !important;
+          }
+          #about > div:last-of-type > div {
+            flex: 1 1 100% !important;
+          }
+        }
+      `}</style>
     </section>
   );
 }
