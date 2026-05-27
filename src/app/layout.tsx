@@ -12,6 +12,12 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "AÉRI - Le snacking qui vous élève",
   description: "L'équilibre parfait entre tradition millénaire et plaisir instantané",
+  alternates: {
+    languages: {
+      "fr-FR": "https://aerisnacks.com/fr",
+      "en-US": "https://aerisnacks.com/en",
+    },
+  },
 };
 
 export default function RootLayout({
@@ -19,12 +25,28 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const schemaOrgJSONLD = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "AÉRI Snacks",
+    "url": "https://aerisnacks.com",
+    "logo": "https://aerisnacks.com/logo.png",
+    "sameAs": [
+      "https://www.instagram.com/aerisnacks",
+      "https://www.linkedin.com/company/aeri-snacks"
+    ]
+  };
+
   return (
     <html
       lang="fr"
       className={`${inter.variable} h-full antialiased`}
     >
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrgJSONLD) }}
+        />
         <Script
           id="microsoft-clarity"
           strategy="afterInteractive"

@@ -12,7 +12,7 @@ export default function Footer() {
   const [email, setEmail] = useState("");
 
   return (
-    <footer className="relative w-full bg-[#111111] text-[#FFFFFF] overflow-hidden">
+    <footer className="relative w-full bg-[#1C1C1C] text-[#FFFFFF] overflow-hidden">
       {/* Waitlist banner */}
       <div className="border-b border-[#FFFFFF]/8">
         <div className="max-w-6xl mx-auto px-6 py-8 md:py-10 flex flex-col md:flex-row items-center justify-between gap-6">

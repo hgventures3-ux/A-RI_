@@ -60,7 +60,7 @@ const productData: Record<
     ],
     storage:
       "Store in a cool, dry place away from direct sunlight. Once opened, reseal tightly and consume within 7 days for optimal crunch.",
-    weight: "30g per serving · 90g per pack",
+    weight: "Pack Size: 30g | 100g",
     origin:
       "Makhana: Bihar, India · Salt: Khewra, Pakistan · Olive Oil: Andalusia, Spain",
   },
@@ -96,7 +96,7 @@ const productData: Record<
     ],
     storage:
       "Conserver dans un endroit frais et sec, à l'abri de la lumière directe du soleil. Une fois ouvert, refermer hermétiquement et consommer dans les 7 jours pour un craquant optimal.",
-    weight: "30g par portion · 90g par sachet",
+    weight: "Format : 30g | 100g",
     origin:
       "Makhana : Bihar, Inde · Herbes : Luberon, France · Huile d'Olive : Andalousie, Espagne",
   },
@@ -132,7 +132,7 @@ const productData: Record<
     ],
     storage:
       "Store in a cool, dry place away from direct sunlight. Once opened, reseal tightly and consume within 5 days to preserve truffle aroma.",
-    weight: "30g per serving · 90g per pack",
+    weight: "Pack Size: 30g | 100g",
     origin:
       "Makhana: Bihar, India · Truffle: Dordogne, France · Salt: Guérande, France",
   },
@@ -180,7 +180,7 @@ const productData: Record<
       "Parfait avec de l'eau pétillante et une tranche de citron",
     ],
     storage: "Conserver dans un endroit frais et sec, à l'abri de la lumière directe du soleil. Une fois ouvert, refermer hermétiquement et consommer dans les 7 jours pour un craquant optimal.",
-    weight: "30g par portion · 90g par sachet",
+    weight: "Format : 30g | 100g",
     origin: "Makhana : Bihar, Inde · Sel : Khewra, Pakistan · Huile d'Olive : Andalousie, Espagne",
   },
   "truffe-noire": {
@@ -210,7 +210,7 @@ const productData: Record<
       "Parfait avec du champagne pour les célébrations",
     ],
     storage: "Conserver dans un endroit frais et sec, à l'abri de la lumière directe du soleil. Une fois ouvert, refermer hermétiquement et consommer dans les 5 jours pour préserver l'arôme de truffe.",
-    weight: "30g par portion · 90g par sachet",
+    weight: "Format : 30g | 100g",
     origin: "Makhana : Bihar, Inde · Truffe : Dordogne, France · Sel : Guérande, France",
   },
   "bientot": {

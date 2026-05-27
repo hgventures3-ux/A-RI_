@@ -26,6 +26,11 @@ const pageTranslations = {
         title: "La Touche AÉRI",
         body: "Nous avons voulu sublimer ce super-aliment en y apportant notre vision du snacking gastronomique. En associant la légèreté du Makhana à des saveurs raffinées comme la truffe noire du Périgord ou les herbes de Provence, AÉRI réinvente l'apéritif. Un plaisir intense, sans compromis sur la santé.",
         image: "/stage_flavoring.png"
+      },
+      {
+        title: "La Fondatrice",
+        body: "« Après une décennie dans le marketing du luxe, j'ai voulu créer ce qui manquait à l'apéritif français : une véritable élégance nutritionnelle. AÉRI est le pont entre l'héritage de mon enfance et l'exigence de la gastronomie contemporaine. »",
+        image: "/founder.jpg"
       }
     ],
     missionTitle: "Notre Mission",
@@ -55,6 +60,11 @@ const pageTranslations = {
         title: "The AÉRI Touch",
         body: "We wanted to elevate this superfood by bringing our vision of gastronomic snacking. By combining the lightness of Makhana with refined flavors like Périgord black truffle or Herbes de Provence, AÉRI reinvents the apéritif. An intense pleasure, without compromising on health.",
         image: "/stage_flavoring.png"
+      },
+      {
+        title: "The Founder",
+        body: "“After a decade in luxury marketing, I wanted to create what was missing from the French apéritif: true nutritional elegance. AÉRI is the bridge between the heritage of my childhood and the demands of contemporary gastronomy.”",
+        image: "/founder.jpg"
       }
     ],
     missionTitle: "Our Mission",
