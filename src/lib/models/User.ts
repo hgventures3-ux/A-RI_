@@ -7,9 +7,6 @@ export interface IUser extends Document {
   countryCode?: string;
   city?: string;
   passwordHash?: string;
-  isVerified: boolean;
-  otp?: string;
-  otpExpiry?: Date;
   totalSpent: number;
   ordersCount: number;
   createdAt: Date;
@@ -41,16 +38,6 @@ const UserSchema = new Schema(
     passwordHash: {
       type: String,
       required: false,
-    },
-    isVerified: {
-      type: Boolean,
-      default: false,
-    },
-    otp: {
-      type: String,
-    },
-    otpExpiry: {
-      type: Date,
     },
     totalSpent: {
       type: Number,

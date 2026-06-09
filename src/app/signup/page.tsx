@@ -7,12 +7,11 @@ import { Lock, Mail, ArrowRight, Loader2, User, MapPin, ChevronDown } from "luci
 import { useLanguage } from "@/context/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import toast from "react-hot-toast";
 
 // Common country codes
 const COUNTRY_CODES = [
   { code: "+33", flag: "🇫🇷", name: "France" },
-  { code: "+1",  flag: "🇺🇸", name: "USA" },
+  { code: "+1", flag: "🇺🇸", name: "USA" },
   { code: "+44", flag: "🇬🇧", name: "UK" },
   { code: "+49", flag: "🇩🇪", name: "Germany" },
   { code: "+91", flag: "🇮🇳", name: "India" },
@@ -21,7 +20,7 @@ const COUNTRY_CODES = [
   { code: "+32", flag: "🇧🇪", name: "Belgium" },
   { code: "+41", flag: "🇨🇭", name: "Switzerland" },
   { code: "+31", flag: "🇳🇱", name: "Netherlands" },
-  { code: "+1",  flag: "🇨🇦", name: "Canada" },
+  { code: "+1", flag: "🇨🇦", name: "Canada" },
   { code: "+61", flag: "🇦🇺", name: "Australia" },
   { code: "+971", flag: "🇦🇪", name: "UAE" },
   { code: "+65", flag: "🇸🇬", name: "Singapore" },
@@ -41,7 +40,6 @@ const t = {
     btnLoading: "Envoi du code...",
     hasAccount: "Déjà inscrit ?",
     loginLink: "Se connecter",
-    successMsg: "Code OTP envoyé à votre e-mail !",
     errRequired: "Nom, e-mail et mot de passe sont requis",
     errShortPass: "Le mot de passe doit contenir au moins 6 caractères",
   },
@@ -57,7 +55,6 @@ const t = {
     btnLoading: "Sending code...",
     hasAccount: "Already have an account?",
     loginLink: "Sign In",
-    successMsg: "OTP code sent to your email!",
     errRequired: "Name, email and password are required",
     errShortPass: "Password must be at least 6 characters",
   },
@@ -103,14 +100,11 @@ function SignupContent() {
 
       if (!res.ok) {
         let msg = "Sign-up failed";
-        try { const d = await res.json(); msg = d.error || msg; } catch (_) {}
+        try { const d = await res.json(); msg = d.error || msg; } catch (_) { }
         throw new Error(msg);
       }
 
       const data = await res.json();
-      toast.success(s.successMsg);
-      // Redirect to OTP verification page
-      router.push(`/verify-otp?email=${encodeURIComponent(email)}&callbackUrl=${encodeURIComponent(callbackUrl)}`);
     } catch (err: any) {
       setError(err.message || "Something went wrong");
     } finally {

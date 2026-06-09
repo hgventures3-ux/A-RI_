@@ -68,18 +68,11 @@ function LoginContent() {
         body: JSON.stringify({ email, password, rememberMe }),
       });
 
-      if (!res.ok) {
-        let errorMessage = "Login failed";
-        try {
-          const data = await res.json();
-          errorMessage = data.error || errorMessage;
-        } catch (e) {
-          errorMessage = `Server error (${res.status})`;
-        }
-        throw new Error(errorMessage);
-      }
-
       const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Login failed");
+      }
 
       toast.success(s.successLogin);
       router.push(callbackUrl);
