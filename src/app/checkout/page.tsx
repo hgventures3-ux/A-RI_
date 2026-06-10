@@ -12,7 +12,7 @@ import Footer from "@/components/Footer";
 import toast from "react-hot-toast";
 
 export default function CheckoutPage() {
-  const { items, cartTotal } = useCart();
+  const { items, cartTotal, clearCart } = useCart();
   const { lang } = useLanguage();
   const router = useRouter();
 
@@ -107,6 +107,7 @@ export default function CheckoutPage() {
 
           if (verifyRes.success) {
             toast.success(isFrench ? `Commande ${verifyRes.orderNumber} passée avec succès via Razorpay !` : `Order ${verifyRes.orderNumber} placed successfully via Razorpay!`);
+            clearCart();
             router.push("/");
           } else {
             toast.error(isFrench ? "Échec de la vérification du paiement. Veuillez contacter le support." : "Payment verification failed. Please contact support.");
@@ -310,6 +311,7 @@ export default function CheckoutPage() {
                             shipping: 0,
                             total: cartTotal,
                             paymentMethod: "PayPal",
+                            paymentStatus: "Paid",
                           };
 
                           const res = await fetch("/api/checkout", {
@@ -321,8 +323,7 @@ export default function CheckoutPage() {
                           const result = await res.json();
                           if (result.success) {
                             toast.success(isFrench ? `Commande ${result.orderNumber} passée avec succès ! Merci, ${details?.payer?.name?.given_name}` : `Order ${result.orderNumber} placed successfully! Thank you, ${details?.payer?.name?.given_name}`);
-                            // Optional: clear cart here if you have a clearCart method in useCart
-                            // clearCart();
+                            clearCart();
                             router.push("/");
                           } else {
                             toast.error(isFrench ? "Le paiement a réussi mais la création de la commande a échoué. Veuillez contacter le support." : "Payment succeeded but order creation failed. Please contact support.");

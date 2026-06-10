@@ -34,8 +34,11 @@ export async function POST(req: Request) {
       shipping: body.shipping || 0,
       total: body.total,
       paymentMethod: body.paymentMethod || "PayPal",
-      paymentStatus: "Pending", // Set to paid after actual payment integration
-      timeline: [{ status: "Pending", note: "Order placed by customer." }],
+      paymentStatus: body.paymentStatus || "Pending",
+      timeline: [
+        { status: "Pending", note: "Order placed by customer." },
+        ...(body.paymentStatus === "Paid" ? [{ status: "Paid", note: "Payment verified successfully." }] : [])
+      ],
     });
 
     await newOrder.save();

@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { usePathname } from "next/navigation";
 
 export interface CartItem {
   id: string;
@@ -28,26 +29,53 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
+  const pathname = usePathname();
+  const [userId, setUserId] = useState<string | null>(null);
 
-  // Load from local storage on mount
+  // Check customer auth state on mount/pathname change
   useEffect(() => {
-    const saved = localStorage.getItem("aeri_cart");
+    const checkUser = async () => {
+      try {
+        const res = await fetch("/api/auth/me");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.user && data.user.id) {
+            setUserId(data.user.id);
+            return;
+          }
+        }
+        setUserId("guest");
+      } catch (error) {
+        setUserId("guest");
+      }
+    };
+    checkUser();
+  }, [pathname]);
+
+  // Load from local storage when userId is set
+  useEffect(() => {
+    if (userId === null) return;
+
+    const saved = localStorage.getItem(`aeri_cart_${userId}`);
     if (saved) {
       try {
         setItems(JSON.parse(saved));
       } catch (e) {
         console.error("Failed to parse cart", e);
+        setItems([]);
       }
+    } else {
+      setItems([]);
     }
     setIsLoaded(true);
-  }, []);
+  }, [userId]);
 
-  // Save to local storage when items change
+  // Save to local storage when items or userId changes
   useEffect(() => {
-    if (isLoaded) {
-      localStorage.setItem("aeri_cart", JSON.stringify(items));
+    if (isLoaded && userId !== null) {
+      localStorage.setItem(`aeri_cart_${userId}`, JSON.stringify(items));
     }
-  }, [items, isLoaded]);
+  }, [items, isLoaded, userId]);
 
   const addToCart = (product: Omit<CartItem, "quantity">) => {
     setItems((prev) => {

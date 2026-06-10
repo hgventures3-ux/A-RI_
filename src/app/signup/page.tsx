@@ -7,6 +7,7 @@ import { Lock, Mail, ArrowRight, Loader2, User, MapPin, ChevronDown } from "luci
 import { useLanguage } from "@/context/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import toast from "react-hot-toast";
 
 // Common country codes
 const COUNTRY_CODES = [
@@ -37,7 +38,7 @@ const t = {
     cityLabel: "Ville",
     passLabel: "Mot de passe",
     btnSignup: "Créer mon compte",
-    btnLoading: "Envoi du code...",
+    btnLoading: "Création du compte...",
     hasAccount: "Déjà inscrit ?",
     loginLink: "Se connecter",
     errRequired: "Nom, e-mail et mot de passe sont requis",
@@ -52,7 +53,7 @@ const t = {
     cityLabel: "City",
     passLabel: "Password",
     btnSignup: "Create Account",
-    btnLoading: "Sending code...",
+    btnLoading: "Creating account...",
     hasAccount: "Already have an account?",
     loginLink: "Sign In",
     errRequired: "Name, email and password are required",
@@ -98,13 +99,15 @@ function SignupContent() {
         body: JSON.stringify({ name, email, password, phone, countryCode, city }),
       });
 
+      const data = await res.json();
+
       if (!res.ok) {
-        let msg = "Sign-up failed";
-        try { const d = await res.json(); msg = d.error || msg; } catch (_) { }
-        throw new Error(msg);
+        throw new Error(data.error || "Sign-up failed");
       }
 
-      const data = await res.json();
+      toast.success(lang === "fr" ? "Inscription réussie !" : "Sign-up successful!");
+      router.push(callbackUrl);
+      router.refresh();
     } catch (err: any) {
       setError(err.message || "Something went wrong");
     } finally {

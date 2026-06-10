@@ -204,22 +204,24 @@ export default function Navbar() {
         </button>
 
         {/* ── Cart Toggle ── */}
-        <button
-          onClick={() => setIsCartOpen(true)}
-          aria-label="Ouvrir le panier"
-          className="relative p-2 text-[#1C1C1C] hover:bg-[#1C1C1C]/5 rounded-full transition-colors"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="9" cy="21" r="1"></circle>
-            <circle cx="20" cy="21" r="1"></circle>
-            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-          </svg>
-          {cartCount > 0 && (
-            <span className="absolute top-0 right-0 w-4 h-4 bg-[#D4AF37] text-white text-[10px] font-bold flex items-center justify-center rounded-full transform translate-x-1/4 -translate-y-1/4">
-              {cartCount}
-            </span>
-          )}
-        </button>
+        {user && (
+          <button
+            onClick={() => setIsCartOpen(true)}
+            aria-label="Ouvrir le panier"
+            className="relative p-2 text-[#1C1C1C] hover:bg-[#1C1C1C]/5 rounded-full transition-colors"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            {cartCount > 0 && (
+              <span className="absolute top-0 right-0 w-4 h-4 bg-[#D4AF37] text-white text-[10px] font-bold flex items-center justify-center rounded-full transform translate-x-1/4 -translate-y-1/4">
+                {cartCount}
+              </span>
+            )}
+          </button>
+        )}
       </motion.nav>
 
       {/* ── Mobile: User + Lang toggle + Hamburger ── */}
@@ -274,22 +276,24 @@ export default function Navbar() {
         </button>
 
         {/* Cart Mobile */}
-        <button
-          onClick={() => setIsCartOpen(true)}
-          className="relative p-2 text-[#1C1C1C] cursor-pointer"
-          aria-label="Panier"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <circle cx="9" cy="21" r="1"></circle>
-            <circle cx="20" cy="21" r="1"></circle>
-            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-          </svg>
-          {cartCount > 0 && (
-            <span className="absolute top-0 right-0 w-4 h-4 bg-[#D4AF37] text-white text-[10px] font-bold flex items-center justify-center rounded-full transform translate-x-1/4 -translate-y-1/4">
-              {cartCount}
-            </span>
-          )}
-        </button>
+        {user && (
+          <button
+            onClick={() => setIsCartOpen(true)}
+            className="relative p-2 text-[#1C1C1C] cursor-pointer"
+            aria-label="Panier"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            {cartCount > 0 && (
+              <span className="absolute top-0 right-0 w-4 h-4 bg-[#D4AF37] text-white text-[10px] font-bold flex items-center justify-center rounded-full transform translate-x-1/4 -translate-y-1/4">
+                {cartCount}
+              </span>
+            )}
+          </button>
+        )}
 
         {/* Hamburger */}
         <button

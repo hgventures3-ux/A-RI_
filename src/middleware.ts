@@ -53,8 +53,8 @@ export async function middleware(request: NextRequest) {
     }
   }
 
-  // User profile routes ko protect karte hain
-  if (path.startsWith('/profile')) {
+  // User profile and checkout routes ko protect karte hain
+  if (path.startsWith('/profile') || path.startsWith('/checkout')) {
     const token = request.cookies.get('user_token')?.value;
 
     if (!token) {
@@ -95,5 +95,6 @@ export const config = {
   matcher: [
     '/admin/:path*',
     '/profile/:path*',
+    '/checkout/:path*',
   ],
 };
