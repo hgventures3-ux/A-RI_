@@ -140,7 +140,7 @@ const frenchProducts: Product[] = [
     description:
       "Makhana Graines Soufflées - Tomate mûrie au soleil et herbes.",
     price: "€5.99 / 50g",
-    image: "/flavor_tangy_tomato.png",
+    image: "/products/tomato.png",
   },
 ];
 

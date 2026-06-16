@@ -165,7 +165,7 @@ const t = {
         category: "GOURMET",
         desc: "A luxurious infusion of white truffle oil and summer black truffle shavings. Roasted in olive oil — never fried.",
         price: "€5.99 / 50g",
-        image: "/flavor_truffle_makhana.png",
+        image: "/products/product2.png",
       },
       {
         id: "herb",
@@ -173,7 +173,7 @@ const t = {
         category: "VÉGÉTAL",
         desc: "An aromatic bouquet of wild oregano, rosemary, and sun-dried basil. Roasted in olive oil — never fried.",
         price: "€5.99 / 50g",
-        image: "/flavor_herbes_makhana.png",
+        image: "/products/product3.png",
       },
       {
         id: "caramel-salt",
@@ -229,7 +229,7 @@ const t = {
         category: "PLANT-BASED",
         desc: "The sweet and tart brilliance of sun-ripened tomatoes, seasoned with subtle herbs.",
         price: "€5.99 / 50g",
-        image: "/flavor_tangy_tomato.png",
+        image: "/products/tomato.png",
       }
     ],
     addToCart: "Add to Cart",
