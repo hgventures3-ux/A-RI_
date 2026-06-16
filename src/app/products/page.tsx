@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     url: "https://aerisnacks.com/products",
     images: [
       {
-        url: "https://aerisnacks.com/flavor_salt_v2.png",
+        url: "https://aerisnacks.com/flavor_himalayan_salt_new.png",
         width: 1200,
         height: 630,
         alt: "AÉRI Snacks Boutique",

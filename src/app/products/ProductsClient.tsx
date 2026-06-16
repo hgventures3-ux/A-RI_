@@ -21,9 +21,9 @@ const t = {
       contact: "Contact",
     },
     hero: {
-      title: "L'Élégance Botanique",
+      title: "Notre Gamme de Makhana",
       subtitle:
-        "Des saveurs d'exception, soufflées avec passion. Découvrez notre collection artisanale de Makhana premium.",
+        "Découvrez notre collection complète de saveurs de Makhana premium.",
     },
     products: [
       {
@@ -32,7 +32,7 @@ const t = {
         category: "SIGNATURE",
         desc: "La pureté du sel rose de l'Himalaya mariée au piquant subtil du poivre noir concassé. Torréfié à l'huile d'olive — jamais frit.",
         price: "€5.99 / 50g",
-        image: "/flavor_salt_v2.png",
+        image: "/flavor_himalayan_salt_new.png",
       },
       {
         id: "truffle",
@@ -40,7 +40,7 @@ const t = {
         category: "GOURMET",
         desc: "Une infusion luxueuse d'huile de truffe blanche et d'éclats de truffe noire d'été. Torréfié à l'huile d'olive — jamais frit.",
         price: "€5.99 / 50g",
-        image: "/flavor_truffle_v2.png",
+        image: "/flavor_truffle_makhana.png",
       },
       {
         id: "herb",
@@ -48,7 +48,7 @@ const t = {
         category: "VÉGÉTAL",
         desc: "Un bouquet aromatique d'origan sauvage, romarin et basilic séché au soleil. Torréfié à l'huile d'olive — jamais frit.",
         price: "€5.99 / 50g",
-        image: "/flavor_herbes_v2.png",
+        image: "/flavor_herbes_makhana.png",
       },
       {
         id: "caramel-salt",
@@ -126,7 +126,7 @@ const t = {
       success: "Merci ! Nous vous tiendrons informé.",
     },
     footer: {
-      copy: "© 2024 AÉRI SNACKS. ÉLÉGANCE BOTANIQUE.",
+      copy: "© 2026 AÉRI SNACKS. NOTRE GAMME DE MAKHANA.",
       links: [
         "Mentions Légales",
         "CGV B2B",
@@ -146,9 +146,9 @@ const t = {
       contact: "Contact",
     },
     hero: {
-      title: "Botanical Elegance",
+      title: "Our Makhana Range",
       subtitle:
-        "Exceptional flavors, passionately puffed. Discover our artisanal collection of premium Makhana.",
+        "Discover our complete collection of premium Makhana flavors.",
     },
     products: [
       {
@@ -157,7 +157,7 @@ const t = {
         category: "SIGNATURE",
         desc: "The purity of Himalayan pink salt married with the subtle kick of crushed black pepper. Roasted in olive oil — never fried.",
         price: "€5.99 / 50g",
-        image: "/flavor_salt_v2.png",
+        image: "/flavor_himalayan_salt_new.png",
       },
       {
         id: "truffle",
@@ -165,7 +165,7 @@ const t = {
         category: "GOURMET",
         desc: "A luxurious infusion of white truffle oil and summer black truffle shavings. Roasted in olive oil — never fried.",
         price: "€5.99 / 50g",
-        image: "/flavor_truffle_v2.png",
+        image: "/flavor_truffle_makhana.png",
       },
       {
         id: "herb",
@@ -173,7 +173,7 @@ const t = {
         category: "VÉGÉTAL",
         desc: "An aromatic bouquet of wild oregano, rosemary, and sun-dried basil. Roasted in olive oil — never fried.",
         price: "€5.99 / 50g",
-        image: "/flavor_herbes_v2.png",
+        image: "/flavor_herbes_makhana.png",
       },
       {
         id: "caramel-salt",
@@ -194,7 +194,7 @@ const t = {
       {
         id: "lemon-mint",
         name: "Lemon & Mint",
-        category: "BOTANICAL",
+        category: "PLANT-BASED",
         desc: "A bright, citrusy burst of lemon paired with cooling mint.",
         price: "€5.99 / 50g",
         image: "/flavor_lemon_mint.png",
@@ -226,7 +226,7 @@ const t = {
       {
         id: "tangy-tomato",
         name: "Tangy Tomato",
-        category: "BOTANICAL",
+        category: "PLANT-BASED",
         desc: "The sweet and tart brilliance of sun-ripened tomatoes, seasoned with subtle herbs.",
         price: "€5.99 / 50g",
         image: "/flavor_tangy_tomato.png",
@@ -251,7 +251,7 @@ const t = {
       success: "Thank you! We'll keep you posted.",
     },
     footer: {
-      copy: "© 2024 AÉRI SNACKS. BOTANICAL ELEGANCE.",
+      copy: "© 2026 AÉRI SNACKS. OUR MAKHANA RANGE.",
       links: [
         "Legal Notice",
         "B2B T&C",
@@ -271,6 +271,7 @@ const categoryColors: Record<string, string> = {
   GOURMET: "bg-rose-100 text-rose-800",
   "VÉGÉTAL": "bg-pink-100 text-pink-800",
   "BOTANICAL": "bg-emerald-100 text-emerald-800",
+  "PLANT-BASED": "bg-emerald-100 text-emerald-800",
   "SUCRÉ": "bg-orange-100 text-orange-800",
   "SWEET": "bg-orange-100 text-orange-800",
   "ÉPICÉ": "bg-red-100 text-red-800",
@@ -325,7 +326,7 @@ export default function ProductsPage() {
         className="min-h-screen text-[#1d1b1a]"
         style={{
           fontFamily: "var(--font-montserrat), sans-serif",
-          background: "#F5E6D3",
+          background: "#FAF8F5",
         }}
       >
         {/* ═══════════════════════ NAVBAR ═══════════════════════ */}
@@ -389,7 +390,7 @@ export default function ProductsPage() {
 
           <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
-              { img: "/flavor_salt_v2.png", label: d.voting.option1 },
+              { img: "/flavor_himalayan_salt_new.png", label: d.voting.option1 },
               { img: "/flavor_mystery.png", label: d.voting.option2 },
             ].map((opt, idx) => (
               <motion.div

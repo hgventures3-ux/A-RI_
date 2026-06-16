@@ -228,10 +228,10 @@ export default function PondToPlate() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden bg-[#F5F5F7]"
+      className="relative w-full overflow-hidden bg-[#FAF8F5]"
     >
       {/* ── Top transition gradient ── */}
-      <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-[#F5F5F7] to-transparent z-10 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-full h-40 bg-gradient-to-b from-[#FAF8F5] to-transparent z-10 pointer-events-none" />
 
       {/* ── Background subtle pattern ── */}
       <motion.div

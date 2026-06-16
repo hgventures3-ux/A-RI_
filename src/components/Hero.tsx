@@ -6,7 +6,9 @@ import { useLanguage } from "@/context/LanguageContext";
 import Navbar from "@/components/Navbar";
 
 const VALID_FRAMES: number[] = [];
-for (let i = 1; i <= 233; i++) {
+// Stop animation after AERI text reveals (around frame 170-175), before packaged product.
+// From 1 to 175.
+for (let i = 1; i <= 175; i++) {
   if (i >= 60 && i <= 135) continue; // Skip blueberry frames
   VALID_FRAMES.push(i);
 }
@@ -16,22 +18,22 @@ const FRAME_COUNT = VALID_FRAMES.length;
 const heroText = {
   fr: {
     ticker: "• Livraison gratuite sur votre première commande • Livraison gratuite sur votre première commande •",
-    headline: "AÉRI : L'Apéro Soufflé d'Exception.",
+    headline: "AÉRI Makhana: The Art de l'Apéro.",
     subheadline: "Croustillant, noble, et naturellement sain. Découvrez la super-graine d'origine indienne qui réinvente vos débuts de soirée.",
     cta: "ACHETER MAINTENANT",
-    disclaimer: "Représentation botanique illustrative.",
+    disclaimer: "Représentation visuelle illustrative.",
   },
   en: {
     ticker: "• Free shipping on your first delivery • Free shipping on your first delivery •",
-    headline: "AÉRI: The Ultimate Gourmet Puff.",
+    headline: "AÉRI Makhana: The Art de l'Apéro.",
     subheadline: "Crunchy, noble, and naturally healthy. Discover the Indian super-seed that reinvents your evening rituals.",
     cta: "SHOP NOW",
-    disclaimer: "Illustrative botanical representation.",
+    disclaimer: "Illustrative visual representation.",
   },
   hi: {
     ticker: "• आपके पहले ऑर्डर पर मुफ़्त डिलीवरी • आपके पहले ऑर्डर पर मुफ़्त डिलीवरी •",
-    headline: "AÉRI: बेमिसाल गॉर्मे स्नैक।",
-    subheadline: "कुरकुरा, शानदार, और प्राकृतिक रूप से स्वस्थ। भारतीय सुपर-सीड की खोज करें जो आपकी शाम को बदल दे।",
+    headline: "AÉRI Makhana: The Art de l'Apéro.",
+    subheadline: "कुरकुरा, शानदार, और प्राकृतिक रूप से स्वस्थ। भारतीय सुपर-सीड की खोज करें जो आपकी शाम को बदल दे。",
     cta: "अभी खरीदें",
     disclaimer: "सचित्र वानस्पतिक प्रतिनिधित्व।",
   },
@@ -57,7 +59,7 @@ export default function Hero() {
   useEffect(() => {
     const loadedImages: HTMLImageElement[] = [];
     let loadedCount = 0;
-    
+
     VALID_FRAMES.forEach((frameNum) => {
       const img = new window.Image();
       const frameStr = frameNum.toString().padStart(3, "0");
@@ -70,7 +72,7 @@ export default function Hero() {
       };
       loadedImages.push(img);
     });
-    
+
     setImages(loadedImages);
   }, []);
 
@@ -80,10 +82,10 @@ export default function Hero() {
       const canvas = canvasRef.current;
       const ctx = canvas.getContext("2d");
       const img = images[0];
-      
+
       canvas.width = img.naturalWidth;
       canvas.height = img.naturalHeight;
-      
+
       if (ctx) {
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
       }
@@ -93,15 +95,15 @@ export default function Hero() {
   // Draw frame on scroll
   useMotionValueEvent(frameIndex, "change", (latest) => {
     if (!loaded || images.length === 0 || !canvasRef.current) return;
-    
+
     let index = Math.floor(latest) - 1;
     if (index < 0) index = 0;
     if (index >= FRAME_COUNT) index = FRAME_COUNT - 1;
-    
+
     const canvas = canvasRef.current;
     const ctx = canvas.getContext("2d");
     const img = images[index];
-    
+
     if (ctx && img && img.complete) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
@@ -111,13 +113,13 @@ export default function Hero() {
   // Transition effects to hide the jump cut between frame 59 and 136
   const cutIndex = 58;
   const cutNextIndex = 59;
-  
+
   const canvasOpacity = useTransform(
     frameIndex,
     [cutIndex - 8, cutIndex, cutNextIndex, cutNextIndex + 8],
     [0.85, 0, 0, 0.85]
   );
-  
+
   const canvasFilter = useTransform(
     frameIndex,
     [cutIndex - 8, cutIndex, cutNextIndex, cutNextIndex + 8],
@@ -128,28 +130,12 @@ export default function Hero() {
   const textOpacity = useTransform(scrollYProgress, [0, 0.15], [1, 0]);
 
   return (
-    <section 
+    <section
       ref={containerRef}
-      className="relative w-full h-[400vh]"
+      className="relative w-full h-[600vh]"
       style={{ background: '#000000' }}
     >
-      {/* Infinite Marquee Ticker */}
-      <div className="fixed top-0 left-0 right-0 z-[50] bg-[#1C1C1C] text-white overflow-hidden">
-        <div className="flex whitespace-nowrap animate-marquee py-2.5">
-          <span className="text-xs tracking-widest uppercase px-8" style={{ fontFamily: "var(--font-montserrat)" }}>
-            {s.ticker}
-          </span>
-          <span className="text-xs tracking-widest uppercase px-8" style={{ fontFamily: "var(--font-montserrat)" }}>
-            {s.ticker}
-          </span>
-          <span className="text-xs tracking-widest uppercase px-8" style={{ fontFamily: "var(--font-montserrat)" }}>
-            {s.ticker}
-          </span>
-          <span className="text-xs tracking-widest uppercase px-8" style={{ fontFamily: "var(--font-montserrat)" }}>
-            {s.ticker}
-          </span>
-        </div>
-      </div>
+      {/* Infinite Marquee Ticker Removed */}
 
       <div
         className="sticky top-0 left-0 w-full h-screen overflow-hidden"
@@ -173,17 +159,18 @@ export default function Hero() {
           }}
         />
 
-        {/* Logo overlay — covers watermark bottom-right */}
+        {/* Logo overlay — covers watermark bottom-right, now moved to center above water lily */}
         <div
           className="absolute z-[3] pointer-events-none flex items-center justify-center"
           style={{
-            bottom: 0,
-            right: 0,
+            bottom: '12%', // Repositioned further down to avoid touching the CTA
+            left: '50%',
+            transform: 'translateX(-50%)',
             width: '120px',
             height: '50px',
             background: 'linear-gradient(135deg, rgba(237,224,212,0.95) 0%, rgba(245,230,208,0.98) 50%, rgba(237,224,212,0.95) 100%)',
             backdropFilter: 'blur(8px)',
-            borderTopLeftRadius: '8px',
+            borderRadius: '8px',
           }}
         >
           <span
@@ -200,13 +187,11 @@ export default function Hero() {
           </span>
         </div>
 
-        {/* Navbar — fixed, rendered here for mount context */}
-        <Navbar />
 
         {/* ── Hero Copy & CTA ── */}
-        {/* pt accounts for ticker (≈36px) + navbar (≈52px) */}
+        {/* pt accounts for navbar (≈52px) */}
         <div
-          className="relative z-[10] flex flex-col items-center justify-center text-center px-6 h-full pt-[88px] pb-16 pointer-events-none"
+          className="relative z-[10] flex flex-col items-center justify-center text-center px-6 h-full pt-16 pb-16 pointer-events-none"
         >
           {/* Animated Text Container */}
           <motion.div
@@ -218,10 +203,11 @@ export default function Hero() {
               initial={{ opacity: 0, y: 32 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.1, delay: 0.45, ease: [0.22, 1, 0.36, 1] }}
-              className="text-3xl md:text-5xl lg:text-[3.75rem] font-bold tracking-tight mb-5 text-[#1C1C1C] leading-tight"
+              className="text-3xl md:text-5xl lg:text-[3.75rem] font-bold tracking-tight mb-5 text-[#1C1C1C] leading-tight px-4 py-2 rounded-2xl"
               style={{
                 fontFamily: 'var(--font-didot)',
-                textShadow: '0 2px 24px rgba(245,230,211,0.9), 0 1px 4px rgba(245,230,211,0.8)',
+                textShadow: '0 2px 24px rgba(255,255,255,1), 0 1px 4px rgba(255,255,255,0.9), 0 0 10px rgba(255,255,255,0.8)',
+                background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.6) 0%, transparent 80%)',
               }}
             >
               {s.headline}
@@ -232,10 +218,11 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.75 }}
-              className="text-sm md:text-base lg:text-[1.05rem] max-w-xl leading-relaxed mb-9 text-[#3a342c]"
+              className="text-sm md:text-base lg:text-[1.05rem] max-w-xl leading-relaxed mb-9 text-[#1C1C1C] font-medium px-4 py-2 rounded-2xl"
               style={{
                 fontFamily: 'var(--font-montserrat)',
-                textShadow: '0 1px 12px rgba(245,230,211,0.95)',
+                textShadow: '0 1px 12px rgba(255,255,255,1), 0 0 8px rgba(255,255,255,0.9)',
+                background: 'radial-gradient(ellipse at center, rgba(255,255,255,0.5) 0%, transparent 80%)',
               }}
             >
               {s.subheadline}
@@ -247,7 +234,7 @@ export default function Hero() {
             href="/products"
             whileHover={{ scale: 1.04, backgroundColor: '#333' }}
             whileTap={{ scale: 0.96 }}
-            className="pointer-events-auto inline-block px-9 py-4 bg-[#1C1C1C] text-[#F5E6D3] text-[11px] font-bold tracking-[0.3em] uppercase rounded-xl shadow-xl transition-colors duration-200 mt-2"
+            className="pointer-events-auto inline-block px-9 py-4 bg-[#1C1C1C] text-[#FAF8F5] text-[11px] font-bold tracking-[0.3em] uppercase rounded-xl shadow-xl transition-colors duration-200 mt-2"
             style={{ fontFamily: 'var(--font-montserrat)' }}
           >
             {s.cta}

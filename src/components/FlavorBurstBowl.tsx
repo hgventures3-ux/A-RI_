@@ -106,7 +106,7 @@ export default function FlavorBurstBowl() {
       <section
         ref={sectionRef}
         className="w-full py-16 px-6"
-        style={{ background: "#F5E6D3" }}
+        style={{ background: "#FAF8F5" }}
       >
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -123,7 +123,7 @@ export default function FlavorBurstBowl() {
           <div className="relative w-48 h-48 mx-auto mb-6">
             <Image
               key={lang}
-              src="/flavor_salt_v2.png"
+              src="/flavor_himalayan_salt_new.png"
               alt={s.title}
               fill
               className="object-contain"
@@ -157,7 +157,7 @@ export default function FlavorBurstBowl() {
     <section
       ref={sectionRef}
       className="w-full py-24 md:py-32 px-6 relative overflow-hidden"
-      style={{ background: "#F5E6D3" }}
+      style={{ background: "#FAF8F5" }}
     >
       {/* बैकग्राउंड ग्रेडिएंट ऑर्ब */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -280,7 +280,7 @@ export default function FlavorBurstBowl() {
 
               {/* प्रोडक्ट इमेज */}
               <Image
-                src="/flavor_salt_v2.png"
+                src="/flavor_himalayan_salt_new.png"
                 alt={s.title}
                 fill
                 className="object-contain drop-shadow-2xl"

@@ -69,7 +69,7 @@ export default function CartDrawer({ onCheckout }: { onCheckout?: () => void }) 
             animate={{ x: 0 }}
             exit={{ x: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed top-0 right-0 h-full w-full max-w-md bg-[#F5E6D3] z-[100] shadow-2xl flex flex-col"
+            className="fixed top-0 right-0 h-full w-full max-w-md bg-[#FAF8F5] z-[100] shadow-2xl flex flex-col"
           >
             {/* Header */}
             <div className="flex items-center justify-between px-6 py-5 border-b border-[#1C1C1C]/10">
@@ -167,7 +167,7 @@ export default function CartDrawer({ onCheckout }: { onCheckout?: () => void }) 
 
             {/* Footer */}
             {items.length > 0 && (
-              <div className="border-t border-[#1C1C1C]/10 px-6 py-6 bg-[#F5E6D3]">
+              <div className="border-t border-[#1C1C1C]/10 px-6 py-6 bg-[#FAF8F5]">
                 <div className="flex justify-between items-center mb-6">
                   <span className="text-sm uppercase tracking-widest text-[#1C1C1C]/80 font-medium" style={{ fontFamily: "var(--font-montserrat)" }}>
                     {s.total}
@@ -186,7 +186,7 @@ export default function CartDrawer({ onCheckout }: { onCheckout?: () => void }) 
                       router.push("/checkout");
                     }
                   }}
-                  className="w-full py-4 bg-[#1C1C1C] text-[#F5E6D3] rounded-xl font-semibold tracking-widest uppercase text-sm hover:bg-[#333] transition-colors"
+                  className="w-full py-4 bg-[#1C1C1C] text-[#FAF8F5] rounded-xl font-semibold tracking-widest uppercase text-sm hover:bg-[#333] transition-colors"
                   style={{ fontFamily: "var(--font-montserrat)" }}
                 >
                   {s.checkout}

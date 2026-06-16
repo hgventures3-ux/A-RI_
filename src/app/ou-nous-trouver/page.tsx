@@ -51,7 +51,7 @@ export default function OuNousTrouverPage() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col" style={{ background: "#F5E6D3" }}>
+    <main className="min-h-screen flex flex-col" style={{ background: "#FAF8F5" }}>
       <Navbar />
 
       {/* ── Hero Section ── */}
@@ -154,7 +154,7 @@ export default function OuNousTrouverPage() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.6 }}
           className="mt-16 w-full max-w-2xl h-72 md:h-96 rounded-3xl overflow-hidden border border-[#E0D5C5] shadow-lg relative flex items-center justify-center"
-          style={{ background: "linear-gradient(135deg, #EDE0D0 0%, #F5E6D3 60%, #EAD9C5 100%)" }}
+          style={{ background: "linear-gradient(135deg, #EDE0D0 0%, #FAF8F5 60%, #EAD9C5 100%)" }}
         >
           {/* ग्रिड बैकग्राउंड पैटर्न */}
           <div

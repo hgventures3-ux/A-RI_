@@ -18,7 +18,7 @@ export default function AdminLayout({
 
   if (isLoginPage) {
     return (
-      <div className="min-h-screen bg-[#faf5ef] flex flex-col relative">
+      <div className="min-h-screen bg-[#FAF8F5] flex flex-col relative">
         <Navbar />
         <div className="flex-1 flex flex-col justify-center pt-20">
           {children}
@@ -29,7 +29,7 @@ export default function AdminLayout({
   }
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[#faf5ef]">
+    <div className="flex h-screen overflow-hidden bg-[#FAF8F5]">
       {/* Sidebar */}
       <AdminSidebar />
 

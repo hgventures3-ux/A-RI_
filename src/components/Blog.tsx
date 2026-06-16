@@ -13,11 +13,11 @@ import t from "@/translations";
 const articles = [
   {
     id: "apero",
-    tag: "Culture",
+    tag: "LIFESTYLE",
     date: "12 Mai 2026",
     readTime: "5 min",
     image: "/blog_apero.png",
-    title: "L'Étiquette de l'Apéro",
+    title: "L'Étiquette de l'Apéro Moderne : L'Art de Recevoir à la Française",
     subtitle: "Comment ne pas passer pour un barbare devant le fromage.",
     description:
       "L'apéro, c'est sacré. Mais entre la planche qui ressemble à un accident de supermarché et celle qui fait dire 'oh là là', il y a un monde. Spoiler : AÉRI fait partie du deuxième camp.",
@@ -25,11 +25,11 @@ const articles = [
   },
   {
     id: "wine",
-    tag: "Accords",
+    tag: "GASTRONOMIE",
     date: "8 Mai 2026",
     readTime: "4 min",
     image: "/blog_wine.png",
-    title: "AÉRI & Vins : Le Mariage Parfait",
+    title: "AÉRI & Vins : Le Guide d'Expert pour des Accords Parfaits",
     subtitle: "Un Bourgogne et un Makhana entrent dans un bar…",
     description:
       "On ne vous fera pas un cours d'œnologie (promis). Mais imaginez : la légèreté d'AÉRI Truffe avec un Pinot Noir. Oui, c'est aussi beau que ça en a l'air. Non, votre paquet de chips n'est pas invité.",
@@ -37,11 +37,11 @@ const articles = [
   },
   {
     id: "supermarket",
-    tag: "Vérité",
+    tag: "TRANSPARENCE",
     date: "3 Mai 2026",
     readTime: "6 min",
     image: "/blog_supermarket.png",
-    title: "Les Mensonges de Votre Supermarché",
+    title: "Les Mensonges Cachés de Votre Supermarché : Décoder les étiquettes de snacks",
     subtitle: "Votre snack « healthy » contient plus de surprises que prévu.",
     description:
       "« Naturel », « Léger », « Sans culpabilité »… Si les paquets de chips pouvaient rougir, ils seraient écarlates. On décortique les étiquettes et — attention — on a apporté nos lunettes.",
@@ -254,36 +254,7 @@ export default function Blog() {
         </div>
       </div>
 
-      {/* ── Bottom CTA ── */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.5 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-        className="text-center mt-14 md:mt-20 px-6"
-      >
-        <motion.button
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-          className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#111111] text-[#FFFFFF] text-sm font-semibold tracking-wide transition-all hover:shadow-xl cursor-pointer"
-          style={{ fontFamily: "var(--font-montserrat)" }}
-        >
-          {s.allArticles}
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <line x1="5" y1="12" x2="19" y2="12" />
-            <polyline points="12 5 19 12 12 19" />
-          </svg>
-        </motion.button>
-      </motion.div>
+
     </section>
   );
 }

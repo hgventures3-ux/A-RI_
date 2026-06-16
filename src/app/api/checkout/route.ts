@@ -31,6 +31,8 @@ export async function POST(req: Request) {
         image: item.image,
       })),
       subtotal: body.subtotal,
+      discount: body.discount || 0,
+      couponCode: body.couponCode || "",
       shipping: body.shipping || 0,
       total: body.total,
       paymentMethod: body.paymentMethod || "PayPal",

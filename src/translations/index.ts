@@ -27,7 +27,7 @@ const t: Record<string, Record<string, any>> = {
   education: {
     fr: {
       label: "Découverte",
-      title: "Qu'est-ce que le Makhana ?",
+      title: "Un Super-Aliment à Fort Rendement Linéaire",
       subtitle: "Un voyage de 5 000 ans, résumé en 3 étapes.\nPromis, c'est plus fun qu'un cours d'histoire.",
       stepLabel: "Étape",
       steps: [
@@ -39,7 +39,7 @@ const t: Record<string, Record<string, any>> = {
     },
     en: {
       label: "Discovery",
-      title: "What is Makhana?",
+      title: "A High-Yield Superfood for Retail Shelves",
       subtitle: "A 5,000-year journey in 3 steps.\nDiscover the heritage behind the crunch.",
       stepLabel: "Step",
       steps: [
@@ -51,11 +51,11 @@ const t: Record<string, Record<string, any>> = {
     },
     hi: {
       label: "खोज",
-      title: "मखाना क्या है?",
+      title: "रिटेल शेल्फ के लिए उच्च प्रदर्शन वाला सुपरफूड",
       subtitle: "3 चरणों में 5,000 साल की यात्रा।\nहम वादा करते हैं कि यह इतिहास की क्लास से ज्यादा मजेदार है।",
       stepLabel: "चरण",
       steps: [
-        { headline: "सुपरहीरो बीज", body: "यह कमल का बीज है। नहीं, आपके बगीचे वाला फूल नहीं — बल्कि उसका सुपरहीरो संस्करण।", badge: "अपराध-मुक्त आनंद" },
+        { headline: "सुपरहीरो बीज", body: "यह मखाना का बीज है। यह कोई साधारण बीज नहीं — बल्कि सुपरफूड संस्करण है।", badge: "अपराध-मुक्त आनंद" },
         { headline: "बीज से स्नैक तक", body: "बिहार के ताजे पानी में उगाया जाने वाला यह Euryale Ferox (मखाना) किसी भी उद्योग से दूर, साफ तालाबों में पनपता है। एक असाधारण उत्पाद के लिए एक असाधारण जगह।", badge: "असाधारण जगह" },
         { headline: "हवा से भी हल्का", body: "स्नैक खाने के बाद पेट में होने वाले भारीपन को अलविदा कहें। AÉRI इतना हल्का है कि आप लगभग उड़ सकते हैं।", badge: "अत्यंत हल्का · 0 तेल" },
       ],
@@ -76,14 +76,14 @@ const t: Record<string, Record<string, any>> = {
       traceLabel: "Traçabilité",
       traceTitle: "100% Éthique. 100% Traçable.",
       traceBody: "Cultivé sur 1 000 acres de zones humides préservées du Bihar, en partenariat avec Hybite Foods pour une traçabilité 100% éthique. De la graine à votre assiette, chaque étape est documentée.",
-      tracePills: ["Plaisir sans Culpabilité", "Énergie Durable", "Commerce Équitable"],
+      tracePills: ["Plaisir sans Culpabilité", "Énergie Durable", "Commerce équitable"],
     },
     en: {
       label: "The Journey",
       title: "From Pond to Plate",
       subtitle: "Every AÉRI grain travels 8,000 km, from the pure waters of Bihar to your Parisian apéro.",
       stages: [
-        { label: "Harvesting", headline: "Artisanal Harvesting", body: "Hand-picked from the preserved wetlands of Bihar, every Euryale Ferox (foxnut) seed is harvested with ancestral know-how passed down through generations. A thousand-year-old gesture, respectful of land and water.", stat: { value: "1,000", unit: "acres", desc: "of preserved wetlands" }, benefit: "Guilt-Free Pleasure" },
+        { label: "Harvesting", headline: "Artisanal Harvesting", body: "Hand-picked from the preserved wetlands of Bihar, every Euryale Ferox (Makhana) seed is harvested with ancestral know-how passed down through generations. A thousand-year-old gesture, respectful of land and water.", stat: { value: "1,000", unit: "acres", desc: "of preserved wetlands" }, benefit: "Guilt-Free Pleasure" },
         { label: "Popping", headline: "The Ancestral Pop", body: "The black seeds are sun-dried, then popped using heat alone — no oil, no industrial machines. This traditional process reveals the airy texture and delicate taste of Makhana.", stat: { value: "0", unit: "oil", desc: "added during popping" }, benefit: "Sustained Energy" },
         { label: "Flavoring", headline: "The French Touch", body: "Lightly coated in extra-virgin olive oil and artisanally seasoned with selected spices. The result: a gourmet snack, crunchy and irresistibly light.", stat: { value: "9.5g", unit: "protein", desc: "per 30g serving" }, benefit: "Guilt-Free Pleasure" },
       ],
@@ -180,7 +180,7 @@ const t: Record<string, Record<string, any>> = {
       tagline: "From the Himalayas to your Apéro: 3,000 years of history, 0% guilt.",
       botTitle1: "A Millennial Seed,",
       botTitle2: "A Rediscovered Treasure",
-      botP1: "Euryale Ferox, known as Makhana (foxnut / water lily seed), is a unique aquatic plant that grows exclusively in the calm, pure waters of Bihar. Its seeds have been consumed for over 3,000 years in Asia, revered for their exceptional nutritional properties.",
+      botP1: "Euryale Ferox, known as Makhana, is a unique aquatic plant that grows exclusively in the calm, pure waters of Bihar. Its seeds have been consumed for over 3,000 years in Asia, revered for their exceptional nutritional properties.",
       botP2: "Rich in protein, low in fat, and naturally gluten-free: Makhana is the snack that nature perfected over millennia. AÉRI simply gives it the stage it deserves.",
       stats: [
         { value: "9.5g", label: "Protein", sub: "per 100g" },
@@ -206,7 +206,7 @@ const t: Record<string, Record<string, any>> = {
       tagline: "हिमालय से आपके एपेरो (Apéro) तक: 3,000 साल का इतिहास, 0% अपराधबोध।",
       botTitle1: "एक सहस्राब्दी बीज,",
       botTitle2: "एक फिर से खोजा गया खजाना",
-      botP1: "Euryale Ferox, जिसे मखाना (foxnut / कमल का बीज) के रूप में जाना जाता है, एक अनूठा जलीय पौधा है जो विशेष रूप से बिहार के शांत, शुद्ध पानी में उगता है। इसके बीजों का सेवन एशिया में 3,000 से अधिक वर्षों से किया जा रहा है, जिन्हें उनके असाधारण पोषण गुणों के लिए सम्मानित किया जाता है।",
+      botP1: "Euryale Ferox, जिसे मखाना के रूप में जाना जाता है, एक अनूठा जलीय पौधा है जो विशेष रूप से बिहार के शांत, शुद्ध पानी में उगता है। इसके बीजों का सेवन एशिया में 3,000 से अधिक वर्षों से किया जा रहा है, जिन्हें उनके असाधारण पोषण गुणों के लिए सम्मानित किया जाता है।",
       botP2: "प्रोटीन से भरपूर, वसा में कम, और स्वाभाविक रूप से ग्लूटेन-मुक्त: मखाना वह स्नैक है जिसे प्रकृति ने सहस्राब्दियों में पूर्ण बनाया है। AÉRI बस इसे वह मंच दे रहा है जिसका यह हकदार है।",
       stats: [
         { value: "9.5g", label: "प्रोटीन", sub: "प्रति 100g" },
@@ -347,9 +347,9 @@ const t: Record<string, Record<string, any>> = {
       readMore: "Lire l'article",
       allArticles: "Tous les articles",
       articles: [
-        { tag: "Culture", title: "L'Étiquette de l'Apéro Moderne : L'Art de Recevoir à la Française", subtitle: "Comment ne pas passer pour un barbare devant le fromage.", desc: "L'apéro, c'est sacré. Mais entre la planche qui ressemble à un accident de supermarché et celle qui fait dire 'oh là là', il y a un monde. Spoiler : AÉRI fait partie du deuxième camp." },
-        { tag: "Accords", title: "AÉRI & Vins : Le Guide d'Expert pour des Accords Parfaits", subtitle: "Un Bourgogne et un Makhana entrent dans un bar…", desc: "On ne vous fera pas un cours d'œnologie (promis). Mais imaginez : la légèreté d'AÉRI Truffe avec un Pinot Noir. Oui, c'est aussi beau que ça en a l'air." },
-        { tag: "Vérité", title: "Les Mensonges Cachés de Votre Supermarché : Décoder les étiquettes de snacks", subtitle: "Votre snack « healthy » contient plus de surprises que prévu.", desc: "« Naturel », « Léger », « Sans culpabilité »… Si les paquets de chips pouvaient rougir, ils seraient écarlates. On décortique les étiquettes." },
+        { tag: "LIFESTYLE", title: "L'Étiquette de l'Apéro Moderne : L'Art de Recevoir à la Française", subtitle: "Comment ne pas passer pour un barbare devant le fromage.", desc: "L'apéro, c'est sacré. Mais entre la planche qui ressemble à un accident de supermarché et celle qui fait dire 'oh là là', il y a un monde. Spoiler : AÉRI fait partie du deuxième camp." },
+        { tag: "GASTRONOMIE", title: "AÉRI & Vins : Le Guide d'Expert pour des Accords Parfaits", subtitle: "Un Bourgogne et un Makhana entrent dans un bar…", desc: "On ne vous fera pas un cours d'œnologie (promis). Mais imaginez : la légèreté d'AÉRI Truffe avec un Pinot Noir. Oui, c'est aussi beau que ça en a l'air." },
+        { tag: "TRANSPARENCE", title: "Les Mensonges Cachés de Votre Supermarché : Décoder les étiquettes de snacks", subtitle: "Votre snack « healthy » contient plus de surprises que prévu.", desc: "« Naturel », « Léger », « Sans culpabilité »… Si les paquets de chips pouvaient rougir, ils seraient écarlates. On décortique les étiquettes." },
       ],
     },
     en: {
@@ -380,19 +380,19 @@ const t: Record<string, Record<string, any>> = {
 
   pro: {
     fr: {
-      label: "B2B · Partenariats · Export",
+      label: "CONFORMITÉ ET DISPONIBILITÉ INDUSTRIELLE",
       title: "Espace Professionnel",
       hook: "Expertise de plus de 20 ans dans l'industrie de l'emballage et l'ingénierie de la conservation.",
       stats: [
-        { value: "20+", label: "Ans d'expertise", sub: "Emballage & conservation" },
-        { value: "1000", label: "Acres", sub: "Zones humides préservées" },
-        { value: "100%", label: "Traçabilité", sub: "Du Bihar à la France" },
-        { value: "4", label: "Certifications", sub: "FSSAI · NABL · EU · IEC" },
+        { value: "20+", label: "Ans d'Expertise Industrielle", sub: "Emballage & conservation" },
+        { value: "1000", label: "Acres de Culture Préservée", sub: "Zones humides" },
+        { value: "100%", label: "Traçabilité Totale Approvisionnement", sub: "(Hybite Foods)" },
+        { value: "NABL", label: "Rapports de Laboratoire", sub: "& Certifications" },
       ],
       services: [
-        { title: "Marque Blanche", desc: "Conditionnement sous votre propre marque avec nos standards de qualité premium." },
-        { title: "Volume & Pricing", desc: "Tarifs dégressifs pour commandes en gros. MOQ flexible pour les marchés européens." },
-        { title: "Logistique Mondiale", desc: "Expédition maritime et aérienne. Incoterms CIF/FOB. Dédouanement EU inclus." },
+        { title: "Production en Marque Blanche / Private Label", desc: "Développement de recettes sur-mesure et conditionnements industriels adaptés à vos cahiers des charges." },
+        { title: "Tarification Échelonnée & Volumes Grossistes", desc: "Grilles de prix dégressives calculées à la palette ou au conteneur maritime complet de 40 pieds." },
+        { title: "Logistique Internationale & Sécurisation Douanière", desc: "Gestion complète des flux d'importation avec documents de conformité réglementaires de l'UE pré-validés." },
       ],
       trustText: "Reconnu comme un super-aliment essentiel par les leaders de la santé en Inde, le Makhana fait désormais partie du quotidien de millions de personnes.",
       docLabel: "Documentation",
@@ -408,10 +408,10 @@ const t: Record<string, Record<string, any>> = {
       formMessage: "Message",
       formNamePh: "Votre nom complet",
       formCompanyPh: "Nom de votre entreprise",
-      formMessagePh: "Décrivez vos besoins (volumes, saveurs, délais…)",
-      formBtn: "Envoyer la demande",
+      formMessagePh: "ex. Marque Blanche, Private Label, Référencement national.",
+      formBtn: "Demander une Cotation / Fiche Technique",
       formSuccess: "✓ Message envoyé !",
-      waitlistLabel: "Bientôt en France",
+      waitlistLabel: "BIENTÔT EN FRANCE",
       waitlistTitle: "Bientôt disponible dans votre épicerie fine habituelle.",
       waitlistSub: "Inscrivez-vous pour être parmi les premiers à déguster.",
       waitlistBtn: "S'inscrire",
@@ -419,15 +419,15 @@ const t: Record<string, Record<string, any>> = {
       copyright: "© 2026 AÉRI · H&G Ventures Private Limited · Tous droits réservés",
       returnPolicy: "Politique de Retour",
       privacy: "Confidentialité",
-      brandTagline1: "Le snacking qui vous élève.",
-      brandTagline2: "Tradition millénaire, plaisir instantané.",
+      brandTagline1: "AÉRI Makhana: The Art de l'Apéro.",
+      brandTagline2: "",
       partner: "Partenaire : Hybite Foods",
       footerLinks: {
-        products: ["Sel de l'Himalaya", "Herbes de Provence", "Truffe Noire", "Bientôt…"],
-        company: ["Notre Histoire", "Notre Raison d'Être", "Transparence", "Certifications", "Espace Pro"],
-        legal: ["Politique de Retour", "CGV", "Mentions Légales", "Confidentialité"],
+        products: ["Gamme Complète", "Signature", "Gourmet", "Vrac B2B"],
+        company: ["Notre Histoire", "Notre Raison d'Être", "Espace Pro"],
+        legal: ["Mentions Légales", "CGV", "Politique de Retour", "Droit de Rétractation 14 jours"],
       },
-      footerCats: ["Produits", "Entreprise", "Légal"],
+      footerCats: ["PRODUITS", "ENTREPRISE", "JURIDIQUE"],
     },
     en: {
       label: "B2B · Partnerships · Export",
@@ -469,8 +469,8 @@ const t: Record<string, Record<string, any>> = {
       copyright: "© 2026 AÉRI · H&G Ventures Private Limited · All rights reserved",
       returnPolicy: "Return Policy",
       privacy: "Privacy",
-      brandTagline1: "Snacking that elevates you.",
-      brandTagline2: "Ancient tradition, instant pleasure.",
+      brandTagline1: "AÉRI Makhana: The Art de l'Apéro.",
+      brandTagline2: "",
       partner: "Partner: Hybite Foods",
       footerLinks: {
         products: ["Himalayan Salt", "Mediterranean Herb Fusion", "Black Truffle", "Coming soon…"],
@@ -519,9 +519,9 @@ const t: Record<string, Record<string, any>> = {
       copyright: "© 2026 AÉRI · H&G Ventures Private Limited · सर्वाधिकार सुरक्षित",
       returnPolicy: "रिटर्न पॉलिसी",
       privacy: "गोपनीयता",
-      brandTagline1: "स्नैकिंग जो आपको ऊंचा उठाती है।",
-      brandTagline2: "प्राचीन परंपरा, तुरंत आनंद।",
-      partner: "पार्टनर: Hybite Foods",
+      brandTagline1: "AÉRI Makhana: The Art de l'Apéro.",
+      brandTagline2: "",
+      partner: "भागीदार: Hybite Foods",
       footerLinks: {
         products: ["हिमालयन नमक", "हर्ब्स डे प्रोवेंस", "ब्लैक ट्रफल", "जल्द आ रहा है…"],
         company: ["हमारी कहानी", "हमारा मिशन", "पारदर्शिता", "प्रमाणपत्र", "प्रो पोर्टल"],

@@ -23,6 +23,8 @@ export interface IOrder extends Document {
   };
   items: IOrderItem[];
   subtotal: number;
+  discount?: number;
+  couponCode?: string;
   shipping: number;
   total: number;
   status:
@@ -66,6 +68,8 @@ const OrderSchema = new Schema<IOrder>(
       },
     ],
     subtotal: { type: Number, required: true },
+    discount: { type: Number, default: 0 },
+    couponCode: { type: String },
     shipping: { type: Number, default: 0 },
     total: { type: Number, required: true },
     status: {

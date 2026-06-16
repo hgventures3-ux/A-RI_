@@ -96,7 +96,7 @@ function ModiVideoBlock() {
   useEffect(() => {
     if (!videoRef.current) return;
     if (inView) {
-      videoRef.current.play().catch(() => {});
+      videoRef.current.play().catch(() => { });
     } else {
       videoRef.current.pause();
     }
@@ -112,7 +112,7 @@ function ModiVideoBlock() {
         playsInline
         className="w-full h-auto object-contain block max-h-[360px]"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/80 via-transparent to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#1C1C1C]/80 via-transparent to-transparent pointer-events-none" />
       {/* म्यूट टॉगल बटन */}
       <button
         onClick={() => setIsMuted(!isMuted)}
@@ -120,9 +120,9 @@ function ModiVideoBlock() {
         aria-label="Toggle sound"
       >
         {isMuted ? (
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" /><line x1="23" y1="9" x2="17" y2="15" /><line x1="17" y1="9" x2="23" y2="15" /></svg>
         ) : (
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" /><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07" /></svg>
         )}
       </button>
       <div className="absolute bottom-4 left-4">
@@ -207,12 +207,12 @@ export default function EspacePro() {
       {/* ═══════════════════════════════════════════════════
          SECTION — ESPACE PRO
       ═══════════════════════════════════════════════════ */}
-      <section className="relative w-full overflow-hidden" style={{ background: "#F7F7F7" }}>
+      <section className="relative w-full overflow-hidden" style={{ background: "#FFFFFF" }}>
         {/* Subtle grid pattern */}
         <div
           className="absolute inset-0 opacity-[0.025] pointer-events-none"
           style={{
-            backgroundImage: "linear-gradient(#111111 1px, transparent 1px), linear-gradient(90deg, #111111 1px, transparent 1px)",
+            backgroundImage: "linear-gradient(#1C1C1C 1px, transparent 1px), linear-gradient(90deg, #1C1C1C 1px, transparent 1px)",
             backgroundSize: "60px 60px",
           }}
         />
@@ -236,7 +236,7 @@ export default function EspacePro() {
               initial={{ opacity: 0, y: 30 }}
               animate={headerInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.9, delay: 0.1 }}
-              className="text-4xl md:text-5xl lg:text-7xl font-bold text-[#111111] mb-6"
+              className="text-4xl md:text-5xl lg:text-7xl font-bold text-[#1C1C1C] mb-6"
               style={{ fontFamily: "var(--font-montserrat)" }}
             >
               {s.title}
@@ -246,7 +246,7 @@ export default function EspacePro() {
               initial={{ opacity: 0 }}
               animate={headerInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.7, delay: 0.3 }}
-              className="text-lg md:text-xl text-[#111111]/55 max-w-2xl mx-auto leading-relaxed"
+              className="text-lg md:text-xl text-[#1C1C1C]/55 max-w-2xl mx-auto leading-relaxed"
               style={{ fontFamily: "var(--font-lora)" }}
             >
               {s.hook}
@@ -263,10 +263,10 @@ export default function EspacePro() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.5 }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="text-center p-6 rounded-2xl bg-white border border-[#111111]/6 shadow-sm"
+                  className="text-center p-6 rounded-2xl bg-white border border-[#1C1C1C]/6 shadow-sm"
                 >
                   <span
-                    className="block text-3xl md:text-4xl font-bold text-[#111111] mb-1"
+                    className="block text-3xl md:text-4xl font-bold text-[#1C1C1C] mb-1"
                     style={{ fontFamily: "var(--font-montserrat)" }}
                   >
                     {stat.value}
@@ -278,7 +278,7 @@ export default function EspacePro() {
                     {stat.label}
                   </span>
                   <span
-                    className="block text-[11px] text-[#111111]/35"
+                    className="block text-[11px] text-[#1C1C1C]/35"
                     style={{ fontFamily: "var(--font-lora)" }}
                   >
                     {stat.sub}
@@ -297,19 +297,19 @@ export default function EspacePro() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={servicesInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, delay: i * 0.12 }}
-                  className="group p-7 rounded-2xl bg-white border border-[#111111]/6 transition-all duration-400 hover:shadow-lg hover:border-[#111111]/12"
+                  className="group p-7 rounded-2xl bg-white border border-[#1C1C1C]/6 transition-all duration-400 hover:shadow-lg hover:border-[#1C1C1C]/12"
                 >
-                  <div className="w-12 h-12 text-[#111111]/60 mb-5 transition-colors group-hover:text-[#111111]">
+                  <div className="w-12 h-12 text-[#1C1C1C]/60 mb-5 transition-colors group-hover:text-[#1C1C1C]">
                     {svc.icon}
                   </div>
                   <h4
-                    className="text-lg font-bold text-[#111111] mb-2"
+                    className="text-lg font-bold text-[#1C1C1C] mb-2"
                     style={{ fontFamily: "var(--font-montserrat)" }}
                   >
                     {svc.title}
                   </h4>
                   <p
-                    className="text-sm text-[#111111]/50 leading-relaxed"
+                    className="text-sm text-[#1C1C1C]/50 leading-relaxed"
                     style={{ fontFamily: "var(--font-lora)" }}
                   >
                     {svc.description}
@@ -331,10 +331,10 @@ export default function EspacePro() {
               <span className="inline-block text-xs font-semibold tracking-[0.4em] uppercase text-[#6E6E73] mb-3" style={{ fontFamily: "var(--font-montserrat)" }}>
                 {isFrench ? "Transparence & Conformité" : "Transparency & Compliance"}
               </span>
-              <h3 className="text-2xl md:text-3xl font-bold text-[#111111]" style={{ fontFamily: "var(--font-montserrat)" }}>
+              <h3 className="text-2xl md:text-3xl font-bold text-[#1C1C1C]" style={{ fontFamily: "var(--font-montserrat)" }}>
                 {isFrench ? "Notre Moat de Certification" : "Our Certification Moat"}
               </h3>
-              <p className="text-sm text-[#111111]/50 mt-2 max-w-xl mx-auto" style={{ fontFamily: "var(--font-montserrat)" }}>
+              <p className="text-sm text-[#1C1C1C]/50 mt-2 max-w-xl mx-auto" style={{ fontFamily: "var(--font-montserrat)" }}>
                 {isFrench ? "Rapports NABL indépendants & conformité corporate disponibles en téléchargement immédiat." : "Independent NABL reports & corporate compliance available for immediate download."}
               </p>
             </motion.div>
@@ -356,18 +356,18 @@ export default function EspacePro() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.08 }}
-                  className="group p-5 rounded-2xl bg-white border border-[#111111]/6 hover:shadow-lg hover:border-[#111111]/15 transition-all duration-300"
+                  className="group p-5 rounded-2xl bg-white border border-[#1C1C1C]/6 hover:shadow-lg hover:border-[#1C1C1C]/15 transition-all duration-300"
                 >
                   <span className="text-3xl mb-3 block">{cert.icon}</span>
-                  <h5 className="text-sm font-bold text-[#111111] mb-1" style={{ fontFamily: "var(--font-montserrat)" }}>{cert.title}</h5>
-                  <p className="text-[11px] text-[#111111]/45 leading-relaxed mb-4" style={{ fontFamily: "var(--font-montserrat)" }}>{cert.desc}</p>
+                  <h5 className="text-sm font-bold text-[#1C1C1C] mb-1" style={{ fontFamily: "var(--font-montserrat)" }}>{cert.title}</h5>
+                  <p className="text-[11px] text-[#1C1C1C]/45 leading-relaxed mb-4" style={{ fontFamily: "var(--font-montserrat)" }}>{cert.desc}</p>
                   <a
                     href={`/docs/${cert.file}`}
                     download
-                    className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-wider uppercase text-[#1C1C1C] border border-[#111111]/15 rounded-lg px-3 py-2 hover:bg-[#111111] hover:text-white transition-all duration-200"
+                    className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-wider uppercase text-[#1C1C1C] border border-[#1C1C1C]/15 rounded-lg px-3 py-2 hover:bg-[#1C1C1C] hover:text-white transition-all duration-200"
                     style={{ fontFamily: "var(--font-montserrat)" }}
                   >
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
                     {isFrench ? "Télécharger PDF" : "Download PDF"}
                   </a>
                 </motion.div>
@@ -391,7 +391,7 @@ export default function EspacePro() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: i * 0.07 }}
-                  className="group p-4 rounded-2xl bg-[#111111] text-white hover:bg-[#222] transition-all duration-300 flex flex-col"
+                  className="group p-4 rounded-2xl bg-[#1C1C1C] text-white hover:bg-[#222] transition-all duration-300 flex flex-col"
                 >
                   <span className="text-xs font-black tracking-[0.25em] text-[#D4AF37] mb-1" style={{ fontFamily: "var(--font-montserrat)" }}>{cred.badge}</span>
                   <span className="text-[10px] font-semibold text-white/60 uppercase tracking-wider mb-2" style={{ fontFamily: "var(--font-montserrat)" }}>{cred.label}</span>
@@ -399,10 +399,10 @@ export default function EspacePro() {
                   <a
                     href={`/docs/${cred.file}`}
                     download
-                    className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-wider uppercase text-[#D4AF37] border border-[#D4AF37]/30 rounded-lg px-3 py-2 hover:bg-[#D4AF37] hover:text-[#111111] transition-all duration-200"
+                    className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-wider uppercase text-[#D4AF37] border border-[#D4AF37]/30 rounded-lg px-3 py-2 hover:bg-[#D4AF37] hover:text-[#1C1C1C] transition-all duration-200"
                     style={{ fontFamily: "var(--font-montserrat)" }}
                   >
-                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
                     Télécharger
                   </a>
                 </motion.div>
@@ -417,40 +417,52 @@ export default function EspacePro() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.4 }}
               transition={{ duration: 0.7 }}
-              className="relative rounded-2xl overflow-hidden bg-[#111111]"
+              className="relative rounded-2xl overflow-hidden bg-[#1C1C1C]"
             >
               {/* Video */}
               <ModiVideoBlock />
               {/* Text overlay */}
               <div className="p-8 md:p-10 text-center">
                 <h3
-                  className="text-lg md:text-xl font-bold text-white/90 mb-4"
+                  className="text-lg md:text-xl font-bold text-[#FFFFFF] mb-4"
                   style={{ fontFamily: "var(--font-didot)" }}
                 >
-                  {isFrench ? "Un Super-aliment Reconnu par la Leadership Nationale" : "A Superfood Recognized by National Leadership"}
+                  Un Super-aliment Reconnu par la Leadership Nationale
                 </h3>
                 <p
-                  className="text-sm md:text-base text-white/65 leading-relaxed max-w-2xl mx-auto mb-6"
+                  className="text-sm md:text-base text-[#FFFFFF]/80 leading-relaxed max-w-2xl mx-auto mb-8"
                   style={{ fontFamily: "var(--font-montserrat)" }}
                 >
-                  {isFrench ? "Reconnu comme un super-aliment essentiel par les leaders de la santé en Inde, le Makhana fait désormais partie du quotidien de millions de personnes." : "Recognized as an essential superfood by health leaders in India, Makhana is now part of the daily routine of millions."}
+                  Reconnu comme un super-aliment essentiel par les leaders de la santé en Inde, le Makhana fait désormais partie du quotidien de millions de personnes.
                 </p>
-                <div className="flex items-center justify-center gap-3">
-                  <div className="w-8 h-[1px] bg-[#8E8E93]/30" />
-                  <span
-                    className="text-xs font-semibold text-[#D4AF37] tracking-widest uppercase"
-                    style={{ fontFamily: "var(--font-montserrat)" }}
-                  >
-                    {isFrench ? "Narendra Modi — Premier Ministre de l'Inde" : "Narendra Modi — Prime Minister of India"}
+                <div className="flex flex-col items-center justify-center border-t border-white/10 pt-8 mt-4">
+                  <span className="text-2xl md:text-4xl text-[#D4AF37] mb-4 block" style={{ fontFamily: "var(--font-lora), serif", fontStyle: "italic" }}>
+                    "365 दिन में से 300 दिन मैं मखाना जरूर खाता हूं"
                   </span>
-                  <div className="w-8 h-[1px] bg-[#8E8E93]/30" />
+                  <span className="text-sm md:text-base text-[#FFFFFF]/60 block mb-6" style={{ fontFamily: "var(--font-montserrat)" }}>
+                    "300 jours sur 365, je consomme invariablement du Makhana."
+                  </span>
+                  <div className="flex items-center justify-center gap-3">
+                    <div className="w-8 h-[1px] bg-[#FFFFFF]/30" />
+                    <span
+                      className="text-xs font-semibold text-[#D4AF37] tracking-widest uppercase"
+                      style={{ fontFamily: "var(--font-montserrat)" }}
+                    >
+                      Narendra Modi — Premier Ministre de l'Inde
+                    </span>
+                    <div className="w-8 h-[1px] bg-[#FFFFFF]/30" />
+                  </div>
                 </div>
               </div>
             </motion.div>
           </div>
 
           {/* ── CTA + Form ── */}
-          <div ref={formRef} className="max-w-5xl mx-auto px-6">
+          <div
+            id="demande-professionnelle"
+            ref={formRef}
+            className="max-w-5xl mx-auto scroll-mt-28 px-6"
+          >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
               {/* Left — CTA */}
               <motion.div
@@ -467,7 +479,7 @@ export default function EspacePro() {
                 </span>
 
                 <h3
-                  className="text-2xl md:text-3xl font-bold text-[#111111] mb-4 leading-snug"
+                  className="text-2xl md:text-3xl font-bold text-[#1C1C1C] mb-4 leading-snug"
                   style={{ fontFamily: "var(--font-montserrat)" }}
                 >
                   {s.docTitle1}
@@ -476,7 +488,7 @@ export default function EspacePro() {
                 </h3>
 
                 <p
-                  className="text-base text-[#111111]/55 leading-relaxed mb-8"
+                  className="text-base text-[#1C1C1C]/55 leading-relaxed mb-8"
                   style={{ fontFamily: "var(--font-lora)" }}
                 >
                   {s.docBody}
@@ -486,7 +498,7 @@ export default function EspacePro() {
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
-                    className="inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-xl bg-[#111111] text-[#FFFFFF] text-sm font-semibold tracking-wide transition-colors hover:bg-[#111111]/90 cursor-pointer"
+                    className="inline-flex items-center justify-center gap-3 px-6 py-3.5 rounded-xl bg-[#1C1C1C] text-[#FFFFFF] text-sm font-semibold tracking-wide transition-colors hover:bg-[#1C1C1C]/90 cursor-pointer"
                     style={{ fontFamily: "var(--font-montserrat)" }}
                   >
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -500,7 +512,7 @@ export default function EspacePro() {
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-transparent text-[#111111] text-sm font-semibold tracking-wide border border-[#111111]/15 transition-colors hover:bg-[#111111]/5 cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-transparent text-[#1C1C1C] text-sm font-semibold tracking-wide border border-[#1C1C1C]/15 transition-colors hover:bg-[#1C1C1C]/5 cursor-pointer"
                     style={{ fontFamily: "var(--font-montserrat)" }}
                   >
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -520,89 +532,89 @@ export default function EspacePro() {
               >
                 <form
                   onSubmit={handleSubmit}
-                  className="p-7 md:p-9 rounded-2xl bg-white border border-[#111111]/8 shadow-sm"
+                  className="p-7 md:p-9 rounded-2xl bg-white border border-[#1C1C1C]/10 shadow-sm"
                 >
                   <h4
-                    className="text-lg font-bold text-[#111111] mb-1"
+                    className="text-lg font-bold text-[#1C1C1C] mb-1"
                     style={{ fontFamily: "var(--font-didot)" }}
                   >
-                    {isFrench ? "Demande Professionnelle" : "Professional Inquiry"}
+                    Demande Professionnelle
                   </h4>
                   <p
-                    className="text-xs text-[#111111]/40 mb-6"
+                    className="text-xs text-[#1C1C1C]/40 mb-6"
                     style={{ fontFamily: "var(--font-montserrat)" }}
                   >
-                    {isFrench ? "Nous répondons sous 24h ouvrées." : "We respond within 24 business hours."}
+                    Nous répondons sous 24h ouvrées.
                   </p>
 
                   <div className="space-y-4">
                     {/* Nom complet */}
                     <div>
-                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#111111]/50 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        {isFrench ? "Nom complet" : "Full Name"}
+                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                        Nom complet *
                       </label>
-                      <input type="text" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder={isFrench ? "Votre nom complet" : "Your full name"} className="w-full px-4 py-3 rounded-xl bg-[#FFFFFF]/30 border border-[#111111]/8 text-sm text-[#111111] placeholder:text-[#111111]/25 focus:outline-none focus:border-[#111111]/25 focus:ring-1 focus:ring-[#111111]/10 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
+                      <input type="text" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="Votre nom complet" className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
                     </div>
 
                     {/* Nom de l'entreprise */}
                     <div>
-                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#111111]/50 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        {isFrench ? "Nom de l'entreprise" : "Company Name"}
+                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                        Nom de l'entreprise *
                       </label>
-                      <input type="text" required value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} placeholder={isFrench ? "Nom de votre entreprise" : "Your company name"} className="w-full px-4 py-3 rounded-xl bg-[#FFFFFF]/30 border border-[#111111]/8 text-sm text-[#111111] placeholder:text-[#111111]/25 focus:outline-none focus:border-[#111111]/25 focus:ring-1 focus:ring-[#111111]/10 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
+                      <input type="text" required value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} placeholder="Nom de votre entreprise" className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
                     </div>
 
                     {/* E-mail professionnel */}
                     <div>
-                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#111111]/50 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        {isFrench ? "Adresse e-mail professionnelle" : "Professional Email Address"}
+                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                        Adresse e-mail professionnelle *
                       </label>
-                      <input type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder={isFrench ? "pro@entreprise.com" : "pro@company.com"} className="w-full px-4 py-3 rounded-xl bg-[#FFFFFF]/30 border border-[#111111]/8 text-sm text-[#111111] placeholder:text-[#111111]/25 focus:outline-none focus:border-[#111111]/25 focus:ring-1 focus:ring-[#111111]/10 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
+                      <input type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="pro@entreprise.com" className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
                     </div>
 
                     {/* SIRET / VAT */}
                     <div>
-                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#111111]/50 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        {isFrench ? "N° SIRET ou TVA intracommunautaire" : "Company Registration / VAT No"}
+                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                        N° SIRET ou TVA Intracommunautaire *
                       </label>
-                      <input type="text" required value={formData.siret} onChange={(e) => setFormData({ ...formData, siret: e.target.value })} placeholder="Ex: 123 456 789 00012" className="w-full px-4 py-3 rounded-xl bg-[#FFFFFF]/30 border border-[#111111]/8 text-sm text-[#111111] placeholder:text-[#111111]/25 focus:outline-none focus:border-[#111111]/25 focus:ring-1 focus:ring-[#111111]/10 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
+                      <input type="text" required value={formData.siret} onChange={(e) => setFormData({ ...formData, siret: e.target.value })} placeholder="Ex: 123 456 789 00012" className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
                     </div>
 
                     {/* Distribution Channels Dropdown */}
                     <div>
-                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#111111]/50 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        {isFrench ? "Canaux de Distribution" : "Distribution Channels"}
+                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                        Canaux de Distribution
                       </label>
-                      <select required value={formData.channel} onChange={(e) => setFormData({ ...formData, channel: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-[#FFFFFF]/30 border border-[#111111]/8 text-sm text-[#111111] focus:outline-none focus:border-[#111111]/25 focus:ring-1 focus:ring-[#111111]/10 transition-all" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        <option value="">{isFrench ? "Sélectionnez un canal" : "Select a channel"}</option>
-                        <option value="grandes-surfaces">{isFrench ? "Grandes Surfaces" : "Supermarkets"}</option>
-                        <option value="epiceries-fines">{isFrench ? "Épiceries Fines" : "Delicatessens"}</option>
-                        <option value="reseau-bio">{isFrench ? "Réseau Bio" : "Organic Network"}</option>
-                        <option value="grossiste">{isFrench ? "Grossiste" : "Wholesaler"}</option>
-                        <option value="fitness-gym">{isFrench ? "Secteur Fitness / Gym" : "Fitness / Gym Sector"}</option>
+                      <select required value={formData.channel} onChange={(e) => setFormData({ ...formData, channel: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }}>
+                        <option value="">Sélectionnez un canal</option>
+                        <option value="Grandes Surfaces">Grandes Surfaces</option>
+                        <option value="Épiceries Fines">Épiceries Fines</option>
+                        <option value="Réseau Bio">Réseau Bio</option>
+                        <option value="Grossiste">Grossiste</option>
+                        <option value="Secteur Fitness-Gym">Secteur Fitness-Gym</option>
                       </select>
                     </div>
 
                     {/* Volume Dropdown */}
                     <div>
-                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#111111]/50 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        {isFrench ? "Volume Annuel Estimé (palettes)" : "Estimated Annual Volume (pallets)"}
+                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                        Volume Annuel Estimé
                       </label>
-                      <select required value={formData.volume} onChange={(e) => setFormData({ ...formData, volume: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-[#FFFFFF]/30 border border-[#111111]/8 text-sm text-[#111111] focus:outline-none focus:border-[#111111]/25 focus:ring-1 focus:ring-[#111111]/10 transition-all" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        <option value="">{isFrench ? "Sélectionnez un volume" : "Select a volume"}</option>
-                        <option value="1-5">{isFrench ? "1 – 5 palettes" : "1 – 5 pallets"}</option>
-                        <option value="5-20">{isFrench ? "5 – 20 palettes" : "5 – 20 pallets"}</option>
-                        <option value="20-50">{isFrench ? "20 – 50 palettes" : "20 – 50 pallets"}</option>
-                        <option value="50+">{isFrench ? "50+ palettes" : "50+ pallets"}</option>
+                      <select required value={formData.volume} onChange={(e) => setFormData({ ...formData, volume: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }}>
+                        <option value="">Sélectionnez un volume</option>
+                        <option value="1-5 palettes">1–5 palettes</option>
+                        <option value="5-20 palettes">5–20 palettes</option>
+                        <option value="20-50 palettes">20–50 palettes</option>
+                        <option value="50+ palettes">50+ palettes</option>
                       </select>
                     </div>
 
                     {/* Message */}
                     <div>
-                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#111111]/50 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        {isFrench ? "Message et besoins spécifiques" : "Message and specific needs"}
+                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                        Votre Message / Besoins Spécifiques
                       </label>
-                      <textarea required rows={4} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder={isFrench ? "Ex. Marque Blanche, Private Label, Référencement national" : "E.g. White Label, Private Label, National Listing"} className="w-full px-4 py-3 rounded-xl bg-[#FFFFFF]/30 border border-[#111111]/8 text-sm text-[#111111] placeholder:text-[#111111]/25 focus:outline-none focus:border-[#111111]/25 focus:ring-1 focus:ring-[#111111]/10 transition-all resize-none" style={{ fontFamily: "var(--font-montserrat)" }} />
+                      <textarea required rows={4} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder="ex. Marque Blanche, Private Label, Référencement national." className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all resize-none" style={{ fontFamily: "var(--font-montserrat)" }} />
                     </div>
                   </div>
 
@@ -611,10 +623,10 @@ export default function EspacePro() {
                     disabled={loading}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    className="mt-6 w-full py-3.5 rounded-xl bg-[#1C1C1C] text-[#FFFFFF] text-sm font-semibold tracking-wide transition-colors hover:bg-[#333] cursor-pointer disabled:opacity-70"
+                    className="mt-6 w-full py-3.5 rounded-xl bg-[#1C1C1C] text-[#FFFFFF] text-sm font-semibold tracking-wide transition-colors hover:bg-[#333] cursor-pointer disabled:opacity-70 flex justify-center text-center"
                     style={{ fontFamily: "var(--font-montserrat)" }}
                   >
-                    {loading ? "..." : submitted ? (isFrench ? "✓ Demande envoyée !" : "✓ Inquiry sent!") : (isFrench ? "Envoyer la demande" : "Submit Inquiry")}
+                    {loading ? "..." : submitted ? "✓ Demande envoyée !" : "Demander une Cotation / Fiche Technique"}
                   </motion.button>
                 </form>
               </motion.div>

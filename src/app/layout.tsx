@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import Script from "next/script";import Providers from "@/components/Providers";
+import Script from "next/script";
+import Providers from "@/components/Providers";
 import "./globals.css";
 
 import { Inter } from "next/font/google";
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
     siteName: "AÉRI Snacks",
     images: [
       {
-        url: "https://aerisnacks.com/flavor_salt_v2.png",
+        url: "https://aerisnacks.com/flavor_himalayan_salt_new.png",
         width: 1200,
         height: 630,
         alt: "AÉRI Snacks - Makhana Premium",
@@ -38,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "AÉRI - Le snacking qui vous élève",
     description: "L'équilibre parfait entre tradition millénaire et plaisir instantané",
-    images: ["https://aerisnacks.com/flavor_salt_v2.png"],
+    images: ["https://aerisnacks.com/flavor_himalayan_salt_new.png"],
   },
 };
 

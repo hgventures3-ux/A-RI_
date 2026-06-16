@@ -26,7 +26,7 @@ export default function Superfood() {
     <section
       ref={sectionRef}
       className="relative w-full overflow-hidden py-24 md:py-36"
-      style={{ background: "#F5E6D3" }}
+      style={{ background: "#FAF8F5" }}
     >
       {/* Soft gradient background overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#FFFFFF] via-[#FFFFFF] to-[#eaddca] opacity-80 pointer-events-none" />

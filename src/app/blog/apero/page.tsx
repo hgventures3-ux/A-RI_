@@ -18,7 +18,7 @@ export default function AperoArticle() {
       paragraphs: [
         "L'apéro en France n'est pas qu'un repas de transition, c'est une véritable institution. C'est l'art de prendre son temps, de décompresser après une longue journée, de partager et de célébrer les petites victoires quotidiennes. Mais attention, un apéro réussi et digne de ce nom demande une certaine discipline et un respect des traditions, tout en sachant innover.",
         "Pendant trop longtemps, nous avons toléré les chips industrielles luisantes d'huile et les cacahuètes tellement salées qu'elles en devenaient une épreuve d'endurance. L'apéro moderne, lui, se veut différent. Il est raffiné, conscient de la santé, et surtout, incroyablement léger. Il s'agit de privilégier la qualité à la quantité.",
-        "C'est exactement ici qu'intervient AÉRI. Nos graines de lotus soufflées (Makhana) apportent cette touche d'élégance inattendue que vos invités n'oublieront pas. Avec leur texture aérienne et leurs saveurs sophistiquées comme la Truffe Noire ou les Herbes de Provence, elles transforment une simple table basse en un véritable festin gastronomique.",
+        "C'est exactement ici qu'intervient AÉRI. Nos graines de makhana soufflées (Makhana) apportent cette touche d'élégance inattendue que vos invités n'oublieront pas. Avec leur texture aérienne et leurs saveurs sophistiquées comme la Truffe Noire ou les Herbes de Provence, elles transforment une simple table basse en un véritable festin gastronomique.",
         "La règle d'or ? Associez les textures. Servez vos AÉRI croustillants aux côtés d'un fromage à pâte molle comme un Brie truffé, ou d'une tapenade d'olives noires artisanale. Le contraste entre le crémeux et le croquant léger du Makhana est tout simplement divin. Ne sacrifiez plus votre bien-être pour le plaisir : avec AÉRI, vous pouvez enfin savourer l'apéro parfait, sans la moindre culpabilité."
       ],
       back: "← Retour au Journal"
@@ -54,7 +54,7 @@ export default function AperoArticle() {
   const t = content[lang as keyof typeof content] || content.en;
 
   return (
-    <main className="min-h-screen bg-[#FFFFFF] flex flex-col">
+    <main className="min-h-screen bg-[#FAF8F5] flex flex-col">
       <Navbar />
       <div className="flex-1 pt-32 pb-24 px-6">
         <div className="max-w-3xl mx-auto">

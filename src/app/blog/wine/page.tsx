@@ -25,7 +25,7 @@ export default function WineArticle() {
     },
     en: {
       title: "AÉRI & Wine: The Perfect Marriage",
-      subtitle: "A Burgundy and a foxnut walk into a bar…",
+      subtitle: "A Burgundy and a Makhana walk into a bar.",
       date: "May 8, 2026",
       category: "Pairings",
       paragraphs: [
@@ -54,7 +54,7 @@ export default function WineArticle() {
   const t = content[lang as keyof typeof content] || content.en;
 
   return (
-    <main className="min-h-screen bg-[#FFFFFF] flex flex-col">
+    <main className="min-h-screen bg-[#FAF8F5] flex flex-col">
       <Navbar />
       <div className="flex-1 pt-32 pb-24 px-6">
         <div className="max-w-3xl mx-auto">

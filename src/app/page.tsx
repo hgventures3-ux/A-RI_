@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import BadgeStrip from "@/components/BadgeStrip";
 import ThreeFlavorLineup from "@/components/ThreeFlavorLineup";
@@ -39,13 +40,14 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrgJSONLD) }}
       />
+      <Navbar />
       {/* 1. Hero animation with headline, sub-headline, CTA */}
       <Hero />
       
       {/* 2. Badge strip — health claims */}
       <BadgeStrip />
       
-      {/* 3. Three-flavor product lineup visual */}
+      {/* 3. Signature Himalayan Salt collection visual */}
       <ThreeFlavorLineup />
       
       {/* 4. Product grid with "Ajouter au Panier" buttons */}

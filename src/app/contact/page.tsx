@@ -107,7 +107,7 @@ export default function ContactPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#F5E6D3] text-[#111111] font-sans flex flex-col">
+    <main className="min-h-screen bg-[#FAF8F5] text-[#111111] font-sans flex flex-col">
       {/* ग्लोबल नेवबार (Global Navbar) */}
       <Navbar />
 

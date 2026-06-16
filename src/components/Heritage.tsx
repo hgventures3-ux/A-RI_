@@ -115,7 +115,7 @@ export default function Heritage() {
     <section
       ref={sectionRef}
       className="relative w-full overflow-hidden"
-      style={{ background: "#F5E6D3" }}
+      style={{ background: "#FAF8F5" }}
     >
       {/* Subtle parchment texture */}
       <motion.div

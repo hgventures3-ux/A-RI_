@@ -1,485 +1,436 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { useCart } from "@/context/CartContext";
+import toast from "react-hot-toast";
 
-const t = {
+type Product = {
+  id: string;
+  slug: string;
+  name: string;
+  category: string;
+  flavor?: string;
+  description: string;
+  price: string;
+  image: string;
+  isB2B?: boolean;
+};
+
+type LocaleCopy = {
+  title: string;
+  subtitle: string;
+  collectionLabel: string;
+  addToCart: string;
+  addedToCart: string;
+  b2bButton: string;
+  roastBadge: string;
+  products: Product[];
+};
+
+const frenchProducts: Product[] = [
+  {
+    id: "salt",
+    slug: "himalayan-salt",
+    name: "Makhana Graines Soufflées",
+    category: "SIGNATURE",
+    flavor: "Pristine Himalayan Salt & Pepper",
+    description:
+      "Roasted makhana seasoned with pink Himalayan salt and cracked black peppercorns.",
+    price: "€5.99 / 50g",
+    image: "/flavor_himalayan_salt_new.png",
+  },
+  {
+    id: "truffle",
+    slug: "black-truffle",
+    name: "Gourmet Truffle Fusion",
+    category: "GOURMET",
+    description: "Makhana Graines Soufflées - Saveur Truffe Noire.",
+    price: "€5.99 / 50g",
+    image: "/products/product2.png",
+  },
+  {
+    id: "herb",
+    slug: "mediterranean-herb-fusion",
+    name: "Mediterranean Herb Fusion",
+    category: "VÉGÉTAL",
+    description: "Makhana Graines Soufflées - Aux Herbes de Provence.",
+    price: "€5.99 / 50g",
+    image: "/products/product3.png",
+  },
+  {
+    id: "raw",
+    slug: "raw-bulk-kernels",
+    name: "Raw Premium Bulk Kernels",
+    category: "B2B / VRAC",
+    description:
+      "Makhana premium en vrac pour grossistes, distributeurs et marques privées.",
+    price: "Tarifs dégressifs au container - Devis sur demande.",
+    image: "/bulk makhana.png",
+    isB2B: true,
+  },
+  {
+    id: "caramel-salt",
+    slug: "caramel-salt",
+    name: "Caramel & Sel",
+    category: "SUCRÉ",
+    description:
+      "Makhana Graines Soufflées - Caramel doré et pointe de sel.",
+    price: "€5.99 / 50g",
+    image: "/flavor_caramel_salt.png",
+  },
+  {
+    id: "dark-chocolate",
+    slug: "dark-chocolate",
+    name: "Chocolat Noir 70%",
+    category: "SUCRÉ",
+    description:
+      "Makhana Graines Soufflées - Enrobage fin au chocolat noir 70%.",
+    price: "€5.99 / 50g",
+    image: "/flavor_dark_chocolate.png",
+  },
+  {
+    id: "lemon-mint",
+    slug: "lemon-mint",
+    name: "Citron & Menthe",
+    category: "VÉGÉTAL",
+    description:
+      "Makhana Graines Soufflées - Fraîcheur citronnée et menthe.",
+    price: "€5.99 / 50g",
+    image: "/flavor_lemon_mint.png",
+  },
+  {
+    id: "peanut-butter",
+    slug: "peanut-butter",
+    name: "Beurre de Cacahuète",
+    category: "GOURMET",
+    description:
+      "Makhana Graines Soufflées - Saveur cacahuète torréfiée.",
+    price: "€5.99 / 50g",
+    image: "/flavor_peanut_butter.png",
+  },
+  {
+    id: "peri-peri",
+    slug: "peri-peri",
+    name: "Peri Peri",
+    category: "ÉPICÉ",
+    description:
+      "Makhana Graines Soufflées - Piment, agrumes et ail.",
+    price: "€5.99 / 50g",
+    image: "/flavor_peri_peri.png",
+  },
+  {
+    id: "smokey-bbq",
+    slug: "smokey-bbq",
+    name: "BBQ Fumé",
+    category: "GOURMET",
+    description:
+      "Makhana Graines Soufflées - Notes fumées et épices savoureuses.",
+    price: "€5.99 / 50g",
+    image: "/flavor_smokey_bbq.png",
+  },
+  {
+    id: "tangy-tomato",
+    slug: "tangy-tomato",
+    name: "Tomate Acidulée",
+    category: "VÉGÉTAL",
+    description:
+      "Makhana Graines Soufflées - Tomate mûrie au soleil et herbes.",
+    price: "€5.99 / 50g",
+    image: "/flavor_tangy_tomato.png",
+  },
+];
+
+const englishProducts: Product[] = frenchProducts.map((product) => {
+  const localized: Record<string, Partial<Product>> = {
+    "caramel-salt": {
+      name: "Caramel & Sea Salt",
+      description: "Puffed Makhana - Golden caramel with a touch of sea salt.",
+      category: "SWEET",
+    },
+    "dark-chocolate": {
+      name: "Dark Chocolate 70%",
+      description: "Puffed Makhana - Delicately coated in 70% dark chocolate.",
+      category: "SWEET",
+    },
+    "lemon-mint": {
+      name: "Lemon & Mint",
+      description: "Puffed Makhana - Bright lemon and cooling mint.",
+      category: "PLANT-BASED",
+    },
+    "peanut-butter": {
+      name: "Peanut Butter",
+      description: "Puffed Makhana - Roasted peanut flavor.",
+    },
+    "peri-peri": {
+      description: "Puffed Makhana - Chili, citrus, and garlic.",
+      category: "SPICY",
+    },
+    "smokey-bbq": {
+      name: "Smokey BBQ",
+      description: "Puffed Makhana - Deep smoky notes and savory spices.",
+    },
+    "tangy-tomato": {
+      name: "Tangy Tomato",
+      description: "Puffed Makhana - Sun-ripened tomato and herbs.",
+      category: "PLANT-BASED",
+    },
+    raw: {
+      description:
+        "Premium bulk Makhana for wholesalers, distributors, and private labels.",
+      price: "Tiered container pricing - Quote on request.",
+    },
+  };
+
+  return { ...product, ...localized[product.id] };
+});
+
+const copy: Record<"fr" | "en", LocaleCopy> = {
   fr: {
-    title: "L'Élégance Botanique",
-    subtitle: "Découvrez notre collection artisanale de Makhana — Graines Soufflées d'Exception.",
-    products: [
-      {
-        id: "salt",
-        name: "Pristine Himalayan Salt & Pepper",
-        category: "SIGNATURE",
-        desc: "La pureté du sel rose de l'Himalaya mariée au piquant subtil du poivre noir concassé. Torréfié à l'huile d'olive — jamais frit.",
-        price: "€5.99 / 50g",
-        image: "/flavor_salt_v2.png",
-        badge: "Nutri-Score A",
-      },
-      {
-        id: "truffle",
-        name: "Gourmet Truffle Fusion",
-        category: "GOURMET",
-        desc: "Une infusion luxueuse d'huile de truffe blanche et d'éclats de truffe noire d'été. Torréfié à l'huile d'olive — jamais frit.",
-        price: "€5.99 / 50g",
-        image: "/flavor_truffle_v2.png",
-        badge: "Nutri-Score A",
-      },
-      {
-        id: "herb",
-        name: "Mediterranean Herb Fusion",
-        category: "VÉGÉTAL",
-        desc: "Un bouquet aromatique d'origan sauvage, romarin et basilic séché au soleil. Torréfié à l'huile d'olive — jamais frit.",
-        price: "€5.99 / 50g",
-        image: "/flavor_herbes_v2.png",
-        badge: "Nutri-Score A",
-      },
-      {
-        id: "caramel-salt",
-        name: "Caramel & Beurre Salé",
-        category: "SUCRÉ",
-        desc: "Un mélange luxueux de caramel riche et d'une pointe de sel de mer. Torréfié, jamais frit.",
-        price: "€5.99 / 50g",
-        image: "/flavor_caramel_salt.png",
-        badge: "Nutri-Score B",
-      },
-      {
-        id: "dark-chocolate",
-        name: "Chocolat Noir 70%",
-        category: "SUCRÉ",
-        desc: "Chocolat noir 70% d'origine unique enrobant délicatement notre Makhana soufflé premium.",
-        price: "€5.99 / 50g",
-        image: "/flavor_dark_chocolate.png",
-        badge: "Nutri-Score B",
-      },
-      {
-        id: "lemon-mint",
-        name: "Citron & Menthe",
-        category: "VÉGÉTAL",
-        desc: "Un éclat vif et citronné de citron associé à la fraîcheur de la menthe.",
-        price: "€5.99 / 50g",
-        image: "/flavor_lemon_mint.png",
-        badge: "Nutri-Score A",
-      },
-      {
-        id: "peanut-butter",
-        name: "Beurre de Cacahuète",
-        category: "SUCRÉ",
-        desc: "Beurre de cacahuète onctueux et torréfié enrobant naturellement notre Makhana.",
-        price: "€5.99 / 50g",
-        image: "/flavor_peanut_butter.png",
-        badge: "Nutri-Score A",
-      },
-      {
-        id: "peri-peri",
-        name: "Peri Peri",
-        category: "ÉPICÉ",
-        desc: "Un mélange audacieux et vibrant de piment africain, d'agrumes et d'ail.",
-        price: "€5.99 / 50g",
-        image: "/flavor_peri_peri.png",
-        badge: "Nutri-Score A",
-      },
-      {
-        id: "smokey-bbq",
-        name: "BBQ Fumé",
-        category: "GOURMET",
-        desc: "Notes profondes et fumées de caryer associées à une touche de douceur.",
-        price: "€5.99 / 50g",
-        image: "/flavor_smokey_bbq.png",
-        badge: "Nutri-Score A",
-      },
-      {
-        id: "tangy-tomato",
-        name: "Tomate Acidulée",
-        category: "VÉGÉTAL",
-        desc: "L'éclat sucré et acidulé des tomates mûries au soleil avec des herbes subtiles.",
-        price: "€5.99 / 50g",
-        image: "/flavor_tangy_tomato.png",
-        badge: "Nutri-Score A",
-      }
-    ],
+    title: "Notre Gamme de Makhana",
+    subtitle:
+      "Les trois créations fondatrices AÉRI, notre gamme complète de saveurs et une offre vrac dédiée aux acheteurs professionnels.",
+    collectionLabel: "Collection AÉRI",
     addToCart: "Ajouter au Panier",
-    roastedBadge: "À l'huile d'olive — jamais frit",
-    collectionLabel: "✦ Collection AÉRI ✦",
-    contactB2B: "Contact B2B",
+    addedToCart: "Ajouté au panier !",
+    b2bButton: "Formulaire B2B",
+    roastBadge: "Torréfié à l'huile d'olive - Jamais frit",
+    products: frenchProducts,
   },
   en: {
-    title: "Botanical Elegance",
-    subtitle: "Discover our artisanal collection of Makhana — Gourmet Water Lily Pops.",
-    products: [
-      {
-        id: "salt",
-        name: "Pristine Himalayan Salt & Pepper",
-        category: "SIGNATURE",
-        desc: "The purity of Himalayan pink salt married with the subtle kick of crushed black pepper. Roasted in olive oil — never fried.",
-        price: "€5.99 / 50g",
-        image: "/flavor_salt_v2.png",
-        badge: "Nutri-Score A",
-      },
-      {
-        id: "truffle",
-        name: "Gourmet Truffle Fusion",
-        category: "GOURMET",
-        desc: "A luxurious infusion of white truffle oil and summer black truffle shavings. Roasted in olive oil — never fried.",
-        price: "€5.99 / 50g",
-        image: "/flavor_truffle_v2.png",
-        badge: "Nutri-Score A",
-      },
-      {
-        id: "herb",
-        name: "Mediterranean Herb Fusion",
-        category: "VÉGÉTAL",
-        desc: "An aromatic bouquet of wild oregano, rosemary, and sun-dried basil. Roasted in olive oil — never fried.",
-        price: "€5.99 / 50g",
-        image: "/flavor_herbes_v2.png",
-        badge: "Nutri-Score A",
-      },
-      {
-        id: "caramel-salt",
-        name: "Caramel & Sea Salt",
-        category: "SWEET",
-        desc: "A luxurious blend of rich caramel and a hint of sea salt. Roasted, never fried.",
-        price: "€5.99 / 50g",
-        image: "/flavor_caramel_salt.png",
-        badge: "Nutri-Score B",
-      },
-      {
-        id: "dark-chocolate",
-        name: "Dark Chocolate 70%",
-        category: "SWEET",
-        desc: "Rich, 70% single-origin dark chocolate gently coating our premium puffed Makhana.",
-        price: "€5.99 / 50g",
-        image: "/flavor_dark_chocolate.png",
-        badge: "Nutri-Score B",
-      },
-      {
-        id: "lemon-mint",
-        name: "Lemon & Mint",
-        category: "BOTANICAL",
-        desc: "A bright, citrusy burst of lemon paired with cooling mint.",
-        price: "€5.99 / 50g",
-        image: "/flavor_lemon_mint.png",
-        badge: "Nutri-Score A",
-      },
-      {
-        id: "peanut-butter",
-        name: "Peanut Butter",
-        category: "SWEET",
-        desc: "Smooth, roasted peanut butter naturally coats our Makhana for a protein-packed experience.",
-        price: "€5.99 / 50g",
-        image: "/flavor_peanut_butter.png",
-        badge: "Nutri-Score A",
-      },
-      {
-        id: "peri-peri",
-        name: "Peri Peri",
-        category: "SPICY",
-        desc: "A bold, vibrant blend of African bird's eye chili, citrus, and garlic.",
-        price: "€5.99 / 50g",
-        image: "/flavor_peri_peri.png",
-        badge: "Nutri-Score A",
-      },
-      {
-        id: "smokey-bbq",
-        name: "Smokey BBQ",
-        category: "GOURMET",
-        desc: "Deep, smoky hickory notes paired with a touch of molasses sweetness and savory spices.",
-        price: "€5.99 / 50g",
-        image: "/flavor_smokey_bbq.png",
-        badge: "Nutri-Score A",
-      },
-      {
-        id: "tangy-tomato",
-        name: "Tangy Tomato",
-        category: "BOTANICAL",
-        desc: "The sweet and tart brilliance of sun-ripened tomatoes, seasoned with subtle herbs.",
-        price: "€5.99 / 50g",
-        image: "/flavor_tangy_tomato.png",
-        badge: "Nutri-Score A",
-      }
-    ],
+    title: "Our Makhana Range",
+    subtitle:
+      "The three founding AÉRI creations, our complete flavor range, and a bulk offer for professional buyers.",
+    collectionLabel: "AÉRI Collection",
     addToCart: "Add to Cart",
-    roastedBadge: "Olive oil — never fried",
-    collectionLabel: "✦ AÉRI Collection ✦",
-    contactB2B: "Contact B2B",
+    addedToCart: "Added to cart!",
+    b2bButton: "B2B Form",
+    roastBadge: "Roasted in olive oil - Never fried",
+    products: englishProducts,
   },
 };
 
 const categoryColors: Record<string, string> = {
-  SIGNATURE: "bg-amber-100 text-amber-800",
-  GOURMET: "bg-rose-100 text-rose-800",
-  "VÉGÉTAL": "bg-pink-100 text-pink-800",
-  "BOTANICAL": "bg-emerald-100 text-emerald-800",
-  "SUCRÉ": "bg-orange-100 text-orange-800",
-  "SWEET": "bg-orange-100 text-orange-800",
-  "ÉPICÉ": "bg-red-100 text-red-800",
-  "SPICY": "bg-red-100 text-red-800",
-  "B2B / VRAC": "bg-sky-100 text-sky-800",
-  "Espace Pro": "bg-sky-100 text-sky-800",
-  "Pro Space": "bg-sky-100 text-sky-800",
+  SIGNATURE: "bg-amber-100 text-amber-900",
+  GOURMET: "bg-stone-200 text-stone-800",
+  VÉGÉTAL: "bg-emerald-100 text-emerald-900",
+  "PLANT-BASED": "bg-emerald-100 text-emerald-900",
+  SUCRÉ: "bg-orange-100 text-orange-900",
+  SWEET: "bg-orange-100 text-orange-900",
+  ÉPICÉ: "bg-red-100 text-red-900",
+  SPICY: "bg-red-100 text-red-900",
+  "B2B / VRAC": "bg-sky-100 text-sky-900",
 };
 
-const fadeUp: any = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (i: number) => ({
+const fadeUp = {
+  hidden: { opacity: 0, y: 24 },
+  visible: (index: number) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] },
+    transition: {
+      duration: 0.55,
+      delay: Math.min(index * 0.06, 0.36),
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
   }),
-};
-
-const staggerContainer = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.12 } },
 };
 
 export default function FlavorExplorer() {
   const { lang } = useLanguage();
+  const content = copy[lang === "en" ? "en" : "fr"];
   const { addToCart } = useCart();
-  const d = t[lang as keyof typeof t] || t.en;
-  
-  const [products, setProducts] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [addedIds, setAddedIds] = useState<Set<string>>(new Set());
 
-  React.useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const res = await fetch("/api/products");
-        const json = await res.json();
-        if (json.success) {
-          setProducts(json.data);
-        }
-      } catch (error) {
-        console.error("Failed to fetch products:", error);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchProducts();
-  }, []);
+  const handleAddToCart = (product: Product) => {
+    // Parse price number from string like "€5.99 / 50g"
+    const priceMatch = product.price.match(/(\d+[.,]\d+)/);
+    const priceNum = priceMatch ? parseFloat(priceMatch[1].replace(",", ".")) : 0;
 
-  // Use DB products if loaded and not empty, otherwise fallback to hardcoded (or just use DB)
-  const displayProducts = products.length > 0 ? products.map(p => ({
-    id: p.slug === "caramel-salt" ? "caramel-salt" 
-      : p.slug === "peanut-butter" ? "peanut-butter" 
-      : p.slug === "lemon-mint" ? "lemon-mint" 
-      : p.slug === "dark-chocolate" ? "dark-chocolate" 
-      : p.slug === "smokey-bbq" ? "smokey-bbq" 
-      : p.slug === "peri-peri" ? "peri-peri" 
-      : p.slug === "tangy-tomato" ? "tangy-tomato" 
-      : p.sku === "AERI-SALT" ? "salt" 
-      : p.sku === "AERI-TRUFFLE" ? "truffle" 
-      : p.sku === "AERI-HERB" ? "herb" 
-      : p.slug,
-    name: lang === "en" && p.nameEn ? p.nameEn : p.name,
-    category: p.category,
-    desc: lang === "en" && p.descriptionEn ? p.descriptionEn : p.description,
-    price: `€${p.price.toFixed(2)} / 50g`,
-    image: p.images && p.images.length > 0 ? p.images[0] : "/flavor_mystery.png",
-    badge: p.category === "SUCRÉ" || p.category === "SWEET" ? "Nutri-Score B" : "Nutri-Score A",
-    slug: p.slug,
-  })) : d.products.map((p: any) => ({
-    ...p,
-    slug: p.id === "salt" ? "himalayan-salt"
-      : p.id === "truffle" ? "black-truffle"
-      : p.id === "herb" ? "mediterranean-herb-fusion"
-      : p.id,
-  }));
+    addToCart({
+      id: product.id,
+      name: product.name,
+      price: priceNum,
+      image: product.image,
+    });
 
-  /* मोबाइल पर API fail हो तो तुरंत fallback दिखाओ (Show fallback on mobile immediately if API fails) */
-  const finalProducts = displayProducts;
+    setAddedIds((prev) => new Set([...prev, product.id]));
+    toast.success(content.addedToCart, { duration: 2000 });
+
+    // Reset button after 2s
+    setTimeout(() => {
+      setAddedIds((prev) => {
+        const next = new Set(prev);
+        next.delete(product.id);
+        return next;
+      });
+    }, 2000);
+  };
 
   return (
-    <section className="py-24 bg-[#F5E6D3] relative">
-      <div className="max-w-5xl mx-auto px-6 md:px-12 mb-16 text-center">
+    <section
+      id="gamme"
+      className="relative bg-[#FAF8F5] py-20 md:py-28"
+      aria-labelledby="product-grid-title"
+    >
+      <div className="mx-auto mb-12 max-w-5xl px-6 text-center md:mb-16">
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="text-xs tracking-[0.3em] uppercase font-medium mb-5 text-[#4c463e]"
+          className="mb-4 text-[11px] font-semibold uppercase tracking-[0.32em] text-[#6C6257]"
+          style={{ fontFamily: "var(--font-montserrat)" }}
         >
-          {d.collectionLabel}
+          {content.collectionLabel}
         </motion.p>
         <motion.h2
-          initial={{ opacity: 0, y: 30 }}
+          id="product-grid-title"
+          initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="text-4xl md:text-5xl font-bold tracking-tight mb-6 text-[#1d1b1a]"
-          style={{ fontFamily: "var(--font-didot), var(--font-lora), serif" }}
+          transition={{ duration: 0.75 }}
+          className="text-4xl font-semibold tracking-tight text-[#1D1B1A] md:text-5xl"
+          style={{ fontFamily: "var(--font-didot)" }}
         >
-          {d.title}
+          {content.title}
         </motion.h2>
         <motion.p
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.9, delay: 0.25 }}
-          className="text-base md:text-lg max-w-2xl mx-auto leading-relaxed text-[#4c463e]"
-          style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+          transition={{ duration: 0.7, delay: 0.15 }}
+          className="mx-auto mt-5 max-w-3xl text-sm leading-7 text-[#4C463E] md:text-base"
+          style={{ fontFamily: "var(--font-montserrat)" }}
         >
-          {d.subtitle}
+          {content.subtitle}
         </motion.p>
       </div>
 
-      <div className="px-6 md:px-12 max-w-6xl mx-auto pb-8">
-        {loading ? (
-          <div className="flex justify-center items-center py-20">
-            <div className="w-8 h-8 border-4 border-[#1C1C1C]/20 border-t-[#1C1C1C] rounded-full animate-spin"></div>
-          </div>
-        ) : (
-          <motion.div
-            variants={staggerContainer}
-            initial="hidden"
-            animate="visible"
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+      <motion.div
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.08 }}
+        className="mx-auto grid max-w-[1440px] grid-cols-1 gap-5 px-5 sm:grid-cols-2 md:px-8 xl:grid-cols-4"
+      >
+        {content.products.map((product, index) => (
+          <motion.article
+            key={product.id}
+            custom={index}
+            variants={fadeUp}
+            className={`group flex h-full flex-col overflow-hidden rounded-[1.5rem] border bg-white transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_55px_-30px_rgba(28,28,28,0.45)] ${
+              product.isB2B
+                ? "border-sky-900/20"
+                : "border-[#1C1C1C]/10"
+            }`}
           >
-            {finalProducts.map((product, i) => {
-              const slug = product.slug || product.id;
-              return (
-                <div
-                  key={product.id + "-wrapper"}
-                  className={finalProducts.length % 2 === 1 && i === finalProducts.length - 1 ? "md:col-span-2 flex justify-center" : ""}
+            <Link
+              href={`/products/${product.slug}`}
+              className="relative block aspect-square overflow-hidden bg-[#F7F2EB]"
+              aria-label={product.name}
+            >
+              <Image
+                src={product.image}
+                alt={
+                  product.isB2B
+                    ? "Raw premium bulk Makhana kernels"
+                    : `Sachet AÉRI ${product.name}`
+                }
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
+                className="object-contain p-5 transition-transform duration-500 group-hover:scale-[1.035]"
+              />
+              <div className="absolute left-4 top-4">
+                <span
+                  className={`inline-flex rounded-full px-3 py-1 text-[9px] font-bold uppercase tracking-[0.16em] ${
+                    categoryColors[product.category] ||
+                    "bg-stone-100 text-stone-800"
+                  }`}
+                  style={{ fontFamily: "var(--font-montserrat)" }}
                 >
-                  <Link
-                    href={`/products/${slug}`}
-                    className="block group relative rounded-2xl overflow-hidden border transition-all duration-500 cursor-pointer w-full"
-                    style={{
-                      borderColor: "#cec5bb",
-                      backgroundColor: "#ffffff",
-                      ...(finalProducts.length % 2 === 1 && i === finalProducts.length - 1 ? { maxWidth: "calc(50% - 1rem)" } : {}),
-                    }}
-                  >
-                    <motion.div
-                      variants={fadeUp}
-                      whileHover={{
-                        y: -4,
-                        boxShadow: "0 16px 48px -12px rgba(29,27,26,0.22)",
-                      }}
-                      className="h-full flex flex-col"
-                    >
-                      <div className="relative w-full aspect-square overflow-hidden shrink-0" style={{ backgroundColor: "#FAF7F4" }}>
-                        <Image
-                          src={product.image}
-                          alt={`makhana ${product.name.toLowerCase()} sachet 50g aeri snacks`}
-                          fill
-                          sizes="(max-width: 768px) 100vw, 50vw"
-                          className={`object-contain transition-transform duration-700 ease-out group-hover:scale-110 ${
-                            product.id === "salt" ? "p-10" 
-                            : product.id === "truffle" ? "p-1" 
-                            : product.id === "raw" ? "p-6"
-                            : "p-4"
-                          }`}
-                        />
-                        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#FAF7F4]/90 to-transparent pointer-events-none" />
-                        <div className="absolute top-4 left-4 flex flex-col items-start gap-2 z-10">
-                          <span
-                            className={`text-[10px] tracking-[0.15em] uppercase font-semibold px-3 py-1 rounded-full ${
-                              categoryColors[product.category] || "bg-gray-100 text-gray-700"
-                            }`}
-                          >
-                            {product.category}
-                          </span>
-                          {product.badge && (
-                            <span
-                              className="text-[9px] tracking-[0.1em] uppercase font-semibold px-3 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200"
-                            >
-                              {product.badge}
-                            </span>
-                          )}
-                        </div>
-                        {product.id !== "raw" && (
-                          <span
-                            className="absolute top-4 right-4 text-[9px] tracking-[0.1em] uppercase font-semibold px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200 z-10"
-                          >
-                            {d.roastedBadge}
-                          </span>
-                        )}
-                      </div>
+                  {product.category}
+                </span>
+              </div>
+            </Link>
 
-                      <div className="px-6 pb-6 pt-3 flex-1 flex flex-col justify-between">
-                        <div>
-                          <h3
-                            className="text-lg font-bold mb-1 text-[#1d1b1a]"
-                            style={{ fontFamily: "var(--font-didot), var(--font-montserrat), serif" }}
-                          >
-                            {product.name}
-                          </h3>
-                          <p className="text-sm leading-relaxed mb-4 line-clamp-2 text-[#4c463e]">
-                            {product.desc}
-                          </p>
-                        </div>
-                        <div className="flex items-center justify-between">
-                          <span
-                            className="text-xl font-bold text-[#675d4e]"
-                            style={{ fontFamily: "var(--font-didot), var(--font-montserrat), serif" }}
-                          >
-                            {product.price}
-                          </span>
-                          {product.id === "raw" ? (
-                            <button
-                              onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                window.location.href = "/espace-pro";
-                              }}
-                              className="relative inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold tracking-wide transition-all duration-150 active:translate-y-[2px] active:shadow-none cursor-pointer"
-                              style={{
-                                fontFamily: "var(--font-montserrat), sans-serif",
-                                background: "#1C1C1C",
-                                color: "#FFFFFF",
-                                boxShadow: "0 4px 12px -2px rgba(28,28,28,0.35)",
-                              }}
-                            >
-                              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <rect width="20" height="16" x="2" y="4" rx="2" />
-                                <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                              </svg>
-                              {d.contactB2B || 'Contact B2B'}
-                            </button>
-                          ) : (
-                            <button
-                              onClick={(e) => {
-                                e.preventDefault();
-                                e.stopPropagation();
-                                addToCart({
-                                  id: product.id,
-                                  name: product.name,
-                                  price: parseFloat(product.price.replace("€", "").split(" /")[0]) || 5.99,
-                                  image: product.image,
-                                });
-                              }}
-                              className="relative inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold tracking-wide transition-all duration-150 active:translate-y-[2px] active:shadow-none cursor-pointer z-20"
-                              style={{
-                                fontFamily: "var(--font-montserrat), sans-serif",
-                                background: "#1C1C1C",
-                                color: "#FFFFFF",
-                                boxShadow: "0 4px 12px -2px rgba(28,28,28,0.35)",
-                              }}
-                            >
-                              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <circle cx="9" cy="21" r="1" />
-                                <circle cx="20" cy="21" r="1" />
-                                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-                              </svg>
-                              {d.addToCart}
-                            </button>
-                          )}
-                        </div>
-                      </div>
-                    </motion.div>
-                  </Link>
-                </div>
-              );
-            })}
-          </motion.div>
-        )}
-      </div>
+            <div className="flex flex-1 flex-col p-5">
+              {!product.isB2B && (
+                <p
+                  className="mb-3 text-[9px] font-bold uppercase leading-4 tracking-[0.12em] text-[#55705B]"
+                  style={{ fontFamily: "var(--font-montserrat)" }}
+                >
+                  {content.roastBadge}
+                </p>
+              )}
+
+              <Link href={`/products/${product.slug}`} className="block">
+                <h3
+                  className="text-xl font-semibold leading-tight text-[#1D1B1A]"
+                  style={{ fontFamily: "var(--font-didot)" }}
+                >
+                  {product.name}
+                </h3>
+              </Link>
+
+              {product.flavor && (
+                <p
+                  className="mt-2 text-sm font-semibold leading-5 text-[#6A5B49]"
+                  style={{ fontFamily: "var(--font-montserrat)" }}
+                >
+                  {product.flavor}
+                </p>
+              )}
+
+              <p
+                className="mt-3 flex-1 text-sm leading-6 text-[#4C463E]/80"
+                style={{ fontFamily: "var(--font-montserrat)" }}
+              >
+                {product.description}
+              </p>
+
+              <p
+                className={`mt-5 font-semibold text-[#1D1B1A] ${
+                  product.isB2B ? "text-sm leading-5" : "text-lg"
+                }`}
+                style={{
+                  fontFamily: product.isB2B
+                    ? "var(--font-montserrat)"
+                    : "var(--font-didot)",
+                }}
+              >
+                {product.price}
+              </p>
+
+              {product.isB2B ? (
+                <Link
+                  href="/espace-pro#demande-professionnelle"
+                  className="mt-5 inline-flex min-h-11 items-center justify-center rounded-xl bg-[#1C1C1C] px-5 py-3 text-center text-xs font-bold uppercase tracking-[0.13em] text-white transition-colors hover:bg-[#343434]"
+                  style={{ fontFamily: "var(--font-montserrat)" }}
+                >
+                  {content.b2bButton}
+                </Link>
+              ) : (
+                <button
+                  type="button"
+                  onClick={() => handleAddToCart(product)}
+                  disabled={addedIds.has(product.id)}
+                  className={`mt-5 min-h-11 rounded-xl px-5 py-3 text-xs font-bold uppercase tracking-[0.13em] text-white transition-all duration-300 ${
+                    addedIds.has(product.id)
+                      ? "bg-green-700 scale-95"
+                      : "bg-[#1C1C1C] hover:bg-[#343434]"
+                  }`}
+                  style={{ fontFamily: "var(--font-montserrat)" }}
+                >
+                  {addedIds.has(product.id) ? "✓ " + content.addedToCart : content.addToCart}
+                </button>
+              )}
+            </div>
+          </motion.article>
+        ))}
+      </motion.div>
+
+
     </section>
   );
 }

@@ -132,45 +132,41 @@ export default function Footer() {
               if (currentLang === 'en') {
                 return {
                   products: [
-                    "/products/himalayan-salt",
-                    "/products/mediterranean-herb-fusion",
-                    "/products/black-truffle",
-                    "/products"
+                    "/products",
+                    "/products/signature",
+                    "/products/gourmet",
+                    "/espace-pro"
                   ],
                   company: [
                     "/company/our-story",
                     "/mission",
-                    "/company/transparency",
-                    "/company/certifications",
                     "/espace-pro"
                   ],
                   legal: [
-                    "/legal/return-policy",
-                    "/legal/t-c",
                     "/legal/legal-notice",
-                    "/legal/privacy"
+                    "/legal/t-c",
+                    "/legal/return-policy",
+                    "/legal/retractation"
                   ]
                 };
               }
               return {
                 products: [
-                  "/products/sel-de-l-himalaya",
-                  "/products/herbes-de-provence",
-                  "/products/truffe-noire",
-                  "/products"
+                  "/products",
+                  "/products/signature",
+                  "/products/gourmet",
+                  "/espace-pro"
                 ],
                 company: [
                   "/company/notre-histoire",
                   "/mission",
-                  "/company/transparence",
-                  "/company/certifications-fr",
                   "/espace-pro"
                 ],
                 legal: [
-                  "/legal/politique-de-retour",
-                  "/legal/cgv",
                   "/legal/mentions-legales",
-                  "/legal/confidentialite"
+                  "/legal/cgv",
+                  "/legal/politique-de-retour",
+                  "/legal/retractation"
                 ]
               };
             };

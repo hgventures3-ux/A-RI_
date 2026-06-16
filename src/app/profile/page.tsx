@@ -151,7 +151,7 @@ export default function ProfilePage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col bg-[#F5E6D3] text-[#1C1C1C]">
+      <div className="min-h-screen flex flex-col bg-[#FAF8F5] text-[#1C1C1C]">
         <Navbar />
         <div className="flex-1 flex flex-col items-center justify-center">
           <Loader2 className="animate-spin h-8 w-8 text-[#1C1C1C] mb-4" />
@@ -165,7 +165,7 @@ export default function ProfilePage() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F5E6D3] text-[#1C1C1C]">
+    <div className="min-h-screen flex flex-col bg-[#FAF8F5] text-[#1C1C1C]">
       <Navbar />
 
       <main className="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-24">
@@ -188,7 +188,7 @@ export default function ProfilePage() {
             </button>
             <button
               onClick={handleLogout}
-              className="flex items-center gap-2 px-4 py-2 bg-[#1C1C1C] text-[#F5E6D3] text-xs font-semibold uppercase tracking-wider rounded-xl hover:bg-[#333333] transition-colors cursor-pointer"
+              className="flex items-center gap-2 px-4 py-2 bg-[#1C1C1C] text-[#FAF8F5] text-xs font-semibold uppercase tracking-wider rounded-xl hover:bg-[#333333] transition-colors cursor-pointer"
             >
               <LogOut size={14} />
               <span>{s.logoutBtn}</span>

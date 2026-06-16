@@ -85,7 +85,7 @@ function LoginContent() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#F5E6D3] text-[#1C1C1C]">
+    <div className="min-h-screen flex flex-col bg-[#FAF8F5] text-[#1C1C1C]">
       <Navbar />
 
       <div className="flex-1 flex flex-col justify-center items-center px-4 sm:px-6 lg:px-8 py-24 sm:py-32">
@@ -171,17 +171,17 @@ function LoginContent() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full flex justify-center items-center gap-2 py-3 px-4 rounded-xl text-xs font-bold tracking-widest uppercase text-[#F5E6D3] bg-[#1C1C1C] hover:bg-[#333333] active:scale-[0.98] transition-all disabled:opacity-75 disabled:pointer-events-none cursor-pointer"
+              className="w-full flex justify-center items-center gap-2 py-3 px-4 rounded-xl text-xs font-bold tracking-widest uppercase text-[#FAF8F5] bg-[#1C1C1C] hover:bg-[#333333] active:scale-[0.98] transition-all disabled:opacity-75 disabled:pointer-events-none cursor-pointer"
             >
               {loading ? (
                 <>
-                  <Loader2 className="animate-spin h-4 w-4 text-[#F5E6D3]" />
+                  <Loader2 className="animate-spin h-4 w-4 text-[#FAF8F5]" />
                   <span>{s.btnLoading}</span>
                 </>
               ) : (
                 <>
                   <span>{s.btnLogin}</span>
-                  <ArrowRight className="h-4 w-4 text-[#F5E6D3]" />
+                  <ArrowRight className="h-4 w-4 text-[#FAF8F5]" />
                 </>
               )}
             </button>
@@ -208,7 +208,7 @@ export default function LoginPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex items-center justify-center bg-[#F5E6D3]">
+        <div className="min-h-screen flex items-center justify-center bg-[#FAF8F5]">
           <Loader2 className="animate-spin h-8 w-8 text-[#1C1C1C]" />
         </div>
       }

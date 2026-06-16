@@ -4,9 +4,9 @@ export default function SkeletonLoader({ type = "table" }: { type?: "table" | "c
   if (type === "card") {
     return (
       <div className="bg-white p-6 rounded-2xl shadow-sm border border-[#e8e0d8] flex flex-col gap-4 animate-pulse">
-        <div className="h-10 w-10 bg-[#f5e6d3] rounded-full"></div>
-        <div className="h-6 w-1/2 bg-[#f5e6d3] rounded"></div>
-        <div className="h-8 w-1/3 bg-[#f5e6d3] rounded"></div>
+        <div className="h-10 w-10 bg-[#FAF8F5] rounded-full"></div>
+        <div className="h-6 w-1/2 bg-[#FAF8F5] rounded"></div>
+        <div className="h-8 w-1/3 bg-[#FAF8F5] rounded"></div>
       </div>
     );
   }
@@ -15,10 +15,10 @@ export default function SkeletonLoader({ type = "table" }: { type?: "table" | "c
     return (
       <div className="animate-pulse flex flex-col gap-6 max-w-4xl">
         <div className="bg-white p-6 rounded-2xl shadow-sm border border-[#e8e0d8] flex flex-col gap-4">
-          <div className="h-6 w-1/4 bg-[#f5e6d3] rounded"></div>
-          <div className="h-10 w-full bg-[#f5e6d3] rounded"></div>
-          <div className="h-6 w-1/4 bg-[#f5e6d3] rounded mt-4"></div>
-          <div className="h-32 w-full bg-[#f5e6d3] rounded"></div>
+          <div className="h-6 w-1/4 bg-[#FAF8F5] rounded"></div>
+          <div className="h-10 w-full bg-[#FAF8F5] rounded"></div>
+          <div className="h-6 w-1/4 bg-[#FAF8F5] rounded mt-4"></div>
+          <div className="h-32 w-full bg-[#FAF8F5] rounded"></div>
         </div>
       </div>
     );
@@ -35,10 +35,10 @@ export default function SkeletonLoader({ type = "table" }: { type?: "table" | "c
       <div className="divide-y divide-[#e8e0d8]">
         {[1, 2, 3, 4, 5].map((row) => (
           <div key={row} className="px-6 py-4 flex gap-4 items-center">
-            <div className="h-10 w-10 bg-[#f5e6d3] rounded-md shrink-0"></div>
-            <div className="h-4 w-1/5 bg-[#f5e6d3] rounded"></div>
-            <div className="h-4 w-1/5 bg-[#f5e6d3] rounded"></div>
-            <div className="h-4 w-1/5 bg-[#f5e6d3] rounded"></div>
+            <div className="h-10 w-10 bg-[#FAF8F5] rounded-md shrink-0"></div>
+            <div className="h-4 w-1/5 bg-[#FAF8F5] rounded"></div>
+            <div className="h-4 w-1/5 bg-[#FAF8F5] rounded"></div>
+            <div className="h-4 w-1/5 bg-[#FAF8F5] rounded"></div>
             <div className="h-8 w-20 bg-[#e8e0d8] rounded ml-auto shrink-0"></div>
           </div>
         ))}

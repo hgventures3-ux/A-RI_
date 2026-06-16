@@ -207,7 +207,7 @@ export default function CompanyDynamicPage() {
 
   if (!page) {
     return (
-      <main className="min-h-screen bg-[#FFFFFF] flex items-center justify-center">
+      <main className="min-h-screen bg-[#FAF8F5] flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-4xl font-bold mb-4">Page Not Found</h1>
           <Link href="/" className="text-[#6E6E73] hover:text-[#111111] underline">Back to Home</Link>
@@ -217,7 +217,7 @@ export default function CompanyDynamicPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[#FFFFFF] text-[#111111] font-sans">
+    <main className="min-h-screen bg-[#FAF8F5] text-[#111111] font-sans">
       {/* Navbar */}
       <Navbar />
 
@@ -246,7 +246,7 @@ export default function CompanyDynamicPage() {
             </motion.div>
           ))}
           {page.cta && (
-            <div className="p-8 md:p-12 border-t border-[#111111]/5 bg-[#F5F5F7] text-center">
+            <div className="p-8 md:p-12 border-t border-[#111111]/5 bg-[#FAF8F5] text-center">
               <Link href={page.cta.href} className="inline-block px-8 py-4 bg-[#111111] text-white rounded-2xl font-medium tracking-wide hover:bg-[#111111]/80 transition-colors">{page.cta.text}</Link>
             </div>
           )}

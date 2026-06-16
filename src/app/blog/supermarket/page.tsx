@@ -54,7 +54,7 @@ export default function SupermarketArticle() {
   const t = content[lang as keyof typeof content] || content.en;
 
   return (
-    <main className="min-h-screen bg-[#FFFFFF] flex flex-col">
+    <main className="min-h-screen bg-[#FAF8F5] flex flex-col">
       <Navbar />
       <div className="flex-1 pt-32 pb-24 px-6">
         <div className="max-w-3xl mx-auto">

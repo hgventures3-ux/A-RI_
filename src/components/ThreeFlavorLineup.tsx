@@ -1,103 +1,156 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 
-const fallbackFlavors = [
-  { name: "Himalayan Salt & Pepper", label: "SIGNATURE", image: "/flavor_salt_v2.png" },
-  { name: "Gourmet Truffle Fusion", label: "GOURMET", image: "/flavor_truffle.png" },
-  { name: "Mediterranean Herb Fusion", label: "VÉGÉTAL", image: "/flavor_herbes_v2.png" },
-];
+const copy = {
+  fr: {
+    title: "La Collection AÉRI",
+    subtitle:
+      "Notre saveur signature, torréfiée à l'huile d'olive vierge extra.",
+    label: "SIGNATURE",
+    product: "Pristine Himalayan Salt & Pepper",
+    price: "7,50 €",
+    button: "Acheter maintenant",
+  },
+  en: {
+    title: "The AÉRI Collection",
+    subtitle: "Our signature flavor, roasted in extra virgin olive oil.",
+    label: "SIGNATURE",
+    product: "Pristine Himalayan Salt & Pepper",
+    price: "7.50 €",
+    button: "Buy Now",
+  },
+  hi: {
+    title: "AÉRI कलेक्शन",
+    subtitle:
+      "हमारा सिग्नेचर फ्लेवर, एक्स्ट्रा वर्जिन ऑलिव ऑयल में रोस्ट किया गया।",
+    label: "सिग्नेचर",
+    product: "Pristine Himalayan Salt & Pepper",
+    price: "7.50 €",
+    button: "अभी खरीदें",
+  },
+};
 
 export default function ThreeFlavorLineup() {
   const { lang } = useLanguage();
-  const isFrench = lang === "fr";
-  const [flavors, setFlavors] = useState<any[]>(fallbackFlavors);
-
-  useEffect(() => {
-    async function fetchProducts() {
-      try {
-        const res = await fetch("/api/products");
-        const json = await res.json();
-        if (json.success && json.data.length > 0) {
-          // Take top 3 products (assuming the first 3 are the ones needed)
-          const top3 = json.data.slice(0, 3).map((p: any) => ({
-            name: p.name,
-            label: p.category,
-            image: p.images && p.images.length > 0 ? p.images[0] : "/flavor_mystery.png"
-          }));
-          setFlavors(top3);
-        }
-      } catch (error) {
-        console.error("Failed to fetch products for lineup:", error);
-      }
-    }
-    fetchProducts();
-  }, []);
+  const content = copy[lang as keyof typeof copy] || copy.fr;
 
   return (
     <section
-      className="relative w-full py-16 md:py-24 overflow-hidden"
-      style={{ background: "#F5E6D3" }}
+      className="relative w-full overflow-hidden py-16 md:py-24 bg-[#F9F6F0]"
+      aria-labelledby="collection-title"
     >
-      <div className="max-w-6xl mx-auto px-6">
+      <div
+        className="absolute inset-x-0 top-0 h-px"
+        style={{
+          background:
+            "linear-gradient(90deg, transparent, rgba(28,28,28,0.15), transparent)",
+        }}
+      />
+
+      <div className="mx-auto max-w-5xl px-6 text-center">
         <motion.h2
+          id="collection-title"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="text-3xl md:text-4xl lg:text-5xl font-bold text-center text-[#1C1C1C] mb-4"
+          className="text-4xl font-semibold text-[#1C1C1C] md:text-5xl"
           style={{ fontFamily: "var(--font-didot)" }}
         >
-          {isFrench ? "La Collection AÉRI" : "The AÉRI Collection"}
+          {content.title}
         </motion.h2>
+
         <motion.p
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-center text-sm md:text-base text-[#1C1C1C]/60 mb-12 md:mb-16 max-w-xl mx-auto"
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-[#1C1C1C]/60 md:text-base"
           style={{ fontFamily: "var(--font-montserrat)" }}
         >
-          {isFrench ? "Trois saveurs d'exception, torréfiées à l'huile d'olive vierge extra." : "Three exceptional flavors, roasted in extra virgin olive oil."}
+          {content.subtitle}
         </motion.p>
 
-        <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
-          {flavors.map((f, i) => (
-            <motion.div
-              key={f.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.15 }}
-              className="flex flex-col items-center group"
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.75, delay: 0.2 }}
+          className="mx-auto mt-12 w-full max-w-lg"
+        >
+          <article className="group flex flex-col overflow-hidden rounded-[2rem] border border-[#1C1C1C]/10 bg-white shadow-[0_8px_40px_-10px_rgba(168,121,25,0.18)] ring-1 ring-amber-200/60 transition duration-300 hover:-translate-y-2 hover:shadow-[0_32px_80px_-20px_rgba(28,28,28,0.5)]">
+
+            {/* ── Image area ── */}
+            <Link
+              href="/products/himalayan-salt"
+              className="relative block aspect-square overflow-hidden bg-[#F7F2EB]"
+              aria-label="Himalayan Salt & Pepper Makhana"
             >
-              <div className="relative w-[200px] h-[200px] md:w-[260px] md:h-[260px] mb-5 transition-transform duration-500 group-hover:scale-105">
-                  <Image
-                    src={f.image}
-                    alt={`makhana ${f.name.toLowerCase()} sachet 50g aeri snacks`}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-contain drop-shadow-lg"
-                  />
+              <Image
+                src="/flavor_himalayan_salt_new.png"
+                alt="Sachet AÉRI Makhana Himalayan Salt and Pepper"
+                fill
+                priority={false}
+                sizes="(max-width: 640px) 100vw, 512px"
+                className="object-contain p-8 transition-transform duration-700 group-hover:scale-[1.04]"
+              />
+              {/* SIGNATURE badge */}
+              <div className="absolute left-4 top-4">
+                <span
+                  className="inline-flex rounded-full bg-amber-100 px-4 py-1.5 text-[10px] font-bold uppercase tracking-[0.22em] text-amber-900 shadow-sm"
+                  style={{ fontFamily: "var(--font-montserrat)" }}
+                >
+                  ✦ {content.label}
+                </span>
               </div>
-              <span
-                className="text-[10px] font-bold tracking-[0.3em] uppercase mb-1"
-                style={{ fontFamily: "var(--font-montserrat)", color: "#D4AF37" }}
-              >
-                {f.label === "VÉGÉTAL" && !isFrench ? "PLANT-BASED" : f.label}
-              </span>
-              <span
-                className="text-sm font-semibold text-[#1C1C1C]"
+            </Link>
+
+            {/* ── Card body ── */}
+            <div className="flex flex-col px-8 pb-8 pt-5">
+              <p
+                className="mb-3 text-[9px] font-bold uppercase leading-4 tracking-[0.12em] text-[#55705B]"
                 style={{ fontFamily: "var(--font-montserrat)" }}
               >
-                {f.name}
-              </span>
-            </motion.div>
-          ))}
-        </div>
+                Torréfié à l&apos;huile d&apos;olive · Jamais frit
+              </p>
+
+              <Link href="/products/himalayan-salt" className="block">
+                <h3
+                  className="text-3xl font-semibold leading-tight text-[#1D1B1A] md:text-4xl"
+                  style={{ fontFamily: "var(--font-didot)" }}
+                >
+                  Makhana Graines Soufflées
+                </h3>
+              </Link>
+
+              <p
+                className="mt-3 text-base font-semibold leading-6 text-[#6A5B49]"
+                style={{ fontFamily: "var(--font-montserrat)" }}
+              >
+                {content.product}
+              </p>
+
+              <p
+                className="mt-6 text-3xl font-semibold text-[#1D1B1A]"
+                style={{ fontFamily: "var(--font-didot)" }}
+              >
+                {content.price}
+              </p>
+
+              <Link
+                href="/products/himalayan-salt"
+                className="mt-6 inline-flex w-full min-h-14 items-center justify-center rounded-xl bg-[#1C1C1C] px-8 py-4 text-sm font-bold uppercase tracking-[0.18em] text-white transition-all duration-300 hover:bg-[#343434] hover:scale-[1.02]"
+                style={{ fontFamily: "var(--font-montserrat)" }}
+              >
+                {content.button}
+              </Link>
+            </div>
+          </article>
+        </motion.div>
       </div>
     </section>
   );

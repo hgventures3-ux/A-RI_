@@ -6,7 +6,15 @@ import { motion, useInView } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import translations from "@/translations";
 
-function StepCard({ step, index }: { step: any; index: number }) {
+function StepCard({
+  step,
+  index,
+  stepLabel,
+}: {
+  step: any;
+  index: number;
+  stepLabel: string;
+}) {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
 
@@ -49,7 +57,7 @@ function StepCard({ step, index }: { step: any; index: number }) {
           lineHeight: 1.3,
         }}
       >
-        {step.headline}
+        {stepLabel} 0{index + 1}: {step.headline}
       </h3>
       <p
         style={{
@@ -77,7 +85,7 @@ export default function MakhanaEducation() {
       style={{
         width: "100%",
         padding: "6rem 1.5rem",
-        backgroundColor: "#F5E6D3",
+        backgroundColor: "#FAF8F5",
         overflow: "hidden",
       }}
     >
@@ -99,33 +107,18 @@ export default function MakhanaEducation() {
         </motion.h2>
       </div>
 
-      {/* 3-Column Layout */}
       <div
-        style={{
-          maxWidth: "72rem",
-          margin: "0 auto",
-          display: "flex",
-          flexDirection: "row" as const,
-          gap: "1.5rem",
-          flexWrap: "wrap" as const,
-        }}
+        className="mx-auto grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-3"
       >
         {t.steps.map((step: any, i: number) => (
-          <StepCard key={i} step={step} index={i} />
+          <StepCard
+            key={step.headline}
+            step={step}
+            index={i}
+            stepLabel={t.stepLabel}
+          />
         ))}
       </div>
-
-      {/* Responsive: stack on mobile */}
-      <style>{`
-        @media (max-width: 768px) {
-          #about > div:last-of-type {
-            flex-direction: column !important;
-          }
-          #about > div:last-of-type > div {
-            flex: 1 1 100% !important;
-          }
-        }
-      `}</style>
     </section>
   );
 }

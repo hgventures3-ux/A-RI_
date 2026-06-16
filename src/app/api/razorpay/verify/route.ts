@@ -44,6 +44,8 @@ export async function POST(req: Request) {
         image: item.image,
       })),
       subtotal: orderDetails.subtotal,
+      discount: orderDetails.discount || 0,
+      couponCode: orderDetails.couponCode || "",
       shipping: orderDetails.shipping || 0,
       total: orderDetails.total,
       paymentMethod: "Razorpay",

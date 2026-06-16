@@ -45,7 +45,7 @@ export default function FlavorVotingCard() {
     <section
       ref={sectionRef}
       className="w-full py-20 md:py-28 px-6 relative overflow-hidden"
-      style={{ background: "#F5E6D3" }}
+      style={{ background: "#FAF8F5" }}
     >
       {/* Blurred silhouette background */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -104,11 +104,10 @@ export default function FlavorVotingCard() {
                   <button
                     onClick={() => handleVote(flavor.id)}
                     disabled={hasVoted}
-                    className={`w-full text-left rounded-xl px-5 py-4 border transition-all duration-300 relative overflow-hidden ${
-                      hasVoted
+                    className={`w-full text-left rounded-xl px-5 py-4 border transition-all duration-300 relative overflow-hidden ${hasVoted
                         ? "cursor-default border-white/30"
                         : "cursor-pointer border-white/40 hover:border-[#F4C2C2] hover:bg-[#F4C2C2]/20 active:scale-[0.98]"
-                    } ${isSelected ? "border-[#D4AF37]/60" : ""}`}
+                      } ${isSelected ? "border-[#D4AF37]/60" : ""}`}
                     style={{
                       background: hasVoted
                         ? "rgba(255,255,255,0.15)"

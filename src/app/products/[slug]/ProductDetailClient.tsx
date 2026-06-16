@@ -48,7 +48,7 @@ export default function ProductDetailPage() {
       <main
         className="min-h-screen flex items-center justify-center"
         style={{
-          backgroundColor: "#F5E6D3",
+          backgroundColor: "#FAF8F5",
           fontFamily: "var(--font-montserrat), sans-serif",
         }}
       >
@@ -78,7 +78,7 @@ export default function ProductDetailPage() {
     <main
       className="min-h-screen"
       style={{
-        backgroundColor: "#F5E6D3",
+        backgroundColor: "#FAF8F5",
         color: "#1d1b1a",
         fontFamily: "var(--font-montserrat), sans-serif",
       }}

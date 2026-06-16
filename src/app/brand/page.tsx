@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import InstitutionalNav from "@/components/InstitutionalNav";
 import Image from "next/image";
 
 // भाषा के अनुसार अनुवाद (Translations for French, English, and Hindi)
@@ -33,10 +34,10 @@ const pageTranslations = {
         image: "/stage_flavoring.png"
       }
     ],
-    founderTitle: "La Fondatrice & Notre Expertise",
+    founderTitle: "Origine de l'Entreprise & Leadership",
     founderStories: [
-      "Après avoir obtenu son Master en France, notre fondatrice a vécu le rituel sacré de l'apéro en tant qu'étudiante urbaine à Paris. C'est en constatant l'absence cruelle de snacks clean-label, sains et véritablement gourmands sur les tables de l'apéro qu'elle a décidé d'entreprendre. De cette frustration est née une conviction : il fallait bâtir une chaîne d'approvisionnement directe, reliant les producteurs du Bihar aux tables françaises pour de bon.",
-      "Derrière AÉRI se trouve également un solide socle industriel familial de plus de 20 ans d'expertise active dans la fabrication d'emballages et le négoce de matières premières en Inde. Ce savoir-faire opérationnel — allant de l'ingénierie de conservation de la fraîcheur à la logistique conteneurisée — nous donne l'autorité et la capacité de passage à l'échelle nécessaires pour approvisionner les plus grandes enseignes de la distribution en Europe."
+      "Après avoir obtenu son Master en France, notre fondatrice a vécu de l'intérieur la véritable culture française de l'Apéro en vivant à Paris. C'est lors de ces moments de convivialité qu'elle a constaté le manque flagrant de snacks sains et clean-label sur les tables. Pour combler ce vide, elle a créé AÉRI, structurant une solution globale allant de la logistique d'approvisionnement jusqu'à l'expérience premium du snacking.",
+      "AÉRI s'appuie sur une expertise industrielle familiale de plus de 25 ans. Notre solide expérience dans la fabrication d'emballages à haut volume et notre capacité de production de matières premières à travers l'Inde nous confèrent l'autorité opérationnelle et l'évolutivité indispensables pour accompagner et sécuriser les approvisionnements des plus grands acheteurs du retail mondial."
     ]
   },
   en: {
@@ -66,7 +67,7 @@ const pageTranslations = {
     founderTitle: "The Founder & Our Expertise",
     founderStories: [
       "After obtaining her Master's degree in France, our founder experienced the authentic local L'Apéro ritual firsthand as an urban student in Paris. Recognizing the complete lack of healthy, clean-label gourmet snacks on French tables, she set out to change things. From that frustration, she designed a direct supply chain from Bihar to Europe.",
-      "Behind AÉRI lies over 20 years of active family industrial expertise in the packaging industry and raw materials trading across India. This operational foundation — from shelf-life engineering to containerised international logistics — grants AÉRI the authority and scalability to supply Europe's largest retail chains at high volume."
+      "Behind AÉRI lies over 20 years of active family industrial expertise in the packaging industry and raw materials trading across India. This operational foundation, from shelf-life engineering to containerised international logistics, grants AÉRI the authority and scalability to supply Europe's largest retail chains at high volume."
     ]
   },
   hi: {
@@ -116,12 +117,13 @@ export default function BrandPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#F5E6D3] text-[#1C1C1C] font-sans overflow-hidden">
+    <main className="min-h-screen bg-[#FAF8F5] text-[#1C1C1C] font-sans overflow-hidden">
       {/* नैविगेशन बार (Unified Navbar) */}
       <Navbar />
+      <InstitutionalNav />
 
       {/* हीरो विभाग (Hero Section) */}
-      <section className="pt-44 pb-20 px-6 md:px-12 max-w-5xl mx-auto text-center">
+      <section className="pt-16 pb-20 px-6 md:px-12 max-w-5xl mx-auto text-center">
         <motion.h1
           initial="hidden"
           animate="visible"

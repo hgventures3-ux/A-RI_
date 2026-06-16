@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useInView, type Variants } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import Navbar from "@/components/Navbar";
+import InstitutionalNav from "@/components/InstitutionalNav";
 import Footer from "@/components/Footer";
 
 const pageTranslations = {
@@ -13,7 +14,7 @@ const pageTranslations = {
     missionBody: "Faire d'un super-aliment indien millénaire — naturellement riche en protéines, faible en graisses et en glucides complexes — une référence mondiale du snacking premium.",
     visionTitle: "Notre Vision",
     visionBody: "Devenir le partenaire d'approvisionnement le plus fiable, le plus rigoureux en matière de qualité et le plus certifié pour les super-aliments alternatifs premium à l'échelle mondiale.",
-    valuesTitle: "Nos Valeurs",
+    valuesTitle: "Piliers d'Excellence Opérationnelle",
     values: [
       {
         title: "Qualité Absolue",
@@ -32,7 +33,7 @@ const pageTranslations = {
   en: {
     title: "Our Purpose",
     missionTitle: "Our Mission",
-    missionBody: "To elevate an ancient Indian superfood—naturally high in protein, low in fat, and rich in complex carbohydrates—into a global benchmark for premium snacking.",
+    missionBody: "To elevate an ancient Indian superfood, naturally high in protein, low in fat, and rich in complex carbohydrates into a global benchmark for premium snacking.",
     visionTitle: "Our Vision",
     visionBody: "To become the most reliable, rigorously quality-controlled, and certified supply partner for premium alternative superfoods worldwide.",
     valuesTitle: "Our Values",
@@ -54,7 +55,7 @@ const pageTranslations = {
   hi: {
     title: "हमारा उद्देश्य",
     missionTitle: "हमारा मिशन",
-    missionBody: "एक प्राचीन भारतीय सुपरफूड को—जो प्राकृतिक रूप से प्रोटीन में उच्च, वसा में कम और जटिल कार्बोहाइड्रेट से भरपूर है—प्रीमियम स्नैकिंग के लिए एक वैश्विक मानक बनाना।",
+    missionBody: "एक प्राचीन भारतीय सुपरफूड को, जो प्राकृतिक रूप से प्रोटीन में उच्च, वसा में कम और जटिल कार्बोहाइड्रेट से भरपूर है,प्रीमियम स्नैकिंग के लिए एक वैश्विक मानक बनाना।",
     visionTitle: "हमारा दृष्टिकोण",
     visionBody: "दुनिया भर में प्रीमियम वैकल्पिक सुपरफूड्स के लिए सबसे विश्वसनीय, गुणवत्ता-नियंत्रित और प्रमाणित आपूर्ति भागीदार बनना।",
     valuesTitle: "हमारे मूल्य",
@@ -94,16 +95,17 @@ const cardVariants: Variants = {
 export default function MissionPage() {
   const { lang } = useLanguage();
   const d = pageTranslations[lang as keyof typeof pageTranslations] || pageTranslations.fr;
-  
+
   const sectionRef = useRef<HTMLElement>(null);
   const valuesRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.15 });
   const valuesInView = useInView(valuesRef, { once: true, amount: 0.2 });
 
   return (
-    <main className="min-h-screen w-full bg-[#FFFFFF]">
+    <main className="min-h-screen w-full bg-[#FAF8F5]">
       <Navbar />
-      <section ref={sectionRef} className="max-w-5xl mx-auto px-6 pt-40 pb-20 md:pb-32">
+      <InstitutionalNav />
+      <section ref={sectionRef} className="max-w-5xl mx-auto px-6 pt-16 pb-20 md:pb-32">
         {/* Page Title */}
         <motion.h1
           initial={{ opacity: 0, y: 20 }}

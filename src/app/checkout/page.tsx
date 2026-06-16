@@ -11,28 +11,83 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import toast from "react-hot-toast";
 
+type CouponResult = {
+  code: string;
+  discountType: "percentage" | "fixed";
+  discountValue: number;
+  discountAmount: number;
+  finalTotal: number;
+};
+
 export default function CheckoutPage() {
   const { items, cartTotal, clearCart } = useCart();
   const { lang } = useLanguage();
   const router = useRouter();
 
+  const isFrench = lang === "fr";
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
+    phone: "",
     address: "",
     city: "",
     zipCode: "",
     country: "",
   });
 
-  const isFrench = lang === "fr";
+  // Coupon state
+  const [couponCode, setCouponCode] = useState("");
+  const [couponLoading, setCouponLoading] = useState(false);
+  const [appliedCoupon, setAppliedCoupon] = useState<CouponResult | null>(null);
+  const [couponError, setCouponError] = useState("");
+
+  const finalTotal = appliedCoupon ? appliedCoupon.finalTotal : cartTotal;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // ── Coupon validation ──────────────────────────────────────────
+  const handleApplyCoupon = async () => {
+    if (!couponCode.trim()) return;
+    setCouponLoading(true);
+    setCouponError("");
+    setAppliedCoupon(null);
+
+    try {
+      const res = await fetch("/api/coupons/validate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ code: couponCode, total: cartTotal }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setCouponError(data.error || (isFrench ? "Code invalide" : "Invalid code"));
+      } else {
+        setAppliedCoupon(data);
+        toast.success(
+          isFrench
+            ? `Code appliqué ! -€${data.discountAmount.toFixed(2)}`
+            : `Coupon applied! -€${data.discountAmount.toFixed(2)}`
+        );
+      }
+    } catch {
+      setCouponError(isFrench ? "Erreur lors de la validation." : "Validation error.");
+    } finally {
+      setCouponLoading(false);
+    }
+  };
+
+  const removeCoupon = () => {
+    setAppliedCoupon(null);
+    setCouponCode("");
+    setCouponError("");
+  };
+
+  // ── Razorpay ──────────────────────────────────────────────────
   const loadRazorpayScript = () => {
     return new Promise((resolve) => {
       if ((window as any).Razorpay) {
@@ -47,15 +102,34 @@ export default function CheckoutPage() {
     });
   };
 
+  const isFormValid = () => {
+    return (
+      formData.firstName &&
+      formData.email &&
+      formData.address &&
+      formData.city &&
+      formData.zipCode &&
+      formData.country
+    );
+  };
+
   const handleRazorpayPayment = async () => {
-    if (!formData.firstName || !formData.email || !formData.address) {
-      toast(isFrench ? "Veuillez remplir toutes les informations de livraison requises." : "Please fill in all required shipping details.");
+    if (!isFormValid()) {
+      toast.error(
+        isFrench
+          ? "Veuillez remplir tous les champs obligatoires."
+          : "Please fill in all required fields."
+      );
       return;
     }
 
     const res = await loadRazorpayScript();
     if (!res) {
-      toast.error(isFrench ? "Échec du chargement du SDK Razorpay. Êtes-vous connecté à Internet ?" : "Razorpay SDK failed to load. Are you online?");
+      toast.error(
+        isFrench
+          ? "Échec du chargement de Razorpay. Êtes-vous connecté à Internet ?"
+          : "Razorpay failed to load. Are you online?"
+      );
       return;
     }
 
@@ -63,7 +137,7 @@ export default function CheckoutPage() {
       const orderData = await fetch("/api/razorpay/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: cartTotal }),
+        body: JSON.stringify({ amount: finalTotal }),
       }).then((t) => t.json());
 
       if (orderData.error) {
@@ -76,7 +150,7 @@ export default function CheckoutPage() {
         amount: orderData.order.amount,
         currency: orderData.order.currency,
         name: "AÉRI Snacks",
-        description: "Premium Snacks Checkout",
+        description: "Premium Makhana Checkout",
         order_id: orderData.order.id,
         handler: async function (response: any) {
           const payload = {
@@ -87,6 +161,7 @@ export default function CheckoutPage() {
               customer: {
                 name: `${formData.firstName} ${formData.lastName}`,
                 email: formData.email,
+                phone: formData.phone,
                 address: formData.address,
                 city: formData.city,
                 zipCode: formData.zipCode,
@@ -94,9 +169,11 @@ export default function CheckoutPage() {
               },
               items: items,
               subtotal: cartTotal,
+              discount: appliedCoupon ? appliedCoupon.discountAmount : 0,
+              couponCode: appliedCoupon ? appliedCoupon.code : undefined,
               shipping: 0,
-              total: cartTotal,
-            }
+              total: finalTotal,
+            },
           };
 
           const verifyRes = await fetch("/api/razorpay/verify", {
@@ -106,16 +183,20 @@ export default function CheckoutPage() {
           }).then((t) => t.json());
 
           if (verifyRes.success) {
-            toast.success(isFrench ? `Commande ${verifyRes.orderNumber} passée avec succès via Razorpay !` : `Order ${verifyRes.orderNumber} placed successfully via Razorpay!`);
             clearCart();
-            router.push("/");
+            router.push(`/order-confirmation?orderNumber=${verifyRes.orderNumber}`);
           } else {
-            toast.error(isFrench ? "Échec de la vérification du paiement. Veuillez contacter le support." : "Payment verification failed. Please contact support.");
+            toast.error(
+              isFrench
+                ? "Échec de la vérification du paiement. Contactez le support."
+                : "Payment verification failed. Please contact support."
+            );
           }
         },
         prefill: {
           name: `${formData.firstName} ${formData.lastName}`,
           email: formData.email,
+          contact: formData.phone,
         },
         theme: {
           color: "#1C1C1C",
@@ -126,26 +207,33 @@ export default function CheckoutPage() {
       paymentObject.open();
     } catch (err) {
       console.error(err);
-      toast.error(isFrench ? "Échec de l'initiation du paiement Razorpay." : "Failed to initiate Razorpay payment.");
+      toast.error(
+        isFrench
+          ? "Échec de l'initiation du paiement."
+          : "Failed to initiate payment."
+      );
     }
   };
 
-  // Check if cart is empty to redirect back
+  // ── Empty cart ─────────────────────────────────────────────────
   if (items.length === 0) {
     return (
       <main className="min-h-screen flex flex-col">
         <Navbar />
-        <div className="flex-1 bg-[#F5E6D3] pt-32 px-6 flex flex-col items-center justify-center">
-          <h1 className="text-3xl font-bold text-[#1C1C1C] mb-4" style={{ fontFamily: "var(--font-didot), serif" }}>
-          {isFrench ? "Votre panier est vide" : "Your cart is empty"}
-        </h1>
-        <button
-          onClick={() => router.push("/products")}
-          className="px-8 py-3 bg-[#1C1C1C] text-[#F5E6D3] rounded-xl font-medium tracking-wide hover:bg-[#333] transition-colors"
-          style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
-        >
-          {isFrench ? "Continuer vos achats" : "Continue Shopping"}
-        </button>
+        <div className="flex-1 bg-[#FAF8F5] pt-32 px-6 flex flex-col items-center justify-center gap-6">
+          <h1
+            className="text-3xl font-bold text-[#1C1C1C]"
+            style={{ fontFamily: "var(--font-didot), serif" }}
+          >
+            {isFrench ? "Votre panier est vide" : "Your cart is empty"}
+          </h1>
+          <button
+            onClick={() => router.push("/products")}
+            className="px-8 py-3 bg-[#1C1C1C] text-[#FAF8F5] rounded-xl font-medium tracking-wide hover:bg-[#333] transition-colors"
+            style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+          >
+            {isFrench ? "Continuer vos achats" : "Continue Shopping"}
+          </button>
         </div>
         <Footer />
       </main>
@@ -153,198 +241,453 @@ export default function CheckoutPage() {
   }
 
   return (
-    <main className="min-h-screen flex flex-col bg-[#F5E6D3]">
+    <main className="min-h-screen flex flex-col bg-[#FAF8F5]">
       <Navbar />
       <div className="flex-1 pt-32 pb-20 px-6 md:px-12">
-      <div className="max-w-6xl mx-auto">
-        <motion.h1 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-4xl md:text-5xl font-bold mb-12 text-[#1C1C1C]"
-          style={{ fontFamily: "var(--font-didot), serif" }}
-        >
-          {isFrench ? "Paiement sécurisé" : "Secure Checkout"}
-        </motion.h1>
-
-        <div className="flex flex-col lg:flex-row gap-12">
-          {/* Left Column: Form Details */}
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.1 }}
-            className="flex-1 space-y-8"
+        <div className="max-w-6xl mx-auto">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-4xl md:text-5xl font-bold mb-12 text-[#1C1C1C]"
+            style={{ fontFamily: "var(--font-didot), serif" }}
           >
-            <div className="bg-white/50 p-8 rounded-2xl border border-[#cec5bb] shadow-sm">
-              <h2 className="text-xl font-semibold mb-6 text-[#1C1C1C]" style={{ fontFamily: "var(--font-montserrat), sans-serif" }}>
-                {isFrench ? "Détails de livraison" : "Shipping Details"}
-              </h2>
-              <form className="grid grid-cols-1 md:grid-cols-2 gap-4" style={{ fontFamily: "var(--font-montserrat), sans-serif" }}>
-                <div>
-                  <label className="block text-sm text-[#4c463e] mb-1">{isFrench ? "Prénom" : "First Name"}*</label>
-                  <input type="text" name="firstName" value={formData.firstName} onChange={handleInputChange} required className="w-full px-4 py-3 rounded-xl border border-[#cec5bb] bg-white focus:ring-2 focus:ring-[#1C1C1C] outline-none" />
-                </div>
-                <div>
-                  <label className="block text-sm text-[#4c463e] mb-1">{isFrench ? "Nom" : "Last Name"}*</label>
-                  <input type="text" name="lastName" value={formData.lastName} onChange={handleInputChange} required className="w-full px-4 py-3 rounded-xl border border-[#cec5bb] bg-white focus:ring-2 focus:ring-[#1C1C1C] outline-none" />
-                </div>
-                <div className="md:col-span-2">
-                  <label className="block text-sm text-[#4c463e] mb-1">{isFrench ? "E-mail" : "Email"}*</label>
-                  <input type="email" name="email" value={formData.email} onChange={handleInputChange} required className="w-full px-4 py-3 rounded-xl border border-[#cec5bb] bg-white focus:ring-2 focus:ring-[#1C1C1C] outline-none" />
-                </div>
-                <div className="md:col-span-2">
-                  <label className="block text-sm text-[#4c463e] mb-1">{isFrench ? "Adresse" : "Address"}*</label>
-                  <input type="text" name="address" value={formData.address} onChange={handleInputChange} required className="w-full px-4 py-3 rounded-xl border border-[#cec5bb] bg-white focus:ring-2 focus:ring-[#1C1C1C] outline-none" />
-                </div>
-                <div>
-                  <label className="block text-sm text-[#4c463e] mb-1">{isFrench ? "Ville" : "City"}*</label>
-                  <input type="text" name="city" value={formData.city} onChange={handleInputChange} required className="w-full px-4 py-3 rounded-xl border border-[#cec5bb] bg-white focus:ring-2 focus:ring-[#1C1C1C] outline-none" />
-                </div>
-                <div>
-                  <label className="block text-sm text-[#4c463e] mb-1">{isFrench ? "Code Postal" : "Zip Code"}*</label>
-                  <input type="text" name="zipCode" value={formData.zipCode} onChange={handleInputChange} required className="w-full px-4 py-3 rounded-xl border border-[#cec5bb] bg-white focus:ring-2 focus:ring-[#1C1C1C] outline-none" />
-                </div>
-                <div className="md:col-span-2">
-                  <label className="block text-sm text-[#4c463e] mb-1">{isFrench ? "Pays" : "Country"}*</label>
-                  <input type="text" name="country" value={formData.country} onChange={handleInputChange} required className="w-full px-4 py-3 rounded-xl border border-[#cec5bb] bg-white focus:ring-2 focus:ring-[#1C1C1C] outline-none" />
-                </div>
-              </form>
-            </div>
-          </motion.div>
+            {isFrench ? "Paiement sécurisé" : "Secure Checkout"}
+          </motion.h1>
 
-          {/* Right Column: Order Summary & PayPal */}
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            className="w-full lg:w-[400px] flex flex-col gap-8"
-          >
-            <div className="bg-white/50 p-8 rounded-2xl border border-[#cec5bb] shadow-sm">
-              <h2 className="text-xl font-semibold mb-6 text-[#1C1C1C]" style={{ fontFamily: "var(--font-montserrat), sans-serif" }}>
-                {isFrench ? "Résumé de la commande" : "Order Summary"}
-              </h2>
-              
-              <div className="space-y-4 mb-6">
-                {items.map((item) => (
-                  <div key={item.id} className="flex items-center gap-4">
-                    <div className="relative w-16 h-16 bg-[#F5E6D3] rounded-lg overflow-hidden">
-                      <Image src={item.image} alt={item.name} fill className="object-cover" />
-                    </div>
-                    <div className="flex-1" style={{ fontFamily: "var(--font-montserrat), sans-serif" }}>
-                      <h4 className="text-sm font-semibold text-[#1C1C1C]">{item.name}</h4>
-                      <p className="text-xs text-[#4c463e]">{isFrench ? "Qté" : "Qty"}: {item.quantity}</p>
-                    </div>
-                    <div className="text-sm font-semibold text-[#1C1C1C]" style={{ fontFamily: "var(--font-montserrat), sans-serif" }}>
-                      €{(item.price * item.quantity).toFixed(2)}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="border-t border-[#cec5bb] pt-4 mb-6" style={{ fontFamily: "var(--font-montserrat), sans-serif" }}>
-                <div className="flex justify-between items-center text-sm text-[#4c463e] mb-2">
-                  <span>{isFrench ? "Sous-total" : "Subtotal"}</span>
-                  <span>€{cartTotal.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between items-center text-sm text-[#4c463e] mb-4">
-                  <span>{isFrench ? "Livraison" : "Shipping"}</span>
-                  <span>{isFrench ? "Gratuit" : "Free"}</span>
-                </div>
-                <div className="flex justify-between items-center text-lg font-bold text-[#1C1C1C]">
-                  <span>Total</span>
-                  <span>€{cartTotal.toFixed(2)}</span>
-                </div>
-              </div>
-
-              {/* Razorpay Integration */}
-              <div className="mt-8 z-0 relative">
-                <button
-                  onClick={handleRazorpayPayment}
-                  className="w-full py-3 px-4 bg-[#1C1C1C] text-white rounded-xl font-medium tracking-wide hover:bg-[#333] transition-colors mb-4 flex justify-center items-center gap-2"
+          <div className="flex flex-col lg:flex-row gap-12">
+            {/* ── Left: Shipping Form ── */}
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.1 }}
+              className="flex-1 space-y-8"
+            >
+              <div className="bg-white/50 p-8 rounded-2xl border border-[#cec5bb] shadow-sm">
+                <h2
+                  className="text-xl font-semibold mb-6 text-[#1C1C1C]"
                   style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
                 >
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                    <path d="M12 6V12L16 14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
-                  {isFrench ? "Payer avec Razorpay" : "Pay with Razorpay"}
-                </button>
-                
-                <div className="relative flex py-4 items-center mb-4">
-                  <div className="flex-grow border-t border-[#cec5bb]"></div>
-                  <span className="flex-shrink-0 mx-4 text-[#4c463e] text-xs uppercase" style={{ fontFamily: "var(--font-montserrat), sans-serif" }}>{isFrench ? "OU" : "OR"}</span>
-                  <div className="flex-grow border-t border-[#cec5bb]"></div>
+                  {isFrench ? "Détails de livraison" : "Shipping Details"}
+                </h2>
+                <form
+                  className="grid grid-cols-1 md:grid-cols-2 gap-4"
+                  style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+                >
+                  {/* First Name */}
+                  <div>
+                    <label className="block text-sm text-[#4c463e] mb-1">
+                      {isFrench ? "Prénom" : "First Name"}*
+                    </label>
+                    <input
+                      type="text"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 rounded-xl border border-[#cec5bb] bg-white focus:ring-2 focus:ring-[#1C1C1C] outline-none"
+                    />
+                  </div>
+
+                  {/* Last Name */}
+                  <div>
+                    <label className="block text-sm text-[#4c463e] mb-1">
+                      {isFrench ? "Nom" : "Last Name"}
+                    </label>
+                    <input
+                      type="text"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 rounded-xl border border-[#cec5bb] bg-white focus:ring-2 focus:ring-[#1C1C1C] outline-none"
+                    />
+                  </div>
+
+                  {/* Email */}
+                  <div className="md:col-span-2">
+                    <label className="block text-sm text-[#4c463e] mb-1">
+                      {isFrench ? "E-mail" : "Email"}*
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 rounded-xl border border-[#cec5bb] bg-white focus:ring-2 focus:ring-[#1C1C1C] outline-none"
+                    />
+                  </div>
+
+                  {/* Phone */}
+                  <div className="md:col-span-2">
+                    <label className="block text-sm text-[#4c463e] mb-1">
+                      {isFrench ? "Téléphone" : "Phone Number"}
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      placeholder={isFrench ? "+33 6 00 00 00 00" : "+1 555 000 0000"}
+                      className="w-full px-4 py-3 rounded-xl border border-[#cec5bb] bg-white focus:ring-2 focus:ring-[#1C1C1C] outline-none"
+                    />
+                  </div>
+
+                  {/* Address */}
+                  <div className="md:col-span-2">
+                    <label className="block text-sm text-[#4c463e] mb-1">
+                      {isFrench ? "Adresse" : "Address"}*
+                    </label>
+                    <input
+                      type="text"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 rounded-xl border border-[#cec5bb] bg-white focus:ring-2 focus:ring-[#1C1C1C] outline-none"
+                    />
+                  </div>
+
+                  {/* City */}
+                  <div>
+                    <label className="block text-sm text-[#4c463e] mb-1">
+                      {isFrench ? "Ville" : "City"}*
+                    </label>
+                    <input
+                      type="text"
+                      name="city"
+                      value={formData.city}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 rounded-xl border border-[#cec5bb] bg-white focus:ring-2 focus:ring-[#1C1C1C] outline-none"
+                    />
+                  </div>
+
+                  {/* Zip Code */}
+                  <div>
+                    <label className="block text-sm text-[#4c463e] mb-1">
+                      {isFrench ? "Code Postal" : "Zip Code"}*
+                    </label>
+                    <input
+                      type="text"
+                      name="zipCode"
+                      value={formData.zipCode}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 rounded-xl border border-[#cec5bb] bg-white focus:ring-2 focus:ring-[#1C1C1C] outline-none"
+                    />
+                  </div>
+
+                  {/* Country */}
+                  <div className="md:col-span-2">
+                    <label className="block text-sm text-[#4c463e] mb-1">
+                      {isFrench ? "Pays" : "Country"}*
+                    </label>
+                    <input
+                      type="text"
+                      name="country"
+                      value={formData.country}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 rounded-xl border border-[#cec5bb] bg-white focus:ring-2 focus:ring-[#1C1C1C] outline-none"
+                    />
+                  </div>
+                </form>
+              </div>
+
+              {/* ── Coupon Code ── */}
+              <div className="bg-white/50 p-6 rounded-2xl border border-[#cec5bb] shadow-sm">
+                <h2
+                  className="text-base font-semibold mb-4 text-[#1C1C1C]"
+                  style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+                >
+                  {isFrench ? "Code Promo" : "Promo Code"}
+                </h2>
+
+                {appliedCoupon ? (
+                  <div className="flex items-center justify-between bg-green-50 border border-green-200 rounded-xl px-4 py-3">
+                    <div>
+                      <span
+                        className="text-sm font-bold text-green-800"
+                        style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+                      >
+                        {appliedCoupon.code}
+                      </span>
+                      <p
+                        className="text-xs text-green-700"
+                        style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+                      >
+                        -{appliedCoupon.discountType === "percentage"
+                          ? `${appliedCoupon.discountValue}%`
+                          : `€${appliedCoupon.discountValue}`}{" "}
+                        {isFrench ? "remise appliquée" : "discount applied"} (−€{appliedCoupon.discountAmount.toFixed(2)})
+                      </p>
+                    </div>
+                    <button
+                      onClick={removeCoupon}
+                      className="text-green-700 hover:text-red-600 text-xs font-semibold uppercase tracking-wider transition-colors"
+                      style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+                    >
+                      {isFrench ? "Retirer" : "Remove"}
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex gap-3">
+                    <input
+                      type="text"
+                      value={couponCode}
+                      onChange={(e) => {
+                        setCouponCode(e.target.value.toUpperCase());
+                        setCouponError("");
+                      }}
+                      placeholder={isFrench ? "Entrer le code" : "Enter code"}
+                      className="flex-1 px-4 py-3 rounded-xl border border-[#cec5bb] bg-white focus:ring-2 focus:ring-[#1C1C1C] outline-none text-sm uppercase tracking-wider"
+                      style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+                      onKeyDown={(e) => e.key === "Enter" && handleApplyCoupon()}
+                    />
+                    <button
+                      onClick={handleApplyCoupon}
+                      disabled={couponLoading || !couponCode.trim()}
+                      className="px-5 py-3 bg-[#1C1C1C] text-white rounded-xl text-sm font-semibold hover:bg-[#333] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                      style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+                    >
+                      {couponLoading
+                        ? "..."
+                        : isFrench
+                        ? "Appliquer"
+                        : "Apply"}
+                    </button>
+                  </div>
+                )}
+                {couponError && (
+                  <p
+                    className="mt-2 text-xs text-red-600 font-medium"
+                    style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+                  >
+                    {couponError}
+                  </p>
+                )}
+              </div>
+            </motion.div>
+
+            {/* ── Right: Order Summary + Payment ── */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.2 }}
+              className="w-full lg:w-[420px] flex flex-col gap-8"
+            >
+              {/* Order Summary */}
+              <div className="bg-white/50 p-8 rounded-2xl border border-[#cec5bb] shadow-sm">
+                <h2
+                  className="text-xl font-semibold mb-6 text-[#1C1C1C]"
+                  style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+                >
+                  {isFrench ? "Résumé de la commande" : "Order Summary"}
+                </h2>
+
+                {/* Items */}
+                <div className="space-y-4 mb-6">
+                  {items.map((item) => (
+                    <div key={item.id} className="flex items-center gap-4">
+                      <div className="relative w-16 h-16 bg-[#FAF8F5] rounded-lg overflow-hidden shrink-0">
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          fill
+                          className="object-contain p-1"
+                        />
+                      </div>
+                      <div
+                        className="flex-1"
+                        style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+                      >
+                        <h4 className="text-sm font-semibold text-[#1C1C1C]">
+                          {item.name}
+                        </h4>
+                        <p className="text-xs text-[#4c463e]">
+                          {isFrench ? "Qté" : "Qty"}: {item.quantity}
+                        </p>
+                      </div>
+                      <div
+                        className="text-sm font-semibold text-[#1C1C1C]"
+                        style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+                      >
+                        €{(item.price * item.quantity).toFixed(2)}
+                      </div>
+                    </div>
+                  ))}
                 </div>
 
-              {/* PayPal Integration using placeholder client ID 'test' */}
-              <div className="z-0 relative">
-                <PayPalScriptProvider options={{ clientId: "test", currency: "EUR" }}>
-                  <PayPalButtons
-                    style={{ layout: "vertical", shape: "rect", color: "black" }}
-                    createOrder={(data, actions) => {
-                      return actions.order.create({
-                        intent: "CAPTURE",
-                        purchase_units: [
-                          {
-                            amount: {
-                              currency_code: "EUR",
-                              value: cartTotal.toFixed(2),
-                            },
-                          },
-                        ],
-                      });
-                    }}
-                    onApprove={async (data, actions) => {
-                      if (actions.order) {
-                        const details = await actions.order.capture();
-                        try {
-                          const payload = {
-                            customer: {
-                              name: `${formData.firstName} ${formData.lastName}`,
-                              email: formData.email,
-                              address: formData.address,
-                              city: formData.city,
-                              zipCode: formData.zipCode,
-                              country: formData.country,
-                            },
-                            items: items,
-                            subtotal: cartTotal,
-                            shipping: 0,
-                            total: cartTotal,
-                            paymentMethod: "PayPal",
-                            paymentStatus: "Paid",
-                          };
+                {/* Totals */}
+                <div
+                  className="border-t border-[#cec5bb] pt-4 space-y-2"
+                  style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+                >
+                  <div className="flex justify-between items-center text-sm text-[#4c463e]">
+                    <span>{isFrench ? "Sous-total" : "Subtotal"}</span>
+                    <span>€{cartTotal.toFixed(2)}</span>
+                  </div>
 
-                          const res = await fetch("/api/checkout", {
-                            method: "POST",
-                            headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify(payload),
+                  {appliedCoupon && (
+                    <div className="flex justify-between items-center text-sm text-green-700 font-semibold">
+                      <span>
+                        {isFrench ? "Remise" : "Discount"} ({appliedCoupon.code})
+                      </span>
+                      <span>−€{appliedCoupon.discountAmount.toFixed(2)}</span>
+                    </div>
+                  )}
+
+                  <div className="flex justify-between items-center text-sm text-[#4c463e]">
+                    <span>{isFrench ? "Livraison" : "Shipping"}</span>
+                    <span>{isFrench ? "Gratuit" : "Free"}</span>
+                  </div>
+
+                  <div className="flex justify-between items-center text-lg font-bold text-[#1C1C1C] pt-2 border-t border-[#cec5bb]">
+                    <span>Total</span>
+                    <span>€{finalTotal.toFixed(2)}</span>
+                  </div>
+                </div>
+
+                {/* ── Payment Buttons ── */}
+                <div className="mt-8 space-y-4">
+                  {/* Razorpay */}
+                  <button
+                    onClick={handleRazorpayPayment}
+                    className="w-full py-3.5 px-4 bg-[#1C1C1C] text-white rounded-xl font-semibold tracking-wide hover:bg-[#333] transition-colors flex justify-center items-center gap-2 text-sm"
+                    style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
+                      <line x1="1" y1="10" x2="23" y2="10" />
+                    </svg>
+                    {isFrench ? "Payer avec Razorpay" : "Pay with Razorpay"}
+                  </button>
+
+                  {/* Divider */}
+                  <div className="relative flex items-center">
+                    <div className="flex-grow border-t border-[#cec5bb]" />
+                    <span
+                      className="flex-shrink-0 mx-4 text-[#4c463e] text-xs uppercase"
+                      style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+                    >
+                      {isFrench ? "OU" : "OR"}
+                    </span>
+                    <div className="flex-grow border-t border-[#cec5bb]" />
+                  </div>
+
+                  {/* PayPal */}
+                  <div className="z-0 relative">
+                    <PayPalScriptProvider
+                      options={{
+                        clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "test",
+                        currency: "EUR",
+                      }}
+                    >
+                      <PayPalButtons
+                        style={{ layout: "vertical", shape: "rect", color: "black" }}
+                        createOrder={(data, actions) => {
+                          return actions.order.create({
+                            intent: "CAPTURE",
+                            purchase_units: [
+                              {
+                                amount: {
+                                  currency_code: "EUR",
+                                  value: finalTotal.toFixed(2),
+                                },
+                              },
+                            ],
                           });
-                          
-                          const result = await res.json();
-                          if (result.success) {
-                            toast.success(isFrench ? `Commande ${result.orderNumber} passée avec succès ! Merci, ${details?.payer?.name?.given_name}` : `Order ${result.orderNumber} placed successfully! Thank you, ${details?.payer?.name?.given_name}`);
-                            clearCart();
-                            router.push("/");
-                          } else {
-                            toast.error(isFrench ? "Le paiement a réussi mais la création de la commande a échoué. Veuillez contacter le support." : "Payment succeeded but order creation failed. Please contact support.");
+                        }}
+                        onApprove={async (data, actions) => {
+                          if (!isFormValid()) {
+                            toast.error(
+                              isFrench
+                                ? "Veuillez remplir tous les champs obligatoires."
+                                : "Please fill in all required fields."
+                            );
+                            return;
                           }
-                        } catch (err) {
-                          console.error("Checkout error:", err);
-                          toast.error(isFrench ? "Une erreur est survenue. Veuillez contacter le support." : "An error occurred. Please contact support.");
-                        }
-                      }
-                    }}
-                  />
-                </PayPalScriptProvider>
-                <p className="text-xs text-center mt-3 text-[#4c463e]" style={{ fontFamily: "var(--font-montserrat), sans-serif" }}>
-                  {isFrench ? "Paiement sécurisé par PayPal" : "Secure payment via PayPal"}
-                </p>
+                          if (actions.order) {
+                            const details = await actions.order.capture();
+                            try {
+                              const payload = {
+                                customer: {
+                                  name: `${formData.firstName} ${formData.lastName}`,
+                                  email: formData.email,
+                                  phone: formData.phone,
+                                  address: formData.address,
+                                  city: formData.city,
+                                  zipCode: formData.zipCode,
+                                  country: formData.country,
+                                },
+                                items: items,
+                                subtotal: cartTotal,
+                                discount: appliedCoupon ? appliedCoupon.discountAmount : 0,
+                                couponCode: appliedCoupon ? appliedCoupon.code : undefined,
+                                shipping: 0,
+                                total: finalTotal,
+                                paymentMethod: "PayPal",
+                                paymentStatus: "Paid",
+                              };
+
+                              const res = await fetch("/api/checkout", {
+                                method: "POST",
+                                headers: { "Content-Type": "application/json" },
+                                body: JSON.stringify(payload),
+                              });
+
+                              const result = await res.json();
+                              if (result.success) {
+                                clearCart();
+                                router.push(
+                                  `/order-confirmation?orderNumber=${result.orderNumber}`
+                                );
+                              } else {
+                                toast.error(
+                                  isFrench
+                                    ? "Paiement réussi mais erreur de commande. Contactez le support."
+                                    : "Payment succeeded but order creation failed. Contact support."
+                                );
+                              }
+                            } catch (err) {
+                              console.error("Checkout error:", err);
+                              toast.error(
+                                isFrench
+                                  ? "Une erreur est survenue. Contactez le support."
+                                  : "An error occurred. Please contact support."
+                              );
+                            }
+                          }
+                        }}
+                      />
+                    </PayPalScriptProvider>
+                    <p
+                      className="text-xs text-center mt-2 text-[#4c463e]"
+                      style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+                    >
+                      {isFrench ? "Paiement sécurisé par PayPal" : "Secure payment via PayPal"}
+                    </p>
+                  </div>
+                </div>
               </div>
-            </div>
-            </div>
-          </motion.div>
+
+              {/* Security badges */}
+              <div
+                className="flex items-center justify-center gap-6 text-xs text-[#4c463e]/70"
+                style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+              >
+                <span className="flex items-center gap-1.5">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" /></svg>
+                  {isFrench ? "Paiement sécurisé SSL" : "SSL Secured Payment"}
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="20 6 9 17 4 12" /></svg>
+                  {isFrench ? "Données chiffrées" : "Encrypted Data"}
+                </span>
+              </div>
+            </motion.div>
+          </div>
         </div>
-      </div>
       </div>
       <Footer />
     </main>

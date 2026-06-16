@@ -178,7 +178,7 @@ export default function AperoPage() {
       <Navbar />
       <main
         className="min-h-screen w-full flex flex-col items-center relative overflow-hidden"
-        style={{ background: "linear-gradient(180deg, #F5E6D3 0%, #FDF8F3 40%, #FFFFFF 100%)" }}
+        style={{ background: "linear-gradient(180deg, #FAF8F5 0%, #FAF8F5 40%, #FAF8F5 100%)" }}
       >
         {/* सूक्ष्म पृष्ठभूमि पैटर्न */}
         <div
@@ -324,7 +324,7 @@ export default function AperoPage() {
                 <button
                   type="button"
                   onClick={() => setFeedbackSubmitted(false)}
-                  className="px-4 py-2 rounded-lg text-xs font-semibold text-[#8B7355] border border-[#8B7355]/30 bg-[#F5E6D3]/35 hover:bg-[#F5E6D3]/60 transition-all"
+                  className="px-4 py-2 rounded-lg text-xs font-semibold text-[#8B7355] border border-[#8B7355]/30 bg-[#FAF8F5]/35 hover:bg-[#FAF8F5]/60 transition-all"
                   style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
                 >
                   {t.writeAnother}
@@ -358,7 +358,7 @@ export default function AperoPage() {
                   >
                     <div className="flex justify-between items-start gap-2 mb-1.5">
                       <span
-                        className="inline-block px-2 py-0.5 rounded bg-[#F5E6D3] text-[9px] font-bold text-[#8B7355] uppercase tracking-wider"
+                        className="inline-block px-2 py-0.5 rounded bg-[#FAF8F5] text-[9px] font-bold text-[#8B7355] uppercase tracking-wider"
                         style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
                       >
                         {rev.flavor}
@@ -404,7 +404,7 @@ export default function AperoPage() {
                   transition={{ delay: 0.5 + i * 0.08, duration: 0.4 }}
                   className="flex flex-col items-center gap-1.5 py-4 px-2 rounded-xl bg-white border border-[#E0D5C8]/80 hover:shadow-md hover:border-[#8B7355]/30 transition-all duration-300"
                 >
-                  <div className="w-12 h-12 rounded-full bg-[#F5E6D3]/60 flex items-center justify-center text-xl">
+                  <div className="w-12 h-12 rounded-full bg-[#FAF8F5]/60 flex items-center justify-center text-xl">
                     {badge.icon}
                   </div>
                   <span

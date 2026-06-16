@@ -10,12 +10,12 @@ import { usePathname } from "next/navigation";
 // नेवबार के सभी भाषा-टेक्स्ट
 const navText = {
   fr: {
-    brand: "La Marque",
+    brand: "La Marque AÉRI",
     products: "Produits",
     mission: "Notre Raison d'Être",
     contact: "Nous Contacter",
     findUs: "Où nous trouver",
-    pro: "Espace Pro",
+    pro: "Espace Professionnel",
     admin: "Administrateur",
     account: "Mon Compte",
     login: "Se connecter",
@@ -26,7 +26,7 @@ const navText = {
     mission: "Our Mission",
     contact: "Contact Us",
     findUs: "Where to Find Us",
-    pro: "Trade Portal",
+    pro: "Espace Professionnel",
     admin: "Admin",
     account: "Account",
     login: "Sign In",
@@ -53,7 +53,6 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [user, setUser] = useState<{ name: string } | null>(null);
   const pathname = usePathname();
-  const isHomepage = pathname === "/";
 
   // स्क्रॉल पर बैकग्राउंड को ज़्यादा opaque करना
   useEffect(() => {
@@ -73,7 +72,7 @@ export default function Navbar() {
         } else {
           setUser(null);
         }
-      } catch (error) {
+      } catch {
         setUser(null);
       }
     };
@@ -82,20 +81,19 @@ export default function Navbar() {
 
   const toggleLang = () => setLang(langCycle[lang] ?? "fr");
 
-  // टॉप पोजीशन: होमपेज पर ticker (36px) के नीचे, बाकी pages पर 0
-  const topPos = isHomepage ? "top-[36px]" : "top-0";
+  // टॉप पोजीशन: अब कोई टिकर नहीं है, इसलिए हमेशा 0
+  const topPos = "top-0";
 
   // बैकग्राउंड: स्क्रॉल होने पर ज़्यादा solid ताकि text साफ़ दिखे
   const navBg = scrolled
-    ? "rgba(245, 230, 211, 0.98)"
-    : "rgba(245, 230, 211, 0.92)";
+    ? "rgba(250, 248, 245, 0.98)"
+    : "rgba(250, 248, 245, 0.94)";
 
   const navLinks = [
     { href: "/brand", label: s.brand },
     { href: "/products", label: s.products },
     { href: "/ou-nous-trouver", label: s.findUs },
     { href: "/mission", label: s.mission },
-    { href: "/espace-pro", label: s.pro },
     { href: "/admin", label: s.admin },
   ];
 
@@ -130,7 +128,7 @@ export default function Navbar() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="hidden md:flex items-center gap-5 text-[11px] tracking-[0.18em] uppercase font-medium text-[#1C1C1C]/65"
+        className="hidden md:flex items-center gap-6 text-[13px] tracking-[0.05em] font-normal text-[#1C1C1C]/80"
         style={{ fontFamily: "var(--font-montserrat)" }}
       >
         {navLinks.map((link) => (
@@ -143,19 +141,19 @@ export default function Navbar() {
           </Link>
         ))}
 
-        {/* ── Contact — styled CTA ── */}
+        {/* ── Espace Professionnel — styled CTA ── */}
         <Link
-          href="/contact"
-          className="px-3.5 py-1.5 rounded-lg border border-[#1C1C1C]/25 text-[#1C1C1C] hover:bg-[#1C1C1C] hover:text-[#F5E6D3] transition-all duration-200 whitespace-nowrap text-[10px] font-semibold tracking-[0.2em]"
+          href="/espace-pro"
+          className="px-5 py-2 rounded-lg bg-[#1C1C1C] text-[#FAF8F5] hover:bg-[#333] transition-all duration-200 whitespace-nowrap text-[12px] font-semibold tracking-[0.05em]"
         >
-          {s.contact}
+          {s.pro}
         </Link>
 
         {/* ── User Auth Link ── */}
         {user ? (
           <Link
             href="/profile"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#1C1C1C]/25 text-[#1C1C1C] hover:bg-[#1C1C1C] hover:text-[#F5E6D3] transition-all duration-200 whitespace-nowrap text-[10px] font-semibold tracking-[0.2em]"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#1C1C1C]/25 text-[#1C1C1C] hover:bg-[#1C1C1C] hover:text-[#FAF8F5] transition-all duration-200 whitespace-nowrap text-[10px] font-semibold tracking-[0.2em]"
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
@@ -166,7 +164,7 @@ export default function Navbar() {
         ) : (
           <Link
             href="/login"
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#1C1C1C]/25 text-[#1C1C1C] hover:bg-[#1C1C1C] hover:text-[#F5E6D3] transition-all duration-200 whitespace-nowrap text-[10px] font-semibold tracking-[0.2em]"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#1C1C1C]/25 text-[#1C1C1C] hover:bg-[#1C1C1C] hover:text-[#FAF8F5] transition-all duration-200 whitespace-nowrap text-[10px] font-semibold tracking-[0.2em]"
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
@@ -180,27 +178,12 @@ export default function Navbar() {
         <button
           onClick={toggleLang}
           aria-label={`Changer la langue — actuellement ${langLabel[lang]}`}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1C1C1C] text-[#F5E6D3] border border-[#1C1C1C] hover:bg-[#333] transition-all duration-200 cursor-pointer select-none"
+          className="flex items-center gap-2 px-2 py-1 transition-all duration-200 cursor-pointer select-none text-[#1C1C1C] text-[12px] font-normal"
           style={{ fontFamily: "var(--font-montserrat)" }}
         >
-          {/* Globe icon */}
-          <svg
-            width="11"
-            height="11"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-          </svg>
-          <span className="text-[10px] font-bold tracking-[0.2em] uppercase">
-            {langLabel[lang]}
-          </span>
+          <span className={lang === "fr" ? "font-bold" : "opacity-60 hover:opacity-100 transition-opacity"}>FR</span>
+          <span className="opacity-30 text-[10px]">|</span>
+          <span className={lang === "en" ? "font-bold" : "opacity-60 hover:opacity-100 transition-opacity"}>EN</span>
         </button>
 
         {/* ── Cart Toggle ── */}
@@ -255,24 +238,12 @@ export default function Navbar() {
         <button
           onClick={toggleLang}
           aria-label={`Langue : ${langLabel[lang]}`}
-          className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#1C1C1C] text-[#F5E6D3] text-[10px] font-bold tracking-[0.18em] uppercase cursor-pointer select-none border border-[#1C1C1C] hover:bg-[#333] transition-all"
+          className="flex items-center gap-1.5 px-2 py-1 cursor-pointer select-none text-[#1C1C1C] text-[12px] font-normal"
           style={{ fontFamily: "var(--font-montserrat)" }}
         >
-          <svg
-            width="10"
-            height="10"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden="true"
-          >
-            <circle cx="12" cy="12" r="10" />
-            <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-          </svg>
-          {langLabel[lang]}
+          <span className={lang === "fr" ? "font-bold" : "opacity-60"}>FR</span>
+          <span className="opacity-30 text-[10px]">|</span>
+          <span className={lang === "en" ? "font-bold" : "opacity-60"}>EN</span>
         </button>
 
         {/* Cart Mobile */}
@@ -339,7 +310,7 @@ export default function Navbar() {
             transition={{ duration: 0.2 }}
             className="absolute top-full left-0 right-0 border-b border-[#1C1C1C]/10 py-5 px-6 flex flex-col gap-3.5 md:hidden"
             style={{
-              background: "rgba(245, 230, 211, 0.99)",
+              background: "rgba(250, 248, 245, 0.99)",
               backdropFilter: "blur(20px)",
               fontFamily: "var(--font-montserrat)",
             }}
@@ -349,7 +320,7 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="text-[11px] tracking-[0.2em] uppercase font-medium text-[#1C1C1C]/70 hover:text-[#1C1C1C] transition-colors"
+                className="text-[13px] tracking-[0.05em] font-normal text-[#1C1C1C]/80 hover:text-[#1C1C1C] transition-colors"
               >
                 {link.label}
               </Link>
@@ -374,13 +345,13 @@ export default function Navbar() {
               </Link>
             )}
 
-            {/* Contact comme CTA dans le menu mobile */}
+            {/* Espace Pro comme CTA dans le menu mobile */}
             <Link
-              href="/contact"
+              href="/espace-pro"
               onClick={() => setMobileOpen(false)}
-              className="mt-1 inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-[#1C1C1C] text-[#F5E6D3] text-[11px] font-semibold tracking-[0.2em] uppercase transition-all hover:bg-[#333]"
+              className="mt-1 inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-[#1C1C1C] text-[#FAF8F5] text-[12px] font-semibold tracking-[0.05em] transition-all hover:bg-[#333]"
             >
-              {s.contact}
+              {s.pro}
             </Link>
           </motion.div>
         )}
