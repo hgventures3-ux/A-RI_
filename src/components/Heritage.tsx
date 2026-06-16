@@ -136,7 +136,7 @@ export default function Heritage() {
         {/* ═══════════════════════════════════════════════
            HEADER
         ═══════════════════════════════════════════════ */}
-        <div ref={headerRef} className="text-center px-6 mb-20 md:mb-28">
+        <div ref={headerRef} className="text-center px-4 sm:px-6 mb-20 md:mb-28">
           <motion.span
             initial={{ opacity: 0, y: 15 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
@@ -180,7 +180,7 @@ export default function Heritage() {
         ═══════════════════════════════════════════════ */}
         <div
           ref={botanicalRef}
-          className="max-w-7xl mx-auto px-6 mb-20 md:mb-32"
+          className="max-w-7xl mx-auto px-4 sm:px-6 mb-20 md:mb-32"
         >
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
             {/* Image */}
@@ -291,7 +291,7 @@ export default function Heritage() {
         {/* ═══════════════════════════════════════════════
            TIMELINE
         ═══════════════════════════════════════════════ */}
-        <div className="max-w-5xl mx-auto px-6 mb-20 md:mb-32">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 mb-20 md:mb-32">
           <div className="flex flex-col gap-12 md:gap-16">
             {s.milestones.map((ms: { year: string; title: string; text: string }, i: number) => (
               <MilestoneItem key={ms.year} milestone={ms} index={i} total={s.milestones.length} />
@@ -307,7 +307,7 @@ export default function Heritage() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true, amount: 0.5 }}
           transition={{ duration: 1 }}
-          className="text-center mt-20 md:mt-28 px-6"
+          className="text-center mt-20 md:mt-28 px-4 sm:px-6"
         >
           <p
             className="text-base md:text-lg italic text-[#111111]/35 max-w-lg mx-auto"

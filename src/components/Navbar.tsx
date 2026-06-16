@@ -99,7 +99,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed ${topPos} left-0 right-0 z-[40] w-full flex justify-between items-center px-6 md:px-12 py-3 border-b border-[#111111]/8 transition-all duration-300`}
+      className={`fixed ${topPos} left-0 right-0 z-[40] w-full flex justify-between items-center px-4 sm:px-6 md:px-12 py-3 border-b border-[#111111]/8 transition-all duration-300`}
       style={{
         background: navBg,
         backdropFilter: "blur(16px)",

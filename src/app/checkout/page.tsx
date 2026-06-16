@@ -220,7 +220,7 @@ export default function CheckoutPage() {
     return (
       <main className="min-h-screen flex flex-col">
         <Navbar />
-        <div className="flex-1 bg-[#FAF8F5] pt-32 px-6 flex flex-col items-center justify-center gap-6">
+        <div className="flex-1 bg-[#FAF8F5] pt-32 px-4 sm:px-6 flex flex-col items-center justify-center gap-6">
           <h1
             className="text-3xl font-bold text-[#1C1C1C]"
             style={{ fontFamily: "var(--font-didot), serif" }}
@@ -243,7 +243,7 @@ export default function CheckoutPage() {
   return (
     <main className="min-h-screen flex flex-col bg-[#FAF8F5]">
       <Navbar />
-      <div className="flex-1 pt-32 pb-20 px-6 md:px-12">
+      <div className="flex-1 pt-32 pb-20 px-4 sm:px-6 md:px-12">
         <div className="max-w-6xl mx-auto">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -262,7 +262,7 @@ export default function CheckoutPage() {
               transition={{ delay: 0.1 }}
               className="flex-1 space-y-8"
             >
-              <div className="bg-white/50 p-8 rounded-2xl border border-[#cec5bb] shadow-sm">
+              <div className="bg-white/50 p-5 sm:p-8 rounded-2xl border border-[#cec5bb] shadow-sm">
                 <h2
                   className="text-xl font-semibold mb-6 text-[#1C1C1C]"
                   style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
@@ -395,7 +395,7 @@ export default function CheckoutPage() {
               </div>
 
               {/* ── Coupon Code ── */}
-              <div className="bg-white/50 p-6 rounded-2xl border border-[#cec5bb] shadow-sm">
+              <div className="bg-white/50 p-5 sm:p-6 rounded-2xl border border-[#cec5bb] shadow-sm">
                 <h2
                   className="text-base font-semibold mb-4 text-[#1C1C1C]"
                   style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
@@ -477,7 +477,7 @@ export default function CheckoutPage() {
               className="w-full lg:w-[420px] flex flex-col gap-8"
             >
               {/* Order Summary */}
-              <div className="bg-white/50 p-8 rounded-2xl border border-[#cec5bb] shadow-sm">
+              <div className="bg-white/50 p-5 sm:p-8 rounded-2xl border border-[#cec5bb] shadow-sm">
                 <h2
                   className="text-xl font-semibold mb-6 text-[#1C1C1C]"
                   style={{ fontFamily: "var(--font-montserrat), sans-serif" }}

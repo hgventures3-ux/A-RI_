@@ -251,7 +251,7 @@ export default function PondToPlate() {
       {/* ── Section content ── */}
       <div className="relative z-20 pt-32 pb-24 md:pt-44 md:pb-36">
         {/* ── Header ── */}
-        <div ref={headerRef} className="text-center px-6 mb-16 md:mb-24">
+        <div ref={headerRef} className="text-center px-4 sm:px-6 mb-16 md:mb-24">
           <motion.span
             initial={{ opacity: 0, y: 15 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
@@ -292,7 +292,7 @@ export default function PondToPlate() {
         </div>
 
         {/* ── Inner container with cream background ── */}
-        <div className="mx-4 md:mx-8 lg:mx-auto lg:max-w-7xl rounded-3xl bg-[#FFFFFF] px-6 md:px-12 lg:px-16 py-16 md:py-24 shadow-2xl">
+        <div className="mx-4 md:mx-8 lg:mx-auto lg:max-w-7xl rounded-3xl bg-[#FFFFFF] px-4 sm:px-6 md:px-12 lg:px-16 py-12 sm:py-16 md:py-24 shadow-2xl">
           {/* ── Stages ── */}
           {localizedStages.map((stage, i) => (
             <StageCard key={stage.id} stage={stage} index={i} />
@@ -304,7 +304,7 @@ export default function PondToPlate() {
               initial={{ opacity: 0, y: 30 }}
               animate={traceInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.8 }}
-              className="relative overflow-hidden rounded-2xl bg-[#111111] p-8 md:p-12"
+              className="relative overflow-hidden rounded-2xl bg-[#111111] p-6 sm:p-8 md:p-12"
             >
               {/* Decorative corner pattern */}
               <div className="absolute top-0 right-0 w-40 h-40 opacity-5">

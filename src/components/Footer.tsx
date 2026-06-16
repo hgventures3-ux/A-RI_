@@ -41,7 +41,7 @@ export default function Footer() {
     <footer className="relative w-full bg-[#1C1C1C] text-[#FFFFFF] overflow-hidden">
       {/* Waitlist banner */}
       <div className="border-b border-[#FFFFFF]/8">
-        <div className="max-w-6xl mx-auto px-6 py-8 md:py-10 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 md:py-10 flex flex-col md:flex-row items-center justify-between gap-6">
           <div>
             <span
               className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.3em] uppercase text-[#8E8E93] mb-2"
@@ -88,7 +88,7 @@ export default function Footer() {
       </div>
 
       {/* Main footer */}
-      <div className="max-w-6xl mx-auto px-6 py-12 md:py-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8">
           {/* Brand */}
           <div className="md:col-span-1">
@@ -207,7 +207,7 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div className="border-t border-[#FFFFFF]/6">
-        <div className="max-w-6xl mx-auto px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
           <p
             className="text-xs text-[#FFFFFF]/25"
             style={{ fontFamily: "var(--font-lora)" }}

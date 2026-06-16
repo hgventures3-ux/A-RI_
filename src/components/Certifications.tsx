@@ -141,7 +141,7 @@ function CertCard({
       transition={{ duration: 0.6, delay: index * 0.1 }}
       className="group relative"
     >
-      <div className="relative h-full p-6 md:p-8 rounded-2xl bg-white/50 border border-[#111111]/6 backdrop-blur-sm transition-all duration-400 hover:bg-white/80 hover:shadow-lg hover:border-[#111111]/12 flex flex-col">
+      <div className="relative h-full p-5 sm:p-6 md:p-8 rounded-2xl bg-white/50 border border-[#111111]/6 backdrop-blur-sm transition-all duration-400 hover:bg-white/80 hover:shadow-lg hover:border-[#111111]/12 flex flex-col">
         {/* Icon */}
         <div className="w-14 h-14 md:w-16 md:h-16 mb-5 transition-transform duration-300 group-hover:scale-110 shrink-0">
           {cert.icon}
@@ -324,7 +324,7 @@ export default function Certifications() {
         style={{ background: "#FFFFFF" }}
       >
         {/* ── Header ── */}
-        <div ref={headerRef} className="text-center px-6 mb-16 md:mb-24">
+        <div ref={headerRef} className="text-center px-4 sm:px-6 mb-16 md:mb-24">
           <motion.span
             initial={{ opacity: 0, y: 15 }}
             animate={headerInView ? { opacity: 1, y: 0 } : {}}
@@ -364,7 +364,7 @@ export default function Certifications() {
         </div>
 
         {/* ── Certification Grid ── */}
-        <div className="max-w-7xl mx-auto px-6 mb-16 md:mb-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 mb-16 md:mb-24">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 md:gap-6">
             {certifications.map((cert, i) => (
               <CertCard key={cert.id} cert={cert} index={i} s={s} onViewPdf={setActivePdf} />
@@ -373,14 +373,14 @@ export default function Certifications() {
         </div>
 
         {/* ── Lab Reports Block ── */}
-        <div ref={labRef} className="max-w-5xl mx-auto px-6">
+        <div ref={labRef} className="max-w-5xl mx-auto px-4 sm:px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={labInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8 }}
             className="relative overflow-hidden rounded-3xl bg-white border border-[#111111]/8 shadow-xl"
           >
-            <div className="p-8 md:p-12">
+            <div className="p-5 sm:p-8 md:p-12">
               {/* Lab report header */}
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-8 pb-8 border-b border-[#111111]/8">
                 <div>

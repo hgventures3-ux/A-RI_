@@ -191,7 +191,7 @@ export default function Hero() {
         {/* ── Hero Copy & CTA ── */}
         {/* pt accounts for navbar (≈52px) */}
         <div
-          className="relative z-[10] flex flex-col items-center justify-center text-center px-6 h-full pt-16 pb-16 pointer-events-none"
+          className="relative z-[10] flex flex-col items-center justify-center text-center px-4 sm:px-6 h-full pt-16 pb-16 pointer-events-none"
         >
           {/* Animated Text Container */}
           <motion.div
@@ -234,7 +234,7 @@ export default function Hero() {
             href="/products"
             whileHover={{ scale: 1.04, backgroundColor: '#333' }}
             whileTap={{ scale: 0.96 }}
-            className="pointer-events-auto inline-block px-9 py-4 bg-[#1C1C1C] text-[#FAF8F5] text-[11px] font-bold tracking-[0.3em] uppercase rounded-xl shadow-xl transition-colors duration-200 mt-2"
+            className="pointer-events-auto inline-block px-6 py-3 md:px-9 md:py-4 bg-[#1C1C1C] text-[#FAF8F5] text-[11px] font-bold tracking-[0.3em] uppercase rounded-xl shadow-xl transition-colors duration-200 mt-2"
             style={{ fontFamily: 'var(--font-montserrat)' }}
           >
             {s.cta}

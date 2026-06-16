@@ -358,7 +358,7 @@ export default function ProductsPage() {
 
         {/* ═══════════════════════ VOTING SECTION ═══════════════════════ */}
         <section
-          className="py-20 px-6 md:px-12"
+          className="py-20 px-4 sm:px-6 md:px-12"
           style={{ backgroundColor: "#f2edea" }}
         >
           <div className="max-w-4xl mx-auto text-center mb-14">
@@ -427,7 +427,7 @@ export default function ProductsPage() {
                 </div>
 
                 {/* Label + vote */}
-                <div className="px-6 py-5 flex items-center justify-between gap-4">
+                <div className="px-4 sm:px-6 py-5 flex items-center justify-between gap-4">
                   <h4
                     className="text-sm md:text-base font-semibold"
                     style={{

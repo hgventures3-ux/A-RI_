@@ -89,7 +89,7 @@ export default function ProductDetailPage() {
 
       {/* ════════ HERO ════════ */}
       <section
-        className="pt-32 pb-16 md:pt-40 md:pb-28 px-6 md:px-12"
+        className="pt-32 pb-16 md:pt-40 md:pb-28 px-4 sm:px-6 md:px-12"
         style={{ backgroundColor: product.color }}
       >
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-20">
@@ -237,7 +237,7 @@ export default function ProductDetailPage() {
 
       {/* ════════ COMING SOON ════════ */}
       {isComingSoon ? (
-        <section className="py-32 px-6 text-center">
+        <section className="py-32 px-4 sm:px-6 text-center">
           <motion.div
             initial="hidden"
             animate="visible"
@@ -301,7 +301,7 @@ export default function ProductDetailPage() {
       ) : (
         <>
           {/* ════════ THE STORY ════════ */}
-          <section className="py-20 md:py-28 px-6 md:px-12">
+          <section className="py-20 md:py-28 px-4 sm:px-6 md:px-12">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -337,7 +337,7 @@ export default function ProductDetailPage() {
           />
 
           {/* ════════ HOW IT'S MADE ════════ */}
-          <section className="py-20 md:py-28 px-6 md:px-12">
+          <section className="py-20 md:py-28 px-4 sm:px-6 md:px-12">
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -368,7 +368,7 @@ export default function ProductDetailPage() {
 
           {/* ════════ NUTRITION & INGREDIENTS ════════ */}
           <section
-            className="py-20 md:py-28 px-6 md:px-12"
+            className="py-20 md:py-28 px-4 sm:px-6 md:px-12"
             style={{ backgroundColor: "#f2edea" }}
           >
             <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -379,7 +379,7 @@ export default function ProductDetailPage() {
                 viewport={{ once: true, margin: "-60px" }}
                 variants={fadeUp}
                 custom={0}
-                className="p-8 md:p-10 rounded-3xl"
+                className="p-6 sm:p-8 md:p-10 rounded-3xl"
                 style={{
                   backgroundColor: "#fef8f6",
                   border: "1px solid rgba(29,27,26,0.05)",
@@ -439,7 +439,7 @@ export default function ProductDetailPage() {
                   viewport={{ once: true, margin: "-60px" }}
                   variants={fadeUp}
                   custom={0.1}
-                  className="p-8 rounded-3xl flex-1"
+                  className="p-6 sm:p-8 rounded-3xl flex-1"
                   style={{
                     backgroundColor: "#fef8f6",
                     border: "1px solid rgba(29,27,26,0.05)",
@@ -469,7 +469,7 @@ export default function ProductDetailPage() {
                   viewport={{ once: true, margin: "-60px" }}
                   variants={fadeUp}
                   custom={0.2}
-                  className="p-8 rounded-3xl flex-1"
+                  className="p-6 sm:p-8 rounded-3xl flex-1"
                   style={{
                     backgroundColor: "#fef8f6",
                     border: "1px solid rgba(29,27,26,0.05)",
@@ -497,7 +497,7 @@ export default function ProductDetailPage() {
           </section>
 
           {/* ════════ PAIRINGS & DETAILS ════════ */}
-          <section className="py-20 md:py-28 px-6 md:px-12">
+          <section className="py-20 md:py-28 px-4 sm:px-6 md:px-12">
             <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
               {/* Pairing Suggestions */}
               <motion.div
@@ -506,7 +506,7 @@ export default function ProductDetailPage() {
                 viewport={{ once: true, margin: "-60px" }}
                 variants={fadeUp}
                 custom={0}
-                className="p-8 rounded-3xl"
+                className="p-6 sm:p-8 rounded-3xl"
                 style={{
                   backgroundColor: "#f2edea",
                   border: "1px solid rgba(29,27,26,0.05)",
@@ -547,7 +547,7 @@ export default function ProductDetailPage() {
                 viewport={{ once: true, margin: "-60px" }}
                 variants={fadeUp}
                 custom={0.1}
-                className="p-8 rounded-3xl"
+                className="p-6 sm:p-8 rounded-3xl"
                 style={{
                   backgroundColor: "#f2edea",
                   border: "1px solid rgba(29,27,26,0.05)",
@@ -593,7 +593,7 @@ export default function ProductDetailPage() {
                 viewport={{ once: true, margin: "-60px" }}
                 variants={fadeUp}
                 custom={0.2}
-                className="p-8 rounded-3xl"
+                className="p-6 sm:p-8 rounded-3xl"
                 style={{
                   backgroundColor: "#f2edea",
                   border: "1px solid rgba(29,27,26,0.05)",
@@ -641,7 +641,7 @@ export default function ProductDetailPage() {
 
           {/* ════════ CTA ════════ */}
           <section
-            className="py-24 px-6 text-center"
+            className="py-24 px-4 sm:px-6 text-center"
             style={{ backgroundColor: "#32302f" }}
           >
             <motion.div

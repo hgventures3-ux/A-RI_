@@ -56,7 +56,7 @@ export default function SupermarketArticle() {
   return (
     <main className="min-h-screen bg-[#FAF8F5] flex flex-col">
       <Navbar />
-      <div className="flex-1 pt-32 pb-24 px-6">
+      <div className="flex-1 pt-32 pb-24 px-4 sm:px-6">
         <div className="max-w-3xl mx-auto">
           <Link href="/" className="inline-block mb-12 text-[#6E6E73] font-semibold hover:underline" style={{ fontFamily: "var(--font-montserrat)" }}>
             {t.back}
