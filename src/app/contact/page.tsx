@@ -115,7 +115,7 @@ export default function ContactPage() {
       <section className="pt-40 pb-16 px-6 md:px-12 max-w-5xl mx-auto text-center">
         <motion.h1 
           initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}
-          className="text-5xl md:text-7xl font-bold tracking-tight mb-6"
+          className="text-4xl sm:text-5xl md:text-7xl font-bold tracking-tight mb-6"
         >
           {t.title}
         </motion.h1>
@@ -133,7 +133,7 @@ export default function ContactPage() {
         {/* Contact Form */}
         <motion.div 
           initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.2 }}
-          className="bg-[#F5F5F7] p-8 md:p-12 rounded-3xl"
+          className="bg-[#F5F5F7] p-5 sm:p-8 md:p-12 rounded-3xl"
         >
           <form onSubmit={handleSubmit} className="flex flex-col gap-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -154,7 +154,7 @@ export default function ContactPage() {
               <label className="text-sm font-medium text-[#6E6E73]">{t.formMessage}</label>
               <textarea required rows={6} value={formData.message} onChange={(e) => setFormData({...formData, message: e.target.value})} className="px-4 py-3 rounded-xl bg-white border border-[#111111]/10 focus:outline-none focus:ring-1 focus:ring-[#111111]/30 transition-all text-[#111111] resize-none" />
             </div>
-            <button type="submit" disabled={loading} className="mt-4 px-8 py-4 bg-[#111111] text-white rounded-2xl font-medium tracking-wide hover:bg-[#111111]/80 transition-colors shadow-md disabled:opacity-70">
+            <button type="submit" disabled={loading} className="mt-4 px-6 sm:px-8 py-4 bg-[#111111] text-white rounded-2xl font-medium tracking-wide hover:bg-[#111111]/80 transition-colors shadow-md disabled:opacity-70">
               {loading ? "..." : submitted ? t.formSuccess : t.formBtn}
             </button>
           </form>
@@ -176,7 +176,7 @@ export default function ContactPage() {
           </div>
 
           {/* B2B Block */}
-          <div className="p-8 border border-[#111111]/10 rounded-3xl bg-white shadow-sm">
+          <div className="p-5 sm:p-8 border border-[#111111]/10 rounded-3xl bg-white shadow-sm">
             <h4 className="text-xl font-bold mb-4 text-[#111111]">{t.b2b.title}</h4>
             <p className="text-[#6E6E73] leading-relaxed mb-6">
               {t.b2b.desc}

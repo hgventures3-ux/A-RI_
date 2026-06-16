@@ -127,7 +127,7 @@ export default function SocialProofGrid() {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.6 }}
-            className="text-4xl md:text-5xl lg:text-6xl text-[#1C1C1C] mb-6 tracking-wide"
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#1C1C1C] mb-6 tracking-wide"
             style={{ fontFamily: "var(--font-didot), serif" }}
           >
             {t.heading}
@@ -151,7 +151,7 @@ export default function SocialProofGrid() {
               initial="hidden"
               animate={isInView ? "visible" : "hidden"}
               variants={cardVariants}
-              className="bg-white rounded-3xl p-8 shadow-[0_4px_24px_rgba(28,28,28,0.04)] hover:shadow-[0_16px_40px_rgba(28,28,28,0.08)] hover:-translate-y-2 transition-all duration-500 flex flex-col h-full border border-[#1C1C1C]/5"
+              className="bg-white rounded-3xl p-6 sm:p-8 shadow-[0_4px_24px_rgba(28,28,28,0.04)] hover:shadow-[0_16px_40px_rgba(28,28,28,0.08)] hover:-translate-y-2 transition-all duration-500 flex flex-col h-full border border-[#1C1C1C]/5"
             >
               <div className="flex gap-1 mb-6">
                 {[...Array(5)].map((_, idx) => (

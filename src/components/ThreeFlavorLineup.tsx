@@ -58,7 +58,7 @@ export default function ThreeFlavorLineup() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
-          className="text-4xl font-semibold text-[#1C1C1C] md:text-5xl"
+          className="text-3xl sm:text-4xl font-semibold text-[#1C1C1C] md:text-5xl"
           style={{ fontFamily: "var(--font-didot)" }}
         >
           {content.title}
@@ -96,7 +96,7 @@ export default function ThreeFlavorLineup() {
                 fill
                 priority={false}
                 sizes="(max-width: 640px) 100vw, 512px"
-                className="object-contain p-8 transition-transform duration-700 group-hover:scale-[1.04]"
+                className="object-contain p-4 sm:p-8 transition-transform duration-700 group-hover:scale-[1.04]"
               />
               {/* SIGNATURE badge */}
               <div className="absolute left-4 top-4">
@@ -110,7 +110,7 @@ export default function ThreeFlavorLineup() {
             </Link>
 
             {/* ── Card body ── */}
-            <div className="flex flex-col px-8 pb-8 pt-5">
+            <div className="flex flex-col px-5 sm:px-8 pb-8 sm:pb-10 pt-5">
               <p
                 className="mb-3 text-[9px] font-bold uppercase leading-4 tracking-[0.12em] text-[#55705B]"
                 style={{ fontFamily: "var(--font-montserrat)" }}
@@ -143,7 +143,7 @@ export default function ThreeFlavorLineup() {
 
               <Link
                 href="/products/himalayan-salt"
-                className="mt-6 inline-flex w-full min-h-14 items-center justify-center rounded-xl bg-[#1C1C1C] px-8 py-4 text-sm font-bold uppercase tracking-[0.18em] text-white transition-all duration-300 hover:bg-[#343434] hover:scale-[1.02]"
+                className="mt-6 inline-flex w-full min-h-14 items-center justify-center rounded-xl bg-[#1C1C1C] px-6 sm:px-8 py-4 text-sm font-bold uppercase tracking-[0.18em] text-white transition-all duration-300 hover:bg-[#343434] hover:scale-[1.02]"
                 style={{ fontFamily: "var(--font-montserrat)" }}
               >
                 {content.button}

@@ -67,7 +67,7 @@ export default function FlavorVotingCard() {
       >
         {/* Glass card */}
         <div
-          className="rounded-3xl p-8 md:p-10 border border-white/40"
+          className="rounded-3xl p-6 sm:p-8 md:p-10 border border-white/40"
           style={{
             background: "rgba(255, 255, 255, 0.25)",
             backdropFilter: "blur(20px)",

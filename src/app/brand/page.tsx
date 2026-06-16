@@ -129,7 +129,7 @@ export default function BrandPage() {
           animate="visible"
           variants={fadeUp}
           custom={0}
-          className="text-5xl md:text-7xl font-bold tracking-tight mb-8"
+          className="text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight mb-8"
           style={{ fontFamily: "var(--font-didot), serif" }}
         >
           {t.title}
@@ -168,7 +168,7 @@ export default function BrandPage() {
               viewport={{ once: true, margin: "-100px" }}
               variants={fadeUp}
               custom={index * 0.15}
-              className="bg-white/40 backdrop-blur-sm rounded-3xl p-8 border border-[#1d1b1a]/5 hover:border-[#D4AF37]/35 transition-all duration-300 group flex flex-col justify-between h-full"
+              className="bg-white/40 backdrop-blur-sm rounded-3xl p-5 sm:p-8 border border-[#1d1b1a]/5 hover:border-[#D4AF37]/35 transition-all duration-300 group flex flex-col justify-between h-full"
             >
               <div>
                 {/* स्टेप नंबर और शीर्षक (Step Number and Title) */}

@@ -236,7 +236,7 @@ export default function EspacePro() {
               initial={{ opacity: 0, y: 30 }}
               animate={headerInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.9, delay: 0.1 }}
-              className="text-4xl md:text-5xl lg:text-7xl font-bold text-[#1C1C1C] mb-6"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-[#1C1C1C] mb-6"
               style={{ fontFamily: "var(--font-montserrat)" }}
             >
               {s.title}
@@ -422,7 +422,7 @@ export default function EspacePro() {
               {/* Video */}
               <ModiVideoBlock />
               {/* Text overlay */}
-              <div className="p-8 md:p-10 text-center">
+              <div className="p-6 sm:p-8 md:p-10 text-center">
                 <h3
                   className="text-lg md:text-xl font-bold text-[#FFFFFF] mb-4"
                   style={{ fontFamily: "var(--font-didot)" }}
@@ -532,7 +532,7 @@ export default function EspacePro() {
               >
                 <form
                   onSubmit={handleSubmit}
-                  className="p-7 md:p-9 rounded-2xl bg-white border border-[#1C1C1C]/10 shadow-sm"
+                  className="p-5 sm:p-7 md:p-9 rounded-2xl bg-white border border-[#1C1C1C]/10 shadow-sm"
                 >
                   <h4
                     className="text-lg font-bold text-[#1C1C1C] mb-1"

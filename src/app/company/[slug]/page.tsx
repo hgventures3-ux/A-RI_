@@ -228,7 +228,7 @@ export default function CompanyDynamicPage() {
           {page.badge}
           <span className="w-6 h-[1px] bg-[#6E6E73]/40" />
         </motion.span>
-        <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }} className="text-5xl md:text-6xl font-bold tracking-tight mb-6">{page.title}</motion.h1>
+        <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }} className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6">{page.title}</motion.h1>
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.3 }} className="text-lg text-[#6E6E73] max-w-2xl mx-auto leading-relaxed">{page.subtitle}</motion.p>
       </section>
 
@@ -236,7 +236,7 @@ export default function CompanyDynamicPage() {
       <section className="px-6 md:px-12 max-w-3xl mx-auto pb-32">
         <div className="bg-white rounded-3xl shadow-sm border border-[#111111]/5 overflow-hidden">
           {page.sections.map((sec, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.7 }} className={`p-8 md:p-12 ${i > 0 ? "border-t border-[#111111]/5" : ""}`}>
+            <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.7 }} className={`p-5 sm:p-8 md:p-12 ${i > 0 ? "border-t border-[#111111]/5" : ""}`}>
               <h2 className="text-2xl font-bold mb-4">{sec.heading}</h2>
               {typeof sec.body === "string" ? (
                 <p className="text-[#111111]/70 leading-[1.9] text-[15px]">{sec.body}</p>
@@ -246,8 +246,8 @@ export default function CompanyDynamicPage() {
             </motion.div>
           ))}
           {page.cta && (
-            <div className="p-8 md:p-12 border-t border-[#111111]/5 bg-[#FAF8F5] text-center">
-              <Link href={page.cta.href} className="inline-block px-8 py-4 bg-[#111111] text-white rounded-2xl font-medium tracking-wide hover:bg-[#111111]/80 transition-colors">{page.cta.text}</Link>
+            <div className="p-5 sm:p-8 md:p-12 border-t border-[#111111]/5 bg-[#FAF8F5] text-center">
+              <Link href={page.cta.href} className="inline-block px-6 sm:px-8 py-4 bg-[#111111] text-white rounded-2xl font-medium tracking-wide hover:bg-[#111111]/80 transition-colors">{page.cta.text}</Link>
             </div>
           )}
         </div>

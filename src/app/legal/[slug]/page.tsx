@@ -273,7 +273,7 @@ export default function LegalDynamicPage() {
         <motion.span initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.3em] uppercase text-[#6E6E73] mb-5">
           <span className="w-6 h-[1px] bg-[#6E6E73]/40" />Legal<span className="w-6 h-[1px] bg-[#6E6E73]/40" />
         </motion.span>
-        <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }} className="text-4xl md:text-5xl font-bold tracking-tight mb-4">{page.title}</motion.h1>
+        <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1 }} className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight mb-4">{page.title}</motion.h1>
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1, delay: 0.3 }} className="text-sm text-[#6E6E73]">Last updated: {page.lastUpdated || "June 2026"}</motion.p>
       </section>
 
@@ -281,12 +281,12 @@ export default function LegalDynamicPage() {
       <section className="px-6 md:px-12 max-w-3xl mx-auto pb-32">
         <div className="bg-white rounded-3xl shadow-sm border border-[#111111]/5 overflow-hidden">
           {page.sections.map((sec, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.6 }} className={`p-8 md:p-12 ${i > 0 ? "border-t border-[#111111]/5" : ""}`}>
+            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.6 }} className={`p-5 sm:p-8 md:p-12 ${i > 0 ? "border-t border-[#111111]/5" : ""}`}>
               <h2 className="text-xl font-bold mb-3">{sec.heading}</h2>
               <p className="text-[#111111]/65 leading-[1.9] text-[15px]">{sec.body}</p>
             </motion.div>
           ))}
-          <div className="p-8 md:p-12 border-t border-[#111111]/5 bg-[#FAF8F5]">
+          <div className="p-5 sm:p-8 md:p-12 border-t border-[#111111]/5 bg-[#FAF8F5]">
             <p className="text-sm text-[#6E6E73]">If you have any questions about this document, please <Link href="/contact" className="text-[#111111] font-medium hover:underline">contact us</Link>.</p>
           </div>
         </div>

@@ -248,7 +248,7 @@ export default function ProfilePage() {
             </h2>
 
             {orders.length === 0 ? (
-              <div className="bg-white/40 backdrop-blur-xl border border-white/20 p-12 rounded-3xl text-center flex flex-col items-center justify-center">
+              <div className="bg-white/40 backdrop-blur-xl border border-white/20 p-8 md:p-12 rounded-3xl text-center flex flex-col items-center justify-center">
                 <PackageOpen size={48} className="text-[#1C1C1C]/20 mb-4" />
                 <p className="text-[#1C1C1C]/60 text-sm font-medium">{s.noOrders}</p>
               </div>

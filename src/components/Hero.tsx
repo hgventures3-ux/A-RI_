@@ -55,25 +55,39 @@ export default function Hero() {
 
   const frameIndex = useTransform(scrollYProgress, [0, 1], [1, FRAME_COUNT]);
 
-  // Preload images
+  // Preload images smartly
   useEffect(() => {
-    const loadedImages: HTMLImageElement[] = [];
-    let loadedCount = 0;
-
-    VALID_FRAMES.forEach((frameNum) => {
-      const img = new window.Image();
-      const frameStr = frameNum.toString().padStart(3, "0");
-      img.src = `/hero-sequence/ezgif-frame-${frameStr}.jpg`;
-      img.onload = () => {
-        loadedCount++;
-        if (loadedCount === FRAME_COUNT) {
-          setLoaded(true);
-        }
-      };
-      loadedImages.push(img);
-    });
-
-    setImages(loadedImages);
+    const loadedImages: HTMLImageElement[] = new Array(FRAME_COUNT);
+    
+    // Load first frame immediately
+    const firstFrame = VALID_FRAMES[0];
+    const firstImg = new window.Image();
+    const firstFrameStr = firstFrame.toString().padStart(3, "0");
+    firstImg.src = `/hero-sequence/ezgif-frame-${firstFrameStr}.jpg`;
+    
+    firstImg.onload = () => {
+      loadedImages[0] = firstImg;
+      setImages([...loadedImages]);
+      setLoaded(true); // Draw first frame immediately!
+      
+      // Defer loading of remaining frames so it doesn't block initial page load (fonts, scripts)
+      setTimeout(() => {
+        VALID_FRAMES.forEach((frameNum, idx) => {
+          if (idx === 0) return; // Already loaded
+          
+          const img = new window.Image();
+          const frameStr = frameNum.toString().padStart(3, "0");
+          img.src = `/hero-sequence/ezgif-frame-${frameStr}.jpg`;
+          img.onload = () => {
+            loadedImages[idx] = img;
+            // Update state occasionally to avoid too many re-renders
+            if (idx % 10 === 0 || idx === FRAME_COUNT - 1) {
+              setImages([...loadedImages]);
+            }
+          };
+        });
+      }, 500); // Wait 500ms after first frame loads to start downloading the heavy sequence
+    };
   }, []);
 
   // Draw the initial frame once loaded

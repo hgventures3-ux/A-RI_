@@ -205,7 +205,7 @@ export default function AperoPage() {
               {t.exp}
             </span>
             <h1
-              className="text-3xl md:text-5xl text-[#1C1C1C] leading-tight"
+              className="text-3xl sm:text-4xl md:text-5xl text-[#1C1C1C] leading-tight"
               style={{ fontFamily: "var(--font-didot)" }}
             >
               {t.headlinePart1}
