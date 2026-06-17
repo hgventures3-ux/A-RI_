@@ -94,7 +94,6 @@ export default function Navbar() {
     { href: "/products", label: s.products },
     { href: "/ou-nous-trouver", label: s.findUs },
     { href: "/mission", label: s.mission },
-    { href: "/admin", label: s.admin },
   ];
 
   return (
