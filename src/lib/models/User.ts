@@ -6,7 +6,6 @@ export interface IUser extends Document {
   phone?: string;
   countryCode?: string;
   city?: string;
-  passwordHash?: string;
   totalSpent: number;
   ordersCount: number;
   createdAt: Date;
@@ -34,10 +33,6 @@ const UserSchema = new Schema(
     },
     city: {
       type: String,
-    },
-    passwordHash: {
-      type: String,
-      required: false,
     },
     totalSpent: {
       type: Number,

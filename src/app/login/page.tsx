@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect, Suspense } from "react";
+import { useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { Lock, Mail, ArrowRight, Loader2, User } from "lucide-react";
+import { Mail, ArrowRight, Loader2, ShieldCheck } from "lucide-react";
 import { useLanguage } from "@/context/LanguageContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -14,27 +14,31 @@ const translations = {
     heading: "Se Connecter",
     subtitle: "Accédez à votre espace client AÉRI",
     emailLabel: "Adresse e-mail",
-    passLabel: "Mot de passe",
-    remember: "Se souvenir de moi",
-    btnLogin: "Se connecter",
-    btnLoading: "Connexion en cours...",
+    btnSendOtp: "Recevoir le code",
+    btnVerifyOtp: "Vérifier et se connecter",
+    otpLabel: "Code de vérification (6 chiffres)",
+    btnLoading: "Patientez...",
     noAccount: "Nouveau chez AÉRI ?",
     createAccount: "Créer un compte",
-    errorRequired: "Veuillez remplir tous les champs",
+    errorRequired: "Veuillez entrer votre email",
     successLogin: "Connexion réussie !",
+    otpSent: "Code envoyé à votre adresse e-mail !",
+    backToEmail: "Changer d'e-mail",
   },
   en: {
     heading: "Sign In",
     subtitle: "Access your AÉRI customer space",
     emailLabel: "Email address",
-    passLabel: "Password",
-    remember: "Remember me",
-    btnLogin: "Sign In",
-    btnLoading: "Signing in...",
+    btnSendOtp: "Get Verification Code",
+    btnVerifyOtp: "Verify & Sign In",
+    otpLabel: "Verification Code (6 digits)",
+    btnLoading: "Please wait...",
     noAccount: "New to AÉRI?",
     createAccount: "Create an account",
-    errorRequired: "Please fill in all fields",
+    errorRequired: "Please enter your email",
     successLogin: "Login successful!",
+    otpSent: "Code sent to your email address!",
+    backToEmail: "Change Email",
   },
 };
 
@@ -46,14 +50,14 @@ function LoginContent() {
   const s = translations[lang as keyof typeof translations] || translations.fr;
 
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [step, setStep] = useState<"EMAIL" | "OTP">("EMAIL");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleLogin = async (e: React.FormEvent) => {
+  const handleSendOtp = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !password) {
+    if (!email) {
       setError(s.errorRequired);
       return;
     }
@@ -62,17 +66,43 @@ function LoginContent() {
     setError("");
 
     try {
-      const res = await fetch("/api/auth/login", {
+      const res = await fetch("/api/auth/send-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password, rememberMe }),
+        body: JSON.stringify({ email, purpose: "Login" }),
       });
 
       const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Failed to send OTP");
 
-      if (!res.ok) {
-        throw new Error(data.error || "Login failed");
-      }
+      toast.success(s.otpSent);
+      setStep("OTP");
+    } catch (err: any) {
+      setError(err.message || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleVerifyOtp = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!otp || otp.length !== 6) {
+      setError("Please enter a valid 6-digit OTP");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+
+    try {
+      const res = await fetch("/api/auth/verify-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, otp, purpose: "Login" }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Verification failed");
 
       toast.success(s.successLogin);
       router.push(callbackUrl);
@@ -105,68 +135,67 @@ function LoginContent() {
             </p>
           </div>
 
-          <form className="space-y-5" onSubmit={handleLogin}>
+          <form className="space-y-5" onSubmit={step === "EMAIL" ? handleSendOtp : handleVerifyOtp}>
             {error && (
               <div className="bg-red-50/75 border border-red-200/50 text-red-600 px-4 py-2.5 rounded-xl text-xs font-medium text-center">
                 {error}
               </div>
             )}
 
-            <div>
-              <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-[#1C1C1C]/75 mb-1.5">
-                {s.emailLabel}
-              </label>
-              <div className="relative rounded-xl shadow-sm">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                  <Mail className="h-4 w-4 text-[#1C1C1C]/40" />
+            {step === "EMAIL" && (
+              <div>
+                <label htmlFor="email" className="block text-xs font-bold uppercase tracking-wider text-[#1C1C1C]/75 mb-1.5">
+                  {s.emailLabel}
+                </label>
+                <div className="relative rounded-xl shadow-sm">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                    <Mail className="h-4 w-4 text-[#1C1C1C]/40" />
+                  </div>
+                  <input
+                    id="email"
+                    type="email"
+                    autoComplete="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="block w-full pl-10 pr-3.5 py-3 border border-[#1C1C1C]/15 rounded-xl focus:ring-2 focus:ring-[#D4AF37]/50 focus:border-[#D4AF37] text-xs bg-white/70 text-[#1C1C1C] outline-none transition-all"
+                    placeholder="name@example.com"
+                  />
                 </div>
-                <input
-                  id="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full pl-10 pr-3.5 py-3 border border-[#1C1C1C]/15 rounded-xl focus:ring-2 focus:ring-[#D4AF37]/50 focus:border-[#D4AF37] text-xs bg-white/70 text-[#1C1C1C] outline-none transition-all"
-                  placeholder="name@example.com"
-                />
               </div>
-            </div>
+            )}
 
-            <div>
-              <label htmlFor="password" className="block text-xs font-bold uppercase tracking-wider text-[#1C1C1C]/75 mb-1.5">
-                {s.passLabel}
-              </label>
-              <div className="relative rounded-xl shadow-sm">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                  <Lock className="h-4 w-4 text-[#1C1C1C]/40" />
+            {step === "OTP" && (
+              <div>
+                <label htmlFor="otp" className="block text-xs font-bold uppercase tracking-wider text-[#1C1C1C]/75 mb-1.5">
+                  {s.otpLabel}
+                </label>
+                <div className="relative rounded-xl shadow-sm">
+                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                    <ShieldCheck className="h-4 w-4 text-[#1C1C1C]/40" />
+                  </div>
+                  <input
+                    id="otp"
+                    type="text"
+                    maxLength={6}
+                    required
+                    value={otp}
+                    onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
+                    className="block w-full pl-10 pr-3.5 py-3 border border-[#1C1C1C]/15 rounded-xl focus:ring-2 focus:ring-[#D4AF37]/50 focus:border-[#D4AF37] text-sm tracking-[0.5em] font-bold text-center bg-white/70 text-[#1C1C1C] outline-none transition-all"
+                    placeholder="------"
+                  />
                 </div>
-                <input
-                  id="password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="block w-full pl-10 pr-3.5 py-3 border border-[#1C1C1C]/15 rounded-xl focus:ring-2 focus:ring-[#D4AF37]/50 focus:border-[#D4AF37] text-xs bg-white/70 text-[#1C1C1C] outline-none transition-all"
-                  placeholder="••••••••"
-                />
+                <div className="mt-2 text-right">
+                  <button
+                    type="button"
+                    onClick={() => setStep("EMAIL")}
+                    className="text-[10px] uppercase font-bold text-[#D4AF37] hover:text-[#1C1C1C] transition-colors"
+                  >
+                    {s.backToEmail}
+                  </button>
+                </div>
               </div>
-            </div>
-
-            <div className="flex items-center justify-between">
-              <label className="flex items-center cursor-pointer select-none">
-                <input
-                  type="checkbox"
-                  checked={rememberMe}
-                  onChange={(e) => setRememberMe(e.target.checked)}
-                  className="h-3.5 w-3.5 text-[#1C1C1C] focus:ring-[#D4AF37] border-white/40 rounded bg-white"
-                />
-                <span className="ml-2 text-xs text-[#1C1C1C]/70">
-                  {s.remember}
-                </span>
-              </label>
-            </div>
+            )}
 
             <button
               type="submit"
@@ -180,22 +209,24 @@ function LoginContent() {
                 </>
               ) : (
                 <>
-                  <span>{s.btnLogin}</span>
+                  <span>{step === "EMAIL" ? s.btnSendOtp : s.btnVerifyOtp}</span>
                   <ArrowRight className="h-4 w-4 text-[#FAF8F5]" />
                 </>
               )}
             </button>
           </form>
 
-          <div className="mt-6 border-t border-[#1C1C1C]/5 pt-6 text-center text-xs text-[#1C1C1C]/70">
-            {s.noAccount}{" "}
-            <Link
-              href={`/signup?callbackUrl=${encodeURIComponent(callbackUrl)}`}
-              className="font-bold text-[#D4AF37] hover:text-[#1C1C1C] transition-colors"
-            >
-              {s.createAccount}
-            </Link>
-          </div>
+          {step === "EMAIL" && (
+            <div className="mt-6 border-t border-[#1C1C1C]/5 pt-6 text-center text-xs text-[#1C1C1C]/70">
+              {s.noAccount}{" "}
+              <Link
+                href={`/signup?callbackUrl=${encodeURIComponent(callbackUrl)}`}
+                className="font-bold text-[#D4AF37] hover:text-[#1C1C1C] transition-colors"
+              >
+                {s.createAccount}
+              </Link>
+            </div>
+          )}
         </div>
       </div>
 

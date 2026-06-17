@@ -33,17 +33,6 @@ type LocaleCopy = {
 
 const frenchProducts: Product[] = [
   {
-    id: "salt",
-    slug: "himalayan-salt",
-    name: "Makhana Graines Soufflées",
-    category: "SIGNATURE",
-    flavor: "Pristine Himalayan Salt & Pepper",
-    description:
-      "Roasted makhana seasoned with pink Himalayan salt and cracked black peppercorns.",
-    price: "€5.99 / 50g",
-    image: "/flavor_himalayan_salt_new.png",
-  },
-  {
     id: "truffle",
     slug: "black-truffle",
     name: "Gourmet Truffle Fusion",
