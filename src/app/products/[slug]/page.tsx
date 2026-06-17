@@ -65,7 +65,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
     "offers": {
       "@type": "Offer",
       "priceCurrency": "EUR",
-      "price": "5.99",
+      "price": "2.99",
       "availability": "https://schema.org/InStock",
       "url": `https://aerisnacks.com/products/${resolvedParams.slug}`
     }

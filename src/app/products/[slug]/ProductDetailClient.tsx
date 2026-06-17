@@ -138,8 +138,8 @@ export default function ProductDetailPage() {
               className="mb-10"
               style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
             >
-              <span className="text-2xl font-bold" style={{ color: "#1d1b1a" }}>€5.99</span>
-              <span className="text-sm font-medium tracking-wide uppercase ml-2" style={{ color: "#675d4e" }}>/ 50g</span>
+              <span className="text-2xl font-bold" style={{ color: "#1d1b1a" }}>€2.99</span>
+              <span className="text-sm font-medium tracking-wide uppercase ml-2" style={{ color: "#675d4e" }}>/ 30g</span>
             </motion.div>
 
             {!isComingSoon && (
@@ -170,7 +170,7 @@ export default function ProductDetailPage() {
                       addToCart({
                         id: slug,
                         name: product.title,
-                        price: 5.99,
+                        price: 2.99,
                         image: product.image,
                       });
                     }}
@@ -224,7 +224,7 @@ export default function ProductDetailPage() {
               <Image
                 key={lang}
                 src={product.image}
-                alt={`makhana ${product.title.toLowerCase()} sachet 50g aeri snacks`}
+                alt={`makhana ${product.title.toLowerCase()} sachet 30g aeri snacks`}
                 fill
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className={`object-contain transition-transform duration-700 ease-out ${product.image.includes("flavor_salt") ? "p-10 group-hover:scale-105" : product.image.includes("flavor_truffle") ? "scale-110 group-hover:scale-125" : "group-hover:scale-105"}`}
@@ -399,7 +399,7 @@ export default function ProductDetailPage() {
                     fontFamily: "var(--font-montserrat), sans-serif",
                   }}
                 >
-                  {isFrench ? "par sachet de 50g" : "per 50g pack"}
+                  {isFrench ? "par sachet de 30g" : "per 30g pack"}
                 </span>
 
                 <div className="space-y-0">

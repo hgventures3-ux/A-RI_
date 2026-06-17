@@ -11,7 +11,7 @@ import Footer from "@/components/Footer";
    Stats
    ──────────────────────────────────────────────────────── */
 const stats = [
-  { value: "20+", label: "Ans d'expertise", sub: "Emballage & conservation" },
+  { value: "25+", label: "Ans d'expertise", sub: "Emballage & conservation" },
   { value: "1000", label: "Acres", sub: "Zones humides préservées" },
   { value: "100%", label: "Traçabilité", sub: "Du Bihar à la France" },
   { value: "4", label: "Certifications", sub: "FSSAI · NABL · EU · IEC" },
@@ -332,7 +332,7 @@ export default function EspacePro() {
                 {isFrench ? "Transparence & Conformité" : "Transparency & Compliance"}
               </span>
               <h3 className="text-2xl md:text-3xl font-bold text-[#1C1C1C]" style={{ fontFamily: "var(--font-montserrat)" }}>
-                {isFrench ? "Notre Moat de Certification" : "Our Certification Moat"}
+                {isFrench ? "Nos Garanties de Conformité" : "Our Certification Moat"}
               </h3>
               <p className="text-sm text-[#1C1C1C]/50 mt-2 max-w-xl mx-auto" style={{ fontFamily: "var(--font-montserrat)" }}>
                 {isFrench ? "Rapports NABL indépendants & conformité corporate disponibles en téléchargement immédiat." : "Independent NABL reports & corporate compliance available for immediate download."}
@@ -407,6 +407,11 @@ export default function EspacePro() {
                   </a>
                 </motion.div>
               ))}
+            </div>
+            <div className="mt-8 text-center text-xs text-[#1C1C1C]/60" style={{ fontFamily: "var(--font-montserrat)" }}>
+              {isFrench 
+                ? "Certificat d'installation de fabrication FSSC 22000 disponible sur demande, IFS broker (en cours) et BRCGS disponibles sur demande."
+                : "Manufacturing facility FSSC 22000 certificate available upon request, IFS broker (en cours) and BRCGS available upon request."}
             </div>
           </div>
 

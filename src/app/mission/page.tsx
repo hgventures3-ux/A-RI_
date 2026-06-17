@@ -22,7 +22,7 @@ const pageTranslations = {
       },
       {
         title: "Fiabilité d'Approvisionnement",
-        body: "Notre héritage familial de 25 ans dans la fabrication industrielle à haute capacité soutient chaque promesse. Notre pipeline logistique est conçu pour éliminer les retards, prévenir les ruptures de stock et garantir que vos rayons restent continuellement approvisionnés.",
+        body: "Notre héritage familial de 25+ ans dans la fabrication industrielle à haute capacité soutient chaque promesse. Notre pipeline logistique est conçu pour éliminer les retards, prévenir les ruptures de stock et garantir que vos rayons restent continuellement approvisionnés.",
       },
       {
         title: "Sécurité Réglementaire",

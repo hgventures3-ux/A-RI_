@@ -254,7 +254,7 @@ export const productData: Record<
     origin: "Makhana: Bihar, India · Peanuts: Saurashtra, India",
   },
   "peri-peri": {
-    title: "Peri Peri",
+    title: "Péri-Péri",
     tagline: "Fiery African Heat",
     heroDesc: "A bold, vibrant blend of African bird's eye chili, citrus, and garlic. For those who crave an elegant, fiery kick.",
     image: "/flavor_peri_peri.png",
@@ -457,7 +457,7 @@ export const productData: Record<
     origin: "Makhana : Bihar, Inde · Cacahuètes : Saurashtra, Inde",
   },
   "peri-peri-fr": {
-    title: "Peri Peri",
+    title: "Péri-Péri",
     tagline: "Chaleur Africaine Ardente",
     heroDesc: "Un mélange audacieux et vibrant de piment œil d'oiseau africain, d'agrumes et d'ail. Pour ceux qui recherchent un piquant élégant et ardent.",
     image: "/flavor_peri_peri.png",

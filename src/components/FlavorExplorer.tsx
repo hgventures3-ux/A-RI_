@@ -38,7 +38,7 @@ const frenchProducts: Product[] = [
     name: "Gourmet Truffle Fusion",
     category: "GOURMET",
     description: "Makhana Graines Soufflées - Saveur Truffe Noire.",
-    price: "€5.99 / 50g",
+    price: "€2.99 / 30g",
     image: "/products/product2.png",
   },
   {
@@ -47,7 +47,7 @@ const frenchProducts: Product[] = [
     name: "Mediterranean Herb Fusion",
     category: "VÉGÉTAL",
     description: "Makhana Graines Soufflées - Aux Herbes de Provence.",
-    price: "€5.99 / 50g",
+    price: "€2.99 / 30g",
     image: "/products/product3.png",
   },
   {
@@ -68,7 +68,7 @@ const frenchProducts: Product[] = [
     category: "SUCRÉ",
     description:
       "Makhana Graines Soufflées - Caramel doré et pointe de sel.",
-    price: "€5.99 / 50g",
+    price: "€2.99 / 30g",
     image: "/flavor_caramel_salt.png",
   },
   {
@@ -78,7 +78,7 @@ const frenchProducts: Product[] = [
     category: "SUCRÉ",
     description:
       "Makhana Graines Soufflées - Enrobage fin au chocolat noir 70%.",
-    price: "€5.99 / 50g",
+    price: "€2.99 / 30g",
     image: "/flavor_dark_chocolate.png",
   },
   {
@@ -88,7 +88,7 @@ const frenchProducts: Product[] = [
     category: "VÉGÉTAL",
     description:
       "Makhana Graines Soufflées - Fraîcheur citronnée et menthe.",
-    price: "€5.99 / 50g",
+    price: "€2.99 / 30g",
     image: "/flavor_lemon_mint.png",
   },
   {
@@ -98,17 +98,17 @@ const frenchProducts: Product[] = [
     category: "GOURMET",
     description:
       "Makhana Graines Soufflées - Saveur cacahuète torréfiée.",
-    price: "€5.99 / 50g",
+    price: "€2.99 / 30g",
     image: "/flavor_peanut_butter.png",
   },
   {
     id: "peri-peri",
     slug: "peri-peri",
-    name: "Peri Peri",
+    name: "Péri-Péri",
     category: "ÉPICÉ",
     description:
       "Makhana Graines Soufflées - Piment, agrumes et ail.",
-    price: "€5.99 / 50g",
+    price: "€2.99 / 30g",
     image: "/flavor_peri_peri.png",
   },
   {
@@ -118,7 +118,7 @@ const frenchProducts: Product[] = [
     category: "GOURMET",
     description:
       "Makhana Graines Soufflées - Notes fumées et épices savoureuses.",
-    price: "€5.99 / 50g",
+    price: "€2.99 / 30g",
     image: "/flavor_smokey_bbq.png",
   },
   {
@@ -128,7 +128,7 @@ const frenchProducts: Product[] = [
     category: "VÉGÉTAL",
     description:
       "Makhana Graines Soufflées - Tomate mûrie au soleil et herbes.",
-    price: "€5.99 / 50g",
+    price: "€2.99 / 30g",
     image: "/products/tomato.png",
   },
 ];
@@ -234,7 +234,7 @@ export default function FlavorExplorer() {
   const [addedIds, setAddedIds] = useState<Set<string>>(new Set());
 
   const handleAddToCart = (product: Product) => {
-    // Parse price number from string like "€5.99 / 50g"
+    // Parse price number from string like "€2.99 / 30g"
     const priceMatch = product.price.match(/(\d+[.,]\d+)/);
     const priceNum = priceMatch ? parseFloat(priceMatch[1].replace(",", ".")) : 0;
 

@@ -35,7 +35,7 @@ export async function POST(req: Request) {
       couponCode: body.couponCode || "",
       shipping: body.shipping || 0,
       total: body.total,
-      paymentMethod: body.paymentMethod || "PayPal",
+      paymentMethod: body.paymentMethod || "Razorpay",
       paymentStatus: body.paymentStatus || "Pending",
       timeline: [
         { status: "Pending", note: "Order placed by customer." },

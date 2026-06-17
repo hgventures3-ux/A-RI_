@@ -15,7 +15,7 @@ export default function SettingsPage() {
 
   // Local state for forms
   const [general, setGeneral] = useState({ storeName: "", contactEmail: "", currency: "EUR" });
-  const [payment, setPayment] = useState({ paypalClientId: "", taxRate: "0" });
+  const [payment, setPayment] = useState({ razorpayApiKey: "", taxRate: "0" });
   const [shipping, setShipping] = useState({ freeShippingThreshold: "0", standardRate: "0" });
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function SettingsPage() {
             if (item.key === "storeName") setGeneral(prev => ({ ...prev, storeName: item.value }));
             if (item.key === "contactEmail") setGeneral(prev => ({ ...prev, contactEmail: item.value }));
             if (item.key === "currency") setGeneral(prev => ({ ...prev, currency: item.value }));
-            if (item.key === "paypalClientId") setPayment(prev => ({ ...prev, paypalClientId: item.value }));
+            if (item.key === "razorpayApiKey") setPayment(prev => ({ ...prev, razorpayApiKey: item.value }));
             if (item.key === "taxRate") setPayment(prev => ({ ...prev, taxRate: item.value }));
             if (item.key === "freeShippingThreshold") setShipping(prev => ({ ...prev, freeShippingThreshold: item.value }));
             if (item.key === "standardRate") setShipping(prev => ({ ...prev, standardRate: item.value }));
@@ -49,7 +49,7 @@ export default function SettingsPage() {
         { key: "storeName", value: general.storeName, category: "General" },
         { key: "contactEmail", value: general.contactEmail, category: "General" },
         { key: "currency", value: general.currency, category: "General" },
-        { key: "paypalClientId", value: payment.paypalClientId, category: "Payment" },
+        { key: "razorpayApiKey", value: payment.razorpayApiKey, category: "Payment" },
         { key: "taxRate", value: payment.taxRate, category: "Payment" },
         { key: "freeShippingThreshold", value: shipping.freeShippingThreshold, category: "Shipping" },
         { key: "standardRate", value: shipping.standardRate, category: "Shipping" },
@@ -132,13 +132,13 @@ export default function SettingsPage() {
             </div>
             <div>
               <h2 className="text-lg font-semibold text-[#1d1b1a]">{isFrench ? "Passerelles de paiement" : "Payment Gateways"}</h2>
-              <p className="text-xs text-[#4c463e]/60">{isFrench ? "Configurer les clés Stripe et PayPal" : "Configure Stripe and PayPal keys"}</p>
+              <p className="text-xs text-[#4c463e]/60">{isFrench ? "Configurer les clés Razorpay" : "Configure Razorpay keys"}</p>
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div className="md:col-span-2">
-              <label className="block text-xs font-semibold text-[#4c463e] uppercase tracking-wider mb-2">{isFrench ? "ID client PayPal" : "PayPal Client ID"}</label>
-              <input type="text" value={payment.paypalClientId} onChange={e=>setPayment({...payment, paypalClientId: e.target.value})} placeholder="sb-xxxxxx..." className="w-full bg-[#faf5ef] border border-[#e8e0d8] rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#675d4e]/30 outline-none font-mono" />
+              <label className="block text-xs font-semibold text-[#4c463e] uppercase tracking-wider mb-2">{isFrench ? "Clé API Razorpay" : "Razorpay API Key"}</label>
+              <input type="text" value={payment.razorpayApiKey} onChange={e=>setPayment({...payment, razorpayApiKey: e.target.value})} placeholder="rzp_live_xxxxxx..." className="w-full bg-[#faf5ef] border border-[#e8e0d8] rounded-xl px-4 py-2.5 text-sm focus:ring-2 focus:ring-[#675d4e]/30 outline-none font-mono" />
             </div>
             <div>
               <label className="block text-xs font-semibold text-[#4c463e] uppercase tracking-wider mb-2">{isFrench ? "Taux de taxe par défaut (%)" : "Default Tax Rate (%)"}</label>

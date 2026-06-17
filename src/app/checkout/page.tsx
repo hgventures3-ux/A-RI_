@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useCart } from "@/context/CartContext";
 import { useLanguage } from "@/context/LanguageContext";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -137,7 +136,10 @@ export default function CheckoutPage() {
       const orderData = await fetch("/api/razorpay/create-order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: finalTotal }),
+        body: JSON.stringify({ 
+          items,
+          amount: finalTotal 
+        }),
       }).then((t) => t.json());
 
       if (orderData.error) {
@@ -147,11 +149,11 @@ export default function CheckoutPage() {
 
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_API_KEY || "",
-        amount: orderData.order.amount,
-        currency: orderData.order.currency,
+        amount: orderData.amount * 100, // Make sure amount is exactly what backend computed
+        currency: orderData.currency,
         name: "AÉRI Snacks",
         description: "Premium Makhana Checkout",
-        order_id: orderData.order.id,
+        order_id: orderData.order_id,
         handler: async function (response: any) {
           const payload = {
             razorpay_order_id: response.razorpay_order_id,
@@ -168,11 +170,11 @@ export default function CheckoutPage() {
                 country: formData.country,
               },
               items: items,
-              subtotal: cartTotal,
+              subtotal: orderData.subtotal,
               discount: appliedCoupon ? appliedCoupon.discountAmount : 0,
               couponCode: appliedCoupon ? appliedCoupon.code : undefined,
-              shipping: 0,
-              total: finalTotal,
+              shipping: orderData.shipping,
+              total: orderData.amount,
             },
           };
 
@@ -560,114 +562,9 @@ export default function CheckoutPage() {
                       <rect x="1" y="4" width="22" height="16" rx="2" ry="2" />
                       <line x1="1" y1="10" x2="23" y2="10" />
                     </svg>
-                    {isFrench ? "Payer avec Razorpay" : "Pay with Razorpay"}
+                    {isFrench ? "Payer de manière sécurisée" : "Pay Securely"}
                   </button>
-
-                  {/* Divider */}
-                  <div className="relative flex items-center">
-                    <div className="flex-grow border-t border-[#cec5bb]" />
-                    <span
-                      className="flex-shrink-0 mx-4 text-[#4c463e] text-xs uppercase"
-                      style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
-                    >
-                      {isFrench ? "OU" : "OR"}
-                    </span>
-                    <div className="flex-grow border-t border-[#cec5bb]" />
-                  </div>
-
-                  {/* PayPal */}
-                  <div className="z-0 relative">
-                    <PayPalScriptProvider
-                      options={{
-                        clientId: process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID || "test",
-                        currency: "EUR",
-                      }}
-                    >
-                      <PayPalButtons
-                        style={{ layout: "vertical", shape: "rect", color: "black" }}
-                        createOrder={(data, actions) => {
-                          return actions.order.create({
-                            intent: "CAPTURE",
-                            purchase_units: [
-                              {
-                                amount: {
-                                  currency_code: "EUR",
-                                  value: finalTotal.toFixed(2),
-                                },
-                              },
-                            ],
-                          });
-                        }}
-                        onApprove={async (data, actions) => {
-                          if (!isFormValid()) {
-                            toast.error(
-                              isFrench
-                                ? "Veuillez remplir tous les champs obligatoires."
-                                : "Please fill in all required fields."
-                            );
-                            return;
-                          }
-                          if (actions.order) {
-                            const details = await actions.order.capture();
-                            try {
-                              const payload = {
-                                customer: {
-                                  name: `${formData.firstName} ${formData.lastName}`,
-                                  email: formData.email,
-                                  phone: formData.phone,
-                                  address: formData.address,
-                                  city: formData.city,
-                                  zipCode: formData.zipCode,
-                                  country: formData.country,
-                                },
-                                items: items,
-                                subtotal: cartTotal,
-                                discount: appliedCoupon ? appliedCoupon.discountAmount : 0,
-                                couponCode: appliedCoupon ? appliedCoupon.code : undefined,
-                                shipping: 0,
-                                total: finalTotal,
-                                paymentMethod: "PayPal",
-                                paymentStatus: "Paid",
-                              };
-
-                              const res = await fetch("/api/checkout", {
-                                method: "POST",
-                                headers: { "Content-Type": "application/json" },
-                                body: JSON.stringify(payload),
-                              });
-
-                              const result = await res.json();
-                              if (result.success) {
-                                clearCart();
-                                router.push(
-                                  `/order-confirmation?orderNumber=${result.orderNumber}`
-                                );
-                              } else {
-                                toast.error(
-                                  isFrench
-                                    ? "Paiement réussi mais erreur de commande. Contactez le support."
-                                    : "Payment succeeded but order creation failed. Contact support."
-                                );
-                              }
-                            } catch (err) {
-                              console.error("Checkout error:", err);
-                              toast.error(
-                                isFrench
-                                  ? "Une erreur est survenue. Contactez le support."
-                                  : "An error occurred. Please contact support."
-                              );
-                            }
-                          }
-                        }}
-                      />
-                    </PayPalScriptProvider>
-                    <p
-                      className="text-xs text-center mt-2 text-[#4c463e]"
-                      style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
-                    >
-                      {isFrench ? "Paiement sécurisé par PayPal" : "Secure payment via PayPal"}
-                    </p>
-                  </div>
+                  
                 </div>
               </div>
 

@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import crypto from "crypto";
 import dbConnect from "@/lib/db";
 import Order from "@/lib/models/Order";
+import Product from "@/lib/models/Product";
+import mongoose from "mongoose";
 import { sendEmail } from "@/lib/mailer";
 
 export async function POST(req: Request) {
@@ -36,12 +38,29 @@ export async function POST(req: Request) {
         zipCode: orderDetails.customer.zipCode,
         country: orderDetails.customer.country,
       },
-      items: orderDetails.items.map((item: any) => ({
-        productId: item.id || item.productId,
-        name: item.name,
-        price: item.price,
-        quantity: item.quantity,
-        image: item.image,
+      items: await Promise.all(orderDetails.items.map(async (item: any) => {
+        const itemId = item.id || item.productId;
+        let dbProduct;
+        
+        if (mongoose.Types.ObjectId.isValid(itemId)) {
+          dbProduct = await Product.findById(itemId);
+        } else {
+          const slugMap: Record<string, string> = {
+            "herb": "mediterranean-herb-fusion",
+            "salt": "himalayan-salt",
+            "truffle": "black-truffle"
+          };
+          const actualSlug = slugMap[itemId] || itemId;
+          dbProduct = await Product.findOne({ slug: actualSlug });
+        }
+
+        return {
+          productId: dbProduct ? dbProduct._id : itemId,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+          image: item.image,
+        };
       })),
       subtotal: orderDetails.subtotal,
       discount: orderDetails.discount || 0,

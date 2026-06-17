@@ -26,10 +26,21 @@ const navText = {
     mission: "Our Mission",
     contact: "Contact Us",
     findUs: "Where to Find Us",
-    pro: "Espace Professionnel",
+    pro: "Pro Portal",
     admin: "Admin",
     account: "Account",
     login: "Sign In",
+  },
+  hi: {
+    brand: "ब्रांड",
+    products: "उत्पाद",
+    mission: "हमारा उद्देश्य",
+    contact: "संपर्क करें",
+    findUs: "हमें कहाँ खोजें",
+    pro: "प्रो पोर्टल",
+    admin: "एडमिन",
+    account: "खाता",
+    login: "लॉगिन करें",
   },
 };
 

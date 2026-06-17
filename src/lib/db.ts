@@ -32,6 +32,8 @@ export async function connectDB(): Promise<typeof mongoose> {
   if (!cached.promise) {
     cached.promise = mongoose.connect(MONGODB_URI, {
       bufferCommands: false,
+      family: 4, // Force IPv4 to fix DNS ECONNREFUSED issues
+      serverSelectionTimeoutMS: 5000,
     });
   }
 

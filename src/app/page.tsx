@@ -4,7 +4,7 @@ import BadgeStrip from "@/components/BadgeStrip";
 import ThreeFlavorLineup from "@/components/ThreeFlavorLineup";
 import FlavorExplorer from "@/components/FlavorExplorer";
 import SocialProofGrid from "@/components/SocialProofGrid";
-import MakhanaEducation from "@/components/MakhanaEducation";
+import B2BTeaser from "@/components/B2BTeaser";
 import Blog from "@/components/Blog";
 import Footer from "@/components/Footer";
 
@@ -56,8 +56,8 @@ export default function Home() {
       {/* 5. Consumer review grid */}
       <SocialProofGrid />
       
-      {/* 6. "Qu'est-ce que le Makhana" educational section */}
-      <MakhanaEducation />
+      {/* 6. B2B Teaser banner */}
+      <B2BTeaser />
       
       {/* 7. Journal d'AÉRI blog preview */}
       <Blog />

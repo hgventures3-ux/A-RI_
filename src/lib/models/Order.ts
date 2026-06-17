@@ -85,7 +85,7 @@ const OrderSchema = new Schema<IOrder>(
       ],
       default: "Pending",
     },
-    paymentMethod: { type: String, default: "PayPal" },
+    paymentMethod: { type: String, default: "Razorpay" },
     paymentStatus: {
       type: String,
       enum: ["Pending", "Paid", "Failed", "Refunded"],

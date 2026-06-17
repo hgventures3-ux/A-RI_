@@ -382,9 +382,9 @@ const t: Record<string, Record<string, any>> = {
     fr: {
       label: "CONFORMITÉ ET DISPONIBILITÉ INDUSTRIELLE",
       title: "Espace Professionnel",
-      hook: "Expertise de plus de 20 ans dans l'industrie de l'emballage et l'ingénierie de la conservation.",
+      hook: "Expertise de 25+ ans dans l'industrie de l'emballage et l'ingénierie de la conservation.",
       stats: [
-        { value: "20+", label: "Ans d'Expertise Industrielle", sub: "Emballage & conservation" },
+        { value: "25+", label: "Ans d'Expertise Industrielle", sub: "Emballage & conservation" },
         { value: "1000", label: "Acres de Culture Préservée", sub: "Zones humides" },
         { value: "100%", label: "Traçabilité Totale Approvisionnement", sub: "(Hybite Foods)" },
         { value: "NABL", label: "Rapports de Laboratoire", sub: "& Certifications" },
@@ -432,9 +432,9 @@ const t: Record<string, Record<string, any>> = {
     en: {
       label: "B2B · Partnerships · Export",
       title: "Professional Portal",
-      hook: "Over 20 years of expertise in the packaging industry and conservation engineering.",
+      hook: "Over 25+ years of expertise in the packaging industry and conservation engineering.",
       stats: [
-        { value: "20+", label: "Years of expertise", sub: "Packaging & conservation" },
+        { value: "25+", label: "Years of expertise", sub: "Packaging & conservation" },
         { value: "1000", label: "Acres", sub: "Preserved wetlands" },
         { value: "100%", label: "Traceability", sub: "From Bihar to France" },
         { value: "4", label: "Certifications", sub: "FSSAI · NABL · EU · IEC" },
@@ -482,9 +482,9 @@ const t: Record<string, Record<string, any>> = {
     hi: {
       label: "B2B · साझेदारी · निर्यात",
       title: "व्यावसायिक पोर्टल",
-      hook: "पैकेजिंग उद्योग और संरक्षण इंजीनियरिंग में 20 से अधिक वर्षों की विशेषज्ञता।",
+      hook: "पैकेजिंग उद्योग और संरक्षण इंजीनियरिंग में 25+ से अधिक वर्षों की विशेषज्ञता।",
       stats: [
-        { value: "20+", label: "वर्षों की विशेषज्ञता", sub: "पैकेजिंग और संरक्षण" },
+        { value: "25+", label: "वर्षों की विशेषज्ञता", sub: "पैकेजिंग और संरक्षण" },
         { value: "1000", label: "एकड़", sub: "संरक्षित आर्द्रभूमि" },
         { value: "100%", label: "ट्रैसेबिलिटी", sub: "बिहार से फ्रांस तक" },
         { value: "4", label: "प्रमाणपत्र", sub: "FSSAI · NABL · EU · IEC" },

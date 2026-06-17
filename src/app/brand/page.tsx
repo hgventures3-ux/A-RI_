@@ -37,7 +37,7 @@ const pageTranslations = {
     founderTitle: "Origine de l'Entreprise & Leadership",
     founderStories: [
       "Après avoir obtenu son Master en France, notre fondatrice a vécu de l'intérieur la véritable culture française de l'Apéro en vivant à Paris. C'est lors de ces moments de convivialité qu'elle a constaté le manque flagrant de snacks sains et clean-label sur les tables. Pour combler ce vide, elle a créé AÉRI, structurant une solution globale allant de la logistique d'approvisionnement jusqu'à l'expérience premium du snacking.",
-      "AÉRI s'appuie sur une expertise industrielle familiale de plus de 25 ans. Notre solide expérience dans la fabrication d'emballages à haut volume et notre capacité de production de matières premières à travers l'Inde nous confèrent l'autorité opérationnelle et l'évolutivité indispensables pour accompagner et sécuriser les approvisionnements des plus grands acheteurs du retail mondial."
+      "AÉRI s'appuie sur une expertise industrielle familiale de 25+ ans. Notre solide expérience dans la fabrication d'emballages à haut volume et notre capacité de production de matières premières à travers l'Inde nous confèrent l'autorité opérationnelle et l'évolutivité indispensables pour accompagner et sécuriser les approvisionnements des plus grands acheteurs du retail mondial."
     ]
   },
   en: {
@@ -239,7 +239,7 @@ export default function BrandPage() {
                   {lang === 'fr' ? 'Fondatrice' : 'Founder'}
                 </p>
                 <p className="text-base font-bold tracking-wide" style={{ fontFamily: "var(--font-didot), serif" }}>
-                  AÉRI Snacks
+                  AÉRI Makhana
                 </p>
               </div>
             </motion.div>

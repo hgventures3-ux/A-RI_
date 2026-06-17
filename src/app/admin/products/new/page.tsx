@@ -363,7 +363,7 @@ export default function NewProductPage() {
             <Field label="Weight" error={errors.weight?.message}>
               <input
                 {...register("weight")}
-                placeholder="50g"
+                placeholder="30g"
                 className={inputClass}
               />
             </Field>

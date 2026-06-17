@@ -148,7 +148,7 @@ const pages: Record<string, { title: string; badge: string; subtitle: string; se
       { heading: "Notre Fondatrice", body: (
           <div className="space-y-6">
             <p>Après avoir obtenu son Master en France, notre fondatrice a vécu de l'intérieur le rituel de l'apéro parisien en tant qu'étudiante urbaine. Face à l'absence criante de snacks sains et « clean-label » lors de ces moments de convivialité, l'évidence s'est imposée : il manquait une alternative alliant gourmandise et nutrition. C'est ainsi qu'elle a conçu et structuré de bout en bout notre chaîne d'approvisionnement pour y remédier.</p>
-            <p>Fort d'une expertise familiale de plus de 25 ans dans l'emballage industriel et la fabrication de matières premières à travers l'Inde, AÉRI bénéficie d'une véritable autorité opérationnelle. Ce bagage technique nous confère une maîtrise absolue de l'ingénierie de conservation (shelf-life) et la capacité d'adaptation nécessaire pour fournir les grands réseaux de distribution B2B à fort volume.</p>
+            <p>Fort d'une expertise familiale de 25+ ans dans l'emballage industriel et la fabrication de matières premières à travers l'Inde, AÉRI bénéficie d'une véritable autorité opérationnelle. Ce bagage technique nous confère une maîtrise absolue de l'ingénierie de conservation (shelf-life) et la capacité d'adaptation nécessaire pour fournir les grands réseaux de distribution B2B à fort volume.</p>
             <div className="w-full h-64 md:h-80 bg-[#1C1C1C]/5 rounded-2xl border border-[#1C1C1C]/10 flex flex-col items-center justify-center overflow-hidden relative">
               <span className="text-[#6E6E73] font-medium tracking-widest uppercase text-sm z-10">[Photo fondatrice]</span>
             </div>
