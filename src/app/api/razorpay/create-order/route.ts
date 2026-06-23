@@ -6,11 +6,13 @@ import Product from "@/lib/models/Product";
 export async function POST(req: Request) {
   try {
     await connectDB();
-    const { items } = await req.json();
+    const { items, currency } = await req.json();
 
     if (!items || items.length === 0) {
       return NextResponse.json({ error: "Cart is empty" }, { status: 400 });
     }
+
+    const isIndia = currency === "INR";
 
     // Securely calculate total on the backend to prevent price spoofing
     let calculatedSubtotal = 0;
@@ -41,7 +43,13 @@ export async function POST(req: Request) {
         return NextResponse.json({ error: `Not enough stock for ${item.name}` }, { status: 400 });
       }
 
-      const activePrice = dbProduct.discountPrice || dbProduct.price;
+      let activePrice = 0;
+      if (isIndia) {
+        activePrice = dbProduct.discountPriceINR || dbProduct.priceINR || 65; // Default 65 for India if not set
+      } else {
+        activePrice = dbProduct.discountPrice || dbProduct.price;
+      }
+      
       calculatedSubtotal += activePrice * item.quantity;
     }
 
@@ -58,7 +66,7 @@ export async function POST(req: Request) {
 
     const options = {
       amount: amountInCents,
-      currency: "EUR",
+      currency: isIndia ? "INR" : "EUR",
       receipt: `receipt_${Math.random().toString(36).substring(7)}`,
       payment_capture: 1, // Auto capture
     };

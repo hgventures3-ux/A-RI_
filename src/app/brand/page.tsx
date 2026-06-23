@@ -53,20 +53,20 @@ const pageTranslations = {
       },
       {
         number: "02",
-        title: "From Pond to Apéro",
+        title: "From Pond to Plate",
         desc: "Cultivated across 1,000 acres of preserved wetlands in exclusive partnership with Hybite Foods to guarantee 100% traceability. Middleman-free.",
         image: "/stage_harvest.png"
       },
       {
         number: "03",
         title: "Lighter than Air",
-        desc: "Goodbye to the heavy 'brick' feeling in your stomach after the apéro. AÉRI is so light you might just float away.",
+        desc: "Goodbye to the heavy 'brick' feeling in your stomach after snacking. AÉRI is so light you might just float away.",
         image: "/stage_flavoring.png"
       }
     ],
     founderTitle: "The Founder & Our Expertise",
     founderStories: [
-      "After obtaining her Master's degree in France, our founder experienced the authentic local L'Apéro ritual firsthand as an urban student in Paris. Recognizing the complete lack of healthy, clean-label gourmet snacks on French tables, she set out to change things. From that frustration, she designed a direct supply chain from Bihar to Europe.",
+      "After obtaining her Master's degree in France, our founder experienced the authentic local appetizer ritual firsthand as an urban student in Paris. Recognizing the complete lack of healthy, clean-label gourmet snacks on French tables, she set out to change things. From that frustration, she designed a direct supply chain from Bihar to Europe.",
       "Behind AÉRI lies over 20 years of active family industrial expertise in the packaging industry and raw materials trading across India. This operational foundation, from shelf-life engineering to containerised international logistics, grants AÉRI the authority and scalability to supply Europe's largest retail chains at high volume."
     ]
   },
@@ -147,7 +147,7 @@ export default function BrandPage() {
       </section>
 
       {/* ३-चरणों का इन्फोग्राफिक (3-Step Infographic Section) */}
-      <section className="py-16 px-6 md:px-12 max-w-6xl mx-auto mb-20">
+      <section id="procede" className="py-16 px-6 md:px-12 max-w-6xl mx-auto mb-20">
         <div className="text-center mb-16">
           <h2
             className="text-3xl md:text-4xl font-bold mb-4"

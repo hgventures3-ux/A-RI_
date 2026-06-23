@@ -39,12 +39,12 @@ const translations = {
   },
   en: {
     heading: "What our clients say",
-    subheading: "Discover why apéro lovers and professionals appreciate AÉRI Makhana.",
+    subheading: "Discover why snack lovers and professionals appreciate AÉRI Makhana.",
     reviews: [
       {
         name: "Sophie Martin",
         location: "Paris, France",
-        quote: "AÉRI Makhana has completely transformed our apéro evenings. Elegant, light, and incredibly refined. It's the perfect crunch without guilt.",
+        quote: "AÉRI Makhana has completely transformed our evening snacks. Elegant, light, and incredibly refined. It's the perfect crunch without guilt.",
         image: "/testimonials/sophie.png"
       },
       {

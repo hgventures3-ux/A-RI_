@@ -193,12 +193,34 @@ export default function Blog() {
   const headerRef = useRef<HTMLDivElement>(null);
   const headerInView = useInView(headerRef, { once: true, amount: 0.3 });
 
+  const localizedDates: Record<string, { date: string; readTime: string }[]> = {
+    fr: [
+      { date: "12 Mai 2026", readTime: "5 min" },
+      { date: "8 Mai 2026", readTime: "4 min" },
+      { date: "3 Mai 2026", readTime: "6 min" },
+    ],
+    en: [
+      { date: "May 12, 2026", readTime: "5 min" },
+      { date: "May 8, 2026", readTime: "4 min" },
+      { date: "May 3, 2026", readTime: "6 min" },
+    ],
+    hi: [
+      { date: "12 मई 2026", readTime: "5 मिनट" },
+      { date: "8 मई 2026", readTime: "4 मिनट" },
+      { date: "3 मई 2026", readTime: "6 मिनट" },
+    ],
+  };
+
+  const dates = localizedDates[lang] || localizedDates.en;
+
   const localizedArticles = articles.map((a, i) => ({
     ...a,
     tag: s.articles[i].tag,
     title: s.articles[i].title,
     subtitle: s.articles[i].subtitle,
     description: s.articles[i].desc,
+    date: dates[i].date,
+    readTime: dates[i].readTime,
   }));
 
   return (

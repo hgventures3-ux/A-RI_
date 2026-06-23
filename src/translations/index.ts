@@ -44,7 +44,7 @@ const t: Record<string, Record<string, any>> = {
       stepLabel: "Step",
       steps: [
         { headline: "The Millennial Seed", body: "The Euryale Ferox seed, cultivated for millennia and revered in Vedic traditions for its exceptional nutritional profile.", badge: "Nutritional Excellence" },
-        { headline: "From Pond to Apéro", body: "Cultivated across 1,000 acres of preserved wetlands in exclusive partnership with Hybite Foods, ensuring absolute traceability and uncompromised quality.", badge: "Exceptional Terroir" },
+        { headline: "From Pond to Plate", body: "Cultivated across 1,000 acres of preserved wetlands in exclusive partnership with Hybite Foods, ensuring absolute traceability and uncompromised quality.", badge: "Exceptional Terroir" },
         { headline: "Unparalleled Lightness", body: "Experience a savory delight that satisfies without the heaviness. AÉRI delivers an ethereal, cloud-like crunch.", badge: "Ultra Light · Zero Oil" },
       ],
       closing: '"We do not alter 5,000 years of tradition. We elevate it."',
@@ -81,7 +81,7 @@ const t: Record<string, Record<string, any>> = {
     en: {
       label: "The Journey",
       title: "From Pond to Plate",
-      subtitle: "Every AÉRI grain travels 8,000 km, from the pure waters of Bihar to your Parisian apéro.",
+      subtitle: "Every AÉRI grain travels 8,000 km, from the pure waters of Bihar to your table.",
       stages: [
         { label: "Harvesting", headline: "Artisanal Harvesting", body: "Hand-picked from the preserved wetlands of Bihar, every Euryale Ferox (Makhana) seed is harvested with ancestral know-how passed down through generations. A thousand-year-old gesture, respectful of land and water.", stat: { value: "1,000", unit: "acres", desc: "of preserved wetlands" }, benefit: "Guilt-Free Pleasure" },
         { label: "Popping", headline: "The Ancestral Pop", body: "The black seeds are sun-dried, then popped using heat alone — no oil, no industrial machines. This traditional process reveals the airy texture and delicate taste of Makhana.", stat: { value: "0", unit: "oil", desc: "added during popping" }, benefit: "Sustained Energy" },
@@ -130,7 +130,7 @@ const t: Record<string, Record<string, any>> = {
       teaserBtn: "Notify me",
       flavors: [
         { name: "Herbes de Provence", tagline: "The Mediterranean Garden", desc: "Thyme, rosemary, savory — the Southern sun in every bite. The snack that smells like Provence." },
-        { name: "Black Truffle", tagline: "The Black Gold of Apéro", desc: "The enchanting aroma of Périgord black truffle, elevated by the lightness of Makhana. Accessible luxury." },
+        { name: "Black Truffle", tagline: "The Black Gold of Snacking", desc: "The enchanting aroma of Périgord black truffle, elevated by the lightness of Makhana. Accessible luxury." },
       ],
     },
     hi: {
@@ -177,7 +177,7 @@ const t: Record<string, Record<string, any>> = {
     en: {
       label: "Heritage · Euryale Ferox",
       title: "The Heritage",
-      tagline: "From the Himalayas to your Apéro: 3,000 years of history, 0% guilt.",
+      tagline: "From the Himalayas to your Table: 3,000 years of history, 0% guilt.",
       botTitle1: "A Millennial Seed,",
       botTitle2: "A Rediscovered Treasure",
       botP1: "Euryale Ferox, known as Makhana, is a unique aquatic plant that grows exclusively in the calm, pure waters of Bihar. Its seeds have been consumed for over 3,000 years in Asia, revered for their exceptional nutritional properties.",
@@ -347,19 +347,19 @@ const t: Record<string, Record<string, any>> = {
       readMore: "Lire l'article",
       allArticles: "Tous les articles",
       articles: [
-        { tag: "LIFESTYLE", title: "L'Étiquette de l'Apéro Moderne : L'Art de Recevoir à la Française", subtitle: "Comment ne pas passer pour un barbare devant le fromage.", desc: "L'apéro, c'est sacré. Mais entre la planche qui ressemble à un accident de supermarché et celle qui fait dire 'oh là là', il y a un monde. Spoiler : AÉRI fait partie du deuxième camp." },
+        { tag: "MODE DE VIE", title: "L'Étiquette de l'Apéro Moderne : L'Art de Recevoir à la Française", subtitle: "Comment ne pas passer pour un barbare devant le fromage.", desc: "L'apéro, c'est sacré. Mais entre la planche qui ressemble à un accident de supermarché et celle qui fait dire 'oh là là', il y a un monde. Indice : AÉRI fait partie du deuxième camp." },
         { tag: "GASTRONOMIE", title: "AÉRI & Vins : Le Guide d'Expert pour des Accords Parfaits", subtitle: "Un Bourgogne et un Makhana entrent dans un bar…", desc: "On ne vous fera pas un cours d'œnologie (promis). Mais imaginez : la légèreté d'AÉRI Truffe avec un Pinot Noir. Oui, c'est aussi beau que ça en a l'air." },
-        { tag: "TRANSPARENCE", title: "Les Mensonges Cachés de Votre Supermarché : Décoder les étiquettes de snacks", subtitle: "Votre snack « healthy » contient plus de surprises que prévu.", desc: "« Naturel », « Léger », « Sans culpabilité »… Si les paquets de chips pouvaient rougir, ils seraient écarlates. On décortique les étiquettes." },
+        { tag: "TRANSPARENCE", title: "Les Mensonges Cachés de Votre Supermarché : Décoder les étiquettes de snacks", subtitle: "Votre snack « sain » contient plus de surprises que prévu.", desc: "« Naturel », « Léger », « Sans culpabilité »… Si les paquets de chips pouvaient rougir, ils seraient écarlates. On décortique les étiquettes." },
       ],
     },
     en: {
       label: "Editorial · Culture · Wit",
       title: "The AÉRI Journal",
-      subtitle: "Curated insights into gastronomy, culture, and the art of the apéro.",
+      subtitle: "Curated insights into gastronomy, culture, and the art of snacking.",
       readMore: "Read article",
       allArticles: "All articles",
       articles: [
-        { tag: "Culture", title: "The Art of the Apéro", subtitle: "Mastering the nuances of modern entertaining and the French art de vivre.", desc: "The apéro is a sacred ritual. We explore the subtle difference between a standard spread and a truly remarkable culinary experience, where AÉRI takes center stage." },
+        { tag: "Culture", title: "The Art of Snacking", subtitle: "Mastering the nuances of modern entertaining and the French art of living.", desc: "The appetizer is a sacred ritual. We explore the subtle difference between a standard spread and a truly remarkable culinary experience, where AÉRI takes center stage." },
         { tag: "Pairings", title: "AÉRI & Wine: The Perfect Marriage", subtitle: "Exploring the sophisticated synergy between fine wine and premium Makhana.", desc: "Discover how the earthy notes of AÉRI Truffle elegantly complement the complex profile of a vintage Pinot Noir, elevating your tasting experience." },
         { tag: "Truth", title: "Decoding the Labels", subtitle: "Unveiling the realities behind modern snack industry claims.", desc: "We demystify the ingredient labels of conventional snacks, advocating for absolute transparency, clean ingredients, and uncompromising quality." },
       ],
@@ -390,7 +390,7 @@ const t: Record<string, Record<string, any>> = {
         { value: "NABL", label: "Rapports de Laboratoire", sub: "& Certifications" },
       ],
       services: [
-        { title: "Production en Marque Blanche / Private Label", desc: "Développement de recettes sur-mesure et conditionnements industriels adaptés à vos cahiers des charges." },
+        { title: "Production en Marque Blanche / Marque Distributeur", desc: "Développement de recettes sur-mesure et conditionnements industriels adaptés à vos cahiers des charges." },
         { title: "Tarification Échelonnée & Volumes Grossistes", desc: "Grilles de prix dégressives calculées à la palette ou au conteneur maritime complet de 40 pieds." },
         { title: "Logistique Internationale & Sécurisation Douanière", desc: "Gestion complète des flux d'importation avec documents de conformité réglementaires de l'UE pré-validés." },
       ],
@@ -408,7 +408,7 @@ const t: Record<string, Record<string, any>> = {
       formMessage: "Message",
       formNamePh: "Votre nom complet",
       formCompanyPh: "Nom de votre entreprise",
-      formMessagePh: "ex. Marque Blanche, Private Label, Référencement national.",
+      formMessagePh: "ex. Marque Blanche, Marque Distributeur, Référencement national.",
       formBtn: "Demander une Cotation / Fiche Technique",
       formSuccess: "✓ Message envoyé !",
       waitlistLabel: "BIENTÔT EN FRANCE",
@@ -419,18 +419,18 @@ const t: Record<string, Record<string, any>> = {
       copyright: "© 2026 AÉRI · H&G Ventures Private Limited · Tous droits réservés",
       returnPolicy: "Politique de Retour",
       privacy: "Confidentialité",
-      brandTagline1: "AÉRI Makhana: The Art de l'Apéro.",
+      brandTagline1: "AÉRI Makhana : L'Art de l'Apéro.",
       brandTagline2: "",
       partner: "Partenaire : Hybite Foods",
       footerLinks: {
-        products: ["Gamme Complète", "Signature", "Gourmet", "Vrac B2B"],
+        products: ["Gamme Complète", "Signature", "Gourmet", "Vrac Professionnel"],
         company: ["Notre Histoire", "Notre Raison d'Être", "Espace Pro"],
         legal: ["Mentions Légales", "CGV", "Politique de Retour", "Droit de Rétractation 14 jours"],
       },
       footerCats: ["PRODUITS", "ENTREPRISE", "JURIDIQUE"],
     },
     en: {
-      label: "B2B · Partnerships · Export",
+      label: "Professionnel · Partenariats · Export",
       title: "Professional Portal",
       hook: "Over 25+ years of expertise in the packaging industry and conservation engineering.",
       stats: [
@@ -469,7 +469,7 @@ const t: Record<string, Record<string, any>> = {
       copyright: "© 2026 AÉRI · H&G Ventures Private Limited · All rights reserved",
       returnPolicy: "Return Policy",
       privacy: "Privacy",
-      brandTagline1: "AÉRI Makhana: The Art de l'Apéro.",
+      brandTagline1: "AÉRI Makhana: The Art of Snacking.",
       brandTagline2: "",
       partner: "Partner: Hybite Foods",
       footerLinks: {
@@ -519,7 +519,7 @@ const t: Record<string, Record<string, any>> = {
       copyright: "© 2026 AÉRI · H&G Ventures Private Limited · सर्वाधिकार सुरक्षित",
       returnPolicy: "रिटर्न पॉलिसी",
       privacy: "गोपनीयता",
-      brandTagline1: "AÉRI Makhana: The Art de l'Apéro.",
+      brandTagline1: "AÉRI मखाना: स्नैकिंग की कला।",
       brandTagline2: "",
       partner: "भागीदार: Hybite Foods",
       footerLinks: {

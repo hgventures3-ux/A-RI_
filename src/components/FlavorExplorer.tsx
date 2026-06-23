@@ -8,6 +8,8 @@ import { useLanguage } from "@/context/LanguageContext";
 import { useCart } from "@/context/CartContext";
 import toast from "react-hot-toast";
 
+import { useCurrency } from "@/context/CurrencyContext";
+
 type Product = {
   id: string;
   slug: string;
@@ -15,7 +17,9 @@ type Product = {
   category: string;
   flavor?: string;
   description: string;
-  price: string;
+  basePrice?: number;
+  basePriceINR?: number;
+  customPriceLabel?: string;
   image: string;
   isB2B?: boolean;
 };
@@ -38,7 +42,8 @@ const frenchProducts: Product[] = [
     name: "Gourmet Truffle Fusion",
     category: "GOURMET",
     description: "Makhana Graines Soufflées - Saveur Truffe Noire.",
-    price: "€2.99 / 30g",
+    basePrice: 2.99,
+    basePriceINR: 65,
     image: "/products/product2.png",
   },
   {
@@ -47,7 +52,8 @@ const frenchProducts: Product[] = [
     name: "Mediterranean Herb Fusion",
     category: "VÉGÉTAL",
     description: "Makhana Graines Soufflées - Aux Herbes de Provence.",
-    price: "€2.99 / 30g",
+    basePrice: 2.99,
+    basePriceINR: 65,
     image: "/products/product3.png",
   },
   {
@@ -57,7 +63,7 @@ const frenchProducts: Product[] = [
     category: "B2B / VRAC",
     description:
       "Makhana premium en vrac pour grossistes, distributeurs et marques privées.",
-    price: "Tarifs dégressifs au container - Devis sur demande.",
+    customPriceLabel: "Tarifs dégressifs au container - Devis sur demande.",
     image: "/bulk makhana.png",
     isB2B: true,
   },
@@ -68,7 +74,8 @@ const frenchProducts: Product[] = [
     category: "SUCRÉ",
     description:
       "Makhana Graines Soufflées - Caramel doré et pointe de sel.",
-    price: "€2.99 / 30g",
+    basePrice: 2.99,
+    basePriceINR: 65,
     image: "/flavor_caramel_salt.png",
   },
   {
@@ -78,7 +85,8 @@ const frenchProducts: Product[] = [
     category: "SUCRÉ",
     description:
       "Makhana Graines Soufflées - Enrobage fin au chocolat noir 70%.",
-    price: "€2.99 / 30g",
+    basePrice: 2.99,
+    basePriceINR: 65,
     image: "/flavor_dark_chocolate.png",
   },
   {
@@ -88,7 +96,8 @@ const frenchProducts: Product[] = [
     category: "VÉGÉTAL",
     description:
       "Makhana Graines Soufflées - Fraîcheur citronnée et menthe.",
-    price: "€2.99 / 30g",
+    basePrice: 2.99,
+    basePriceINR: 65,
     image: "/flavor_lemon_mint.png",
   },
   {
@@ -98,7 +107,8 @@ const frenchProducts: Product[] = [
     category: "GOURMET",
     description:
       "Makhana Graines Soufflées - Saveur cacahuète torréfiée.",
-    price: "€2.99 / 30g",
+    basePrice: 2.99,
+    basePriceINR: 65,
     image: "/flavor_peanut_butter.png",
   },
   {
@@ -108,7 +118,8 @@ const frenchProducts: Product[] = [
     category: "ÉPICÉ",
     description:
       "Makhana Graines Soufflées - Piment, agrumes et ail.",
-    price: "€2.99 / 30g",
+    basePrice: 2.99,
+    basePriceINR: 65,
     image: "/flavor_peri_peri.png",
   },
   {
@@ -118,7 +129,8 @@ const frenchProducts: Product[] = [
     category: "GOURMET",
     description:
       "Makhana Graines Soufflées - Notes fumées et épices savoureuses.",
-    price: "€2.99 / 30g",
+    basePrice: 2.99,
+    basePriceINR: 65,
     image: "/flavor_smokey_bbq.png",
   },
   {
@@ -128,7 +140,8 @@ const frenchProducts: Product[] = [
     category: "VÉGÉTAL",
     description:
       "Makhana Graines Soufflées - Tomate mûrie au soleil et herbes.",
-    price: "€2.99 / 30g",
+    basePrice: 2.99,
+    basePriceINR: 65,
     image: "/products/tomato.png",
   },
 ];
@@ -170,7 +183,7 @@ const englishProducts: Product[] = frenchProducts.map((product) => {
     raw: {
       description:
         "Premium bulk Makhana for wholesalers, distributors, and private labels.",
-      price: "Tiered container pricing - Quote on request.",
+      customPriceLabel: "Tiered container pricing - Quote on request.",
     },
   };
 
@@ -229,14 +242,17 @@ const fadeUp = {
 
 export default function FlavorExplorer() {
   const { lang } = useLanguage();
+  const { formatPrice, isIndia } = useCurrency();
   const content = copy[lang === "en" ? "en" : "fr"];
   const { addToCart } = useCart();
   const [addedIds, setAddedIds] = useState<Set<string>>(new Set());
 
   const handleAddToCart = (product: Product) => {
-    // Parse price number from string like "€2.99 / 30g"
-    const priceMatch = product.price.match(/(\d+[.,]\d+)/);
-    const priceNum = priceMatch ? parseFloat(priceMatch[1].replace(",", ".")) : 0;
+    if (product.basePrice === undefined) return;
+    
+    // Ensure we use the proper price format for the cart (the number itself)
+    // For INR, use 65 (or basePriceINR), for EUR use basePrice.
+    const priceNum = isIndia ? (product.basePriceINR ?? 65) : product.basePrice;
 
     addToCart({
       id: product.id,
@@ -388,7 +404,12 @@ export default function FlavorExplorer() {
                     : "var(--font-didot)",
                 }}
               >
-                {product.price}
+                {product.isB2B 
+                  ? product.customPriceLabel 
+                  : (product.basePrice !== undefined 
+                      ? `${formatPrice(product.basePrice, product.basePriceINR)} / 30g` 
+                      : "")
+                }
               </p>
 
               {product.isB2B ? (

@@ -25,14 +25,14 @@ const heroText = {
   },
   en: {
     ticker: "• Free shipping on your first delivery • Free shipping on your first delivery •",
-    headline: "AÉRI Makhana: The Art de l'Apéro.",
+    headline: "AÉRI Makhana: The Art of Snacking.",
     subheadline: "Crunchy, noble, and naturally healthy. Discover the Indian super-seed that reinvents your evening rituals.",
     cta: "SHOP NOW",
     disclaimer: "Illustrative visual representation.",
   },
   hi: {
     ticker: "• आपके पहले ऑर्डर पर मुफ़्त डिलीवरी • आपके पहले ऑर्डर पर मुफ़्त डिलीवरी •",
-    headline: "AÉRI Makhana: The Art de l'Apéro.",
+    headline: "AÉRI मखाना: स्नैकिंग की कला।",
     subheadline: "कुरकुरा, शानदार, और प्राकृतिक रूप से स्वस्थ। भारतीय सुपर-सीड की खोज करें जो आपकी शाम को बदल दे。",
     cta: "अभी खरीदें",
     disclaimer: "सचित्र वानस्पतिक प्रतिनिधित्व।",

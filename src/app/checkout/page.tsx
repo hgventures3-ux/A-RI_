@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useCart } from "@/context/CartContext";
 import { useLanguage } from "@/context/LanguageContext";
+import { useCurrency } from "@/context/CurrencyContext";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -21,6 +22,7 @@ type CouponResult = {
 export default function CheckoutPage() {
   const { items, cartTotal, clearCart } = useCart();
   const { lang } = useLanguage();
+  const { currency, formatAmount } = useCurrency();
   const router = useRouter();
 
   const isFrench = lang === "fr";
@@ -69,8 +71,8 @@ export default function CheckoutPage() {
         setAppliedCoupon(data);
         toast.success(
           isFrench
-            ? `Code appliqué ! -€${data.discountAmount.toFixed(2)}`
-            : `Coupon applied! -€${data.discountAmount.toFixed(2)}`
+            ? `Code appliqué ! -${formatAmount(data.discountAmount)}`
+            : `Coupon applied! -${formatAmount(data.discountAmount)}`
         );
       }
     } catch {
@@ -138,7 +140,8 @@ export default function CheckoutPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
           items,
-          amount: finalTotal 
+          amount: finalTotal,
+          currency: currency
         }),
       }).then((t) => t.json());
 
@@ -420,8 +423,8 @@ export default function CheckoutPage() {
                       >
                         -{appliedCoupon.discountType === "percentage"
                           ? `${appliedCoupon.discountValue}%`
-                          : `€${appliedCoupon.discountValue}`}{" "}
-                        {isFrench ? "remise appliquée" : "discount applied"} (−€{appliedCoupon.discountAmount.toFixed(2)})
+                          : formatAmount(appliedCoupon.discountValue)}{" "}
+                        {isFrench ? "remise appliquée" : "discount applied"} (−{formatAmount(appliedCoupon.discountAmount)})
                       </p>
                     </div>
                     <button
@@ -514,7 +517,7 @@ export default function CheckoutPage() {
                         className="text-sm font-semibold text-[#1C1C1C]"
                         style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
                       >
-                        €{(item.price * item.quantity).toFixed(2)}
+                        {formatAmount(item.price * item.quantity)}
                       </div>
                     </div>
                   ))}
@@ -527,7 +530,7 @@ export default function CheckoutPage() {
                 >
                   <div className="flex justify-between items-center text-sm text-[#4c463e]">
                     <span>{isFrench ? "Sous-total" : "Subtotal"}</span>
-                    <span>€{cartTotal.toFixed(2)}</span>
+                    <span>{formatAmount(cartTotal)}</span>
                   </div>
 
                   {appliedCoupon && (
@@ -535,7 +538,7 @@ export default function CheckoutPage() {
                       <span>
                         {isFrench ? "Remise" : "Discount"} ({appliedCoupon.code})
                       </span>
-                      <span>−€{appliedCoupon.discountAmount.toFixed(2)}</span>
+                      <span>−{formatAmount(appliedCoupon.discountAmount)}</span>
                     </div>
                   )}
 
@@ -546,7 +549,7 @@ export default function CheckoutPage() {
 
                   <div className="flex justify-between items-center text-lg font-bold text-[#1C1C1C] pt-2 border-t border-[#cec5bb]">
                     <span>Total</span>
-                    <span>€{finalTotal.toFixed(2)}</span>
+                    <span>{formatAmount(finalTotal)}</span>
                   </div>
                 </div>
 

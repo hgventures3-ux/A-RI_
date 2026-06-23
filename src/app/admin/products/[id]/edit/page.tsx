@@ -20,7 +20,9 @@ const productSchema = z.object({
   description: z.string().optional(),
   category: z.string().min(2, "Category is required"),
   price: z.coerce.number().min(0, "Price must be positive"),
+  priceINR: z.coerce.number().optional(),
   discountPrice: z.coerce.number().optional(),
+  discountPriceINR: z.coerce.number().optional(),
   stockQuantity: z.coerce.number().min(0, "Stock cannot be negative"),
   status: z.enum(["Active", "Draft", "Archived"]),
   featured: z.boolean(),
@@ -69,7 +71,9 @@ export default function EditProductPage() {
           description: p.description || "",
           category: p.category,
           price: p.price,
+          priceINR: p.priceINR || 65,
           discountPrice: p.discountPrice || undefined,
+          discountPriceINR: p.discountPriceINR || undefined,
           stockQuantity: p.stockQuantity,
           status: p.status,
           featured: p.featured,
@@ -349,6 +353,18 @@ export default function EditProductPage() {
                 )}
               </div>
               <div>
+                <label htmlFor="priceINR" className="block text-sm font-medium text-[#4c463e] mb-1.5">
+                  Price India (₹)
+                </label>
+                <input
+                  id="priceINR"
+                  type="number"
+                  step="0.01"
+                  {...register("priceINR")}
+                  className="w-full px-4 py-2.5 rounded-xl bg-[#faf5ef] border border-[#e8e0d8] text-sm outline-none focus:ring-2 focus:ring-[#675d4e]/30"
+                />
+              </div>
+              <div>
                 <label htmlFor="discountPrice" className="block text-sm font-medium text-[#4c463e] mb-1.5">
                   Discount Price (€)
                 </label>
@@ -357,6 +373,18 @@ export default function EditProductPage() {
                   type="number"
                   step="0.01"
                   {...register("discountPrice")}
+                  className="w-full px-4 py-2.5 rounded-xl bg-[#faf5ef] border border-[#e8e0d8] text-sm outline-none focus:ring-2 focus:ring-[#675d4e]/30"
+                />
+              </div>
+              <div>
+                <label htmlFor="discountPriceINR" className="block text-sm font-medium text-[#4c463e] mb-1.5">
+                  Discount Price India (₹)
+                </label>
+                <input
+                  id="discountPriceINR"
+                  type="number"
+                  step="0.01"
+                  {...register("discountPriceINR")}
                   className="w-full px-4 py-2.5 rounded-xl bg-[#faf5ef] border border-[#e8e0d8] text-sm outline-none focus:ring-2 focus:ring-[#675d4e]/30"
                 />
               </div>

@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
 import { useLanguage } from "@/context/LanguageContext";
+import { useCurrency } from "@/context/CurrencyContext";
 import { useRouter } from "next/navigation";
 
 const t = {
@@ -45,6 +46,7 @@ import { useState, useCallback } from "react";
 
 export default function CartDrawer({ onCheckout }: { onCheckout?: () => void }) {
   const { isCartOpen, setIsCartOpen, items, updateQuantity, removeFromCart, cartTotal } = useCart();
+  const { formatAmount } = useCurrency();
   const { lang } = useLanguage();
   const s = t[lang as keyof typeof t] || t.fr;
   const router = useRouter();
@@ -128,7 +130,7 @@ export default function CartDrawer({ onCheckout }: { onCheckout?: () => void }) 
                               {item.name}
                             </h3>
                             <span className="font-bold text-[#1C1C1C]" style={{ fontFamily: "var(--font-montserrat)" }}>
-                              €{(item.price * item.quantity).toFixed(2)}
+                              {formatAmount(item.price * item.quantity)}
                             </span>
                           </div>
                         </div>
@@ -173,7 +175,7 @@ export default function CartDrawer({ onCheckout }: { onCheckout?: () => void }) 
                     {s.total}
                   </span>
                   <span className="text-2xl font-bold text-[#1C1C1C]" style={{ fontFamily: "var(--font-didot)" }}>
-                    €{cartTotal.toFixed(2)}
+                    {formatAmount(cartTotal)}
                   </span>
                 </div>
                 <button

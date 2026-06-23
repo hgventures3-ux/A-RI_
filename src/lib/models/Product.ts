@@ -13,7 +13,9 @@ export interface IProduct extends Document {
   category: string;
   productType: "B2B" | "B2C" | "Both";
   price: number;
+  priceINR?: number;
   discountPrice?: number;
+  discountPriceINR?: number;
   costPrice?: number;
   stockQuantity: number;
   weight?: string;
@@ -44,7 +46,9 @@ const ProductSchema = new Schema<IProduct>(
       default: "B2C",
     },
     price: { type: Number, required: true },
+    priceINR: { type: Number, default: 65 }, // Client requested default 65 for India
     discountPrice: { type: Number },
+    discountPriceINR: { type: Number },
     costPrice: { type: Number },
     stockQuantity: { type: Number, default: 0 },
     weight: { type: String },

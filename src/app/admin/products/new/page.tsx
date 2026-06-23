@@ -22,7 +22,9 @@ const productSchema = z.object({
   category: z.string().min(1, "Category is required"),
   productType: z.enum(["B2B", "B2C", "Both"]),
   price: z.coerce.number().min(0.01, "Price must be greater than 0"),
+  priceINR: z.coerce.number().optional(),
   discountPrice: z.coerce.number().optional(),
+  discountPriceINR: z.coerce.number().optional(),
   costPrice: z.coerce.number().optional(),
   stockQuantity: z.coerce.number().int().min(0),
   weight: z.string().optional(),
@@ -82,6 +84,7 @@ export default function NewProductPage() {
       featured: false,
       stockQuantity: 0,
       price: 0,
+      priceINR: 65,
     },
   });
 
@@ -328,6 +331,15 @@ export default function NewProductPage() {
                 className={inputClass}
               />
             </Field>
+            <Field label="Price India (₹)" error={errors.priceINR?.message}>
+              <input
+                type="number"
+                step="0.01"
+                {...register("priceINR")}
+                placeholder="65"
+                className={inputClass}
+              />
+            </Field>
             <Field
               label="Discount Price (€)"
               error={errors.discountPrice?.message}
@@ -337,6 +349,18 @@ export default function NewProductPage() {
                 step="0.01"
                 {...register("discountPrice")}
                 placeholder="3.99"
+                className={inputClass}
+              />
+            </Field>
+            <Field
+              label="Discount Price India (₹)"
+              error={errors.discountPriceINR?.message}
+            >
+              <input
+                type="number"
+                step="0.01"
+                {...register("discountPriceINR")}
+                placeholder="55"
                 className={inputClass}
               />
             </Field>

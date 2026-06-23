@@ -10,54 +10,73 @@ import Footer from "@/components/Footer";
 /* ────────────────────────────────────────────────────────
    Stats
    ──────────────────────────────────────────────────────── */
-const stats = [
-  { value: "25+", label: "Ans d'expertise", sub: "Emballage & conservation" },
-  { value: "1000", label: "Acres", sub: "Zones humides préservées" },
-  { value: "100%", label: "Traçabilité", sub: "Du Bihar à la France" },
-  { value: "4", label: "Certifications", sub: "FSSAI · NABL · EU · IEC" },
-];
+const statsData: Record<string, { value: string; label: string; sub: string }[]> = {
+  fr: [
+    { value: "25+", label: "Ans d'expertise", sub: "Emballage & conservation" },
+    { value: "1000", label: "Acres", sub: "Zones humides préservées" },
+    { value: "100%", label: "Traçabilité", sub: "Du Bihar à la France" },
+    { value: "4", label: "Certifications", sub: "FSSAI · NABL · EU · IEC" },
+  ],
+  en: [
+    { value: "25+", label: "Years of expertise", sub: "Packaging & conservation" },
+    { value: "1000", label: "Acres", sub: "Preserved wetlands" },
+    { value: "100%", label: "Traceability", sub: "From Bihar to France" },
+    { value: "4", label: "Certifications", sub: "FSSAI · NABL · EU · IEC" },
+  ],
+  hi: [
+    { value: "25+", label: "वर्षों की विशेषज्ञता", sub: "पैकेजिंग और संरक्षण" },
+    { value: "1000", label: "एकड़", sub: "संरक्षित आर्द्रभूमि" },
+    { value: "100%", label: "ट्रैसेबिलिटी", sub: "बिहार से फ्रांस तक" },
+    { value: "4", label: "प्रमाणपत्र", sub: "FSSAI · NABL · EU · IEC" },
+  ],
+};
 
 /* ────────────────────────────────────────────────────────
    Services
    ──────────────────────────────────────────────────────── */
-const services = [
-  {
-    icon: (
-      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
-        <rect x="6" y="10" width="36" height="28" rx="3" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M6 18h36" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M14 26h10M14 30h6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-        <circle cx="34" cy="28" r="5" stroke="currentColor" strokeWidth="1.2" />
-        <path d="M32 28l1.5 1.5 3-3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    ),
-    title: "Marque Blanche",
-    description: "Conditionnement sous votre propre marque avec nos standards de qualité premium.",
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
-        <path d="M8 36l8-8 6 6 8-10 10 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        <path d="M8 12v24h32" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-        <circle cx="34" cy="16" r="3" stroke="currentColor" strokeWidth="1.2" />
-        <path d="M34 13v-3M37 16h3" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
-      </svg>
-    ),
-    title: "Volume & Pricing",
-    description: "Tarifs dégressifs pour commandes en gros. MOQ flexible pour les marchés européens.",
-  },
-  {
-    icon: (
-      <svg viewBox="0 0 48 48" fill="none" className="w-full h-full">
-        <circle cx="24" cy="24" r="16" stroke="currentColor" strokeWidth="1.5" />
-        <ellipse cx="24" cy="24" rx="8" ry="16" stroke="currentColor" strokeWidth="1" />
-        <path d="M8 24h32M10 17h28M10 31h28" stroke="currentColor" strokeWidth="0.8" />
-        <circle cx="24" cy="24" r="2" fill="currentColor" fillOpacity="0.3" />
-      </svg>
-    ),
-    title: "Logistique Mondiale",
-    description: "Expédition maritime et aérienne. Incoterms CIF/FOB. Dédouanement EU inclus.",
-  },
+const servicesData: Record<string, { title: string; description: string }[]> = {
+  fr: [
+    { title: "Marque Blanche", description: "Conditionnement sous votre propre marque avec nos standards de qualité premium." },
+    { title: "Volume et Tarification", description: "Tarifs dégressifs pour commandes en gros. MOQ flexible pour les marchés européens." },
+    { title: "Logistique Mondiale", description: "Expédition maritime et aérienne. Incoterms CIF/FOB. Dédouanement EU inclus." },
+  ],
+  en: [
+    { title: "White Label", description: "Packaging under your own brand with our premium quality standards." },
+    { title: "Volume & Pricing", description: "Volume discounts for bulk orders. Flexible MOQ for European markets." },
+    { title: "Global Logistics", description: "Sea and air shipping. CIF/FOB Incoterms. EU customs clearance included." },
+  ],
+  hi: [
+    { title: "व्हाइट लेबल", description: "हमारे प्रीमियम गुणवत्ता मानकों के साथ आपके अपने ब्रांड के तहत पैकेजिंग।" },
+    { title: "वॉल्यूम और मूल्य निर्धारण", description: "थोक ऑर्डर के लिए छूट। यूरोपीय बाजारों के लिए लचीला MOQ।" },
+    { title: "वैश्विक रसद", description: "समुद्री और हवाई शिपिंग। CIF/FOB इनकोटर्म्स। EU सीमा शुल्क निकासी शामिल है।" },
+  ],
+};
+
+const serviceIcons = [
+  (
+    <svg viewBox="0 0 48 48" fill="none" className="w-full h-full" key="icon1">
+      <rect x="6" y="10" width="36" height="28" rx="3" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M6 18h36" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M14 26h10M14 30h6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+      <circle cx="34" cy="28" r="5" stroke="currentColor" strokeWidth="1.2" />
+      <path d="M32 28l1.5 1.5 3-3" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  (
+    <svg viewBox="0 0 48 48" fill="none" className="w-full h-full" key="icon2">
+      <path d="M8 36l8-8 6 6 8-10 10 12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="M8 12v24h32" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="34" cy="16" r="3" stroke="currentColor" strokeWidth="1.2" />
+      <path d="M34 13v-3M37 16h3" stroke="currentColor" strokeWidth="1" strokeLinecap="round" />
+    </svg>
+  ),
+  (
+    <svg viewBox="0 0 48 48" fill="none" className="w-full h-full" key="icon3">
+      <circle cx="24" cy="24" r="16" stroke="currentColor" strokeWidth="1.5" />
+      <path d="M8 24h32M24 8a28 28 0 0 1 6 16 28 28 0 0 1-6 16M24 8a28 28 0 0 0-6 16 28 28 0 0 0 6 16" stroke="currentColor" strokeWidth="1.2" />
+      <circle cx="24" cy="24" r="2" fill="currentColor" fillOpacity="0.3" />
+    </svg>
+  ),
 ];
 
 /* ────────────────────────────────────────────────────────
@@ -195,11 +214,12 @@ export default function EspacePro() {
     }
   };
 
-  const localizedStats = s.stats;
-  const localizedServices = services.map((svc: { icon: React.ReactNode; title: string; description: string }, i: number) => ({
-    ...svc,
-    title: s.services[i].title,
-    description: s.services[i].desc,
+  const localizedStats = statsData[lang] || statsData.en;
+  const currentServices = servicesData[lang] || servicesData.en;
+  const localizedServices = currentServices.map((svc, i: number) => ({
+    icon: serviceIcons[i],
+    title: svc.title,
+    description: svc.description,
   }));
 
   return (
@@ -383,7 +403,7 @@ export default function EspacePro() {
                 { badge: "FSSAI", label: isFrench ? "Sécurité Alimentaire" : "Food Safety", desc: isFrench ? "N° Lic. 10019052000041" : "Lic. No. 10019052000041", file: "fssai-certificate.pdf" },
                 { badge: "IEC", label: "Import Export", desc: isFrench ? "Code IEC homologué DGFT" : "DGFT approved IEC code", file: "iec-certificate.pdf" },
                 { badge: "APEDA", label: "Export Agri", desc: isFrench ? "Exportateur certifié APEDA" : "APEDA certified exporter", file: "apeda-certificate.pdf" },
-                { badge: "STARTUP", label: "Startup India", desc: "DPIIT Recognized Entity", file: "startup-india-certificate.pdf" },
+                { badge: "STARTUP", label: isFrench ? "Jeune Entreprise" : "Startup India", desc: isFrench ? "Entité reconnue DPIIT" : "DPIIT Recognized Entity", file: "startup-india-certificate.pdf" },
               ].map((cred, i) => (
                 <motion.div
                   key={cred.badge}
@@ -617,9 +637,9 @@ export default function EspacePro() {
                     {/* Message */}
                     <div>
                       <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        Votre Message / Besoins Spécifiques
+                        {isFrench ? "Votre Message / Besoins Spécifiques" : "Your Message / Specific Needs"}
                       </label>
-                      <textarea required rows={4} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder="ex. Marque Blanche, Private Label, Référencement national." className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all resize-none" style={{ fontFamily: "var(--font-montserrat)" }} />
+                      <textarea required rows={4} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder={isFrench ? "ex. Marque Blanche, Marque Distributeur, Référencement national." : "e.g. White Label, Private Label, National listing."} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all resize-none" style={{ fontFamily: "var(--font-montserrat)" }} />
                     </div>
                   </div>
 
@@ -631,7 +651,7 @@ export default function EspacePro() {
                     className="mt-6 w-full py-3.5 rounded-xl bg-[#1C1C1C] text-[#FFFFFF] text-sm font-semibold tracking-wide transition-colors hover:bg-[#333] cursor-pointer disabled:opacity-70 flex justify-center text-center"
                     style={{ fontFamily: "var(--font-montserrat)" }}
                   >
-                    {loading ? "..." : submitted ? "✓ Demande envoyée !" : "Demander une Cotation / Fiche Technique"}
+                    {loading ? "..." : submitted ? (isFrench ? "✓ Demande envoyée !" : "✓ Request sent!") : (isFrench ? "Demander une Cotation / Fiche Technique" : "Request a Quote / Product Sheet")}
                   </motion.button>
                 </form>
               </motion.div>

@@ -79,7 +79,7 @@ export const productData: Record<
   },
   "black-truffle": {
     title: "Black Truffle",
-    tagline: "The Black Gold of Apéro",
+    tagline: "The Black Gold of Snacking",
     heroDesc: "The intoxicating aroma of Périgord black truffle, elevated by the cloud-like lightness of Makhana. Accessible luxury, redefined.",
     image: "/products/product2.png",
     color: "#F5F3F0",

@@ -196,11 +196,16 @@ export default function MissionPage() {
                 }}
               >
                 <h3
-                  className="text-lg md:text-xl text-[#1C1C1C] mb-4 font-semibold"
+                  className="text-lg md:text-xl text-[#1C1C1C] mb-4 font-semibold flex items-center gap-2.5"
                   style={{
                     fontFamily: "var(--font-didot)",
                   }}
                 >
+                  <span className="flex-shrink-0 w-6 h-6 rounded-full bg-[#D4AF37]/15 flex items-center justify-center text-[#D4AF37]">
+                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </span>
                   {value.title}
                 </h3>
                 <p

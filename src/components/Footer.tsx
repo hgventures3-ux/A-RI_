@@ -4,7 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import t from "@/translations";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Footer() {
   const { lang } = useLanguage();
@@ -12,6 +12,18 @@ export default function Footer() {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [dynamicProducts, setDynamicProducts] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetch("/api/products")
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.data) {
+          setDynamicProducts(data.data.slice(0, 6)); // Display up to 6 products
+        }
+      })
+      .catch(console.error);
+  }, []);
 
   const handleSubscribe = async () => {
     if (!email) return;
@@ -183,21 +195,35 @@ export default function Footer() {
                   {s.footerCats[i]}
                 </h5>
                 <ul className="space-y-2.5">
-                  {(s.footerLinks[category as keyof typeof s.footerLinks] as string[]).map((link: string, j: number) => {
-                    const routeKey = category === "products" ? "products" : category === "company" || category === "entreprise" ? "company" : "legal";
-                    const href = linkRoutes[routeKey]?.[j] || "#";
-                    return (
-                      <li key={link}>
+                  {category === "products" && dynamicProducts.length > 0 ? (
+                    dynamicProducts.map((prod) => (
+                      <li key={prod._id || prod.slug}>
                         <Link
-                          href={href}
+                          href={`/products/${prod.slug}`}
                           className="text-sm text-[#FFFFFF]/35 transition-colors hover:text-[#FFFFFF]/70"
                           style={{ fontFamily: "var(--font-lora)" }}
                         >
-                          {link}
+                          {prod.name}
                         </Link>
                       </li>
-                    );
-                  })}
+                    ))
+                  ) : (
+                    (s.footerLinks[category as keyof typeof s.footerLinks] as string[]).map((link: string, j: number) => {
+                      const routeKey = category === "products" ? "products" : category === "company" || category === "entreprise" ? "company" : "legal";
+                      const href = linkRoutes[routeKey]?.[j] || "#";
+                      return (
+                        <li key={link}>
+                          <Link
+                            href={href}
+                            className="text-sm text-[#FFFFFF]/35 transition-colors hover:text-[#FFFFFF]/70"
+                            style={{ fontFamily: "var(--font-lora)" }}
+                          >
+                            {link}
+                          </Link>
+                        </li>
+                      );
+                    })
+                  )}
                 </ul>
               </div>
             ));
