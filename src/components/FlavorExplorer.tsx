@@ -37,11 +37,21 @@ type LocaleCopy = {
 
 const frenchProducts: Product[] = [
   {
+    id: "himalayan-salt",
+    slug: "himalayan-salt",
+    name: "Himalayan Salt & Pepper",
+    category: "SIGNATURE",
+    description: "Graines de Makhana soufflées - Sel rose de l'Himalaya et poivre.",
+    basePrice: 2.99,
+    basePriceINR: 65,
+    image: "/flavor_himalayan_salt_new.png",
+  },
+  {
     id: "truffle",
     slug: "black-truffle",
     name: "Gourmet Truffle Fusion",
     category: "GOURMET",
-    description: "Makhana Graines Soufflées - Saveur Truffe Noire.",
+    description: "Graines de Makhana soufflées - Saveur Truffe Noire.",
     basePrice: 2.99,
     basePriceINR: 65,
     image: "/products/product2.png",
@@ -51,7 +61,7 @@ const frenchProducts: Product[] = [
     slug: "mediterranean-herb-fusion",
     name: "Mediterranean Herb Fusion",
     category: "VÉGÉTAL",
-    description: "Makhana Graines Soufflées - Aux Herbes de Provence.",
+    description: "Graines de Makhana soufflées - Aux Herbes de Provence.",
     basePrice: 2.99,
     basePriceINR: 65,
     image: "/products/product3.png",
@@ -73,7 +83,7 @@ const frenchProducts: Product[] = [
     name: "Caramel & Sel",
     category: "SUCRÉ",
     description:
-      "Makhana Graines Soufflées - Caramel doré et pointe de sel.",
+      "Graines de Makhana soufflées - Caramel doré et pointe de sel.",
     basePrice: 2.99,
     basePriceINR: 65,
     image: "/flavor_caramel_salt.png",
@@ -84,7 +94,7 @@ const frenchProducts: Product[] = [
     name: "Chocolat Noir 70%",
     category: "SUCRÉ",
     description:
-      "Makhana Graines Soufflées - Enrobage fin au chocolat noir 70%.",
+      "Graines de Makhana soufflées - Enrobage fin au chocolat noir 70%.",
     basePrice: 2.99,
     basePriceINR: 65,
     image: "/flavor_dark_chocolate.png",
@@ -95,7 +105,7 @@ const frenchProducts: Product[] = [
     name: "Citron & Menthe",
     category: "VÉGÉTAL",
     description:
-      "Makhana Graines Soufflées - Fraîcheur citronnée et menthe.",
+      "Graines de Makhana soufflées - Fraîcheur citronnée et menthe.",
     basePrice: 2.99,
     basePriceINR: 65,
     image: "/flavor_lemon_mint.png",
@@ -106,7 +116,7 @@ const frenchProducts: Product[] = [
     name: "Beurre de Cacahuète",
     category: "GOURMET",
     description:
-      "Makhana Graines Soufflées - Saveur cacahuète torréfiée.",
+      "Graines de Makhana soufflées - Saveur cacahuète torréfiée.",
     basePrice: 2.99,
     basePriceINR: 65,
     image: "/flavor_peanut_butter.png",
@@ -117,7 +127,7 @@ const frenchProducts: Product[] = [
     name: "Péri-Péri",
     category: "ÉPICÉ",
     description:
-      "Makhana Graines Soufflées - Piment, agrumes et ail.",
+      "Graines de Makhana soufflées - Piment, agrumes et ail.",
     basePrice: 2.99,
     basePriceINR: 65,
     image: "/flavor_peri_peri.png",
@@ -128,7 +138,7 @@ const frenchProducts: Product[] = [
     name: "BBQ Fumé",
     category: "GOURMET",
     description:
-      "Makhana Graines Soufflées - Notes fumées et épices savoureuses.",
+      "Graines de Makhana soufflées - Notes fumées et épices savoureuses.",
     basePrice: 2.99,
     basePriceINR: 65,
     image: "/flavor_smokey_bbq.png",
@@ -139,7 +149,7 @@ const frenchProducts: Product[] = [
     name: "Tomate Acidulée",
     category: "VÉGÉTAL",
     description:
-      "Makhana Graines Soufflées - Tomate mûrie au soleil et herbes.",
+      "Graines de Makhana soufflées - Tomate mûrie au soleil et herbes.",
     basePrice: 2.99,
     basePriceINR: 65,
     image: "/products/tomato.png",
@@ -250,9 +260,9 @@ export default function FlavorExplorer() {
   const handleAddToCart = (product: Product) => {
     if (product.basePrice === undefined) return;
     
-    // Ensure we use the proper price format for the cart (the number itself)
-    // For INR, use 65 (or basePriceINR), for EUR use basePrice.
-    const priceNum = isIndia ? (product.basePriceINR ?? 65) : product.basePrice;
+    // Use INR price for India users, USD base price for everyone else
+    // Cart stores prices in their local currency units
+    const priceNum = isIndia ? (product.basePriceINR ?? Math.round(product.basePrice * 84)) : product.basePrice;
 
     addToCart({
       id: product.id,
@@ -407,7 +417,7 @@ export default function FlavorExplorer() {
                 {product.isB2B 
                   ? product.customPriceLabel 
                   : (product.basePrice !== undefined 
-                      ? `${formatPrice(product.basePrice, product.basePriceINR)} / 30g` 
+                      ? `${formatPrice()} / 30g` 
                       : "")
                 }
               </p>

@@ -124,7 +124,7 @@ export async function POST(req: Request) {
 
       try {
         await resendTransporter.sendMail({
-          from: process.env.SMTP_FROM || "AÉRI Makhana <onboarding@resend.dev>",
+          from: process.env.SMTP_FROM || `"AÉRI Makhana" <no-reply@aerisnacks.com>`,
           to: emailLower,
           subject: `Your AÉRI Verification Code: ${otpCode}`,
           html: htmlContent,

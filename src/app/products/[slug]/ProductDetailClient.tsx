@@ -9,6 +9,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/context/LanguageContext";
 import { useCart } from "@/context/CartContext";
+import { useCurrency } from "@/context/CurrencyContext";
 
 import { productData } from "@/lib/productData";
 
@@ -36,11 +37,10 @@ export default function ProductDetailPage() {
   const slug = params.slug as string;
   const product = productData[slug];
   const { addToCart } = useCart();
-
-  const isComingSoon = slug === "coming-soon";
-  // भाषा अब ग्लोबल टॉगल से आती है, स्लग से नहीं (Language now comes from global toggle, not slug)
   const { lang } = useLanguage();
+  const { formatPrice } = useCurrency();
   const isFrench = lang === 'fr';
+  const isComingSoon = slug === "coming-soon";
 
   /* 404 */
   if (!product) {
@@ -138,7 +138,7 @@ export default function ProductDetailPage() {
               className="mb-10"
               style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
             >
-              <span className="text-2xl font-bold" style={{ color: "#1d1b1a" }}>€2.99</span>
+              <span className="text-2xl font-bold" style={{ color: "#1d1b1a" }}>{formatPrice()}</span>
               <span className="text-sm font-medium tracking-wide uppercase ml-2" style={{ color: "#675d4e" }}>/ 30g</span>
             </motion.div>
 

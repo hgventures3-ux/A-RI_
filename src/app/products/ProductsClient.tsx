@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
+import { useCurrency } from "@/context/CurrencyContext";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FlavorExplorer from "@/components/FlavorExplorer";
@@ -31,7 +32,7 @@ const t = {
         name: "Himalayan Salt & Pepper",
         category: "SIGNATURE",
         desc: "La pureté du sel rose de l'Himalaya mariée au piquant subtil du poivre noir concassé. Torréfié à l'huile d'olive — jamais frit.",
-        price: "€2.99 / 30g",
+        price: "2.99",
         image: "/flavor_himalayan_salt_new.png",
       },
       {
@@ -39,7 +40,7 @@ const t = {
         name: "Truffle Fusion",
         category: "GOURMET",
         desc: "Une infusion luxueuse d'huile de truffe blanche et d'éclats de truffe noire d'été. Torréfié à l'huile d'olive — jamais frit.",
-        price: "€2.99 / 30g",
+        price: "2.99",
         image: "/flavor_truffle_makhana.png",
       },
       {
@@ -47,7 +48,7 @@ const t = {
         name: "Mediterranean Herb",
         category: "VÉGÉTAL",
         desc: "Un bouquet aromatique d'origan sauvage, romarin et basilic séché au soleil. Torréfié à l'huile d'olive — jamais frit.",
-        price: "€2.99 / 30g",
+        price: "2.99",
         image: "/flavor_herbes_makhana.png",
       },
       {
@@ -55,7 +56,7 @@ const t = {
         name: "Caramel & Beurre Salé",
         category: "SUCRÉ",
         desc: "Un mélange luxueux de caramel riche et d'une pointe de sel de mer. Torréfié, jamais frit.",
-        price: "€2.99 / 30g",
+        price: "2.99",
         image: "/flavor_caramel_salt.png",
       },
       {
@@ -63,7 +64,7 @@ const t = {
         name: "Chocolat Noir 70%",
         category: "SUCRÉ",
         desc: "Chocolat noir 70% d'origine unique enrobant délicatement notre Makhana soufflé premium.",
-        price: "€2.99 / 30g",
+        price: "2.99",
         image: "/flavor_dark_chocolate.png",
       },
       {
@@ -71,7 +72,7 @@ const t = {
         name: "Citron & Menthe",
         category: "VÉGÉTAL",
         desc: "Un éclat vif et citronné de citron associé à la fraîcheur de la menthe.",
-        price: "€2.99 / 30g",
+        price: "2.99",
         image: "/flavor_lemon_mint.png",
       },
       {
@@ -79,7 +80,7 @@ const t = {
         name: "Beurre de Cacahuète",
         category: "SUCRÉ",
         desc: "Beurre de cacahuète onctueux et torréfié enrobant naturellement notre Makhana.",
-        price: "€2.99 / 30g",
+        price: "2.99",
         image: "/flavor_peanut_butter.png",
       },
       {
@@ -87,7 +88,7 @@ const t = {
         name: "Péri-Péri",
         category: "ÉPICÉ",
         desc: "Un mélange audacieux et vibrant de piment africain, d'agrumes et d'ail.",
-        price: "€2.99 / 30g",
+        price: "2.99",
         image: "/flavor_peri_peri.png",
       },
       {
@@ -95,7 +96,7 @@ const t = {
         name: "BBQ Fumé",
         category: "GOURMET",
         desc: "Notes profondes et fumées de caryer associées à une touche de douceur.",
-        price: "€2.99 / 30g",
+        price: "2.99",
         image: "/flavor_smokey_bbq.png",
       },
       {
@@ -103,7 +104,7 @@ const t = {
         name: "Tomate Acidulée",
         category: "VÉGÉTAL",
         desc: "L'éclat sucré et acidulé des tomates mûries au soleil avec des herbes subtiles.",
-        price: "€2.99 / 30g",
+        price: "2.99",
         image: "/flavor_tangy_tomato.png",
       }
     ],
@@ -156,7 +157,7 @@ const t = {
         name: "Himalayan Salt & Pepper",
         category: "SIGNATURE",
         desc: "The purity of Himalayan pink salt married with the subtle kick of crushed black pepper. Roasted in olive oil — never fried.",
-        price: "€2.99 / 30g",
+        price: "2.99",
         image: "/flavor_himalayan_salt_new.png",
       },
       {
@@ -164,7 +165,7 @@ const t = {
         name: "Truffle Fusion",
         category: "GOURMET",
         desc: "A luxurious infusion of white truffle oil and summer black truffle shavings. Roasted in olive oil — never fried.",
-        price: "€2.99 / 30g",
+        price: "2.99",
         image: "/products/product2.png",
       },
       {
@@ -172,7 +173,7 @@ const t = {
         name: "Mediterranean Herb",
         category: "VÉGÉTAL",
         desc: "An aromatic bouquet of wild oregano, rosemary, and sun-dried basil. Roasted in olive oil — never fried.",
-        price: "€2.99 / 30g",
+        price: "2.99",
         image: "/products/product3.png",
       },
       {
@@ -180,7 +181,7 @@ const t = {
         name: "Caramel & Sea Salt",
         category: "SWEET",
         desc: "A luxurious blend of rich caramel and a hint of sea salt. Roasted, never fried.",
-        price: "€2.99 / 30g",
+        price: "2.99",
         image: "/flavor_caramel_salt.png",
       },
       {
@@ -188,7 +189,7 @@ const t = {
         name: "Dark Chocolate 70%",
         category: "SWEET",
         desc: "Rich, 70% single-origin dark chocolate gently coating our premium puffed Makhana.",
-        price: "€2.99 / 30g",
+        price: "2.99",
         image: "/flavor_dark_chocolate.png",
       },
       {
@@ -196,7 +197,7 @@ const t = {
         name: "Lemon & Mint",
         category: "PLANT-BASED",
         desc: "A bright, citrusy burst of lemon paired with cooling mint.",
-        price: "€2.99 / 30g",
+        price: "2.99",
         image: "/flavor_lemon_mint.png",
       },
       {
@@ -204,7 +205,7 @@ const t = {
         name: "Peanut Butter",
         category: "SWEET",
         desc: "Smooth, roasted peanut butter naturally coats our Makhana for a protein-packed experience.",
-        price: "€2.99 / 30g",
+        price: "2.99",
         image: "/flavor_peanut_butter.png",
       },
       {
@@ -212,7 +213,7 @@ const t = {
         name: "Péri-Péri",
         category: "SPICY",
         desc: "A bold, vibrant blend of African bird's eye chili, citrus, and garlic.",
-        price: "€2.99 / 30g",
+        price: "2.99",
         image: "/flavor_peri_peri.png",
       },
       {
@@ -220,7 +221,7 @@ const t = {
         name: "Smokey BBQ",
         category: "GOURMET",
         desc: "Deep, smoky hickory notes paired with a touch of molasses sweetness and savory spices.",
-        price: "€2.99 / 30g",
+        price: "2.99",
         image: "/flavor_smokey_bbq.png",
       },
       {
@@ -228,7 +229,7 @@ const t = {
         name: "Tangy Tomato",
         category: "PLANT-BASED",
         desc: "The sweet and tart brilliance of sun-ripened tomatoes, seasoned with subtle herbs.",
-        price: "€2.99 / 30g",
+        price: "2.99",
         image: "/products/tomato.png",
       }
     ],
@@ -302,6 +303,7 @@ const staggerContainer = {
 export default function ProductsPage() {
   const { lang, toggle } = useLanguage();
   const d = t[lang as keyof typeof t] || t.en;
+  const { formatPrice } = useCurrency();
 
   const [voted, setVoted] = useState<Record<number, boolean>>({});
 

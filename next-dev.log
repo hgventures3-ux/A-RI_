@@ -1,0 +1,17 @@
+
+> makhana@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.7 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://10.118.231.178:3000
+- Environments: .env.local
+✓ Ready in 1858ms
+
+ GET / 200 in 1693ms (next.js: 868ms, application-code: 826ms)
+ GET / 200 in 344ms (next.js: 27ms, application-code: 317ms)
+○ Compiling /api/auth/me ...
+ GET /api/auth/me 401 in 4.1s (next.js: 3.8s, application-code: 290ms)
+ GET /api/auth/me 401 in 29ms (next.js: 8ms, application-code: 22ms)
+ GET /api/products 200 in 6.7s (next.js: 4.0s, application-code: 2.8s)
+[?25h

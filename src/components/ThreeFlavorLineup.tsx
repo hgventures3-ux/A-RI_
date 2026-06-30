@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
+import { useCurrency } from "@/context/CurrencyContext";
 
 const copy = {
   fr: {
@@ -11,16 +12,18 @@ const copy = {
     subtitle:
       "Notre saveur signature, torréfiée à l'huile d'olive vierge extra.",
     label: "SIGNATURE",
+    productCategory: "Graines de Makhana Soufflées",
     product: "Pristine Himalayan Salt & Pepper",
-    price: "7,50 €",
+    roastLabel: "Torréfié à l'huile d'olive · Jamais frit",
     button: "Acheter maintenant",
   },
   en: {
     title: "The AÉRI Collection",
     subtitle: "Our signature flavor, roasted in extra virgin olive oil.",
     label: "SIGNATURE",
+    productCategory: "Puffed Makhana Seeds",
     product: "Pristine Himalayan Salt & Pepper",
-    price: "7.50 €",
+    roastLabel: "Roasted in olive oil · Never fried",
     button: "Buy Now",
   },
   hi: {
@@ -28,15 +31,17 @@ const copy = {
     subtitle:
       "हमारा सिग्नेचर फ्लेवर, एक्स्ट्रा वर्जिन ऑलिव ऑयल में रोस्ट किया गया।",
     label: "सिग्नेचर",
-    product: "Pristine Himalayan Salt & Pepper",
-    price: "7.50 €",
+    productCategory: "पॉप्ड मखाना",
+    product: "हिमालयन साल्ट एंड पेपर",
+    roastLabel: "जैतून के तेल में भुना · कभी तला नहीं",
     button: "अभी खरीदें",
   },
 };
 
 export default function ThreeFlavorLineup() {
   const { lang } = useLanguage();
-  const content = copy[lang as keyof typeof copy] || copy.fr;
+  const content = copy[lang as keyof typeof copy] || copy.en;
+  const { formatPrice } = useCurrency();
 
   return (
     <section
@@ -115,7 +120,7 @@ export default function ThreeFlavorLineup() {
                 className="mb-3 text-[9px] font-bold uppercase leading-4 tracking-[0.12em] text-[#55705B]"
                 style={{ fontFamily: "var(--font-montserrat)" }}
               >
-                Torréfié à l&apos;huile d&apos;olive · Jamais frit
+                {content.roastLabel}
               </p>
 
               <Link href="/products/himalayan-salt" className="block">
@@ -123,7 +128,7 @@ export default function ThreeFlavorLineup() {
                   className="text-3xl font-semibold leading-tight text-[#1D1B1A] md:text-4xl"
                   style={{ fontFamily: "var(--font-didot)" }}
                 >
-                  Makhana Graines Soufflées
+                  {content.productCategory}
                 </h3>
               </Link>
 
@@ -138,7 +143,7 @@ export default function ThreeFlavorLineup() {
                 className="mt-6 text-3xl font-semibold text-[#1D1B1A]"
                 style={{ fontFamily: "var(--font-didot)" }}
               >
-                {content.price}
+                {formatPrice()} <span className="text-base font-normal text-[#6A5B49]">/ 30g</span>
               </p>
 
               <Link
