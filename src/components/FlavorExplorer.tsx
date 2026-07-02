@@ -200,6 +200,37 @@ const englishProducts: Product[] = frenchProducts.map((product) => {
   return { ...product, ...localized[product.id] };
 });
 
+/* ─── Bilingual helper for DB-sourced products ───────────────────────────
+   When an admin adds a product with both EN and FR fields, this function
+   returns the correct localized name/description based on current language.
+   Falls back to English if French translation is missing.
+─────────────────────────────────────────────────────────────────────── */
+export function getLocalizedProduct(
+  product: {
+    name?: string;
+    nameFr?: string;
+    description?: string;
+    descriptionFr?: string;
+    shortDescription?: string;
+    shortDescriptionFr?: string;
+    [key: string]: any;
+  },
+  lang: string
+): { name: string; description: string; shortDescription: string } {
+  const isFrench = lang === "fr";
+  return {
+    name: isFrench
+      ? (product.nameFr?.trim() || product.name || "")
+      : (product.name || ""),
+    description: isFrench
+      ? (product.descriptionFr?.trim() || product.description || "")
+      : (product.description || ""),
+    shortDescription: isFrench
+      ? (product.shortDescriptionFr?.trim() || product.shortDescription || "")
+      : (product.shortDescription || ""),
+  };
+}
+
 const copy: Record<"fr" | "en", LocaleCopy> = {
   fr: {
     title: "Notre Gamme de Makhana",

@@ -14,10 +14,13 @@ import toast from "react-hot-toast";
 
 /* Zod Validation Schema */
 const productSchema = z.object({
-  name: z.string().min(2, "Product name is required"),
+  name: z.string().min(2, "Product name (EN) is required"),
+  nameFr: z.string().optional(),
   slug: z.string().min(2, "Slug is required"),
   description: z.string().optional(),
+  descriptionFr: z.string().optional(),
   shortDescription: z.string().optional(),
+  shortDescriptionFr: z.string().optional(),
   sku: z.string().min(1, "SKU is required"),
   category: z.string().min(1, "Category is required"),
   productType: z.enum(["B2B", "B2C", "Both"]),
@@ -212,14 +215,24 @@ export default function NewProductPage() {
             Basic Information
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Field label="Product Name *" error={errors.name?.message}>
+            {/* Row 1: EN Name + FR Name */}
+            <Field label="Product Name (English) *" error={errors.name?.message}>
               <input
                 {...register("name")}
                 onBlur={generateSlug}
-                placeholder="e.g. Himalayan Salt Makhana"
+                placeholder="e.g. Himalayan Salt & Pepper"
                 className={inputClass}
               />
             </Field>
+            <Field label="Nom du Produit (Français)">
+              <input
+                {...register("nameFr")}
+                placeholder="ex: Sel de l'Himalaya & Poivre"
+                className={inputClass}
+              />
+            </Field>
+
+            {/* Row 2: Slug + SKU */}
             <Field label="Slug *" error={errors.slug?.message}>
               <input
                 {...register("slug")}
@@ -234,6 +247,8 @@ export default function NewProductPage() {
                 className={inputClass}
               />
             </Field>
+
+            {/* Row 3: Category */}
             <Field label="Category *" error={errors.category?.message}>
               <input
                 {...register("category")}
@@ -241,26 +256,41 @@ export default function NewProductPage() {
                 className={inputClass}
               />
             </Field>
-            <Field
-              label="Short Description"
-              span2
-              error={errors.shortDescription?.message}
-            >
+
+            {/* Row 4: Short Description EN */}
+            <Field label="Short Description (English)" span2 error={errors.shortDescription?.message}>
               <input
                 {...register("shortDescription")}
                 placeholder="A brief summary of the product"
                 className={inputClass}
               />
             </Field>
-            <Field
-              label="Full Description"
-              span2
-              error={errors.description?.message}
-            >
+
+            {/* Row 5: Short Description FR */}
+            <Field label="Courte Description (Français)" span2>
+              <input
+                {...register("shortDescriptionFr")}
+                placeholder="Un bref résumé du produit"
+                className={inputClass}
+              />
+            </Field>
+
+            {/* Row 6: Full Description EN */}
+            <Field label="Full Description (English)" span2 error={errors.description?.message}>
               <textarea
                 {...register("description")}
-                rows={4}
-                placeholder="Detailed product description..."
+                rows={3}
+                placeholder="Detailed product description in English..."
+                className={`${inputClass} resize-none`}
+              />
+            </Field>
+
+            {/* Row 7: Full Description FR */}
+            <Field label="Description Complète (Français)" span2>
+              <textarea
+                {...register("descriptionFr")}
+                rows={3}
+                placeholder="Description détaillée du produit en français..."
                 className={`${inputClass} resize-none`}
               />
             </Field>

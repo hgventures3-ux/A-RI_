@@ -14,10 +14,14 @@ import toast from "react-hot-toast";
 
 /* Form Validation Schema */
 const productSchema = z.object({
-  name: z.string().min(2, "Product name is required"),
+  name: z.string().min(2, "Product name (EN) is required"),
+  nameFr: z.string().optional(),
   slug: z.string().min(2, "Slug is required"),
   sku: z.string().min(2, "SKU is required"),
   description: z.string().optional(),
+  descriptionFr: z.string().optional(),
+  shortDescription: z.string().optional(),
+  shortDescriptionFr: z.string().optional(),
   category: z.string().min(2, "Category is required"),
   price: z.coerce.number().min(0, "Price must be positive"),
   priceINR: z.coerce.number().optional(),
@@ -66,9 +70,13 @@ export default function EditProductPage() {
         const p = data.product;
         reset({
           name: p.name,
+          nameFr: p.nameFr || "",
           slug: p.slug,
           sku: p.sku,
           description: p.description || "",
+          descriptionFr: p.descriptionFr || "",
+          shortDescription: p.shortDescription || "",
+          shortDescriptionFr: p.shortDescriptionFr || "",
           category: p.category,
           price: p.price,
           priceINR: p.priceINR || 65,
@@ -218,9 +226,10 @@ export default function EditProductPage() {
               Basic Information
             </h2>
             <div className="space-y-4">
+              {/* Product Name EN */}
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-[#4c463e] mb-1.5">
-                  Product Name *
+                  Product Name (English) *
                 </label>
                 <input
                   id="name"
@@ -230,6 +239,19 @@ export default function EditProductPage() {
                 {errors.name && (
                   <p className="text-red-500 text-xs mt-1">{errors.name.message}</p>
                 )}
+              </div>
+
+              {/* Product Name FR */}
+              <div>
+                <label htmlFor="nameFr" className="block text-sm font-medium text-[#4c463e] mb-1.5">
+                  Nom du Produit (Français)
+                </label>
+                <input
+                  id="nameFr"
+                  {...register("nameFr")}
+                  placeholder="ex: Sel de l'Himalaya & Poivre"
+                  className="w-full px-4 py-2.5 rounded-xl bg-[#faf5ef] border border-[#e8e0d8] text-sm outline-none focus:ring-2 focus:ring-[#675d4e]/30"
+                />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
@@ -268,14 +290,55 @@ export default function EditProductPage() {
                 </div>
               </div>
 
+              {/* Short Description EN */}
               <div>
                 <label htmlFor="description" className="block text-sm font-medium text-[#4c463e] mb-1.5">
-                  Description
+                  Short Description (English)
+                </label>
+                <input
+                  id="shortDescription"
+                  {...register("shortDescription")}
+                  placeholder="A brief summary in English"
+                  className="w-full px-4 py-2.5 rounded-xl bg-[#faf5ef] border border-[#e8e0d8] text-sm outline-none focus:ring-2 focus:ring-[#675d4e]/30"
+                />
+              </div>
+
+              {/* Short Description FR */}
+              <div>
+                <label htmlFor="shortDescriptionFr" className="block text-sm font-medium text-[#4c463e] mb-1.5">
+                  Courte Description (Français)
+                </label>
+                <input
+                  id="shortDescriptionFr"
+                  {...register("shortDescriptionFr")}
+                  placeholder="Un bref résumé en français"
+                  className="w-full px-4 py-2.5 rounded-xl bg-[#faf5ef] border border-[#e8e0d8] text-sm outline-none focus:ring-2 focus:ring-[#675d4e]/30"
+                />
+              </div>
+
+              {/* Full Description EN */}
+              <div>
+                <label htmlFor="description" className="block text-sm font-medium text-[#4c463e] mb-1.5">
+                  Description (English)
                 </label>
                 <textarea
                   id="description"
                   {...register("description")}
-                  rows={4}
+                  rows={3}
+                  className="w-full px-4 py-2.5 rounded-xl bg-[#faf5ef] border border-[#e8e0d8] text-sm outline-none focus:ring-2 focus:ring-[#675d4e]/30 resize-none"
+                />
+              </div>
+
+              {/* Full Description FR */}
+              <div>
+                <label htmlFor="descriptionFr" className="block text-sm font-medium text-[#4c463e] mb-1.5">
+                  Description (Français)
+                </label>
+                <textarea
+                  id="descriptionFr"
+                  {...register("descriptionFr")}
+                  rows={3}
+                  placeholder="Description détaillée du produit en français..."
                   className="w-full px-4 py-2.5 rounded-xl bg-[#faf5ef] border border-[#e8e0d8] text-sm outline-none focus:ring-2 focus:ring-[#675d4e]/30 resize-none"
                 />
               </div>
