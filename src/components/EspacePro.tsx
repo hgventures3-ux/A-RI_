@@ -4,53 +4,10 @@ import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
-import t from "@/translations";
 import Footer from "@/components/Footer";
 
-/* ────────────────────────────────────────────────────────
-   Stats
-   ──────────────────────────────────────────────────────── */
-const statsData: Record<string, { value: string; label: string; sub: string }[]> = {
-  fr: [
-    { value: "25+", label: "Ans d'expertise", sub: "Emballage & conservation" },
-    { value: "1000", label: "Acres", sub: "Zones humides préservées" },
-    { value: "100%", label: "Traçabilité", sub: "Du Bihar à la France" },
-    { value: "4", label: "Certifications", sub: "FSSAI · NABL · EU · IEC" },
-  ],
-  en: [
-    { value: "25+", label: "Years of expertise", sub: "Packaging & conservation" },
-    { value: "1000", label: "Acres", sub: "Preserved wetlands" },
-    { value: "100%", label: "Traceability", sub: "From Bihar to France" },
-    { value: "4", label: "Certifications", sub: "FSSAI · NABL · EU · IEC" },
-  ],
-  hi: [
-    { value: "25+", label: "वर्षों की विशेषज्ञता", sub: "पैकेजिंग और संरक्षण" },
-    { value: "1000", label: "एकड़", sub: "संरक्षित आर्द्रभूमि" },
-    { value: "100%", label: "ट्रैसेबिलिटी", sub: "बिहार से फ्रांस तक" },
-    { value: "4", label: "प्रमाणपत्र", sub: "FSSAI · NABL · EU · IEC" },
-  ],
-};
-
-/* ────────────────────────────────────────────────────────
-   Services
-   ──────────────────────────────────────────────────────── */
-const servicesData: Record<string, { title: string; description: string }[]> = {
-  fr: [
-    { title: "Marque Blanche", description: "Conditionnement sous votre propre marque avec nos standards de qualité premium." },
-    { title: "Volume et Tarification", description: "Tarifs dégressifs pour commandes en gros. MOQ flexible pour les marchés européens." },
-    { title: "Logistique Mondiale", description: "Expédition maritime et aérienne. Incoterms CIF/FOB. Dédouanement EU inclus." },
-  ],
-  en: [
-    { title: "White Label", description: "Packaging under your own brand with our premium quality standards." },
-    { title: "Volume & Pricing", description: "Volume discounts for bulk orders. Flexible MOQ for European markets." },
-    { title: "Global Logistics", description: "Sea and air shipping. CIF/FOB Incoterms. EU customs clearance included." },
-  ],
-  hi: [
-    { title: "व्हाइट लेबल", description: "हमारे प्रीमियम गुणवत्ता मानकों के साथ आपके अपने ब्रांड के तहत पैकेजिंग।" },
-    { title: "वॉल्यूम और मूल्य निर्धारण", description: "थोक ऑर्डर के लिए छूट। यूरोपीय बाजारों के लिए लचीला MOQ।" },
-    { title: "वैश्विक रसद", description: "समुद्री और हवाई शिपिंग। CIF/FOB इनकोटर्म्स। EU सीमा शुल्क निकासी शामिल है।" },
-  ],
-};
+import espaceProEn from "@/locales/en/espace-pro.json";
+import espaceProFr from "@/locales/fr/espace-pro.json";
 
 const serviceIcons = [
   (
@@ -80,15 +37,6 @@ const serviceIcons = [
 ];
 
 /* ────────────────────────────────────────────────────────
-   Footer links
-   ──────────────────────────────────────────────────────── */
-const footerLinks = {
-  produits: ["Sel de l'Himalaya", "Herbes de Provence", "Truffe Noire", "Bientôt…"],
-  entreprise: ["Notre Histoire", "Transparence", "Certifications", "Espace Pro"],
-  légal: ["Politique de Retour", "CGV", "Mentions Légales", "Confidentialité"],
-};
-
-/* ────────────────────────────────────────────────────────
    Modi Video Sub-Component (B2B-only embed)
    ──────────────────────────────────────────────────────── */
 function ModiVideoBlock() {
@@ -97,7 +45,7 @@ function ModiVideoBlock() {
   const [isMuted, setIsMuted] = useState(true);
   const [inView, setInView] = useState(false);
   const { lang } = useLanguage();
-  const isFrench = lang === 'fr';
+  const s = lang === "fr" ? espaceProFr : espaceProEn;
 
   // इनटरसेक्शन ऑब्ज़र्वर से व्यूपोर्ट डिटेक्शन
   useEffect(() => {
@@ -146,7 +94,7 @@ function ModiVideoBlock() {
       </button>
       <div className="absolute bottom-4 left-4">
         <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-white/15 backdrop-blur-md text-white text-[10px] font-semibold tracking-widest uppercase border border-white/20" style={{ fontFamily: "var(--font-montserrat)" }}>
-          {isFrench ? "Déclaration Officielle" : "Official Statement"}
+          {s.video.label}
         </span>
       </div>
     </div>
@@ -158,8 +106,8 @@ function ModiVideoBlock() {
    ──────────────────────────────────────────────────────── */
 export default function EspacePro() {
   const { lang } = useLanguage();
-  const isFrench = lang === 'fr';
-  const s = t.pro[lang];
+  const s = lang === "fr" ? espaceProFr : espaceProEn;
+  
   const headerRef = useRef<HTMLDivElement>(null);
   const headerInView = useInView(headerRef, { once: true, amount: 0.3 });
   const formRef = useRef<HTMLDivElement>(null);
@@ -214,9 +162,7 @@ export default function EspacePro() {
     }
   };
 
-  const localizedStats = statsData[lang] || statsData.en;
-  const currentServices = servicesData[lang] || servicesData.en;
-  const localizedServices = currentServices.map((svc, i: number) => ({
+  const localizedServices = s.services.map((svc: { title: string; description: string }, i: number) => ({
     icon: serviceIcons[i],
     title: svc.title,
     description: svc.description,
@@ -248,7 +194,7 @@ export default function EspacePro() {
               style={{ fontFamily: "var(--font-montserrat)" }}
             >
               <span className="w-8 h-[1px] bg-[#6E6E73]/40" />
-              {s.label}
+              {s.header.label}
               <span className="w-8 h-[1px] bg-[#6E6E73]/40" />
             </motion.span>
 
@@ -259,7 +205,7 @@ export default function EspacePro() {
               className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-[#1C1C1C] mb-6"
               style={{ fontFamily: "var(--font-montserrat)" }}
             >
-              {s.title}
+              {s.header.title}
             </motion.h2>
 
             <motion.p
@@ -269,14 +215,14 @@ export default function EspacePro() {
               className="text-lg md:text-xl text-[#1C1C1C]/55 max-w-2xl mx-auto leading-relaxed"
               style={{ fontFamily: "var(--font-lora)" }}
             >
-              {s.hook}
+              {s.header.hook}
             </motion.p>
           </div>
 
           {/* ── Stats ── */}
           <div className="max-w-5xl mx-auto px-6 mb-16 md:mb-24">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-              {localizedStats.map((stat: { value: string; label: string; sub: string }, i: number) => (
+              {s.stats.map((stat: { value: string; label: string; sub: string }, i: number) => (
                 <motion.div
                   key={stat.label}
                   initial={{ opacity: 0, y: 25 }}
@@ -349,26 +295,26 @@ export default function EspacePro() {
               className="text-center mb-10"
             >
               <span className="inline-block text-xs font-semibold tracking-[0.4em] uppercase text-[#6E6E73] mb-3" style={{ fontFamily: "var(--font-montserrat)" }}>
-                {isFrench ? "Transparence & Conformité" : "Transparency & Compliance"}
+                {s.certification.label}
               </span>
               <h3 className="text-2xl md:text-3xl font-bold text-[#1C1C1C]" style={{ fontFamily: "var(--font-montserrat)" }}>
-                {isFrench ? "Nos Garanties de Conformité" : "Our Certification Moat"}
+                {s.certification.title}
               </h3>
               <p className="text-sm text-[#1C1C1C]/50 mt-2 max-w-xl mx-auto" style={{ fontFamily: "var(--font-montserrat)" }}>
-                {isFrench ? "Rapports NABL indépendants & conformité corporate disponibles en téléchargement immédiat." : "Independent NABL reports & corporate compliance available for immediate download."}
+                {s.certification.description}
               </p>
             </motion.div>
 
             {/* NABL Lab Reports */}
             <p className="text-[10px] font-bold tracking-[0.35em] uppercase text-[#6E6E73] mb-4" style={{ fontFamily: "var(--font-montserrat)" }}>
-              {isFrench ? "Rapports de Laboratoire NABL" : "NABL Lab Reports"}
+              {s.certification.nablTitle}
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
               {[
-                { icon: "🧪", title: isFrench ? "Résidus EtO" : "EtO Residues", desc: isFrench ? "Analyse complète Oxyde d'Éthylène — conformité UE 2020/1088" : "Complete Ethylene Oxide analysis — EU 2020/1088 compliance", file: "nabl-eto-report.pdf" },
-                { icon: "⚗️", title: isFrench ? "Métaux Lourds" : "Heavy Metals", desc: isFrench ? "Plomb, Cadmium, Arsenic, Mercure — en dessous des seuils EU" : "Lead, Cadmium, Arsenic, Mercury — below EU thresholds", file: "nabl-heavy-metals.pdf" },
-                { icon: "🔬", title: isFrench ? "Microbiologie" : "Microbiology", desc: isFrench ? "E.Coli, Salmonella, Listeria, Coliformes totaux — négatifs" : "E.Coli, Salmonella, Listeria, Total Coliforms — negative", file: "nabl-microbiology.pdf" },
-                { icon: "🌿", title: isFrench ? "Pesticides" : "Pesticides", desc: isFrench ? "Panel 500+ molécules — zéro résidu détectable" : "Panel 500+ molecules — zero detectable residue", file: "nabl-pesticides.pdf" },
+                { icon: "🧪", file: "nabl-eto-report.pdf", ...s.certification.reports[0] },
+                { icon: "⚗️", file: "nabl-heavy-metals.pdf", ...s.certification.reports[1] },
+                { icon: "🔬", file: "nabl-microbiology.pdf", ...s.certification.reports[2] },
+                { icon: "🌿", file: "nabl-pesticides.pdf", ...s.certification.reports[3] },
               ].map((cert, i) => (
                 <motion.div
                   key={cert.title}
@@ -376,34 +322,36 @@ export default function EspacePro() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.08 }}
-                  className="group p-5 rounded-2xl bg-white border border-[#1C1C1C]/6 hover:shadow-lg hover:border-[#1C1C1C]/15 transition-all duration-300"
+                  className="group p-5 rounded-2xl bg-white border border-[#1C1C1C]/6 hover:shadow-lg hover:border-[#1C1C1C]/15 transition-all duration-300 flex flex-col"
                 >
                   <span className="text-3xl mb-3 block">{cert.icon}</span>
                   <h5 className="text-sm font-bold text-[#1C1C1C] mb-1" style={{ fontFamily: "var(--font-montserrat)" }}>{cert.title}</h5>
-                  <p className="text-[11px] text-[#1C1C1C]/45 leading-relaxed mb-4" style={{ fontFamily: "var(--font-montserrat)" }}>{cert.desc}</p>
-                  <a
-                    href={`/docs/${cert.file}`}
-                    download
-                    className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-wider uppercase text-[#1C1C1C] border border-[#1C1C1C]/15 rounded-lg px-3 py-2 hover:bg-[#1C1C1C] hover:text-white transition-all duration-200"
+                  <p className="text-[11px] text-[#1C1C1C]/45 leading-relaxed mb-4 flex-1" style={{ fontFamily: "var(--font-montserrat)" }}>{cert.desc}</p>
+                  <div className="mt-auto">
+                    <a
+                      href={`/docs/${cert.file}`}
+                      download
+                      className="inline-flex items-center gap-1.5 text-[10px] font-bold tracking-wider uppercase text-[#1C1C1C] border border-[#1C1C1C]/15 rounded-lg px-3 py-2 hover:bg-[#1C1C1C] hover:text-white transition-all duration-200 w-max"
                     style={{ fontFamily: "var(--font-montserrat)" }}
                   >
                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
-                    {isFrench ? "Télécharger PDF" : "Download PDF"}
-                  </a>
+                    {s.certification.downloadBtn}
+                    </a>
+                  </div>
                 </motion.div>
               ))}
             </div>
 
             {/* Corporate Compliance */}
             <p className="text-[10px] font-bold tracking-[0.35em] uppercase text-[#6E6E73] mb-4" style={{ fontFamily: "var(--font-montserrat)" }}>
-              {isFrench ? "Conformité Corporate" : "Corporate Compliance"}
+              {s.certification.corporateTitle}
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
-                { badge: "FSSAI", label: isFrench ? "Sécurité Alimentaire" : "Food Safety", desc: isFrench ? "N° Lic. 10019052000041" : "Lic. No. 10019052000041", file: "fssai-certificate.pdf" },
-                { badge: "IEC", label: "Import Export", desc: isFrench ? "Code IEC homologué DGFT" : "DGFT approved IEC code", file: "iec-certificate.pdf" },
-                { badge: "APEDA", label: "Export Agri", desc: isFrench ? "Exportateur certifié APEDA" : "APEDA certified exporter", file: "apeda-certificate.pdf" },
-                { badge: "STARTUP", label: isFrench ? "Jeune Entreprise" : "Startup India", desc: isFrench ? "Entité reconnue DPIIT" : "DPIIT Recognized Entity", file: "startup-india-certificate.pdf" },
+                { file: "fssai-certificate.pdf", ...s.certification.compliance[0] },
+                { file: "iec-certificate.pdf", ...s.certification.compliance[1] },
+                { file: "apeda-certificate.pdf", ...s.certification.compliance[2] },
+                { file: "startup-india-certificate.pdf", ...s.certification.compliance[3] },
               ].map((cred, i) => (
                 <motion.div
                   key={cred.badge}
@@ -423,15 +371,13 @@ export default function EspacePro() {
                     style={{ fontFamily: "var(--font-montserrat)" }}
                   >
                     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
-                    Télécharger
+                    {s.certification.downloadShortBtn}
                   </a>
                 </motion.div>
               ))}
             </div>
             <div className="mt-8 text-center text-xs text-[#1C1C1C]/60" style={{ fontFamily: "var(--font-montserrat)" }}>
-              {isFrench 
-                ? "Certificat d'installation de fabrication FSSC 22000 disponible sur demande, IFS broker (en cours) et BRCGS disponibles sur demande."
-                : "Manufacturing facility FSSC 22000 certificate available upon request, IFS broker (en cours) and BRCGS available upon request."}
+              {s.certification.disclaimer}
             </div>
           </div>
 
@@ -452,20 +398,20 @@ export default function EspacePro() {
                   className="text-lg md:text-xl font-bold text-[#FFFFFF] mb-4"
                   style={{ fontFamily: "var(--font-didot)" }}
                 >
-                  Un Super-aliment Reconnu par la Leadership Nationale
+                  {s.video.title}
                 </h3>
                 <p
                   className="text-sm md:text-base text-[#FFFFFF]/80 leading-relaxed max-w-2xl mx-auto mb-8"
                   style={{ fontFamily: "var(--font-montserrat)" }}
                 >
-                  Reconnu comme un super-aliment essentiel par les leaders de la santé en Inde, le Makhana fait désormais partie du quotidien de millions de personnes.
+                  {s.video.description}
                 </p>
                 <div className="flex flex-col items-center justify-center border-t border-white/10 pt-8 mt-4">
                   <span className="text-2xl md:text-4xl text-[#D4AF37] mb-4 block" style={{ fontFamily: "var(--font-lora), serif", fontStyle: "italic" }}>
-                    "365 दिन में से 300 दिन मैं मखाना जरूर खाता हूं"
+                    {s.video.quotePrimary}
                   </span>
                   <span className="text-sm md:text-base text-[#FFFFFF]/60 block mb-6" style={{ fontFamily: "var(--font-montserrat)" }}>
-                    "300 jours sur 365, je consomme invariablement du Makhana."
+                    {s.video.quoteSecondary}
                   </span>
                   <div className="flex items-center justify-center gap-3">
                     <div className="w-8 h-[1px] bg-[#FFFFFF]/30" />
@@ -473,7 +419,7 @@ export default function EspacePro() {
                       className="text-xs font-semibold text-[#D4AF37] tracking-widest uppercase"
                       style={{ fontFamily: "var(--font-montserrat)" }}
                     >
-                      Narendra Modi — Premier Ministre de l'Inde
+                      {s.video.author}
                     </span>
                     <div className="w-8 h-[1px] bg-[#FFFFFF]/30" />
                   </div>
@@ -500,23 +446,23 @@ export default function EspacePro() {
                   className="inline-block text-xs font-semibold tracking-[0.3em] uppercase text-[#6E6E73] mb-4"
                   style={{ fontFamily: "var(--font-montserrat)" }}
                 >
-                  {s.docLabel}
+                  {s.form.docLabel}
                 </span>
 
                 <h3
                   className="text-2xl md:text-3xl font-bold text-[#1C1C1C] mb-4 leading-snug"
                   style={{ fontFamily: "var(--font-montserrat)" }}
                 >
-                  {s.docTitle1}
+                  {s.form.docTitle1}
                   <br />
-                  <span className="text-[#6E6E73]">{s.docTitle2}</span>
+                  <span className="text-[#6E6E73]">{s.form.docTitle2}</span>
                 </h3>
 
                 <p
                   className="text-base text-[#1C1C1C]/55 leading-relaxed mb-8"
                   style={{ fontFamily: "var(--font-lora)" }}
                 >
-                  {s.docBody}
+                  {s.form.docBody}
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-3">
@@ -531,7 +477,7 @@ export default function EspacePro() {
                       <polyline points="7 10 12 15 17 10" />
                       <line x1="12" y1="15" x2="12" y2="3" />
                     </svg>
-                    {s.ctaPrimary}
+                    {s.form.ctaPrimary}
                   </motion.button>
 
                   <motion.button
@@ -544,7 +490,7 @@ export default function EspacePro() {
                       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                       <polyline points="14 2 14 8 20 8" />
                     </svg>
-                    {s.ctaSecondary}
+                    {s.form.ctaSecondary}
                   </motion.button>
                 </div>
               </motion.div>
@@ -563,83 +509,80 @@ export default function EspacePro() {
                     className="text-lg font-bold text-[#1C1C1C] mb-1"
                     style={{ fontFamily: "var(--font-didot)" }}
                   >
-                    Demande Professionnelle
+                    {s.form.title}
                   </h4>
                   <p
                     className="text-xs text-[#1C1C1C]/40 mb-6"
                     style={{ fontFamily: "var(--font-montserrat)" }}
                   >
-                    Nous répondons sous 24h ouvrées.
+                    {s.form.subtitle}
                   </p>
 
                   <div className="space-y-4">
                     {/* Nom complet */}
                     <div>
                       <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        Nom complet *
+                        {s.form.fields.nameLabel}
                       </label>
-                      <input type="text" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder="Votre nom complet" className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
+                      <input type="text" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder={s.form.fields.namePh} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
                     </div>
 
                     {/* Nom de l'entreprise */}
                     <div>
                       <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        Nom de l'entreprise *
+                        {s.form.fields.companyLabel}
                       </label>
-                      <input type="text" required value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} placeholder="Nom de votre entreprise" className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
+                      <input type="text" required value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} placeholder={s.form.fields.companyPh} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
                     </div>
 
                     {/* E-mail professionnel */}
                     <div>
                       <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        Adresse e-mail professionnelle *
+                        {s.form.fields.emailLabel}
                       </label>
-                      <input type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="pro@entreprise.com" className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
+                      <input type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder={s.form.fields.emailPh} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
                     </div>
 
                     {/* SIRET / VAT */}
                     <div>
                       <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        N° SIRET ou TVA Intracommunautaire *
+                        {s.form.fields.siretLabel}
                       </label>
-                      <input type="text" required value={formData.siret} onChange={(e) => setFormData({ ...formData, siret: e.target.value })} placeholder="Ex: 123 456 789 00012" className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
+                      <input type="text" required value={formData.siret} onChange={(e) => setFormData({ ...formData, siret: e.target.value })} placeholder={s.form.fields.siretPh} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
                     </div>
 
                     {/* Distribution Channels Dropdown */}
                     <div>
                       <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        Canaux de Distribution
+                        {s.form.fields.channelLabel}
                       </label>
                       <select required value={formData.channel} onChange={(e) => setFormData({ ...formData, channel: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        <option value="">Sélectionnez un canal</option>
-                        <option value="Grandes Surfaces">Grandes Surfaces</option>
-                        <option value="Épiceries Fines">Épiceries Fines</option>
-                        <option value="Réseau Bio">Réseau Bio</option>
-                        <option value="Grossiste">Grossiste</option>
-                        <option value="Secteur Fitness-Gym">Secteur Fitness-Gym</option>
+                        <option value="">{s.form.fields.channelPh}</option>
+                        {s.form.fields.channelOptions.map((opt: string) => (
+                          <option key={opt} value={opt}>{opt}</option>
+                        ))}
                       </select>
                     </div>
 
                     {/* Volume Dropdown */}
                     <div>
                       <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        Volume Annuel Estimé
+                        {s.form.fields.volumeLabel}
                       </label>
                       <select required value={formData.volume} onChange={(e) => setFormData({ ...formData, volume: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        <option value="">Sélectionnez un volume</option>
-                        <option value="1-5 palettes">1–5 palettes</option>
-                        <option value="5-20 palettes">5–20 palettes</option>
-                        <option value="20-50 palettes">20–50 palettes</option>
-                        <option value="50+ palettes">50+ palettes</option>
+                        <option value="">{s.form.fields.volumePh}</option>
+                        {s.form.fields.volumeOptions.map((opt: string) => (
+                          <option key={opt} value={opt}>{opt}</option>
+                        ))}
                       </select>
                     </div>
 
                     {/* Message */}
                     <div>
                       <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        {isFrench ? "Votre Message / Besoins Spécifiques" : "Your Message / Specific Needs"}
+                        {s.form.fields.messageLabel}
                       </label>
-                      <textarea required rows={4} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder={isFrench ? "ex. Marque Blanche, Marque Distributeur, Référencement national." : "e.g. White Label, Private Label, National listing."} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all resize-none" style={{ fontFamily: "var(--font-montserrat)" }} />
+                      <textarea required rows={4} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder={s.form.fields.messagePh} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all resize-none" style={{ fontFamily: "var(--font-montserrat)" }} />
                     </div>
                   </div>
 
@@ -651,7 +594,7 @@ export default function EspacePro() {
                     className="mt-6 w-full py-3.5 rounded-xl bg-[#1C1C1C] text-[#FFFFFF] text-sm font-semibold tracking-wide transition-colors hover:bg-[#333] cursor-pointer disabled:opacity-70 flex justify-center text-center"
                     style={{ fontFamily: "var(--font-montserrat)" }}
                   >
-                    {loading ? "..." : submitted ? (isFrench ? "✓ Demande envoyée !" : "✓ Request sent!") : (isFrench ? "Demander une Cotation / Fiche Technique" : "Request a Quote / Product Sheet")}
+                    {loading ? s.form.btnLoading : submitted ? s.form.btnSuccess : s.form.btnSubmit}
                   </motion.button>
                 </form>
               </motion.div>

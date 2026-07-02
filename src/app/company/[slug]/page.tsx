@@ -1,11 +1,17 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+
+import { useLanguage } from "@/context/LanguageContext";
+import transparenceEn from "@/locales/en/transparence.json";
+import transparenceFr from "@/locales/fr/transparence.json";
+import certificationsEn from "@/locales/en/certifications.json";
+import certificationsFr from "@/locales/fr/certifications.json";
 
 /* ─── Full content for each company page ─── */
 const pages: Record<string, { title: string; badge: string; subtitle: string; sections: { heading: string; body: React.ReactNode }[]; cta?: { text: string; href: string } }> = {
@@ -45,70 +51,8 @@ const pages: Record<string, { title: string; badge: string; subtitle: string; se
     ],
     cta: { text: "Discover Our Products", href: "/products" }
   },
-  "transparency": {
-    title: "Transparency",
-    badge: "Ethics · Traceability · Accountability",
-    subtitle: "At AÉRI, transparency is not a marketing strategy — it is a foundational principle. Every grain we sell is tested, documented, and traceable back to the pond it was harvested from.",
-    sections: [
-      {
-        heading: "Seed-to-Shelf Traceability",
-        body: "Every batch of AÉRI Makhana is assigned a unique lot number at the point of harvest. This number follows the product through every stage of its journey: sun-drying, popping, flavoring, packaging, quality testing, and shipping. Using our traceability system, we can identify exactly which pond, which farmer, and which processing date corresponds to any pack of AÉRI on your shelf. This level of detail is rare in the snack industry — and we believe it should be the standard, not the exception."
-      },
-      {
-        heading: "Ethical Sourcing",
-        body: "We source exclusively from the preserved wetlands of Bihar, India, where Makhana cultivation is a centuries-old tradition. Our sourcing practices are guided by three principles: fair compensation for farmers, environmental sustainability (no chemical pesticides or fertilizers are used in our ponds), and community development (a portion of our revenue funds local education and healthcare initiatives). Every link in our supply chain is regularly audited by independent agencies. We do not use child labour at any stage of our supply chain — this is governed by our supplier agreements and audited annually."
-      },
-      {
-        heading: "Laboratory Testing",
-        body: "Before any batch of AÉRI leaves India, it undergoes rigorous testing in NABL-accredited laboratories (conforming to ISO/IEC 17025 standards). Our tests cover ethylene oxide (EtO) levels, heavy metals (lead, cadmium, arsenic, mercury), pesticide residues, and microbiological safety (Salmonella, E. coli, Aflatoxins). Every single test result must fall well below European Union regulatory limits before we authorize shipment. Complete lab reports are available for download by our professional partners through the B2B portal."
-      },
-      {
-        heading: "Packaging & Environmental Impact",
-        body: "Our packaging is designed to be as responsible as our sourcing. We use recyclable materials wherever possible and are actively working toward 100% compostable packaging by 2027. Our shipping logistics are optimized to minimize carbon footprint — we consolidate shipments and use sea freight for bulk orders, reserving air freight only for time-sensitive deliveries. We are also exploring carbon offset programs to achieve net-zero logistics by 2028."
-      },
-      {
-        heading: "Open Door Policy",
-        body: "We welcome questions, audits, and visits. If you are a retailer, distributor, or journalist who wants to see our operations firsthand — from the ponds of Bihar to our flavoring facility — we will arrange it. Transparency means having nothing to hide."
-      }
-    ],
-    cta: { text: "View Our Certifications", href: "/company/certifications" }
-  },
-  "certifications": {
-    title: "Certifications",
-    badge: "Compliance · Safety · Trust",
-    subtitle: "Every AÉRI product is backed by internationally recognized certifications and rigorous laboratory testing. Because trust is built on evidence, not promises.",
-    sections: [
-      {
-        heading: "FSSAI Central License",
-        body: "The Food Safety and Standards Authority of India (FSSAI) Central License is the highest tier of food safety certification in India. It confirms that our production facilities, processes, and products meet all regulatory requirements for food manufacturing and export. Every batch of Makhana is tested and certified before leaving our facility. Our FSSAI registration covers all aspects of food handling, storage, processing, and distribution."
-      },
-      {
-        heading: "FoSTaC Certification",
-        body: "Notre direction détient une certification individuelle FoSTaC (Food Safety Training and Certification), garantissant les plus hauts standards de manipulation et de sécurité alimentaire. Renouvellement certifié tous les 24 mois. FoSTaC individual certification ensures that our leadership applies the highest hygiene, safety protocols, and contamination-prevention standards across all operations."
-      },
-      {
-        heading: "APEDA Registration",
-        body: "The Agricultural and Processed Food Products Export Development Authority (APEDA) registration certifies that our products meet the quality standards required for export of Indian agricultural goods. This registration is a prerequisite for any food product leaving India and ensures compliance with international trade regulations. It also enables our products to carry the 'Product of India' designation with full legitimacy."
-      },
-      {
-        heading: "IEC (Import Export Code)",
-        body: "Our registered Import Export Code ensures complete customs traceability for every shipment from Bihar to France. Each container is documented with precise information about contents, origin, processing dates, and destination. This code is cross-referenced with our internal lot tracking system, providing an unbroken chain of documentation from pond to plate."
-      },
-      {
-        heading: "Startup India Recognition (DPIIT)",
-        body: "AÉRI is recognized by the Department for Promotion of Industry and Internal Trade (DPIIT) under the Government of India's Startup India initiative. This recognition acknowledges our innovative approach to bringing traditional Indian superfoods to global markets using modern food technology and sustainable practices."
-      },
-      {
-        heading: "European Union Compliance",
-        body: "Our products fully comply with EU Regulation (EC) No. 178/2002 (General Food Law), EU Regulation (EC) No. 1333/2008 (Food Additives), and EU Regulation (EU) No. 1169/2011 (food information to consumers). This includes strict compliance with EtO limits, heavy metal thresholds, pesticide MRLs (Maximum Residue Levels), and comprehensive labeling requirements including allergen declarations and nutritional information."
-      },
-      {
-        heading: "NABL Accredited Laboratory Testing",
-        body: "All analytical testing is performed in laboratories accredited by the National Accreditation Board for Testing and Calibration Laboratories (NABL). These labs operate under ISO/IEC 17025 standards — the international benchmark for testing competence. Our standard panel includes: Ethylene Oxide (EtO) analysis, Heavy Metal screening (Pb, Cd, As, Hg), Pesticide Residue analysis (multi-residue screening), and Microbiological testing (Salmonella, E. coli, Aflatoxins, total plate count)."
-      }
-    ],
-    cta: { text: "Contact for Lab Reports", href: "/contact" }
-  },
+
+
   "pro-portal": {
     title: "Professional Portal",
     badge: "B2B · Partnerships · Export",
@@ -158,33 +102,8 @@ const pages: Record<string, { title: string; badge: string; subtitle: string; se
     ],
     cta: { text: "Découvrir Nos Produits", href: "/products" }
   },
-  "transparence": {
-    title: "Transparence",
-    badge: "Éthique · Traçabilité · Responsabilité",
-    subtitle: "Chez AÉRI, la transparence n'est pas une stratégie marketing — c'est un principe fondateur. Chaque grain que nous vendons est testé, documenté et traçable jusqu'à l'étang dans lequel il a été récolté.",
-    sections: [
-      { heading: "Traçabilité de la Graine à l'Étagère", body: "Chaque lot de Makhana AÉRI se voit attribuer un numéro de lot unique au moment de la récolte. Ce numéro suit le produit à chaque étape de son voyage : séchage au soleil, soufflage, assaisonnement, emballage, contrôle qualité et expédition. Grâce à notre système de traçabilité, nous pouvons identifier avec précision l'étang, l'agriculteur et la date de transformation correspondant à chaque sachet d'AÉRI dans votre épicerie. Ce niveau de détail est rare dans l'industrie du snacking — et nous pensons qu'il devrait être la norme, pas l'exception." },
-      { heading: "Approvisionnement Éthique", body: "Nous nous approvisionnons exclusivement dans les zones humides préservées du Bihar, en Inde, où la culture du Makhana est une tradition centenaire. Nos pratiques d'approvisionnement sont guidées par trois principes : rémunération équitable des agriculteurs, durabilité environnementale (aucun pesticide ou engrais chimique n'est utilisé dans nos étangs), et développement communautaire (une partie de nos revenus finance des initiatives éducatives et sanitaires locales). Chaque maillon de notre chaîne d'approvisionnement est régulièrement audité par des agences indépendantes." },
-      { heading: "Tests en Laboratoire", body: "Avant que tout lot d'AÉRI ne quitte l'Inde, il subit des tests rigoureux dans des laboratoires accrédités NABL (conformes aux normes ISO/IEC 17025). Nos tests couvrent les niveaux d'oxyde d'éthylène (EtO), les métaux lourds (plomb, cadmium, arsenic, mercure), les résidus de pesticides et la sécurité microbiologique (Salmonella, E. coli, Aflatoxines). Chaque résultat de test doit se situer bien en deçà des limites réglementaires de l'Union européenne avant que nous n'autorisions l'expédition. Les rapports de laboratoire complets sont disponibles en téléchargement pour nos partenaires professionnels via le portail B2B." },
-      { heading: "Emballage & Impact Environnemental", body: "Notre emballage est conçu pour être aussi responsable que notre approvisionnement. Nous utilisons des matériaux recyclables dans la mesure du possible et travaillons activement vers un emballage 100% compostable d'ici 2027. Notre logistique d'expédition est optimisée pour minimiser l'empreinte carbone — nous consolidons les envois et privilégions le fret maritime pour les commandes en gros, en réservant le fret aérien aux livraisons urgentes. Nous explorons également des programmes de compensation carbone pour atteindre une logistique neutre en carbone d'ici 2028." },
-      { heading: "Politique de la Porte Ouverte", body: "Nous accueillons les questions, les audits et les visites. Si vous êtes un distributeur, un détaillant ou un journaliste qui souhaite voir nos opérations en direct — des étangs du Bihar à notre unité d'assaisonnement — nous le ferons. La transparence, c'est n'avoir rien à cacher." }
-    ],
-    cta: { text: "Voir Nos Certifications", href: "/company/certifications" }
-  },
-  "certifications-fr": {
-    title: "Certifications",
-    badge: "Conformité · Sécurité · Confiance",
-    subtitle: "Chaque produit AÉRI est soutenu par des certifications reconnues internationalement et des tests de laboratoire rigoureux. Parce que la confiance se construit sur des preuves, pas des promesses.",
-    sections: [
-      { heading: "Licence Centrale FSSAI", body: "La Licence Centrale de la Food Safety and Standards Authority of India (FSSAI) est le niveau le plus élevé de certification de sécurité alimentaire en Inde. Elle confirme que nos installations de production, nos processus et nos produits répondent à toutes les exigences réglementaires pour la fabrication et l'exportation alimentaires. Chaque lot de Makhana est testé et certifié avant de quitter notre installation." },
-      { heading: "Certification FoSTaC", body: "Notre direction détient une certification individuelle FoSTaC (Food Safety Training and Certification), garantissant les plus hauts standards de manipulation et de sécurité alimentaire. Renouvellement certifié tous les 24 mois." },
-      { heading: "Enregistrement APEDA", body: "L'enregistrement APEDA certifie que nos produits répondent aux standards requis pour l'exportation de produits agricoles indiens, permettant à nos produits de porter la mention 'Produit d'Inde' en toute légitimité." },
-      { heading: "Code IEC (Import Export)", body: "Notre Code Import Export enregistré assure une traçabilité douanière complète pour chaque envoi du Bihar vers la France, fournissant une chaîne documentaire ininterrompue de l'étang à l'étagère." },
-      { heading: "Conformité Union Européenne", body: "Nos produits sont entièrement conformes aux Règlements UE n°178/2002, n°1333/2008 et n°1169/2011, incluant une stricte conformité aux limites EtO, seuils de métaux lourds, LMR pesticides et exigences d'étiquetage." },
-      { heading: "Tests NABL", body: "Tous les tests analytiques sont réalisés dans des laboratoires accrédités NABL selon les normes ISO/IEC 17025. Notre panel couvre : EtO, métaux lourds, résidus de pesticides et tests microbiologiques." }
-    ],
-    cta: { text: "Contacter pour les Rapports", href: "/contact" }
-  },
+
+
   "espace-pro": {
     title: "Espace Professionnel",
     badge: "B2B · Partenariats · Export",
@@ -201,16 +120,44 @@ const pages: Record<string, { title: string; badge: string; subtitle: string; se
 };
 
 export default function CompanyDynamicPage() {
+  const { lang } = useLanguage();
   const params = useParams();
   const slug = params.slug as string;
-  const page = pages[slug];
+  
+  let page;
+  if (slug === "transparence" || slug === "transparency") {
+    page = lang === "fr" ? transparenceFr : transparenceEn;
+  } else if (slug === "certifications") {
+    page = lang === "fr" ? certificationsFr : certificationsEn;
+  } else {
+    page = pages[slug];
+  }
+
+  useEffect(() => {
+    if (page) {
+      document.title = `${page.title} | AÉRI Makhana`;
+      const metaDescription = document.querySelector('meta[name="description"]');
+      if (metaDescription) {
+        metaDescription.setAttribute("content", page.subtitle);
+      } else {
+        const meta = document.createElement('meta');
+        meta.name = "description";
+        meta.content = page.subtitle;
+        document.head.appendChild(meta);
+      }
+    }
+  }, [page]);
 
   if (!page) {
     return (
       <main className="min-h-screen bg-[#FAF8F5] flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-4xl font-bold mb-4">Page Not Found</h1>
-          <Link href="/" className="text-[#6E6E73] hover:text-[#111111] underline">Back to Home</Link>
+          <h1 className="text-4xl font-bold mb-4">
+            {lang === "fr" ? "Page Non Trouvée" : "Page Not Found"}
+          </h1>
+          <Link href="/" className="text-[#6E6E73] hover:text-[#111111] underline">
+            {lang === "fr" ? "Retour à l'Accueil" : "Back to Home"}
+          </Link>
         </div>
       </main>
     );

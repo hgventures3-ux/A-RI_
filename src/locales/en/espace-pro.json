@@ -1,0 +1,90 @@
+{
+  "header": {
+    "label": "Professional · Partnerships · Export",
+    "title": "Professional Portal",
+    "hook": "Over 25+ years of expertise in the packaging industry and conservation engineering."
+  },
+  "stats": [
+    { "value": "25+", "label": "Years of expertise", "sub": "Packaging & conservation" },
+    { "value": "1000", "label": "Acres", "sub": "Preserved wetlands" },
+    { "value": "100%", "label": "Traceability", "sub": "From Bihar to France" },
+    { "value": "4", "label": "Certifications", "sub": "FSSAI · NABL · EU · IEC" }
+  ],
+  "services": [
+    { "title": "White Label", "description": "Packaging under your own brand with our premium quality standards." },
+    { "title": "Volume & Pricing", "description": "Volume discounts for bulk orders. Flexible MOQ for European markets." },
+    { "title": "Global Logistics", "description": "Sea and air shipping. CIF/FOB Incoterms. EU customs clearance included." }
+  ],
+  "certification": {
+    "label": "Transparency & Compliance",
+    "title": "Our Certification Moat",
+    "description": "Independent NABL reports & corporate compliance available for immediate download.",
+    "nablTitle": "NABL Lab Reports",
+    "corporateTitle": "Corporate Compliance",
+    "reports": [
+      { "title": "EtO Residues", "desc": "Complete Ethylene Oxide analysis — EU 2020/1088 compliance" },
+      { "title": "Heavy Metals", "desc": "Lead, Cadmium, Arsenic, Mercury — below EU thresholds" },
+      { "title": "Microbiology", "desc": "E.Coli, Salmonella, Listeria, Total Coliforms — negative" },
+      { "title": "Pesticides", "desc": "Panel 500+ molecules — zero detectable residue" }
+    ],
+    "downloadBtn": "Download PDF",
+    "compliance": [
+      { "badge": "FSSAI", "label": "Food Safety", "desc": "Lic. No. 10019052000041" },
+      { "badge": "IEC", "label": "Import Export", "desc": "DGFT approved IEC code" },
+      { "badge": "APEDA", "label": "Export Agri", "desc": "APEDA certified exporter" },
+      { "badge": "STARTUP", "label": "Startup India", "desc": "DPIIT Recognized Entity" }
+    ],
+    "downloadShortBtn": "Download",
+    "disclaimer": "Manufacturing facility FSSC 22000 certificate available upon request, IFS broker (en cours) and BRCGS available upon request."
+  },
+  "video": {
+    "label": "Official Statement",
+    "title": "A Superfood Recognized by National Leadership",
+    "description": "Recognized as an essential superfood by health leaders in India, Makhana is now part of the daily routine of millions of people.",
+    "quotePrimary": "\"I definitely eat Makhana 300 days out of 365\"",
+    "quoteSecondary": "\"300 days out of 365, I invariably consume Makhana.\"",
+    "author": "Narendra Modi — Prime Minister of India"
+  },
+  "form": {
+    "docLabel": "Documentation",
+    "docTitle1": "Everything you need,",
+    "docTitle2": "in one folder.",
+    "docBody": "Technical sheets, certifications, lab reports, and commercial terms — all ready for your procurement team.",
+    "ctaPrimary": "Download Product Sheet",
+    "ctaSecondary": "View Certifications",
+    "title": "Professional Inquiry",
+    "subtitle": "We respond within 24 business hours.",
+    "fields": {
+      "nameLabel": "Full Name *",
+      "namePh": "Your full name",
+      "companyLabel": "Company Name *",
+      "companyPh": "Your company name",
+      "emailLabel": "Professional Email *",
+      "emailPh": "pro@company.com",
+      "siretLabel": "VAT or Registration Number *",
+      "siretPh": "e.g. 123 456 789",
+      "channelLabel": "Distribution Channels",
+      "channelPh": "Select a channel",
+      "channelOptions": [
+        "Supermarkets",
+        "Gourmet Groceries",
+        "Organic Network",
+        "Wholesaler",
+        "Fitness/Gym Sector"
+      ],
+      "volumeLabel": "Estimated Annual Volume",
+      "volumePh": "Select a volume",
+      "volumeOptions": [
+        "1-5 pallets",
+        "5-20 pallets",
+        "20-50 pallets",
+        "50+ pallets"
+      ],
+      "messageLabel": "Your Message / Specific Needs",
+      "messagePh": "e.g. White Label, Private Label, National listing."
+    },
+    "btnLoading": "...",
+    "btnSuccess": "✓ Request sent!",
+    "btnSubmit": "Request a Quote / Product Sheet"
+  }
+}

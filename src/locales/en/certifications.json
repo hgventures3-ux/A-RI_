@@ -1,0 +1,39 @@
+{
+  "title": "Certifications",
+  "badge": "Compliance · Safety · Trust",
+  "subtitle": "Every AÉRI product is backed by internationally recognized certifications and rigorous laboratory testing. Because trust is built on evidence, not promises.",
+  "sections": [
+    {
+      "heading": "FSSAI Central License",
+      "body": "The Food Safety and Standards Authority of India (FSSAI) Central License is the highest tier of food safety certification in India. It confirms that our production facilities, processes, and products meet all regulatory requirements for food manufacturing and export. Every batch of Makhana is tested and certified before leaving our facility. Our FSSAI registration covers all aspects of food handling, storage, processing, and distribution."
+    },
+    {
+      "heading": "FoSTaC Certification",
+      "body": "FoSTaC individual certification ensures that our leadership applies the highest hygiene, safety protocols, and contamination-prevention standards across all operations. Renewal is certified every 24 months."
+    },
+    {
+      "heading": "APEDA Registration",
+      "body": "The Agricultural and Processed Food Products Export Development Authority (APEDA) registration certifies that our products meet the quality standards required for export of Indian agricultural goods. This registration is a prerequisite for any food product leaving India and ensures compliance with international trade regulations. It also enables our products to carry the 'Product of India' designation with full legitimacy."
+    },
+    {
+      "heading": "IEC (Import Export Code)",
+      "body": "Our registered Import Export Code ensures complete customs traceability for every shipment from Bihar to France. Each container is documented with precise information about contents, origin, processing dates, and destination. This code is cross-referenced with our internal lot tracking system, providing an unbroken chain of documentation from pond to plate."
+    },
+    {
+      "heading": "Startup India Recognition (DPIIT)",
+      "body": "AÉRI is recognized by the Department for Promotion of Industry and Internal Trade (DPIIT) under the Government of India's Startup India initiative. This recognition acknowledges our innovative approach to bringing traditional Indian superfoods to global markets using modern food technology and sustainable practices."
+    },
+    {
+      "heading": "European Union Compliance",
+      "body": "Our products fully comply with EU Regulation (EC) No. 178/2002 (General Food Law), EU Regulation (EC) No. 1333/2008 (Food Additives), and EU Regulation (EU) No. 1169/2011 (food information to consumers). This includes strict compliance with EtO limits, heavy metal thresholds, pesticide MRLs (Maximum Residue Levels), and comprehensive labeling requirements including allergen declarations and nutritional information."
+    },
+    {
+      "heading": "NABL Accredited Laboratory Testing",
+      "body": "All analytical testing is performed in laboratories accredited by the National Accreditation Board for Testing and Calibration Laboratories (NABL). These labs operate under ISO/IEC 17025 standards — the international benchmark for testing competence. Our standard panel includes: Ethylene Oxide (EtO) analysis, Heavy Metal screening (Pb, Cd, As, Hg), Pesticide Residue analysis (multi-residue screening), and Microbiological testing (Salmonella, E. coli, Aflatoxins, total plate count)."
+    }
+  ],
+  "cta": {
+    "text": "Contact for Lab Reports",
+    "href": "/contact"
+  }
+}

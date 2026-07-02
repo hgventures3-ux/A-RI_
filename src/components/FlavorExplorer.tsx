@@ -39,7 +39,7 @@ const frenchProducts: Product[] = [
   {
     id: "himalayan-salt",
     slug: "himalayan-salt",
-    name: "Himalayan Salt & Pepper",
+    name: "Sel de l'Himalaya & Poivre",
     category: "SIGNATURE",
     description: "Graines de Makhana soufflées - Sel rose de l'Himalaya et poivre.",
     basePrice: 2.99,
@@ -49,7 +49,7 @@ const frenchProducts: Product[] = [
   {
     id: "truffle",
     slug: "black-truffle",
-    name: "Gourmet Truffle Fusion",
+    name: "Fusion Truffe Noire",
     category: "GOURMET",
     description: "Graines de Makhana soufflées - Saveur Truffe Noire.",
     basePrice: 2.99,
@@ -59,7 +59,7 @@ const frenchProducts: Product[] = [
   {
     id: "herb",
     slug: "mediterranean-herb-fusion",
-    name: "Mediterranean Herb Fusion",
+    name: "Herbes de Provence",
     category: "VÉGÉTAL",
     description: "Graines de Makhana soufflées - Aux Herbes de Provence.",
     basePrice: 2.99,
@@ -69,7 +69,7 @@ const frenchProducts: Product[] = [
   {
     id: "raw",
     slug: "raw-bulk-kernels",
-    name: "Raw Premium Bulk Kernels",
+    name: "Vrac Premium (Makhana Cru)",
     category: "B2B / VRAC",
     description:
       "Makhana premium en vrac pour grossistes, distributeurs et marques privées.",
@@ -158,6 +158,18 @@ const frenchProducts: Product[] = [
 
 const englishProducts: Product[] = frenchProducts.map((product) => {
   const localized: Record<string, Partial<Product>> = {
+    "himalayan-salt": {
+      name: "Himalayan Salt & Pepper",
+      description: "Puffed Makhana - Pink Himalayan salt and pepper.",
+    },
+    "truffle": {
+      name: "Gourmet Truffle Fusion",
+      description: "Puffed Makhana - Black Truffle flavor.",
+    },
+    "herb": {
+      name: "Mediterranean Herb Fusion",
+      description: "Puffed Makhana - Herbes de Provence.",
+    },
     "caramel-salt": {
       name: "Caramel & Sea Salt",
       description: "Puffed Makhana - Golden caramel with a touch of sea salt.",
@@ -178,6 +190,7 @@ const englishProducts: Product[] = frenchProducts.map((product) => {
       description: "Puffed Makhana - Roasted peanut flavor.",
     },
     "peri-peri": {
+      name: "Peri-Peri",
       description: "Puffed Makhana - Chili, citrus, and garlic.",
       category: "SPICY",
     },
@@ -191,6 +204,7 @@ const englishProducts: Product[] = frenchProducts.map((product) => {
       category: "PLANT-BASED",
     },
     raw: {
+      name: "Raw Premium Bulk Kernels",
       description:
         "Premium bulk Makhana for wholesalers, distributors, and private labels.",
       customPriceLabel: "Tiered container pricing - Quote on request.",

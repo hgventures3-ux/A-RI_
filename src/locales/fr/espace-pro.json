@@ -1,0 +1,90 @@
+{
+  "header": {
+    "label": "CONFORMITÉ ET DISPONIBILITÉ INDUSTRIELLE",
+    "title": "Espace Professionnel",
+    "hook": "Expertise de 25+ ans dans l'industrie de l'emballage et l'ingénierie de la conservation."
+  },
+  "stats": [
+    { "value": "25+", "label": "Ans d'expertise", "sub": "Emballage & conservation" },
+    { "value": "1000", "label": "Acres", "sub": "Zones humides préservées" },
+    { "value": "100%", "label": "Traçabilité", "sub": "Du Bihar à la France" },
+    { "value": "4", "label": "Certifications", "sub": "FSSAI · NABL · EU · IEC" }
+  ],
+  "services": [
+    { "title": "Marque Blanche", "description": "Conditionnement sous votre propre marque avec nos standards de qualité premium." },
+    { "title": "Volume et Tarification", "description": "Tarifs dégressifs pour commandes en gros. MOQ flexible pour les marchés européens." },
+    { "title": "Logistique Mondiale", "description": "Expédition maritime et aérienne. Incoterms CIF/FOB. Dédouanement EU inclus." }
+  ],
+  "certification": {
+    "label": "Transparence & Conformité",
+    "title": "Nos Garanties de Conformité",
+    "description": "Rapports NABL indépendants & conformité corporate disponibles en téléchargement immédiat.",
+    "nablTitle": "Rapports de Laboratoire NABL",
+    "corporateTitle": "Conformité Corporate",
+    "reports": [
+      { "title": "Résidus EtO", "desc": "Analyse complète Oxyde d'Éthylène — conformité UE 2020/1088" },
+      { "title": "Métaux Lourds", "desc": "Plomb, Cadmium, Arsenic, Mercure — en dessous des seuils EU" },
+      { "title": "Microbiologie", "desc": "E.Coli, Salmonella, Listeria, Coliformes totaux — négatifs" },
+      { "title": "Pesticides", "desc": "Panel 500+ molécules — zéro résidu détectable" }
+    ],
+    "downloadBtn": "Télécharger PDF",
+    "compliance": [
+      { "badge": "FSSAI", "label": "Sécurité Alimentaire", "desc": "N° Lic. 10019052000041" },
+      { "badge": "IEC", "label": "Import Export", "desc": "Code IEC homologué DGFT" },
+      { "badge": "APEDA", "label": "Export Agri", "desc": "Exportateur certifié APEDA" },
+      { "badge": "STARTUP", "label": "Jeune Entreprise", "desc": "Entité reconnue DPIIT" }
+    ],
+    "downloadShortBtn": "Télécharger",
+    "disclaimer": "Certificat d'installation de fabrication FSSC 22000 disponible sur demande, IFS broker (en cours) et BRCGS disponibles sur demande."
+  },
+  "video": {
+    "label": "Déclaration Officielle",
+    "title": "Un Super-aliment Reconnu par la Leadership Nationale",
+    "description": "Reconnu comme un super-aliment essentiel par les leaders de la santé en Inde, le Makhana fait désormais partie du quotidien de millions de personnes.",
+    "quotePrimary": "\"365 दिन में से 300 दिन मैं मखाना जरूर खाता हूं\"",
+    "quoteSecondary": "\"300 jours sur 365, je consomme invariablement du Makhana.\"",
+    "author": "Narendra Modi — Premier Ministre de l'Inde"
+  },
+  "form": {
+    "docLabel": "Documentation",
+    "docTitle1": "Tout ce dont vous avez besoin,",
+    "docTitle2": "en un seul dossier.",
+    "docBody": "Fiches techniques, certifications, analyses de laboratoire et conditions commerciales — tout est prêt pour votre équipe d'approvisionnement.",
+    "ctaPrimary": "Télécharger la Fiche Produit",
+    "ctaSecondary": "Voir les Certifications",
+    "title": "Demande Professionnelle",
+    "subtitle": "Nous répondons sous 24h ouvrées.",
+    "fields": {
+      "nameLabel": "Nom complet *",
+      "namePh": "Votre nom complet",
+      "companyLabel": "Nom de l'entreprise *",
+      "companyPh": "Nom de votre entreprise",
+      "emailLabel": "Adresse e-mail professionnelle *",
+      "emailPh": "pro@entreprise.com",
+      "siretLabel": "N° SIRET ou TVA Intracommunautaire *",
+      "siretPh": "Ex: 123 456 789 00012",
+      "channelLabel": "Canaux de Distribution",
+      "channelPh": "Sélectionnez un canal",
+      "channelOptions": [
+        "Grandes Surfaces",
+        "Épiceries Fines",
+        "Réseau Bio",
+        "Grossiste",
+        "Secteur Fitness-Gym"
+      ],
+      "volumeLabel": "Volume Annuel Estimé",
+      "volumePh": "Sélectionnez un volume",
+      "volumeOptions": [
+        "1-5 palettes",
+        "5-20 palettes",
+        "20-50 palettes",
+        "50+ palettes"
+      ],
+      "messageLabel": "Votre Message / Besoins Spécifiques",
+      "messagePh": "ex. Marque Blanche, Marque Distributeur, Référencement national."
+    },
+    "btnLoading": "...",
+    "btnSuccess": "✓ Demande envoyée !",
+    "btnSubmit": "Demander une Cotation / Fiche Technique"
+  }
+}

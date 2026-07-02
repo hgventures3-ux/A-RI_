@@ -1,0 +1,35 @@
+{
+  "title": "Transparency",
+  "badge": "Ethics · Traceability · Accountability",
+  "subtitle": "At AÉRI, transparency is not a marketing strategy — it is a foundational principle. Every grain we sell is tested, documented, and traceable back to the pond it was harvested from.",
+  "sections": [
+    {
+      "heading": "Seed-to-Shelf Traceability",
+      "body": "Every batch of AÉRI Makhana is assigned a unique lot number at the point of harvest. This number follows the product through every stage of its journey: sun-drying, popping, flavoring, packaging, quality testing, and shipping. Using our traceability system, we can identify exactly which pond, which farmer, and which processing date corresponds to any pack of AÉRI on your shelf. This level of detail is rare in the snack industry — and we believe it should be the standard, not the exception."
+    },
+    {
+      "heading": "Ethical Sourcing",
+      "body": "We source exclusively from the preserved wetlands of Bihar, India, where Makhana cultivation is a centuries-old tradition. Our sourcing practices are guided by three principles: fair compensation for farmers, environmental sustainability (no chemical pesticides or fertilizers are used in our ponds), and community development (a portion of our revenue funds local education and healthcare initiatives). Every link in our supply chain is regularly audited by independent agencies. We do not use child labour at any stage of our supply chain — this is governed by our supplier agreements and audited annually."
+    },
+    {
+      "heading": "Laboratory Testing",
+      "body": "Before any batch of AÉRI leaves India, it undergoes rigorous testing in NABL-accredited laboratories (conforming to ISO/IEC 17025 standards). Our tests cover ethylene oxide (EtO) levels, heavy metals (lead, cadmium, arsenic, mercury), pesticide residues, and microbiological safety (Salmonella, E. coli, Aflatoxins). Every single test result must fall well below European Union regulatory limits before we authorize shipment. Complete lab reports are available for download by our professional partners through the B2B portal."
+    },
+    {
+      "heading": "Packaging & Environmental Impact",
+      "body": "Our packaging is designed to be as responsible as our sourcing. We use recyclable materials wherever possible and are actively working toward 100% compostable packaging by 2027. Our shipping logistics are optimized to minimize carbon footprint — we consolidate shipments and use sea freight for bulk orders, reserving air freight only for time-sensitive deliveries. We are also exploring carbon offset programs to achieve net-zero logistics by 2028."
+    },
+    {
+      "heading": "Open Door Policy",
+      "body": "We welcome questions, audits, and visits. If you are a retailer, distributor, or journalist who wants to see our operations firsthand — from the ponds of Bihar to our flavoring facility — we will arrange it. Transparency means having nothing to hide."
+    }
+  ],
+  "cta": {
+    "text": "View Our Certifications",
+    "href": "/company/certifications"
+  },
+  "ui": {
+    "pageNotFound": "Page Not Found",
+    "backToHome": "Back to Home"
+  }
+}

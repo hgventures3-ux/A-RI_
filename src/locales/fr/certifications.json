@@ -1,0 +1,39 @@
+{
+  "title": "Certifications",
+  "badge": "Conformité · Sécurité · Confiance",
+  "subtitle": "Chaque produit AÉRI est soutenu par des certifications reconnues internationalement et des tests de laboratoire rigoureux. Parce que la confiance se construit sur des preuves, pas des promesses.",
+  "sections": [
+    {
+      "heading": "Licence Centrale FSSAI",
+      "body": "La Licence Centrale de la Food Safety and Standards Authority of India (FSSAI) est le niveau le plus élevé de certification de sécurité alimentaire en Inde. Elle confirme que nos installations de production, nos processus et nos produits répondent à toutes les exigences réglementaires pour la fabrication et l'exportation alimentaires. Chaque lot de Makhana est testé et certifié avant de quitter notre installation."
+    },
+    {
+      "heading": "Certification FoSTaC",
+      "body": "Notre direction détient une certification individuelle FoSTaC (Food Safety Training and Certification), garantissant les plus hauts standards de manipulation et de sécurité alimentaire. Renouvellement certifié tous les 24 mois."
+    },
+    {
+      "heading": "Enregistrement APEDA",
+      "body": "L'enregistrement APEDA certifie que nos produits répondent aux standards requis pour l'exportation de produits agricoles indiens. Cet enregistrement est une condition préalable pour tout produit alimentaire quittant l'Inde et garantit la conformité avec les réglementations du commerce international. Il permet également à nos produits de porter la mention 'Produit d'Inde' en toute légitimité."
+    },
+    {
+      "heading": "Code IEC (Import Export)",
+      "body": "Notre Code Import Export enregistré assure une traçabilité douanière complète pour chaque envoi du Bihar vers la France. Chaque conteneur est documenté avec des informations précises sur son contenu, son origine, les dates de transformation et sa destination. Ce code est référencé avec notre système de suivi interne des lots, fournissant une chaîne documentaire ininterrompue de l'étang à l'étagère."
+    },
+    {
+      "heading": "Reconnaissance Startup India (DPIIT)",
+      "body": "AÉRI est reconnue par le Department for Promotion of Industry and Internal Trade (DPIIT) dans le cadre de l'initiative Startup India du gouvernement indien. Cette reconnaissance salue notre approche innovante visant à introduire des superaliments indiens traditionnels sur les marchés mondiaux en utilisant les technologies alimentaires modernes et des pratiques durables."
+    },
+    {
+      "heading": "Conformité Union Européenne",
+      "body": "Nos produits sont entièrement conformes aux Règlements UE n°178/2002 (législation alimentaire générale), n°1333/2008 (additifs alimentaires) et n°1169/2011 (informations aux consommateurs). Cela inclut une stricte conformité aux limites EtO, aux seuils de métaux lourds, aux LMR (Limites Maximales de Résidus) pour les pesticides et aux exigences complètes d'étiquetage, y compris les déclarations d'allergènes et les informations nutritionnelles."
+    },
+    {
+      "heading": "Tests NABL",
+      "body": "Tous les tests analytiques sont réalisés dans des laboratoires accrédités par le National Accreditation Board for Testing and Calibration Laboratories (NABL) selon les normes ISO/IEC 17025 — la référence internationale de compétence en matière d'essais. Notre panel standard couvre : l'analyse d'oxyde d'éthylène (EtO), le dépistage des métaux lourds (Pb, Cd, As, Hg), l'analyse des résidus de pesticides (dépistage multirésidus) et les tests microbiologiques (Salmonella, E. coli, aflatoxines, flore totale)."
+    }
+  ],
+  "cta": {
+    "text": "Contacter pour les Rapports",
+    "href": "/contact"
+  }
+}
