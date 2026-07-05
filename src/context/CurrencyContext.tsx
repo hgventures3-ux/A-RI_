@@ -8,8 +8,9 @@ interface CurrencyContextProps {
   currency: Currency;
   isIndia: boolean;
   isEU: boolean;
-  formatPrice: () => string;          // Always $2.99 base, converted
+  formatPrice: (baseUSD?: number) => string;
   formatAmount: (amount: number) => string;
+  setCurrencyOverride: (c: Currency | null) => void;
 }
 
 const CurrencyContext = createContext<CurrencyContextProps | undefined>(undefined);
@@ -28,7 +29,7 @@ const USD_BASE = 2.99;
 const USD_TO_INR = 84;   // 1 USD ≈ ₹84
 const USD_TO_EUR = 0.92; // 1 USD ≈ €0.92
 
-function detectCurrency(): Currency {
+function detectCurrencyFromTimezone(): Currency {
   try {
     const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
     if (tz === "Asia/Calcutta" || tz === "Asia/Kolkata") return "INR";
@@ -36,31 +37,36 @@ function detectCurrency(): Currency {
   } catch {
     // fallback
   }
-  return "USD"; // Rest of world (US, etc.) → USD
+  return "USD"; // Rest of world → USD
 }
 
 export function CurrencyProvider({ children }: { children: React.ReactNode }) {
-  const [currency, setCurrency] = useState<Currency>("USD"); // SSR safe
+  // Timezone-based currency (auto-detected)
+  const [timezoneCurrency, setTimezoneCurrency] = useState<Currency>("USD");
+  // Manual override (set when language is switched)
+  const [override, setOverride] = useState<Currency | null>(null);
 
   useEffect(() => {
-    setCurrency(detectCurrency());
+    setTimezoneCurrency(detectCurrencyFromTimezone());
   }, []);
+
+  // Final currency = override (from language) OR timezone detection
+  const currency: Currency = override ?? timezoneCurrency;
 
   const isIndia = currency === "INR";
   const isEU = currency === "EUR";
 
-  // Base price = $2.99, converted to local currency
-  const formatPrice = (): string => {
+  const formatPrice = (baseUSD: number = USD_BASE): string => {
     if (currency === "INR") {
-      const inrPrice = Math.round(USD_BASE * USD_TO_INR);
+      const inrPrice = Math.round(baseUSD * USD_TO_INR);
       return `₹${inrPrice}`;
     }
     if (currency === "EUR") {
-      const eurPrice = (USD_BASE * USD_TO_EUR).toFixed(2);
+      const eurPrice = (baseUSD * USD_TO_EUR).toFixed(2);
       return `€${eurPrice}`;
     }
     // USD (default for US, rest of world)
-    return `$${USD_BASE.toFixed(2)}`;
+    return `$${baseUSD.toFixed(2)}`;
   };
 
   const formatAmount = (amount: number): string => {
@@ -73,8 +79,12 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
     return `$${amount.toFixed(2)}`;
   };
 
+  const setCurrencyOverride = (c: Currency | null) => {
+    setOverride(c);
+  };
+
   return (
-    <CurrencyContext.Provider value={{ currency, isIndia, isEU, formatPrice, formatAmount }}>
+    <CurrencyContext.Provider value={{ currency, isIndia, isEU, formatPrice, formatAmount, setCurrencyOverride }}>
       {children}
     </CurrencyContext.Provider>
   );

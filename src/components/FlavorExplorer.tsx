@@ -297,7 +297,7 @@ const fadeUp = {
 
 export default function FlavorExplorer() {
   const { lang } = useLanguage();
-  const { formatPrice, isIndia } = useCurrency();
+  const { formatPrice, isIndia, isEU } = useCurrency();
   const content = copy[lang === "en" ? "en" : "fr"];
   const { addToCart } = useCart();
   const [addedIds, setAddedIds] = useState<Set<string>>(new Set());
@@ -305,9 +305,17 @@ export default function FlavorExplorer() {
   const handleAddToCart = (product: Product) => {
     if (product.basePrice === undefined) return;
     
-    // Use INR price for India users, USD base price for everyone else
-    // Cart stores prices in their local currency units
-    const priceNum = isIndia ? (product.basePriceINR ?? Math.round(product.basePrice * 84)) : product.basePrice;
+    let priceNum: number;
+    if (isIndia) {
+      // India → INR price
+      priceNum = product.basePriceINR ?? Math.round(product.basePrice * 84);
+    } else if (isEU) {
+      // France/EU or FR language → EUR price
+      priceNum = parseFloat((product.basePrice * 0.92).toFixed(2));
+    } else {
+      // Rest of world → USD
+      priceNum = product.basePrice;
+    }
 
     addToCart({
       id: product.id,
