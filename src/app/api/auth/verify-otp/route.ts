@@ -20,11 +20,14 @@ export async function POST(req: Request) {
     const emailLower = email.toLowerCase().trim();
     const otpPurpose = purpose || "Login";
 
-    // 1. Validate OTP
+    // 1. Validate OTP — explicitly check createdAt within 5 mins
+    //    (MongoDB TTL index can be delayed by up to 60s on serverless; don't rely on it alone)
+    const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
     const validOtp = await OTP.findOne({
       email: emailLower,
       otp: otp,
       purpose: otpPurpose,
+      createdAt: { $gte: fiveMinutesAgo },
     });
 
     if (!validOtp) {

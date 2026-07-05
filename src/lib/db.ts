@@ -30,14 +30,28 @@ export async function connectDB(): Promise<typeof mongoose> {
   if (cached.conn) return cached.conn;
 
   if (!cached.promise) {
-    cached.promise = mongoose.connect(MONGODB_URI, {
-      bufferCommands: false,
-      family: 4, // Force IPv4 to fix DNS ECONNREFUSED issues
-      serverSelectionTimeoutMS: 5000,
-    });
+    cached.promise = mongoose
+      .connect(MONGODB_URI, {
+        bufferCommands: false,
+        family: 4, // Force IPv4 to fix DNS ECONNREFUSED issues
+        serverSelectionTimeoutMS: 10000, // 5s → 10s for cold starts on Vercel
+        connectTimeoutMS: 10000,
+        socketTimeoutMS: 30000,
+      })
+      .catch((err) => {
+        // Reset promise on failure so next call retries
+        cached.promise = null;
+        throw err;
+      });
   }
 
-  cached.conn = await cached.promise;
+  try {
+    cached.conn = await cached.promise;
+  } catch (err) {
+    cached.promise = null;
+    throw err;
+  }
+
   return cached.conn;
 }
 
