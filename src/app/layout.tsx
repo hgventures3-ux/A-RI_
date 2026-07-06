@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { cookies, headers } from "next/headers";
 import Providers from "@/components/Providers";
 import "./globals.css";
+import { GEO_COUNTRY_COOKIE, normalizeCountryCode } from "@/lib/pricing";
 
 import { Inter, Montserrat, Playfair_Display } from "next/font/google";
 
@@ -57,11 +59,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [headerStore, cookieStore] = await Promise.all([headers(), cookies()]);
+  const initialCountry = normalizeCountryCode(
+    headerStore.get("x-aeri-country") || cookieStore.get(GEO_COUNTRY_COOKIE)?.value
+  );
+
   return (
     <html
       lang="fr"
@@ -84,7 +91,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col">
-        <Providers>{children}</Providers>
+        <Providers initialCountry={initialCountry}>{children}</Providers>
       </body>
     </html>
   );

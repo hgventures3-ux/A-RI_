@@ -1,13 +1,25 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
+import {
+  Currency,
+  DEFAULT_PRODUCT_BASE_PRICE,
+  PriceableProduct,
+  currencyForCountry,
+  currencyForTimezone,
+  formatMoney,
+  getProductUnitPrice,
+  normalizeCountryCode,
+} from "@/lib/pricing";
 
-export type Currency = "EUR" | "INR" | "USD";
+export type { Currency };
 
 interface CurrencyContextProps {
   currency: Currency;
+  country: string | null;
   isIndia: boolean;
   isEU: boolean;
+  getPrice: (product?: PriceableProduct) => number;
   formatPrice: (baseUSD?: number) => string;
   formatAmount: (amount: number) => string;
   setCurrencyOverride: (c: Currency | null) => void;
@@ -15,76 +27,91 @@ interface CurrencyContextProps {
 
 const CurrencyContext = createContext<CurrencyContextProps | undefined>(undefined);
 
-// EU/France timezones
-const EU_TIMEZONES = [
-  "Europe/Paris", "Europe/Berlin", "Europe/Madrid", "Europe/Rome",
-  "Europe/Amsterdam", "Europe/Brussels", "Europe/Vienna", "Europe/Warsaw",
-  "Europe/Prague", "Europe/Budapest", "Europe/Bucharest", "Europe/Athens",
-  "Europe/Helsinki", "Europe/Stockholm", "Europe/Copenhagen", "Europe/Oslo",
-  "Europe/Lisbon", "Europe/Dublin", "Europe/Luxembourg", "Europe/Zurich",
-];
-
-// Fixed conversion rates (base: $2.99 USD)
-const USD_BASE = 2.99;
-const USD_TO_INR = 84;   // 1 USD ≈ ₹84
-const USD_TO_EUR = 0.92; // 1 USD ≈ €0.92
-
 function detectCurrencyFromTimezone(): Currency {
   try {
-    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    if (tz === "Asia/Calcutta" || tz === "Asia/Kolkata") return "INR";
-    if (EU_TIMEZONES.includes(tz)) return "EUR";
+    return currencyForTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone);
   } catch {
-    // fallback
+    return "USD";
   }
-  return "USD"; // Rest of world → USD
 }
 
-export function CurrencyProvider({ children }: { children: React.ReactNode }) {
-  // Timezone-based currency (auto-detected)
-  const [timezoneCurrency, setTimezoneCurrency] = useState<Currency>("USD");
-  // Manual override (set when language is switched)
+export function CurrencyProvider({
+  children,
+  initialCountry,
+}: {
+  children: React.ReactNode;
+  initialCountry?: string | null;
+}) {
+  const [country, setCountry] = useState<string | null>(() => normalizeCountryCode(initialCountry));
+  const [timezoneCurrency, setTimezoneCurrency] = useState<Currency>(() =>
+    currencyForCountry(country, "USD")
+  );
   const [override, setOverride] = useState<Currency | null>(null);
 
   useEffect(() => {
-    setTimezoneCurrency(detectCurrencyFromTimezone());
-  }, []);
-
-  // Final currency = override (from language) OR timezone detection
-  const currency: Currency = override ?? timezoneCurrency;
-
-  const isIndia = currency === "INR";
-  const isEU = currency === "EUR";
-
-  const formatPrice = (baseUSD: number = USD_BASE): string => {
-    if (currency === "INR") {
-      const inrPrice = Math.round(baseUSD * USD_TO_INR);
-      return `₹${inrPrice}`;
+    if (!country) {
+      setTimezoneCurrency(detectCurrencyFromTimezone());
     }
-    if (currency === "EUR") {
-      const eurPrice = (baseUSD * USD_TO_EUR).toFixed(2);
-      return `€${eurPrice}`;
-    }
-    // USD (default for US, rest of world)
-    return `$${baseUSD.toFixed(2)}`;
-  };
+  }, [country]);
 
-  const formatAmount = (amount: number): string => {
-    if (currency === "INR") {
-      return `₹${(amount * USD_TO_INR).toFixed(0)}`;
-    }
-    if (currency === "EUR") {
-      return `€${(amount * USD_TO_EUR).toFixed(2)}`;
-    }
-    return `$${amount.toFixed(2)}`;
-  };
+  useEffect(() => {
+    if (country) return;
 
-  const setCurrencyOverride = (c: Currency | null) => {
-    setOverride(c);
-  };
+    let active = true;
+    fetch("/api/geo")
+      .then((response) => (response.ok ? response.json() : null))
+      .then((data: { country?: string } | null) => {
+        const resolvedCountry = normalizeCountryCode(data?.country);
+        if (active && resolvedCountry) {
+          setCountry(resolvedCountry);
+          setTimezoneCurrency(currencyForCountry(resolvedCountry, detectCurrencyFromTimezone()));
+        }
+      })
+      .catch(() => {});
+
+    return () => {
+      active = false;
+    };
+  }, [country]);
+
+  const currency: Currency = override ?? (country === "IN" ? "INR" : timezoneCurrency);
+
+  const getPrice = useCallback(
+    (product?: PriceableProduct) => getProductUnitPrice(product, currency),
+    [currency]
+  );
+
+  const formatPrice = useCallback(
+    (baseUSD: number = DEFAULT_PRODUCT_BASE_PRICE): string =>
+      formatMoney(getProductUnitPrice({ basePrice: baseUSD }, currency), currency),
+    [currency]
+  );
+
+  const formatAmount = useCallback(
+    (amount: number): string => formatMoney(amount, currency),
+    [currency]
+  );
+
+  const setCurrencyOverride = useCallback(
+    (c: Currency | null) => {
+      setOverride(c);
+    },
+    []
+  );
 
   return (
-    <CurrencyContext.Provider value={{ currency, isIndia, isEU, formatPrice, formatAmount, setCurrencyOverride }}>
+    <CurrencyContext.Provider
+      value={{
+        currency,
+        country,
+        isIndia: currency === "INR",
+        isEU: currency === "EUR",
+        getPrice,
+        formatPrice,
+        formatAmount,
+        setCurrencyOverride,
+      }}
+    >
       {children}
     </CurrencyContext.Provider>
   );

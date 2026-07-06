@@ -141,7 +141,8 @@ export default function CheckoutPage() {
         body: JSON.stringify({ 
           items,
           amount: finalTotal,
-          currency: currency
+          currency,
+          couponCode: appliedCoupon?.code
         }),
       }).then((t) => t.json());
 
@@ -172,12 +173,13 @@ export default function CheckoutPage() {
                 zipCode: formData.zipCode,
                 country: formData.country,
               },
-              items: items,
+              items: orderData.pricedItems || items,
               subtotal: orderData.subtotal,
-              discount: appliedCoupon ? appliedCoupon.discountAmount : 0,
-              couponCode: appliedCoupon ? appliedCoupon.code : undefined,
+              discount: orderData.discount || 0,
+              couponCode: orderData.couponCode || undefined,
               shipping: orderData.shipping,
               total: orderData.amount,
+              currency: orderData.currency,
             },
           };
 
@@ -189,7 +191,9 @@ export default function CheckoutPage() {
 
           if (verifyRes.success) {
             clearCart();
-            router.push(`/order-confirmation?orderNumber=${verifyRes.orderNumber}`);
+            router.push(
+              `/order-confirmation?orderNumber=${verifyRes.orderNumber}&total=${verifyRes.total}&currency=${verifyRes.currency}`
+            );
           } else {
             toast.error(
               isFrench

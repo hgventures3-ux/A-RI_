@@ -2,14 +2,29 @@ import { NextResponse } from "next/server";
 import dbConnect from "@/lib/db";
 import Order from "@/lib/models/Order";
 import { sendEmail } from "@/lib/mailer";
+import { getCouponDiscount, getShippingForCart, priceCartItems } from "@/lib/cartPricing";
+import {
+  Currency,
+  currencyForCountry,
+  detectCountryFromHeaders,
+  formatMoney,
+} from "@/lib/pricing";
+
+function normalizeRequestedCurrency(value: unknown): Currency {
+  return value === "INR" || value === "USD" || value === "EUR" ? value : "EUR";
+}
 
 export async function POST(req: Request) {
   try {
     await dbConnect();
 
     const body = await req.json();
-
-    // Generate a unique order number
+    const country = detectCountryFromHeaders(req.headers);
+    const currency = currencyForCountry(country, normalizeRequestedCurrency(body.currency));
+    const pricedCart = await priceCartItems(body.items || [], currency);
+    const coupon = await getCouponDiscount(body.couponCode, pricedCart.subtotal);
+    const shipping = getShippingForCart(pricedCart.subtotal, currency);
+    const total = Number((pricedCart.subtotal - coupon.discount + shipping).toFixed(2));
     const orderNumber = `AERI-${Math.floor(100000 + Math.random() * 900000)}`;
 
     const newOrder = new Order({
@@ -23,29 +38,30 @@ export async function POST(req: Request) {
         zipCode: body.customer.zipCode,
         country: body.customer.country,
       },
-      items: body.items.map((item: any) => ({
-        productId: item.id || item.productId,
-        name: item.name,
-        price: item.price,
-        quantity: item.quantity,
-        image: item.image,
-      })),
-      subtotal: body.subtotal,
-      discount: body.discount || 0,
-      couponCode: body.couponCode || "",
-      shipping: body.shipping || 0,
-      total: body.total,
+      items: pricedCart.items,
+      subtotal: pricedCart.subtotal,
+      discount: coupon.discount,
+      couponCode: coupon.couponCode,
+      shipping,
+      total,
+      currency,
       paymentMethod: body.paymentMethod || "Razorpay",
       paymentStatus: body.paymentStatus || "Pending",
       timeline: [
         { status: "Pending", note: "Order placed by customer." },
-        ...(body.paymentStatus === "Paid" ? [{ status: "Paid", note: "Payment verified successfully." }] : [])
+        ...(body.paymentStatus === "Paid"
+          ? [{ status: "Paid", note: "Payment verified successfully." }]
+          : []),
       ],
     });
 
     await newOrder.save();
 
-    // Send order confirmation to customer
+    const totalDisplay = formatMoney(newOrder.total, currency);
+    const itemList = newOrder.items
+      .map((item) => `<li>${item.quantity}x ${item.name} - ${formatMoney(item.price * item.quantity, currency)}</li>`)
+      .join("");
+
     await sendEmail({
       to: newOrder.customer.email,
       subject: `Order Confirmation - ${orderNumber}`,
@@ -53,15 +69,12 @@ export async function POST(req: Request) {
         <h2>Thank you for your order!</h2>
         <p>Your order <strong>${orderNumber}</strong> has been received and is currently being processed.</p>
         <h3>Order Details:</h3>
-        <ul>
-          ${newOrder.items.map(item => `<li>${item.quantity}x ${item.name} - €${item.price.toFixed(2)}</li>`).join("")}
-        </ul>
-        <p><strong>Total:</strong> €${newOrder.total.toFixed(2)}</p>
+        <ul>${itemList}</ul>
+        <p><strong>Total:</strong> ${totalDisplay}</p>
         <p>We will notify you once your order has been shipped.</p>
       `,
     });
 
-    // Send notification to admin
     await sendEmail({
       to: process.env.SMTP_USER || "contact@aeri-snacks.com",
       subject: `New Order Received - ${orderNumber}`,
@@ -69,7 +82,7 @@ export async function POST(req: Request) {
         <h2>New Order Received</h2>
         <p><strong>Order Number:</strong> ${orderNumber}</p>
         <p><strong>Customer:</strong> ${newOrder.customer.name} (${newOrder.customer.email})</p>
-        <p><strong>Total:</strong> €${newOrder.total.toFixed(2)}</p>
+        <p><strong>Total:</strong> ${totalDisplay}</p>
         <p>Please check the admin dashboard for more details.</p>
       `,
     });
@@ -79,6 +92,9 @@ export async function POST(req: Request) {
       message: "Order placed successfully",
       orderId: newOrder._id,
       orderNumber,
+      total,
+      currency,
+      totalDisplay,
     });
   } catch (error) {
     console.error("Error creating order:", error);

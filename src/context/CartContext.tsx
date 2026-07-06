@@ -2,11 +2,15 @@
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { usePathname } from "next/navigation";
+import { useCurrency, Currency } from "@/context/CurrencyContext";
+import { DEFAULT_PRODUCT_BASE_PRICE, PriceableProduct } from "@/lib/pricing";
 
 export interface CartItem {
   id: string;
   name: string;
   price: number;
+  basePrice?: number;
+  currency?: Currency;
   image: string;
   quantity: number;
 }
@@ -16,7 +20,7 @@ interface CartContextType {
   cartCount: number;
   cartTotal: number;
   isCartOpen: boolean;
-  addToCart: (item: Omit<CartItem, "quantity">) => void;
+  addToCart: (item: Omit<CartItem, "quantity" | "price"> & { price?: number }) => void;
   removeFromCart: (id: string) => void;
   updateQuantity: (id: string, quantity: number) => void;
   clearCart: () => void;
@@ -31,6 +35,22 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const [isLoaded, setIsLoaded] = useState(false);
   const pathname = usePathname();
   const [userId, setUserId] = useState<string | null>(null);
+  const { currency, getPrice } = useCurrency();
+
+  const priceCartItem = (item: CartItem | (Omit<CartItem, "quantity" | "price"> & { price?: number; quantity?: number })): CartItem => {
+    const source: PriceableProduct = {
+      basePrice: item.basePrice ?? DEFAULT_PRODUCT_BASE_PRICE,
+      price: item.basePrice ?? item.price,
+    };
+
+    return {
+      ...item,
+      price: getPrice(source),
+      basePrice: item.basePrice ?? DEFAULT_PRODUCT_BASE_PRICE,
+      currency,
+      quantity: item.quantity ?? 1,
+    };
+  };
 
   // Check customer auth state on mount/pathname change
   useEffect(() => {
@@ -59,7 +79,8 @@ export function CartProvider({ children }: { children: ReactNode }) {
     const saved = localStorage.getItem(`aeri_cart_${userId}`);
     if (saved) {
       try {
-        setItems(JSON.parse(saved));
+        const parsed = JSON.parse(saved) as CartItem[];
+        setItems(parsed.map(priceCartItem));
       } catch (e) {
         console.error("Failed to parse cart", e);
         setItems([]);
@@ -68,7 +89,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       setItems([]);
     }
     setIsLoaded(true);
-  }, [userId]);
+  }, [userId, currency]);
 
   // Save to local storage when items or userId changes
   useEffect(() => {
@@ -77,15 +98,18 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   }, [items, isLoaded, userId]);
 
-  const addToCart = (product: Omit<CartItem, "quantity">) => {
+  const addToCart = (product: Omit<CartItem, "quantity" | "price"> & { price?: number }) => {
+    const pricedProduct = priceCartItem(product);
     setItems((prev) => {
-      const existing = prev.find((item) => item.id === product.id);
+      const existing = prev.find((item) => item.id === pricedProduct.id);
       if (existing) {
         return prev.map((item) =>
-          item.id === product.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === pricedProduct.id
+            ? { ...priceCartItem(item), quantity: item.quantity + 1 }
+            : priceCartItem(item)
         );
       }
-      return [...prev, { ...product, quantity: 1 }];
+      return [...prev.map(priceCartItem), pricedProduct];
     });
     setIsCartOpen(true);
   };
@@ -100,7 +124,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
       return;
     }
     setItems((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, quantity } : item))
+      prev.map((item) => (item.id === id ? { ...priceCartItem(item), quantity } : priceCartItem(item)))
     );
   };
 

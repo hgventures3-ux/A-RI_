@@ -7,6 +7,7 @@ import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/context/LanguageContext";
+import { Currency, formatMoney } from "@/lib/pricing";
 
 const translations = {
   fr: {
@@ -14,6 +15,7 @@ const translations = {
     subtitle: "Merci pour votre commande !",
     body: "Votre paiement a été effectué avec succès et votre commande est en cours de traitement. Vous recevrez un e-mail de confirmation sous peu.",
     orderNo: "N° de commande",
+    orderTotal: "Total payé",
     whatsNext: "Prochaines étapes",
     step1: "Email de confirmation envoyé",
     step1Desc: "Vérifiez votre boîte de réception pour les détails de votre commande.",
@@ -29,6 +31,7 @@ const translations = {
     subtitle: "Thank you for your order!",
     body: "Your payment was successful and your order is being processed. You will receive a confirmation email shortly.",
     orderNo: "Order Number",
+    orderTotal: "Amount Paid",
     whatsNext: "What's Next",
     step1: "Confirmation Email Sent",
     step1Desc: "Check your inbox for your order details.",
@@ -48,6 +51,8 @@ function OrderConfirmationContent() {
   const s = translations[lang as keyof typeof translations] || translations.fr;
 
   const orderNumber = searchParams.get("orderNumber") || "";
+  const orderTotal = Number(searchParams.get("total") || 0);
+  const orderCurrency = (searchParams.get("currency") || "EUR") as Currency;
 
   const steps = [
     { icon: "✉️", title: s.step1, desc: s.step1Desc },
@@ -125,6 +130,28 @@ function OrderConfirmationContent() {
                 style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
               >
                 {orderNumber}
+              </p>
+            </motion.div>
+          )}
+
+          {orderTotal > 0 && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.45 }}
+              className="inline-block bg-white/80 border border-[#cec5bb] rounded-2xl px-8 py-4 mb-8 shadow-sm"
+            >
+              <p
+                className="text-xs uppercase tracking-[0.25em] text-[#6c6257] mb-1"
+                style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+              >
+                {s.orderTotal}
+              </p>
+              <p
+                className="text-2xl font-bold text-[#1C1C1C]"
+                style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
+              >
+                {formatMoney(orderTotal, orderCurrency)}
               </p>
             </motion.div>
           )}

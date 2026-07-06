@@ -138,7 +138,7 @@ export default function Navbar() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
-        className="hidden md:flex items-center gap-6 text-[13px] tracking-[0.05em] font-normal text-[#1C1C1C]/80"
+        className="hidden xl:flex items-center gap-6 text-[13px] tracking-[0.05em] font-normal text-[#1C1C1C]/80"
         style={{ fontFamily: "var(--font-montserrat)" }}
       >
         {navLinks.map((link) => (
@@ -218,7 +218,7 @@ export default function Navbar() {
       </motion.nav>
 
       {/* ── Mobile: User + Lang toggle + Hamburger ── */}
-      <div className="md:hidden flex items-center gap-2">
+      <div className="xl:hidden flex items-center gap-2">
         {/* User Auth Mobile */}
         {user ? (
           <Link
@@ -318,7 +318,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="absolute top-full left-0 right-0 border-b border-[#1C1C1C]/10 py-5 px-6 flex flex-col gap-3.5 md:hidden"
+            className="absolute top-full left-0 right-0 max-h-[calc(100vh-64px)] overflow-y-auto border-b border-[#1C1C1C]/10 py-5 px-6 flex flex-col gap-3.5 xl:hidden"
             style={{
               background: "rgba(250, 248, 245, 0.99)",
               backdropFilter: "blur(20px)",

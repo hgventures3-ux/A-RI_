@@ -7,6 +7,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { LogOut, User, ShoppingBag, Calendar, Mail, Phone, MapPin, Loader2, ChevronRight, PackageOpen } from "lucide-react";
 import toast from "react-hot-toast";
+import { Currency, formatMoney } from "@/lib/pricing";
 
 const translations = {
   fr: {
@@ -96,6 +97,7 @@ interface Order {
   orderNumber: string;
   createdAt: string;
   total: number;
+  currency?: Currency;
   status: string;
   paymentStatus: string;
   items: OrderItem[];
@@ -297,14 +299,18 @@ export default function ProfilePage() {
                               <span className="text-[#1C1C1C]/50 text-[10px]">Qty: {item.quantity}</span>
                             </div>
                           </div>
-                          <span className="font-bold text-[#1C1C1C]">€{(item.price * item.quantity).toFixed(2)}</span>
+                          <span className="font-bold text-[#1C1C1C]">
+                            {formatMoney(item.price * item.quantity, order.currency || "EUR")}
+                          </span>
                         </div>
                       ))}
                     </div>
 
                     <div className="flex justify-between items-center border-t border-[#1C1C1C]/5 mt-4 pt-4 text-sm font-bold">
                       <span className="text-[#1C1C1C]/60 text-xs font-semibold">{s.total}</span>
-                      <span className="text-lg text-[#1C1C1C]">€{order.total.toFixed(2)}</span>
+                      <span className="text-lg text-[#1C1C1C]">
+                        {formatMoney(order.total, order.currency || "EUR")}
+                      </span>
                     </div>
                   </div>
                 ))}

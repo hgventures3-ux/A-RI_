@@ -26,11 +26,26 @@
   --font-lora: var(--font-lora);
 }
 
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-montserrat);
-  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+main {
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: clip;
 }
 
 /* Typography hierarchy */
@@ -58,11 +73,6 @@ select {
 ::selection {
   background: var(--luxury-caviar);
   color: #FFFFFF;
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
 }
 
 /* Marquee animation — Hero ticker (fast) */

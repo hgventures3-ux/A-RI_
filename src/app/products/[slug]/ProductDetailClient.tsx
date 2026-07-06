@@ -10,6 +10,7 @@ import Footer from "@/components/Footer";
 import { useLanguage } from "@/context/LanguageContext";
 import { useCart } from "@/context/CartContext";
 import { useCurrency } from "@/context/CurrencyContext";
+import { DEFAULT_PRODUCT_BASE_PRICE } from "@/lib/pricing";
 
 import { productData } from "@/lib/productData";
 
@@ -138,7 +139,7 @@ export default function ProductDetailPage() {
               className="mb-10"
               style={{ fontFamily: "var(--font-montserrat), sans-serif" }}
             >
-              <span className="text-2xl font-bold" style={{ color: "#1d1b1a" }}>{formatPrice()}</span>
+              <span className="text-2xl font-bold" style={{ color: "#1d1b1a" }}>{formatPrice(DEFAULT_PRODUCT_BASE_PRICE)}</span>
               <span className="text-sm font-medium tracking-wide uppercase ml-2" style={{ color: "#675d4e" }}>/ 30g</span>
             </motion.div>
 
@@ -170,7 +171,7 @@ export default function ProductDetailPage() {
                       addToCart({
                         id: slug,
                         name: product.title,
-                        price: 2.99,
+                        basePrice: DEFAULT_PRODUCT_BASE_PRICE,
                         image: product.image,
                       });
                     }}

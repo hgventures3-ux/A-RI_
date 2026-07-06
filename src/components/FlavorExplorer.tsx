@@ -297,30 +297,17 @@ const fadeUp = {
 
 export default function FlavorExplorer() {
   const { lang } = useLanguage();
-  const { formatPrice, isIndia, isEU } = useCurrency();
+  const { formatPrice } = useCurrency();
   const content = copy[lang === "en" ? "en" : "fr"];
   const { addToCart } = useCart();
   const [addedIds, setAddedIds] = useState<Set<string>>(new Set());
 
   const handleAddToCart = (product: Product) => {
     if (product.basePrice === undefined) return;
-    
-    let priceNum: number;
-    if (isIndia) {
-      // India → INR price
-      priceNum = product.basePriceINR ?? Math.round(product.basePrice * 84);
-    } else if (isEU) {
-      // France/EU or FR language → EUR price
-      priceNum = parseFloat((product.basePrice * 0.92).toFixed(2));
-    } else {
-      // Rest of world → USD
-      priceNum = product.basePrice;
-    }
-
     addToCart({
       id: product.id,
       name: product.name,
-      price: priceNum,
+      basePrice: product.basePrice,
       image: product.image,
     });
 
@@ -470,7 +457,7 @@ export default function FlavorExplorer() {
                 {product.isB2B 
                   ? product.customPriceLabel 
                   : (product.basePrice !== undefined 
-                      ? `${formatPrice()} / 30g` 
+                      ? `${formatPrice(product.basePrice)} / 30g` 
                       : "")
                 }
               </p>

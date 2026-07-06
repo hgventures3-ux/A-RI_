@@ -27,6 +27,7 @@ export interface IOrder extends Document {
   couponCode?: string;
   shipping: number;
   total: number;
+  currency?: "EUR" | "INR" | "USD";
   status:
     | "Pending"
     | "Processing"
@@ -72,6 +73,7 @@ const OrderSchema = new Schema<IOrder>(
     couponCode: { type: String },
     shipping: { type: Number, default: 0 },
     total: { type: Number, required: true },
+    currency: { type: String, enum: ["EUR", "INR", "USD"], default: "EUR" },
     status: {
       type: String,
       enum: [

@@ -14,7 +14,7 @@ import { Toaster } from "react-hot-toast";
  */
 function LanguageCurrencyBridge() {
   const { lang } = useLanguage();
-  const { setCurrencyOverride } = useCurrency();
+  const { isIndia, setCurrencyOverride } = useCurrency();
 
   useEffect(() => {
     if (lang === "fr") {
@@ -28,10 +28,16 @@ function LanguageCurrencyBridge() {
   return null;
 }
 
-export default function Providers({ children }: { children: React.ReactNode }) {
+export default function Providers({
+  children,
+  initialCountry,
+}: {
+  children: React.ReactNode;
+  initialCountry?: string | null;
+}) {
   return (
     <LanguageProvider>
-      <CurrencyProvider>
+      <CurrencyProvider initialCountry={initialCountry}>
         <LanguageCurrencyBridge />
         <CartProvider>
           {children}
