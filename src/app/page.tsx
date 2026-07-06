@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import BadgeStrip from "@/components/BadgeStrip";
 import ThreeFlavorLineup from "@/components/ThreeFlavorLineup";
+import CraftJourney from "@/components/CraftJourney";
 import FlavorExplorer from "@/components/FlavorExplorer";
 import SocialProofGrid from "@/components/SocialProofGrid";
 import B2BTeaser from "@/components/B2BTeaser";
@@ -47,10 +48,13 @@ export default function Home() {
       {/* 2. Badge strip — health claims */}
       <BadgeStrip />
       
-      {/* 3. Signature Himalayan Salt collection visual */}
+      {/* 3. Craft Journey — 6-step visual timeline */}
+      <CraftJourney />
+
+      {/* 4. Signature Himalayan Salt collection visual */}
       <ThreeFlavorLineup />
-      
-      {/* 4. Product grid with "Ajouter au Panier" buttons */}
+
+      {/* 5. Product grid with "Ajouter au Panier" buttons */}
       <FlavorExplorer />
       
       {/* 5. Consumer review grid */}
