@@ -136,31 +136,7 @@ function StepCircle({
         </motion.div>
       </div>
 
-      {/* Connecting Arrow for Desktop */}
-      {!isLast && (
-        <div 
-           className="hidden xl:block absolute left-[calc(50%+100px)] w-[calc(100%-200px)] h-[100px] pointer-events-none z-0"
-           style={{ top: isDown ? '0px' : '100px' }}
-        >
-           <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none" className="overflow-visible">
-              <path 
-                d={isDown ? "M 0 100 C 40 100, 60 0, 100 0" : "M 0 0 C 40 0, 60 100, 100 100"}
-                fill="none" 
-                stroke="#FDB045" 
-                strokeWidth="2.5" 
-                strokeDasharray="6 6" 
-                vectorEffect="non-scaling-stroke"
-              />
-              <path 
-                d={isDown ? "M 90 10 L 100 0 L 90 -10" : "M 90 90 L 100 100 L 90 110"}
-                fill="none"
-                stroke="#FDB045"
-                strokeWidth="2.5"
-                vectorEffect="non-scaling-stroke"
-              />
-           </svg>
-        </div>
-      )}
+
 
       {/* Text */}
       <motion.div
