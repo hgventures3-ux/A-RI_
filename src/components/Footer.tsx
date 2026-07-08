@@ -111,7 +111,7 @@ export default function Footer() {
               AÉRI
             </h3>
             <p
-              className="text-sm text-[#FFFFFF]/40 leading-relaxed mb-5"
+              className="text-sm text-[#FFFFFF]/70 font-light leading-relaxed mb-5"
               style={{ fontFamily: "var(--font-lora)" }}
             >
               {s.brandTagline1}
@@ -119,18 +119,37 @@ export default function Footer() {
               {s.brandTagline2}
             </p>
             {/* Social icons */}
-            <div className="flex gap-3">
-              {["Instagram", "LinkedIn", "Twitter"].map((social) => (
+            <div className="flex flex-wrap gap-3">
+              {[
+                { 
+                  name: "Instagram", 
+                  href: "https://www.instagram.com/aeri.makhana", 
+                  icon: <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                },
+                { 
+                  name: "LinkedIn", 
+                  href: "https://www.linkedin.com/company/aeri-snacks/", 
+                  icon: <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                },
+                { 
+                  name: "WhatsApp", 
+                  href: "https://wa.me/919499729424", 
+                  icon: <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" /><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" /></svg>
+                },
+              ].map((social) => (
                 <a
-                  key={social}
-                  href="#"
-                  className="w-9 h-9 rounded-full bg-[#FFFFFF]/6 border border-[#FFFFFF]/10 flex items-center justify-center text-[#FFFFFF]/40 transition-colors hover:bg-[#FFFFFF]/12 hover:text-[#FFFFFF]/70"
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#FFFFFF]/6 border border-[#FFFFFF]/10 text-[#FFFFFF]/70 transition-colors hover:bg-[#FFFFFF]/12 hover:text-[#FFFFFF]"
                 >
+                  {social.icon}
                   <span
-                    className="text-[10px] font-bold"
+                    className="text-xs font-medium"
                     style={{ fontFamily: "var(--font-montserrat)" }}
                   >
-                    {social[0]}
+                    {social.name}
                   </span>
                 </a>
               ))}
@@ -189,7 +208,7 @@ export default function Footer() {
             return categories.map((category, i) => (
               <div key={category}>
                 <h5
-                  className="text-xs font-semibold tracking-[0.25em] uppercase text-[#FFFFFF]/50 mb-4"
+                  className="text-xs font-semibold tracking-[0.25em] uppercase text-[#FFFFFF]/80 mb-4"
                   style={{ fontFamily: "var(--font-montserrat)" }}
                 >
                   {s.footerCats[i]}
@@ -200,7 +219,7 @@ export default function Footer() {
                       <li key={prod._id || prod.slug}>
                         <Link
                           href={`/products/${prod.slug}`}
-                          className="text-sm text-[#FFFFFF]/35 transition-colors hover:text-[#FFFFFF]/70"
+                          className="text-sm text-[#FFFFFF]/70 font-light transition-colors hover:text-[#FFFFFF]"
                           style={{ fontFamily: "var(--font-lora)" }}
                         >
                           {prod.name}
@@ -215,7 +234,7 @@ export default function Footer() {
                         <li key={link}>
                           <Link
                             href={href}
-                            className="text-sm text-[#FFFFFF]/35 transition-colors hover:text-[#FFFFFF]/70"
+                            className="text-sm text-[#FFFFFF]/70 font-light transition-colors hover:text-[#FFFFFF]"
                             style={{ fontFamily: "var(--font-lora)" }}
                           >
                             {link}
@@ -234,31 +253,39 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-[#FFFFFF]/6">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-5 flex flex-col md:flex-row items-center justify-between gap-3">
-          <p
-            className="text-xs text-[#FFFFFF]/25"
-            style={{ fontFamily: "var(--font-lora)" }}
-          >
-            {s.copyright}
-          </p>
+          <div className="flex flex-col gap-1">
+            <p
+              className="text-xs text-[#FFFFFF]/75 font-light"
+              style={{ fontFamily: "var(--font-lora)" }}
+            >
+              {s.copyright}
+            </p>
+            <p
+              className="text-xs text-[#FFFFFF]/75 font-light"
+              style={{ fontFamily: "var(--font-lora)" }}
+            >
+              1602/E GIDC HALOL-389350, Gujarat, India
+            </p>
+          </div>
           <div className="flex items-center gap-4">
             <Link
               href={lang === 'en' ? "/legal/return-policy" : "/legal/politique-de-retour"}
-              className="text-xs text-[#FFFFFF]/25 transition-colors hover:text-[#FFFFFF]/50"
+              className="text-xs text-[#FFFFFF]/75 font-light transition-colors hover:text-[#FFFFFF]"
               style={{ fontFamily: "var(--font-lora)" }}
             >
               {s.returnPolicy}
             </Link>
-            <span className="text-[#FFFFFF]/10">·</span>
+            <span className="text-[#FFFFFF]/40">·</span>
             <Link
               href={lang === 'en' ? "/legal/privacy" : "/legal/confidentialite"}
-              className="text-xs text-[#FFFFFF]/25 transition-colors hover:text-[#FFFFFF]/50"
+              className="text-xs text-[#FFFFFF]/75 font-light transition-colors hover:text-[#FFFFFF]"
               style={{ fontFamily: "var(--font-lora)" }}
             >
               {s.privacy}
             </Link>
-            <span className="text-[#FFFFFF]/10">·</span>
+            <span className="text-[#FFFFFF]/40">·</span>
             <span
-              className="text-xs text-[#FFFFFF]/15"
+              className="text-xs text-[#FFFFFF]/60 font-light"
               style={{ fontFamily: "var(--font-montserrat)" }}
             >
               {s.partner}
