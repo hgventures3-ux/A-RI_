@@ -22,6 +22,7 @@ type Product = {
   customPriceLabel?: string;
   image: string;
   isB2B?: boolean;
+  inStock?: boolean;
 };
 
 type LocaleCopy = {
@@ -30,6 +31,7 @@ type LocaleCopy = {
   collectionLabel: string;
   addToCart: string;
   addedToCart: string;
+  outOfStock: string;
   b2bButton: string;
   roastBadge: string;
   products: Product[];
@@ -43,7 +45,7 @@ const frenchProducts: Product[] = [
     category: "SIGNATURE",
     description: "Graines de Makhana soufflées - Sel rose de l'Himalaya et poivre.",
     basePrice: 2.99,
-    basePriceINR: 65,
+    basePriceINR: 59,
     image: "/flavor_himalayan_salt_new.png",
   },
   {
@@ -53,18 +55,19 @@ const frenchProducts: Product[] = [
     category: "GOURMET",
     description: "Graines de Makhana soufflées - Saveur Truffe Noire.",
     basePrice: 2.99,
-    basePriceINR: 65,
+    basePriceINR: 79,
     image: "/products/product2.png",
   },
   {
-    id: "herb",
-    slug: "mediterranean-herb-fusion",
-    name: "Herbes de Provence",
-    category: "VÉGÉTAL",
-    description: "Graines de Makhana soufflées - Aux Herbes de Provence.",
+    id: "dark-chocolate",
+    slug: "dark-chocolate",
+    name: "Chocolat Noir 70%",
+    category: "SUCRÉ",
+    description:
+      "Graines de Makhana soufflées - Enrobage fin au chocolat noir 70%.",
     basePrice: 2.99,
-    basePriceINR: 65,
-    image: "/products/product3.png",
+    basePriceINR: 99,
+    image: "/flavor_dark_chocolate.png",
   },
   {
     id: "raw",
@@ -87,17 +90,18 @@ const frenchProducts: Product[] = [
     basePrice: 2.99,
     basePriceINR: 65,
     image: "/flavor_caramel_salt.png",
+    inStock: false,
   },
   {
-    id: "dark-chocolate",
-    slug: "dark-chocolate",
-    name: "Chocolat Noir 70%",
-    category: "SUCRÉ",
-    description:
-      "Graines de Makhana soufflées - Enrobage fin au chocolat noir 70%.",
+    id: "herb",
+    slug: "mediterranean-herb-fusion",
+    name: "Herbes de Provence",
+    category: "VÉGÉTAL",
+    description: "Graines de Makhana soufflées - Aux Herbes de Provence.",
     basePrice: 2.99,
     basePriceINR: 65,
-    image: "/flavor_dark_chocolate.png",
+    image: "/products/product3.png",
+    inStock: false,
   },
   {
     id: "lemon-mint",
@@ -109,6 +113,7 @@ const frenchProducts: Product[] = [
     basePrice: 2.99,
     basePriceINR: 65,
     image: "/flavor_lemon_mint.png",
+    inStock: false,
   },
   {
     id: "peanut-butter",
@@ -120,6 +125,7 @@ const frenchProducts: Product[] = [
     basePrice: 2.99,
     basePriceINR: 65,
     image: "/flavor_peanut_butter.png",
+    inStock: false,
   },
   {
     id: "peri-peri",
@@ -131,6 +137,7 @@ const frenchProducts: Product[] = [
     basePrice: 2.99,
     basePriceINR: 65,
     image: "/flavor_peri_peri.png",
+    inStock: false,
   },
   {
     id: "smokey-bbq",
@@ -142,6 +149,7 @@ const frenchProducts: Product[] = [
     basePrice: 2.99,
     basePriceINR: 65,
     image: "/flavor_smokey_bbq.png",
+    inStock: false,
   },
   {
     id: "tangy-tomato",
@@ -153,6 +161,37 @@ const frenchProducts: Product[] = [
     basePrice: 2.99,
     basePriceINR: 65,
     image: "/products/tomato.png",
+    inStock: false,
+  },
+  {
+    id: "trio-bundle",
+    slug: "trio-bundle",
+    name: "Pack Découverte - 3 Saveurs",
+    category: "SIGNATURE",
+    description: "Sel de l'Himalaya, Fusion Truffe Noire, et Chocolat Noir 70%.",
+    basePrice: 8.99,
+    basePriceINR: 199,
+    image: "/products/product2.png",
+  },
+  {
+    id: "six-pack-bundle",
+    slug: "six-pack-bundle",
+    name: "Pack Famille - 6 Sachets",
+    category: "SIGNATURE",
+    description: "Un assortiment généreux de nos saveurs les plus populaires.",
+    basePrice: 17.50,
+    basePriceINR: 379,
+    image: "/flavor_himalayan_salt_new.png",
+  },
+  {
+    id: "nine-pack-bundle",
+    slug: "nine-pack-bundle",
+    name: "Pack Dégustation - 9 Sachets",
+    category: "SIGNATURE",
+    description: "L'expérience complète AÉRI avec notre sélection premium.",
+    basePrice: 25.00,
+    basePriceINR: 549,
+    image: "/flavor_dark_chocolate.png",
   },
 ];
 
@@ -209,6 +248,18 @@ const englishProducts: Product[] = frenchProducts.map((product) => {
         "Premium bulk Makhana for wholesalers, distributors, and private labels.",
       customPriceLabel: "Tiered container pricing - Quote on request.",
     },
+    "trio-bundle": {
+      name: "Trio Discovery Pack",
+      description: "Himalayan Salt & Pepper, Gourmet Truffle, and Dark Chocolate 70%.",
+    },
+    "six-pack-bundle": {
+      name: "Family Pack - 6 Bags",
+      description: "A generous assortment of our most popular flavors.",
+    },
+    "nine-pack-bundle": {
+      name: "Ultimate Pack - 9 Bags",
+      description: "The complete AÉRI experience with our premium selection.",
+    },
   };
 
   return { ...product, ...localized[product.id] };
@@ -253,6 +304,7 @@ const copy: Record<"fr" | "en", LocaleCopy> = {
     collectionLabel: "Collection AÉRI",
     addToCart: "Ajouter au Panier",
     addedToCart: "Ajouté au panier !",
+    outOfStock: "Rupture de stock",
     b2bButton: "Formulaire B2B",
     roastBadge: "Torréfié à l'huile d'olive - Jamais frit",
     products: frenchProducts,
@@ -264,6 +316,7 @@ const copy: Record<"fr" | "en", LocaleCopy> = {
     collectionLabel: "AÉRI Collection",
     addToCart: "Add to Cart",
     addedToCart: "Added to cart!",
+    outOfStock: "Out of Stock",
     b2bButton: "B2B Form",
     roastBadge: "Roasted in olive oil - Never fried",
     products: englishProducts,
@@ -297,7 +350,7 @@ const fadeUp = {
 
 export default function FlavorExplorer() {
   const { lang } = useLanguage();
-  const { formatPrice } = useCurrency();
+  const { getPrice, formatAmount } = useCurrency();
   const content = copy[lang === "en" ? "en" : "fr"];
   const { addToCart } = useCart();
   const [addedIds, setAddedIds] = useState<Set<string>>(new Set());
@@ -308,6 +361,7 @@ export default function FlavorExplorer() {
       id: product.id,
       name: product.name,
       basePrice: product.basePrice,
+      basePriceINR: product.basePriceINR,
       image: product.image,
     });
 
@@ -456,9 +510,11 @@ export default function FlavorExplorer() {
               >
                 {product.isB2B 
                   ? product.customPriceLabel 
-                  : (product.basePrice !== undefined 
-                      ? `${formatPrice(product.basePrice)} / 30g` 
-                      : "")
+                  : product.inStock === false
+                      ? ""
+                      : (product.basePrice !== undefined || product.basePriceINR !== undefined)
+                          ? `${formatAmount(getPrice(product))} / ${product.id.includes("bundle") ? "pack" : "30g"}`
+                          : ""
                 }
               </p>
 
@@ -470,6 +526,15 @@ export default function FlavorExplorer() {
                 >
                   {content.b2bButton}
                 </Link>
+              ) : product.inStock === false ? (
+                <button
+                  type="button"
+                  disabled
+                  className="mt-5 min-h-11 rounded-xl px-5 py-3 text-xs font-bold uppercase tracking-[0.13em] text-white transition-all duration-300 bg-stone-400 cursor-not-allowed"
+                  style={{ fontFamily: "var(--font-montserrat)" }}
+                >
+                  {content.outOfStock}
+                </button>
               ) : (
                 <button
                   type="button"
