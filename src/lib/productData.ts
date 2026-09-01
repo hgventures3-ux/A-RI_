@@ -15,6 +15,7 @@ export const productData: Record<
     storage: string;
     weight: string;
     origin: string;
+    inStock?: boolean;
   }
 > = {
   "himalayan-salt": {
@@ -48,6 +49,7 @@ export const productData: Record<
     origin: "Makhana: Bihar, India · Salt: Khewra, Pakistan · Olive Oil: Andalusia, Spain",
   },
   "herbes-de-provence": {
+    inStock: false,
     title: "Herbes de Provence",
     tagline: "Le Jardin Méditerranéen",
     heroDesc: "Thym, romarin, sarriette, origan et basilic — l'âme aromatique du Sud de la France capturée dans chaque graine de Makhana soufflée à l'air.",
@@ -108,6 +110,7 @@ export const productData: Record<
     origin: "Makhana: Bihar, India · Truffle: Dordogne, France · Salt: Guérande, France",
   },
   "mediterranean-herb-fusion": {
+    inStock: false,
     title: "Mediterranean Herb Fusion",
     tagline: "The Mediterranean Garden",
     heroDesc: "Thyme, rosemary, savory, oregano, and basil — the aromatic soul of the South of France captured in each air-popped Makhana seed.",
@@ -138,6 +141,7 @@ export const productData: Record<
     origin: "Makhana: Bihar, India · Herbs: Luberon, France · Olive Oil: Andalusia, Spain",
   },
   "caramel-salt": {
+    inStock: false,
     title: "Caramel & Salt",
     tagline: "Sweet & Salty Indulgence",
     heroDesc: "A luxurious blend of rich caramel and a hint of sea salt, perfectly balanced on our air-popped Makhana.",
@@ -196,6 +200,7 @@ export const productData: Record<
     origin: "Makhana: Bihar, India · Chocolate: Sourced from Ecuador",
   },
   "lemon-mint": {
+    inStock: false,
     title: "Lemon & Mint",
     tagline: "Zesty & Refreshing",
     heroDesc: "A bright, citrusy burst of lemon paired with cooling mint. The ultimate palate-cleansing summer snack.",
@@ -225,6 +230,7 @@ export const productData: Record<
     origin: "Makhana: Bihar, India · Lemon & Mint: Mediterranean Basin",
   },
   "peanut-butter": {
+    inStock: false,
     title: "Peanut Butter",
     tagline: "Creamy Protein Power",
     heroDesc: "Smooth, roasted peanut butter naturally coats our Makhana for a protein-packed, melt-in-the-mouth experience.",
@@ -254,6 +260,7 @@ export const productData: Record<
     origin: "Makhana: Bihar, India · Peanuts: Saurashtra, India",
   },
   "peri-peri": {
+    inStock: false,
     title: "Péri-Péri",
     tagline: "Fiery African Heat",
     heroDesc: "A bold, vibrant blend of African bird's eye chili, citrus, and garlic. For those who crave an elegant, fiery kick.",
@@ -283,6 +290,7 @@ export const productData: Record<
     origin: "Makhana: Bihar, India · Spices: Global Sourcing",
   },
   "smokey-bbq": {
+    inStock: false,
     title: "Smokey BBQ",
     tagline: "Wood-Fired Perfection",
     heroDesc: "Deep, smoky hickory notes paired with a touch of molasses sweetness and savory spices. A classic reinvented.",
@@ -312,6 +320,7 @@ export const productData: Record<
     origin: "Makhana: Bihar, India · Smoked Paprika: Spain",
   },
   "tangy-tomato": {
+    inStock: false,
     title: "Tangy Tomato",
     tagline: "Sun-Ripened Zest",
     heroDesc: "The sweet and tart brilliance of sun-ripened tomatoes, seasoned with subtle herbs for a vibrant, savory crunch.",
@@ -341,6 +350,7 @@ export const productData: Record<
     origin: "Makhana: Bihar, India · Tomatoes: Italy",
   },
   "caramel-beurre-sale": {
+    inStock: false,
     title: "Caramel & Beurre Salé",
     tagline: "Indulgence Sucrée-Salée",
     heroDesc: "Un mélange luxueux de caramel riche et d'une pointe de sel de mer, parfaitement équilibré sur notre Makhana soufflé.",
@@ -399,6 +409,7 @@ export const productData: Record<
     origin: "Makhana : Bihar, Inde · Chocolat : Origine Équateur",
   },
   "citron-menthe": {
+    inStock: false,
     title: "Citron & Menthe",
     tagline: "Piquant & Rafraîchissant",
     heroDesc: "Un éclat vif et citronné de citron associé à la fraîcheur de la menthe. Le snack estival ultime pour nettoyer le palais.",
@@ -428,6 +439,7 @@ export const productData: Record<
     origin: "Makhana : Bihar, Inde · Citron & Menthe : Bassin Méditerranéen",
   },
   "beurre-de-cacahuete": {
+    inStock: false,
     title: "Beurre de Cacahuète",
     tagline: "Puissance Protéinée Crémeuse",
     heroDesc: "Un beurre de cacahuète onctueux et torréfié enrobe naturellement notre Makhana pour une expérience fondante et riche en protéines.",
@@ -457,6 +469,7 @@ export const productData: Record<
     origin: "Makhana : Bihar, Inde · Cacahuètes : Saurashtra, Inde",
   },
   "peri-peri-fr": {
+    inStock: false,
     title: "Péri-Péri",
     tagline: "Chaleur Africaine Ardente",
     heroDesc: "Un mélange audacieux et vibrant de piment œil d'oiseau africain, d'agrumes et d'ail. Pour ceux qui recherchent un piquant élégant et ardent.",
@@ -486,6 +499,7 @@ export const productData: Record<
     origin: "Makhana : Bihar, Inde · Épices : Approvisionnement Mondial",
   },
   "bbq-fume": {
+    inStock: false,
     title: "BBQ Fumé",
     tagline: "Perfection au Feu de Bois",
     heroDesc: "Des notes profondes et fumées de caryer associées à une touche de douceur de mélasse et des épices savoureuses. Un classique réinventé.",
@@ -515,6 +529,7 @@ export const productData: Record<
     origin: "Makhana : Bihar, Inde · Paprika Fumé : Espagne",
   },
   "tomate-acidulee": {
+    inStock: false,
     title: "Tomate Acidulée",
     tagline: "Zeste Mûri au Soleil",
     heroDesc: "L'éclat sucré et acidulé des tomates mûries au soleil, assaisonné d'herbes subtiles pour un croquant vibrant et savoureux.",

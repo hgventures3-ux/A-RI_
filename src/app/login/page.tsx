@@ -137,8 +137,16 @@ function LoginContent() {
 
           <form className="space-y-5" onSubmit={step === "EMAIL" ? handleSendOtp : handleVerifyOtp}>
             {error && (
-              <div className="bg-red-50/75 border border-red-200/50 text-red-600 px-4 py-2.5 rounded-xl text-xs font-medium text-center">
-                {error}
+              <div className="bg-red-50/75 border border-red-200/50 text-red-600 px-4 py-2.5 rounded-xl text-xs font-medium text-center flex flex-col gap-2">
+                <span>{error}</span>
+                {error.toLowerCase().includes("account not found") && (
+                  <Link
+                    href={`/signup?callbackUrl=${encodeURIComponent(callbackUrl)}`}
+                    className="font-bold underline hover:text-red-800"
+                  >
+                    Create Account
+                  </Link>
+                )}
               </div>
             )}
 

@@ -36,12 +36,39 @@ const fadeIn: any = {
 export default function ProductDetailPage() {
   const params = useParams();
   const slug = params.slug as string;
-  const product = productData[slug];
   const { addToCart } = useCart();
   const { lang } = useLanguage();
   const { formatPrice } = useCurrency();
   const isFrench = lang === 'fr';
-  const isComingSoon = slug === "coming-soon";
+  
+  const routeMap: Record<string, { en: string, fr: string }> = {
+    "himalayan-salt": { en: "himalayan-salt", fr: "sel-de-l-himalaya" },
+    "sel-de-l-himalaya": { en: "himalayan-salt", fr: "sel-de-l-himalaya" },
+    "mediterranean-herb-fusion": { en: "mediterranean-herb-fusion", fr: "herbes-de-provence" },
+    "herbes-de-provence": { en: "mediterranean-herb-fusion", fr: "herbes-de-provence" },
+    "black-truffle": { en: "black-truffle", fr: "truffe-noire" },
+    "truffe-noire": { en: "black-truffle", fr: "truffe-noire" },
+    "caramel-salt": { en: "caramel-salt", fr: "caramel-beurre-sale" },
+    "caramel-beurre-sale": { en: "caramel-salt", fr: "caramel-beurre-sale" },
+    "dark-chocolate": { en: "dark-chocolate", fr: "chocolat-noir" },
+    "chocolat-noir": { en: "dark-chocolate", fr: "chocolat-noir" },
+    "lemon-mint": { en: "lemon-mint", fr: "citron-menthe" },
+    "citron-menthe": { en: "lemon-mint", fr: "citron-menthe" },
+    "peanut-butter": { en: "peanut-butter", fr: "beurre-de-cacahuete" },
+    "beurre-de-cacahuete": { en: "peanut-butter", fr: "beurre-de-cacahuete" },
+    "peri-peri": { en: "peri-peri", fr: "peri-peri-fr" },
+    "peri-peri-fr": { en: "peri-peri", fr: "peri-peri-fr" },
+    "smokey-bbq": { en: "smokey-bbq", fr: "bbq-fume" },
+    "bbq-fume": { en: "smokey-bbq", fr: "bbq-fume" },
+    "tangy-tomato": { en: "tangy-tomato", fr: "tomate-acidulee" },
+    "tomate-acidulee": { en: "tangy-tomato", fr: "tomate-acidulee" },
+    "coming-soon": { en: "coming-soon", fr: "bientot" },
+    "bientot": { en: "coming-soon", fr: "bientot" }
+  };
+  
+  const actualSlug = routeMap[slug]?.[lang as "en" | "fr"] || slug;
+  const product = productData[actualSlug];
+  const isComingSoon = actualSlug === "coming-soon" || actualSlug === "bientot";
 
   /* 404 */
   if (!product) {
@@ -164,6 +191,20 @@ export default function ProductDetailPage() {
                     }}
                   >
                     Contact B2B
+                  </button>
+                ) : product.inStock === false ? (
+                  <button
+                    disabled
+                    className="px-8 py-4 rounded-2xl font-medium tracking-wide transition-all duration-300 cursor-not-allowed"
+                    style={{
+                      backgroundColor: "#a8a29e",
+                      color: "#fff",
+                      fontFamily: "var(--font-montserrat), sans-serif",
+                      fontSize: "14px",
+                      letterSpacing: "0.05em",
+                    }}
+                  >
+                    {isFrench ? "Rupture de stock" : "Out of Stock"}
                   </button>
                 ) : (
                   <button
@@ -306,7 +347,7 @@ export default function ProductDetailPage() {
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-60px" }}
+              viewport={{ once: true, margin: "-20px" }}
               className="max-w-3xl mx-auto"
             >
               <motion.h2
@@ -342,7 +383,7 @@ export default function ProductDetailPage() {
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-60px" }}
+              viewport={{ once: true, margin: "-20px" }}
               className="max-w-3xl mx-auto"
             >
               <motion.h2
@@ -377,7 +418,7 @@ export default function ProductDetailPage() {
               <motion.div
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-60px" }}
+                viewport={{ once: true, margin: "-20px" }}
                 variants={fadeUp}
                 custom={0}
                 className="p-6 sm:p-8 md:p-10 rounded-3xl"
@@ -437,7 +478,7 @@ export default function ProductDetailPage() {
                 <motion.div
                   initial="hidden"
                   whileInView="visible"
-                  viewport={{ once: true, margin: "-60px" }}
+                  viewport={{ once: true, margin: "-20px" }}
                   variants={fadeUp}
                   custom={0.1}
                   className="p-6 sm:p-8 rounded-3xl flex-1"
@@ -467,7 +508,7 @@ export default function ProductDetailPage() {
                 <motion.div
                   initial="hidden"
                   whileInView="visible"
-                  viewport={{ once: true, margin: "-60px" }}
+                  viewport={{ once: true, margin: "-20px" }}
                   variants={fadeUp}
                   custom={0.2}
                   className="p-6 sm:p-8 rounded-3xl flex-1"
@@ -504,7 +545,7 @@ export default function ProductDetailPage() {
               <motion.div
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-60px" }}
+                viewport={{ once: true, margin: "-20px" }}
                 variants={fadeUp}
                 custom={0}
                 className="p-6 sm:p-8 rounded-3xl"
@@ -545,7 +586,7 @@ export default function ProductDetailPage() {
               <motion.div
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-60px" }}
+                viewport={{ once: true, margin: "-20px" }}
                 variants={fadeUp}
                 custom={0.1}
                 className="p-6 sm:p-8 rounded-3xl"
@@ -591,7 +632,7 @@ export default function ProductDetailPage() {
               <motion.div
                 initial="hidden"
                 whileInView="visible"
-                viewport={{ once: true, margin: "-60px" }}
+                viewport={{ once: true, margin: "-20px" }}
                 variants={fadeUp}
                 custom={0.2}
                 className="p-6 sm:p-8 rounded-3xl"
@@ -648,7 +689,7 @@ export default function ProductDetailPage() {
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-60px" }}
+              viewport={{ once: true, margin: "-20px" }}
             >
               <motion.h2
                 variants={fadeUp}

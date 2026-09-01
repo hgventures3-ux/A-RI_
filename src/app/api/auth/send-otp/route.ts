@@ -3,6 +3,7 @@ import nodemailer from "nodemailer";
 import { Resend } from "resend";
 import connectDB from "@/lib/db";
 import OTP from "@/lib/models/OTP";
+import User from "@/lib/models/User";
 
 // No need for Resend SDK anymore since we use Resend via SMTP
 
@@ -18,6 +19,17 @@ export async function POST(req: Request) {
 
     const emailLower = email.toLowerCase().trim();
     const otpPurpose = purpose || "Login";
+
+    // If purpose is Login, verify that the account actually exists
+    if (otpPurpose === "Login") {
+      const existingUser = await User.findOne({ email: emailLower });
+      if (!existingUser) {
+        return NextResponse.json(
+          { error: "Account Not Found" },
+          { status: 404 }
+        );
+      }
+    }
 
     // Rate Limiting: Check if more than 3 OTPs requested in last 5 mins
     const recentOtps = await OTP.countDocuments({
