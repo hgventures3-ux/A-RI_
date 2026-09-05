@@ -192,17 +192,7 @@ const frenchProducts: Product[] = [
     basePrice: 17.50,
     basePriceINR: 295,
     image: "/products/six-pack-mixed-promo.jpg",
-  },
-  {
-    id: "nine-pack-bundle",
-    slug: "nine-pack-bundle",
-    name: "Pack Dégustation - 9 Sachets",
-    category: "SIGNATURE",
-    description: "L'expérience complète AÉRI avec notre sélection premium.",
-    basePrice: 25.00,
-    basePriceINR: 549,
-    image: "/flavor_dark_chocolate.png",
-  },
+  }
 ];
 
 const englishProducts: Product[] = frenchProducts.map((product) => {
@@ -269,10 +259,6 @@ const englishProducts: Product[] = frenchProducts.map((product) => {
     "six-pack-mixed": {
       name: "6 Pack Combo Offer",
       description: "2 Dark Chocolate + 2 Peri Peri + 2 Himalayan Pink Salt.",
-    },
-    "nine-pack-bundle": {
-      name: "Ultimate Pack - 9 Bags",
-      description: "The complete AÉRI experience with our premium selection.",
     },
   };
 
