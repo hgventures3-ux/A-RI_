@@ -186,12 +186,12 @@ const frenchProducts: Product[] = [
   {
     id: "six-pack-mixed",
     slug: "six-pack-mixed",
-    name: "Offre Combo 6 Paquets",
+    name: "Pack Découverte 6 Pack",
     category: "SIGNATURE",
-    description: "2 Dark Chocolate + 2 Peri Peri + 2 Himalayan Pink Salt.",
+    description: "2 Chocolat Noir + 2 Peri Peri + 2 Sel Rose.",
     basePrice: 17.50,
     basePriceINR: 295,
-    image: "/products/six-pack-mixed-promo.jpg",
+    image: "/products/six-pack-mixed-promo-fr.jpg",
   }
 ];
 
@@ -259,6 +259,7 @@ const englishProducts: Product[] = frenchProducts.map((product) => {
     "six-pack-mixed": {
       name: "6 Pack Combo Offer",
       description: "2 Dark Chocolate + 2 Peri Peri + 2 Himalayan Pink Salt.",
+      image: "/products/six-pack-mixed-promo.jpg",
     },
   };
 
