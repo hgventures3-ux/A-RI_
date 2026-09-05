@@ -176,12 +176,22 @@ const frenchProducts: Product[] = [
   {
     id: "six-pack-bundle",
     slug: "six-pack-bundle",
-    name: "Pack Famille - 6 Sachets",
+    name: "Pack Famille - 6 Sachets (Himalayan Salt)",
     category: "SIGNATURE",
-    description: "Un assortiment généreux de nos saveurs les plus populaires.",
+    description: "Offre 6 paquets : Achetez-en 5, obtenez-en 1 gratuit !",
     basePrice: 17.50,
     basePriceINR: 295,
     image: "/products/six-pack-promo.png",
+  },
+  {
+    id: "six-pack-mixed",
+    slug: "six-pack-mixed",
+    name: "Offre Combo 6 Paquets",
+    category: "SIGNATURE",
+    description: "2 Dark Chocolate + 2 Peri Peri + 2 Himalayan Pink Salt.",
+    basePrice: 17.50,
+    basePriceINR: 295,
+    image: "/products/six-pack-mixed-promo.jpg",
   },
   {
     id: "nine-pack-bundle",
@@ -253,8 +263,12 @@ const englishProducts: Product[] = frenchProducts.map((product) => {
       description: "Himalayan Salt & Pepper, Gourmet Truffle, and Dark Chocolate 70%.",
     },
     "six-pack-bundle": {
-      name: "Family Pack - 6 Bags",
-      description: "A generous assortment of our most popular flavors.",
+      name: "Family Pack - 6 Bags (Himalayan Salt)",
+      description: "6 Pack Offer: Buy 5, Get 1 Free!",
+    },
+    "six-pack-mixed": {
+      name: "6 Pack Combo Offer",
+      description: "2 Dark Chocolate + 2 Peri Peri + 2 Himalayan Pink Salt.",
     },
     "nine-pack-bundle": {
       name: "Ultimate Pack - 9 Bags",
