@@ -38,6 +38,7 @@ export const PRODUCT_ID_TO_SLUG: Record<string, string> = {
 
 export type PriceableProduct = {
   basePrice?: number | string | null;
+  basePriceINR?: number | string | null;
   price?: number | string | null;
   discountPrice?: number | string | null;
 };
@@ -90,7 +91,10 @@ function numberOrUndefined(value: number | string | null | undefined): number | 
 }
 
 export function getProductUnitPrice(product: PriceableProduct | undefined, currency: Currency): number {
-  if (currency === "INR") return INDIA_UNIT_PRICE;
+  if (currency === "INR") {
+    const inrPrice = numberOrUndefined(product?.basePriceINR);
+    return inrPrice !== undefined ? inrPrice : INDIA_UNIT_PRICE;
+  }
 
   const basePrice =
     numberOrUndefined(product?.discountPrice) ??

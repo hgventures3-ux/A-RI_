@@ -12,8 +12,8 @@ export default function Superfood() {
   const textRef = useRef<HTMLDivElement>(null);
   const videoContainerRef = useRef<HTMLDivElement>(null);
 
-  const textInView = useInView(textRef, { once: true, amount: 0.3 });
-  const videoInView = useInView(videoContainerRef, { amount: 0.3 });
+  const textInView = useInView(textRef, { once: true, amount: 0.1 });
+  const videoInView = useInView(videoContainerRef, { amount: 0.1 });
 
   // पैरेलैक्स बैकग्राउंड के लिए स्क्रॉल प्रोग्रेस
   const { scrollYProgress } = useScroll({

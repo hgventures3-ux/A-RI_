@@ -16,7 +16,7 @@ function StepCard({
   stepLabel: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   return (
     <motion.div
@@ -75,7 +75,7 @@ function StepCard({
 
 export default function MakhanaEducation() {
   const headerRef = useRef<HTMLDivElement>(null);
-  const headerInView = useInView(headerRef, { once: true, amount: 0.3 });
+  const headerInView = useInView(headerRef, { once: true, amount: 0.1 });
   const { lang } = useLanguage();
   const t = translations.education[lang] || translations.education.en;
 

@@ -6,6 +6,7 @@ import { useParams } from "next/navigation";
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { useLanguage } from "@/context/LanguageContext";
 
 const COMPANY = "H&G Ventures Private Limited (trading as AERI Makhana)";
 const REG_ADDRESS = "TF-302, Shanti Heights, Jawahar Nagar, Halol-389350, Gujarat, India";
@@ -46,6 +47,10 @@ const pages: Record<string, { title: string; lastUpdated?: string; sections: { h
         heading: "6. Droit Applicable",
         body: `Les présentes mentions légales sont régies par le droit français. Tout litige sera soumis à la compétence des tribunaux compétents. Mis à jour : Juin 2026.`
       },
+      {
+        heading: "7. Agent de Griefs (Grievance Officer)",
+        body: `Grievance Officer Name: Kush Kanunga\nDesignation: Grievance Officer, H&G Ventures Private Limited\nEmail: hg.ventures3@gmail.com\nPhone: +91 8460058916\nAddress: 1602/E GIDC HALOL-389350, Gujarat, India\nWe will acknowledge your complaint within 48 hours and resolve it within 30 days.`
+      },
     ]
   },
 
@@ -69,6 +74,10 @@ const pages: Record<string, { title: string; lastUpdated?: string; sections: { h
       {
         heading: "4. Intellectual Property",
         body: `All content on ${WEBSITE} — including but not limited to the brand names AERI, AERI Makhana, logos, product images, packaging designs, text, graphics, and overall look and feel — is the exclusive intellectual property of ${COMPANY} and is protected under applicable Indian intellectual property law and international conventions. Any reproduction, distribution, modification, or commercial exploitation without prior written consent is strictly prohibited.`
+      },
+      {
+        heading: "5. Grievance Officer",
+        body: `Grievance Officer Name: Kush Kanunga\nDesignation: Grievance Officer, H&G Ventures Private Limited\nEmail: hg.ventures3@gmail.com\nPhone: +91 8460058916\nAddress: 1602/E GIDC HALOL-389350, Gujarat, India\nWe will acknowledge your complaint within 48 hours and resolve it within 30 days.`
       },
     ]
   },
@@ -248,9 +257,28 @@ const pages: Record<string, { title: string; lastUpdated?: string; sections: { h
 };
 
 export default function LegalDynamicPage() {
+  const { lang } = useLanguage();
   const params = useParams();
   const slug = params.slug as string;
-  const page = pages[slug];
+  
+  const routeMap: Record<string, { en: string, fr: string }> = {
+    "mentions-legales": { en: "legal-notice", fr: "mentions-legales" },
+    "legal-notice": { en: "legal-notice", fr: "mentions-legales" },
+    "cgv": { en: "t-c", fr: "cgv" },
+    "t-c": { en: "t-c", fr: "cgv" },
+    "politique-de-retour": { en: "return-policy", fr: "politique-de-retour" },
+    "return-policy": { en: "return-policy", fr: "politique-de-retour" },
+    "politique-expedition": { en: "shipping-policy", fr: "politique-expedition" },
+    "shipping-policy": { en: "shipping-policy", fr: "politique-expedition" },
+    "confidentialite": { en: "privacy", fr: "confidentialite" },
+    "privacy": { en: "privacy", fr: "confidentialite" },
+    "cookie-policy": { en: "cookie-policy", fr: "cookie-policy" },
+    "retractation": { en: "retractation", fr: "retractation" },
+    "cgv-b2b": { en: "cgv-b2b", fr: "cgv-b2b" }
+  };
+  
+  const actualSlug = routeMap[slug]?.[lang as "en" | "fr"] || slug;
+  const page = pages[actualSlug];
 
   if (!page) {
     return (
@@ -281,7 +309,7 @@ export default function LegalDynamicPage() {
       <section className="px-6 md:px-12 max-w-3xl mx-auto pb-32">
         <div className="bg-white rounded-3xl shadow-sm border border-[#111111]/5 overflow-hidden">
           {page.sections.map((sec, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.6 }} className={`p-5 sm:p-8 md:p-12 ${i > 0 ? "border-t border-[#111111]/5" : ""}`}>
+            <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.6 }} className={`p-5 sm:p-8 md:p-12 ${i > 0 ? "border-t border-[#111111]/5" : ""}`}>
               <h2 className="text-xl font-bold mb-3">{sec.heading}</h2>
               <p className="text-[#111111]/65 leading-[1.9] text-[15px]">{sec.body}</p>
             </motion.div>

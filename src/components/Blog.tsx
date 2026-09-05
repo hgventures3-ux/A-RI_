@@ -62,7 +62,7 @@ function BlogCard({
   readMore: string;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.2 });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   return (
     <motion.article
@@ -191,7 +191,7 @@ export default function Blog() {
   const { lang } = useLanguage();
   const s = t.blog[lang];
   const headerRef = useRef<HTMLDivElement>(null);
-  const headerInView = useInView(headerRef, { once: true, amount: 0.3 });
+  const headerInView = useInView(headerRef, { once: true, amount: 0.1 });
 
   const localizedDates: Record<string, { date: string; readTime: string }[]> = {
     fr: [

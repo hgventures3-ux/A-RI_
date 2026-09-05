@@ -131,7 +131,7 @@ function CertCard({
   onViewPdf: (pdfLink: string) => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
 
   return (
     <motion.div
@@ -311,9 +311,9 @@ export default function Certifications() {
   const { lang } = useLanguage();
   const s = t.certs[lang];
   const headerRef = useRef<HTMLDivElement>(null);
-  const headerInView = useInView(headerRef, { once: true, amount: 0.3 });
+  const headerInView = useInView(headerRef, { once: true, amount: 0.1 });
   const labRef = useRef<HTMLDivElement>(null);
-  const labInView = useInView(labRef, { once: true, amount: 0.3 });
+  const labInView = useInView(labRef, { once: true, amount: 0.1 });
   
   const [activePdf, setActivePdf] = useState<string | null>(null);
 

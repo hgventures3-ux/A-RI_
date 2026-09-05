@@ -124,13 +124,21 @@ export default function CompanyDynamicPage() {
   const params = useParams();
   const slug = params.slug as string;
   
+  const routeMap: Record<string, { en: string, fr: string }> = {
+    "our-story": { en: "our-story", fr: "notre-histoire" },
+    "notre-histoire": { en: "our-story", fr: "notre-histoire" },
+    "pro-portal": { en: "pro-portal", fr: "espace-pro" },
+    "espace-pro": { en: "pro-portal", fr: "espace-pro" }
+  };
+  
   let page;
   if (slug === "transparence" || slug === "transparency") {
     page = lang === "fr" ? transparenceFr : transparenceEn;
   } else if (slug === "certifications") {
     page = lang === "fr" ? certificationsFr : certificationsEn;
   } else {
-    page = pages[slug];
+    const actualSlug = routeMap[slug]?.[lang as "en" | "fr"] || slug;
+    page = pages[actualSlug];
   }
 
   useEffect(() => {
@@ -183,7 +191,7 @@ export default function CompanyDynamicPage() {
       <section className="px-6 md:px-12 max-w-3xl mx-auto pb-32">
         <div className="bg-white rounded-3xl shadow-sm border border-[#111111]/5 overflow-hidden">
           {page.sections.map((sec, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.2 }} transition={{ duration: 0.7 }} className={`p-5 sm:p-8 md:p-12 ${i > 0 ? "border-t border-[#111111]/5" : ""}`}>
+            <motion.div key={i} initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, amount: 0.1 }} transition={{ duration: 0.7 }} className={`p-5 sm:p-8 md:p-12 ${i > 0 ? "border-t border-[#111111]/5" : ""}`}>
               <h2 className="text-2xl font-bold mb-4">{sec.heading}</h2>
               {typeof sec.body === "string" ? (
                 <p className="text-[#111111]/70 leading-[1.9] text-[15px]">{sec.body}</p>

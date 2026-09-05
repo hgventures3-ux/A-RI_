@@ -424,14 +424,14 @@ const t: Record<string, Record<string, any>> = {
       partner: "Partenaire : Hybite Foods",
       footerLinks: {
         products: ["Gamme Complète", "Signature", "Gourmet", "Vrac Professionnel"],
-        company: ["Notre Histoire", "Notre Raison d'Être", "Espace Pro"],
+        company: ["Notre Histoire", "Notre Raison d'Être", "Transparence", "Certifications", "Commerce & Partenariats"],
         legal: ["Mentions Légales", "CGV", "Politique de Retour", "Droit de Rétractation 14 jours"],
       },
       footerCats: ["PRODUITS", "ENTREPRISE", "JURIDIQUE"],
     },
     en: {
       label: "Professionnel · Partenariats · Export",
-      title: "Professional Portal",
+      title: "Trade & Partnerships",
       hook: "Over 25+ years of expertise in the packaging industry and conservation engineering.",
       stats: [
         { value: "25+", label: "Years of expertise", sub: "Packaging & conservation" },
@@ -474,14 +474,14 @@ const t: Record<string, Record<string, any>> = {
       partner: "Partner: Hybite Foods",
       footerLinks: {
         products: ["Himalayan Salt", "Mediterranean Herb Fusion", "Black Truffle", "Coming soon…"],
-        company: ["Our Story", "Our Mission", "Transparency", "Certifications", "Pro Portal"],
+        company: ["Our Story", "Our Mission", "Transparency", "Certifications", "Trade & Partnerships"],
         legal: ["Return Policy", "T&C", "Legal Notice", "Privacy"],
       },
       footerCats: ["Products", "Company", "Legal"],
     },
     hi: {
       label: "B2B · साझेदारी · निर्यात",
-      title: "व्यावसायिक पोर्टल",
+      title: "व्यापार और साझेदारी",
       hook: "पैकेजिंग उद्योग और संरक्षण इंजीनियरिंग में 25+ से अधिक वर्षों की विशेषज्ञता।",
       stats: [
         { value: "25+", label: "वर्षों की विशेषज्ञता", sub: "पैकेजिंग और संरक्षण" },
@@ -524,7 +524,7 @@ const t: Record<string, Record<string, any>> = {
       partner: "भागीदार: Hybite Foods",
       footerLinks: {
         products: ["हिमालयन नमक", "हर्ब्स डे प्रोवेंस", "ब्लैक ट्रफल", "जल्द आ रहा है…"],
-        company: ["हमारी कहानी", "हमारा मिशन", "पारदर्शिता", "प्रमाणपत्र", "प्रो पोर्टल"],
+        company: ["हमारी कहानी", "हमारा मिशन", "पारदर्शिता", "प्रमाणपत्र", "व्यापार और साझेदारी"],
         legal: ["रिटर्न पॉलिसी", "नियम व शर्तें", "कानूनी सूचना", "गोपनीयता"],
       },
       footerCats: ["उत्पाद", "कंपनी", "कानूनी"],

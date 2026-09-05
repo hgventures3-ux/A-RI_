@@ -7,6 +7,7 @@ import FlavorExplorer from "@/components/FlavorExplorer";
 import SocialProofGrid from "@/components/SocialProofGrid";
 import B2BTeaser from "@/components/B2BTeaser";
 import Blog from "@/components/Blog";
+import InstagramFeed from "@/components/InstagramFeed";
 import Footer from "@/components/Footer";
 
 import type { Metadata } from "next";
@@ -65,6 +66,9 @@ export default function Home() {
       
       {/* 7. Journal d'AÉRI blog preview */}
       <Blog />
+      
+      {/* Instagram Feed */}
+      <InstagramFeed />
       
       {/* 8. Footer */}
       <Footer />

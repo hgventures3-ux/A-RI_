@@ -16,7 +16,7 @@ export default function FlavorVotingCard() {
   const [hasVoted, setHasVoted] = useState(false);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.3 });
+  const isInView = useInView(sectionRef, { once: true, amount: 0.1 });
 
   useEffect(() => {
     const stored = localStorage.getItem("aeri-flavor-vote");

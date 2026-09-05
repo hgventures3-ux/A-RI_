@@ -99,7 +99,7 @@ export default function MissionPage() {
   const sectionRef = useRef<HTMLElement>(null);
   const valuesRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(sectionRef, { once: true, amount: 0.15 });
-  const valuesInView = useInView(valuesRef, { once: true, amount: 0.2 });
+  const valuesInView = useInView(valuesRef, { once: true, amount: 0.1 });
 
   return (
     <main className="min-h-screen w-full bg-[#FAF8F5]">

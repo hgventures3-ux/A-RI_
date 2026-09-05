@@ -19,7 +19,7 @@ function MilestoneItem({
   total: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.4 });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
   const isLeft = index % 2 === 0;
 
   return (
@@ -101,9 +101,9 @@ export default function Heritage() {
 
   const sectionRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
-  const headerInView = useInView(headerRef, { once: true, amount: 0.3 });
+  const headerInView = useInView(headerRef, { once: true, amount: 0.1 });
   const botanicalRef = useRef<HTMLDivElement>(null);
-  const botanicalInView = useInView(botanicalRef, { once: true, amount: 0.3 });
+  const botanicalInView = useInView(botanicalRef, { once: true, amount: 0.1 });
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -305,7 +305,7 @@ export default function Heritage() {
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.5 }}
+          viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 1 }}
           className="text-center mt-20 md:mt-28 px-4 sm:px-6"
         >

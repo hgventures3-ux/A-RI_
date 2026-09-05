@@ -92,7 +92,7 @@ function StepCircle({
   isLast: boolean;
 }) {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-60px" });
+  const isInView = useInView(ref, { once: true, margin: "-20px" });
   const content = lang === "fr" ? step.fr : step.en;
 
   const isDown = index % 2 !== 0;

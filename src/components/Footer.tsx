@@ -171,7 +171,9 @@ export default function Footer() {
                   company: [
                     "/company/our-story",
                     "/mission",
-                    "/espace-pro"
+                    "/company/transparency",
+                    "/company/certifications",
+                    "/company/pro-portal"
                   ],
                   legal: [
                     "/legal/legal-notice",
@@ -191,7 +193,9 @@ export default function Footer() {
                 company: [
                   "/company/notre-histoire",
                   "/mission",
-                  "/espace-pro"
+                  "/company/transparence",
+                  "/company/certifications",
+                  "/company/espace-pro"
                 ],
                 legal: [
                   "/legal/mentions-legales",
@@ -266,6 +270,12 @@ export default function Footer() {
             >
               1602/E GIDC HALOL-389350, Gujarat, India
             </p>
+            <p
+              className="text-xs text-[#FFFFFF]/75 font-light"
+              style={{ fontFamily: "var(--font-lora)" }}
+            >
+              FSSAI: [TO BE PROVIDED]
+            </p>
           </div>
           <div className="flex items-center gap-4">
             <Link
@@ -284,12 +294,13 @@ export default function Footer() {
               {s.privacy}
             </Link>
             <span className="text-[#FFFFFF]/40">·</span>
-            <span
-              className="text-xs text-[#FFFFFF]/60 font-light"
-              style={{ fontFamily: "var(--font-montserrat)" }}
+            <Link
+              href={lang === 'en' ? "/legal/legal-notice" : "/legal/mentions-legales"}
+              className="text-xs text-[#FFFFFF]/75 font-light transition-colors hover:text-[#FFFFFF]"
+              style={{ fontFamily: "var(--font-lora)" }}
             >
-              {s.partner}
-            </span>
+              {lang === 'en' ? "Grievance Officer" : "Agent de Griefs"}
+            </Link>
           </div>
         </div>
       </div>

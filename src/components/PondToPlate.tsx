@@ -66,7 +66,7 @@ function TimelineDot({ active }: { active: boolean }) {
    ──────────────────────────────────────────────────────── */
 function StageCard({ stage, index }: { stage: (typeof stages)[0]; index: number }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
+  const isInView = useInView(ref, { once: true, amount: 0.1 });
   const isEven = index % 2 === 0;
 
   return (
@@ -203,9 +203,9 @@ export default function PondToPlate() {
   const s = t.pond[lang];
   const sectionRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
-  const headerInView = useInView(headerRef, { once: true, amount: 0.3 });
+  const headerInView = useInView(headerRef, { once: true, amount: 0.1 });
   const traceRef = useRef<HTMLDivElement>(null);
-  const traceInView = useInView(traceRef, { once: true, amount: 0.4 });
+  const traceInView = useInView(traceRef, { once: true, amount: 0.1 });
 
   const stageImages = ["/stage_harvest.png", "/stage_popping.png", "/stage_flavoring.png"];
 

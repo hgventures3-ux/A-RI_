@@ -109,12 +109,13 @@ export default function EspacePro() {
   const s = lang === "fr" ? espaceProFr : espaceProEn;
   
   const headerRef = useRef<HTMLDivElement>(null);
-  const headerInView = useInView(headerRef, { once: true, amount: 0.3 });
+  const headerInView = useInView(headerRef, { once: true, amount: 0.1 });
   const formRef = useRef<HTMLDivElement>(null);
-  const formInView = useInView(formRef, { once: true, amount: 0.2 });
+  const formInView = useInView(formRef, { once: true, amount: 0.1 });
   const servicesRef = useRef<HTMLDivElement>(null);
-  const servicesInView = useInView(servicesRef, { once: true, amount: 0.2 });
+  const servicesInView = useInView(servicesRef, { once: true, amount: 0.1 });
 
+  const [activeForm, setActiveForm] = useState<"export" | "distributor">("export");
   const [formData, setFormData] = useState({
     name: "",
     company: "",
@@ -123,6 +124,8 @@ export default function EspacePro() {
     channel: "",
     volume: "",
     message: "",
+    city: "",
+    phone: "",
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -150,7 +153,7 @@ export default function EspacePro() {
       const data = await res.json();
       if (data.success) {
         setSubmitted(true);
-        setFormData({ name: "", company: "", email: "", siret: "", channel: "", volume: "", message: "" });
+        setFormData({ name: "", company: "", email: "", siret: "", channel: "", volume: "", message: "", city: "", phone: "" });
         setTimeout(() => setSubmitted(false), 4000);
       } else {
         console.error("Failed to submit Espace Pro form");
@@ -227,7 +230,7 @@ export default function EspacePro() {
                   key={stat.label}
                   initial={{ opacity: 0, y: 25 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.5 }}
+                  viewport={{ once: true, amount: 0.1 }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
                   className="text-center p-6 rounded-2xl bg-white border border-[#1C1C1C]/6 shadow-sm"
                 >
@@ -290,7 +293,7 @@ export default function EspacePro() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.6 }}
               className="text-center mb-10"
             >
@@ -386,7 +389,7 @@ export default function EspacePro() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.4 }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.7 }}
               className="relative rounded-2xl overflow-hidden bg-[#1C1C1C]"
             >
@@ -501,102 +504,174 @@ export default function EspacePro() {
                 animate={formInView ? { opacity: 1, x: 0 } : {}}
                 transition={{ duration: 0.7, delay: 0.15 }}
               >
-                <form
-                  onSubmit={handleSubmit}
-                  className="p-5 sm:p-7 md:p-9 rounded-2xl bg-white border border-[#1C1C1C]/10 shadow-sm"
-                >
-                  <h4
-                    className="text-lg font-bold text-[#1C1C1C] mb-1"
-                    style={{ fontFamily: "var(--font-didot)" }}
-                  >
-                    {s.form.title}
-                  </h4>
-                  <p
-                    className="text-xs text-[#1C1C1C]/40 mb-6"
-                    style={{ fontFamily: "var(--font-montserrat)" }}
-                  >
-                    {s.form.subtitle}
-                  </p>
-
-                  <div className="space-y-4">
-                    {/* Nom complet */}
-                    <div>
-                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        {s.form.fields.nameLabel}
-                      </label>
-                      <input type="text" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder={s.form.fields.namePh} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
-                    </div>
-
-                    {/* Nom de l'entreprise */}
-                    <div>
-                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        {s.form.fields.companyLabel}
-                      </label>
-                      <input type="text" required value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} placeholder={s.form.fields.companyPh} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
-                    </div>
-
-                    {/* E-mail professionnel */}
-                    <div>
-                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        {s.form.fields.emailLabel}
-                      </label>
-                      <input type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder={s.form.fields.emailPh} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
-                    </div>
-
-                    {/* SIRET / VAT */}
-                    <div>
-                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        {s.form.fields.siretLabel}
-                      </label>
-                      <input type="text" required value={formData.siret} onChange={(e) => setFormData({ ...formData, siret: e.target.value })} placeholder={s.form.fields.siretPh} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
-                    </div>
-
-                    {/* Distribution Channels Dropdown */}
-                    <div>
-                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        {s.form.fields.channelLabel}
-                      </label>
-                      <select required value={formData.channel} onChange={(e) => setFormData({ ...formData, channel: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        <option value="">{s.form.fields.channelPh}</option>
-                        {s.form.fields.channelOptions.map((opt: string) => (
-                          <option key={opt} value={opt}>{opt}</option>
-                        ))}
-                      </select>
-                    </div>
-
-                    {/* Volume Dropdown */}
-                    <div>
-                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        {s.form.fields.volumeLabel}
-                      </label>
-                      <select required value={formData.volume} onChange={(e) => setFormData({ ...formData, volume: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        <option value="">{s.form.fields.volumePh}</option>
-                        {s.form.fields.volumeOptions.map((opt: string) => (
-                          <option key={opt} value={opt}>{opt}</option>
-                        ))}
-                      </select>
-                    </div>
-
-                    {/* Message */}
-                    <div>
-                      <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
-                        {s.form.fields.messageLabel}
-                      </label>
-                      <textarea required rows={4} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder={s.form.fields.messagePh} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all resize-none" style={{ fontFamily: "var(--font-montserrat)" }} />
-                    </div>
+                <div className="p-5 sm:p-7 md:p-9 rounded-2xl bg-white border border-[#1C1C1C]/10 shadow-sm">
+                  {/* Form Tabs */}
+                  <div className="flex gap-2 mb-8 bg-[#F7F7F7] p-1.5 rounded-xl border border-[#1C1C1C]/5">
+                    <button
+                      onClick={() => setActiveForm("export")}
+                      type="button"
+                      className={`flex-1 py-2.5 px-4 text-[10px] md:text-xs font-semibold tracking-wide rounded-lg transition-all ${
+                        activeForm === "export"
+                          ? "bg-white text-[#1C1C1C] shadow-sm"
+                          : "text-[#1C1C1C]/50 hover:text-[#1C1C1C]"
+                      }`}
+                      style={{ fontFamily: "var(--font-montserrat)" }}
+                    >
+                      {lang === 'fr' ? 'Export & Vrac' : lang === 'hi' ? 'निर्यात और थोक' : 'Bulk & Export'}
+                    </button>
+                    <button
+                      onClick={() => setActiveForm("distributor")}
+                      type="button"
+                      className={`flex-1 py-2.5 px-4 text-[10px] md:text-xs font-semibold tracking-wide rounded-lg transition-all ${
+                        activeForm === "distributor"
+                          ? "bg-white text-[#1C1C1C] shadow-sm"
+                          : "text-[#1C1C1C]/50 hover:text-[#1C1C1C]"
+                      }`}
+                      style={{ fontFamily: "var(--font-montserrat)" }}
+                    >
+                      {lang === 'fr' ? 'Devenir Distributeur' : lang === 'hi' ? 'वितरक बनें (भारत)' : 'Become a Distributor'}
+                    </button>
                   </div>
 
-                  <motion.button
-                    type="submit"
-                    disabled={loading}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="mt-6 w-full py-3.5 rounded-xl bg-[#1C1C1C] text-[#FFFFFF] text-sm font-semibold tracking-wide transition-colors hover:bg-[#333] cursor-pointer disabled:opacity-70 flex justify-center text-center"
-                    style={{ fontFamily: "var(--font-montserrat)" }}
-                  >
-                    {loading ? s.form.btnLoading : submitted ? s.form.btnSuccess : s.form.btnSubmit}
-                  </motion.button>
-                </form>
+                  <form onSubmit={handleSubmit}>
+                    <h4
+                      className="text-lg font-bold text-[#1C1C1C] mb-1"
+                      style={{ fontFamily: "var(--font-didot)" }}
+                    >
+                      {activeForm === "export" ? s.form.title : (lang === 'fr' ? 'Devenir Distributeur' : lang === 'hi' ? 'वितरक बनें' : 'Become a Distributor')}
+                    </h4>
+                    <p
+                      className="text-xs text-[#1C1C1C]/40 mb-6"
+                      style={{ fontFamily: "var(--font-montserrat)" }}
+                    >
+                      {s.form.subtitle}
+                    </p>
+
+                    <div className="space-y-4">
+                      {/* Shared Name Field */}
+                      <div>
+                        <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                          {s.form.fields.nameLabel}
+                        </label>
+                        <input type="text" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} placeholder={s.form.fields.namePh} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
+                      </div>
+                      
+                      {activeForm === "export" && (
+                        <>
+                          {/* Nom de l'entreprise */}
+                          <div>
+                            <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                              {s.form.fields.companyLabel}
+                            </label>
+                            <input type="text" required value={formData.company} onChange={(e) => setFormData({ ...formData, company: e.target.value })} placeholder={s.form.fields.companyPh} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
+                          </div>
+
+                          {/* E-mail professionnel */}
+                          <div>
+                            <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                              {s.form.fields.emailLabel}
+                            </label>
+                            <input type="email" required value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder={s.form.fields.emailPh} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
+                          </div>
+
+                          {/* SIRET / VAT */}
+                          <div>
+                            <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                              {s.form.fields.siretLabel}
+                            </label>
+                            <input type="text" required value={formData.siret} onChange={(e) => setFormData({ ...formData, siret: e.target.value })} placeholder={s.form.fields.siretPh} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
+                          </div>
+
+                          {/* Distribution Channels Dropdown */}
+                          <div>
+                            <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                              {s.form.fields.channelLabel}
+                            </label>
+                            <select required value={formData.channel} onChange={(e) => setFormData({ ...formData, channel: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }}>
+                              <option value="">{s.form.fields.channelPh}</option>
+                              {s.form.fields.channelOptions.map((opt: string) => (
+                                <option key={opt} value={opt}>{opt}</option>
+                              ))}
+                            </select>
+                          </div>
+
+                          {/* Volume Dropdown */}
+                          <div>
+                            <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                              {s.form.fields.volumeLabel}
+                            </label>
+                            <select required value={formData.volume} onChange={(e) => setFormData({ ...formData, volume: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }}>
+                              <option value="">{s.form.fields.volumePh}</option>
+                              {s.form.fields.volumeOptions.map((opt: string) => (
+                                <option key={opt} value={opt}>{opt}</option>
+                              ))}
+                            </select>
+                          </div>
+                        </>
+                      )}
+
+                      {activeForm === "distributor" && (
+                        <>
+                          {/* Business Type */}
+                          <div>
+                            <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                              {lang === 'hi' ? 'व्यवसाय का प्रकार *' : 'Business Type *'}
+                            </label>
+                            <select required value={formData.channel} onChange={(e) => setFormData({ ...formData, channel: e.target.value })} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }}>
+                              <option value="">{lang === 'hi' ? 'एक प्रकार चुनें' : 'Select a type'}</option>
+                              <option value="Retailer">Retailer / Supermarket</option>
+                              <option value="Wholesaler">Wholesaler / Distributor</option>
+                              <option value="Other">Other</option>
+                            </select>
+                          </div>
+
+                          {/* GST */}
+                          <div>
+                            <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                              {lang === 'hi' ? 'GST नंबर *' : 'GST Number *'}
+                            </label>
+                            <input type="text" required value={formData.siret} onChange={(e) => setFormData({ ...formData, siret: e.target.value })} placeholder="ex: 22AAAAA0000A1Z5" className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
+                          </div>
+
+                          {/* City */}
+                          <div>
+                            <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                              {lang === 'hi' ? 'शहर *' : 'City *'}
+                            </label>
+                            <input type="text" required value={formData.city} onChange={(e) => setFormData({ ...formData, city: e.target.value })} placeholder={lang === 'hi' ? 'आपका शहर' : 'Your city'} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
+                          </div>
+
+                          {/* Phone */}
+                          <div>
+                            <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                              {lang === 'hi' ? 'फोन नंबर *' : 'Phone Number *'}
+                            </label>
+                            <input type="tel" required value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} placeholder="+91 9876543210" className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all" style={{ fontFamily: "var(--font-montserrat)" }} />
+                          </div>
+                        </>
+                      )}
+
+                      {/* Shared Message Field */}
+                      <div>
+                        <label className="block text-xs font-semibold tracking-wide uppercase text-[#1C1C1C]/60 mb-1.5" style={{ fontFamily: "var(--font-montserrat)" }}>
+                          {s.form.fields.messageLabel}
+                        </label>
+                        <textarea required rows={4} value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} placeholder={s.form.fields.messagePh} className="w-full px-4 py-3 rounded-xl bg-[#F7F7F7] border border-[#1C1C1C]/10 text-sm text-[#1C1C1C] placeholder:text-[#1C1C1C]/30 focus:outline-none focus:border-[#1C1C1C]/40 focus:ring-1 focus:ring-[#1C1C1C]/20 transition-all resize-none" style={{ fontFamily: "var(--font-montserrat)" }} />
+                      </div>
+                    </div>
+
+                    <motion.button
+                      type="submit"
+                      disabled={loading}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="mt-6 w-full py-3.5 rounded-xl bg-[#1C1C1C] text-[#FFFFFF] text-sm font-semibold tracking-wide transition-colors hover:bg-[#333] cursor-pointer disabled:opacity-70 flex justify-center text-center"
+                      style={{ fontFamily: "var(--font-montserrat)" }}
+                    >
+                      {loading ? s.form.btnLoading : submitted ? s.form.btnSuccess : s.form.btnSubmit}
+                    </motion.button>
+                  </form>
+                </div>
               </motion.div>
             </div>
           </div>

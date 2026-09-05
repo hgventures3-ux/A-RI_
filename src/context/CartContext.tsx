@@ -10,6 +10,7 @@ export interface CartItem {
   name: string;
   price: number;
   basePrice?: number;
+  basePriceINR?: number;
   currency?: Currency;
   image: string;
   quantity: number;
@@ -40,6 +41,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   const priceCartItem = (item: CartItem | (Omit<CartItem, "quantity" | "price"> & { price?: number; quantity?: number })): CartItem => {
     const source: PriceableProduct = {
       basePrice: item.basePrice ?? DEFAULT_PRODUCT_BASE_PRICE,
+      basePriceINR: (item as any).basePriceINR,
       price: item.basePrice ?? item.price,
     };
 

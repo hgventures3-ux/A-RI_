@@ -24,7 +24,7 @@ const pageTranslations = {
       {
         number: "02",
         title: "De l'Étang à l'Apéro",
-        desc: "Cultivé sur 1 000 acres de zones humides préservées en partenariat exclusif avec Hybite Foods pour garantir une traçabilité à 100%. Sans intermédiaires.",
+        desc: "Cultivé sur 1 000 acres de zones humides préservées en partenariat exclusif avec notre partenaire de culture au Bihar pour garantir une traçabilité à 100%. Sans intermédiaires.",
         image: "/stage_harvest.png"
       },
       {
@@ -54,7 +54,7 @@ const pageTranslations = {
       {
         number: "02",
         title: "From Pond to Plate",
-        desc: "Cultivated across 1,000 acres of preserved wetlands in exclusive partnership with Hybite Foods to guarantee 100% traceability. Middleman-free.",
+        desc: "Cultivated across 1,000 acres of preserved wetlands in exclusive partnership with our cultivation partners in Bihar to guarantee 100% traceability. Middleman-free.",
         image: "/stage_harvest.png"
       },
       {
@@ -67,7 +67,7 @@ const pageTranslations = {
     founderTitle: "The Founder & Our Expertise",
     founderStories: [
       "After obtaining her Master's degree in France, our founder experienced the authentic local appetizer ritual firsthand as an urban student in Paris. Recognizing the complete lack of healthy, clean-label gourmet snacks on French tables, she set out to change things. From that frustration, she designed a direct supply chain from Bihar to Europe.",
-      "Behind AÉRI lies over 20 years of active family industrial expertise in the packaging industry and raw materials trading across India. This operational foundation, from shelf-life engineering to containerised international logistics, grants AÉRI the authority and scalability to supply Europe's largest retail chains at high volume."
+      "Behind AÉRI lies 25 years of active family industrial expertise in the packaging industry and raw materials trading across India. This operational foundation, from shelf-life engineering to containerised international logistics, grants AÉRI the authority and scalability to supply Europe's largest retail chains at high volume."
     ]
   },
   hi: {
@@ -84,7 +84,7 @@ const pageTranslations = {
       {
         number: "02",
         title: "तालाब से अपेरो तक",
-        desc: "100% पता लगाने की क्षमता (ट्रेसेबिलिटी) सुनिश्चित करने के लिए हाइब्रिड Foods (Hybite Foods) के साथ विशेष साझेदारी में 1,000 एकड़ संरक्षित वेटलैंड्स में खेती।",
+        desc: "100% पता लगाने की क्षमता (ट्रेसेबिलिटी) सुनिश्चित करने के लिए बिहार में हमारे खेती भागीदारों (cultivation partners) के साथ विशेष साझेदारी में 1,000 एकड़ संरक्षित वेटलैंड्स में खेती।",
         image: "/stage_harvest.png"
       },
       {
@@ -97,7 +97,7 @@ const pageTranslations = {
     founderTitle: "संस्थापक और हमारी विशेषज्ञता",
     founderStories: [
       "फ्रांस में मास्टर डिग्री पूरी करने के दौरान, हमारी संस्थापक ने एक शहरी छात्र के रूप में प्रामाणिक स्थानीय 'ल-अपेरो' (L'Apéro) सांस्कृतिक अनुष्ठान को करीब से जिया। स्वस्थ, क्लीन-लेबल पेटू स्नैक्स की भारी कमी को देखते हुए, उन्होंने सीधे आपूर्ति श्रृंखला (सप्लाई चेन) का निर्माण किया जो बिहार के किसानों को सीधे यूरोपीय मेजों से जोड़ता है।",
-      "AÉRI के पीछे पैकेजिंग उद्योग और कच्चे माल के व्यापार में 20 से अधिक वर्षों का सक्रिय पारिवारिक औद्योगिक अनुभव है। यह परिचालन अनुभव हमें उन्नत शेल्फ-लाइफ इंजीनियरिंग और उच्च मात्रा में यूरोपीय रिटेल श्रृंखलाओं को मखाना की निरंतर आपूर्ति करने की क्षमता प्रदान करता है।"
+      "AÉRI के पीछे पैकेजिंग उद्योग और कच्चे माल के व्यापार में 25 वर्षों का सक्रिय पारिवारिक औद्योगिक अनुभव है। यह परिचालन अनुभव हमें उन्नत शेल्फ-लाइफ इंजीनियरिंग और उच्च मात्रा में यूरोपीय रिटेल श्रृंखलाओं को मखाना की निरंतर आपूर्ति करने की क्षमता प्रदान करता है।"
     ]
   }
 };
@@ -165,7 +165,7 @@ export default function BrandPage() {
               key={index}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
+              viewport={{ once: true, margin: "-50px" }}
               variants={fadeUp}
               custom={index * 0.15}
               className="bg-white/40 backdrop-blur-sm rounded-3xl p-5 sm:p-8 border border-[#1d1b1a]/5 hover:border-[#D4AF37]/35 transition-all duration-300 group flex flex-col justify-between h-full"
@@ -235,11 +235,25 @@ export default function BrandPage() {
               <div className="absolute inset-3 border border-[#D4AF37]/35 rounded-[22px] pointer-events-none group-hover:inset-2 transition-all duration-500" />
               {/* नाम टैग (Name tag badge) */}
               <div className="absolute bottom-6 left-6 right-6 bg-[#1C1C1C]/90 backdrop-blur-md py-4 px-6 rounded-2xl text-white text-center shadow-lg border border-[#FFFFFF]/10">
-                <p className="text-xs uppercase tracking-widest text-[#D4AF37] font-semibold mb-0.5" style={{ fontFamily: "var(--font-montserrat), sans-serif" }}>
-                  {lang === 'fr' ? 'Fondatrice' : 'Founder'}
+                <p className="text-xs uppercase tracking-widest text-[#D4AF37] font-semibold mb-1" style={{ fontFamily: "var(--font-montserrat), sans-serif" }}>
+                  {lang === 'fr' ? 'Fondatrice' : 'Founder'}, AÉRI Makhana
                 </p>
-                <p className="text-base font-bold tracking-wide" style={{ fontFamily: "var(--font-didot), serif" }}>
-                  AÉRI Makhana
+                <a 
+                  href="https://www.linkedin.com/in/kriya-kanunga" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-lg font-bold tracking-wide hover:text-[#D4AF37] transition-colors" 
+                  style={{ fontFamily: "var(--font-didot), serif" }}
+                >
+                  Kriya Kanunga
+                  <svg className="w-3.5 h-3.5 mt-0.5" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+                </a>
+                <p className="mt-2 text-[10.5px] leading-relaxed text-[#FFFFFF]/80" style={{ fontFamily: "var(--font-montserrat), sans-serif" }}>
+                  {lang === 'fr' 
+                    ? "Bâtir la chaîne d'approvisionnement Bihar-Europe, d'une thèse de master parisienne à une véritable opération d'export." 
+                    : lang === 'hi'
+                      ? "पेरिस की मास्टर थीसिस से लेकर एक लाइव एक्सपोर्ट ऑपरेशन तक बिहार-से-यूरोप सप्लाई चेन का निर्माण।"
+                      : "Building the Bihar-to-Europe supply chain from a Paris master's thesis into a live export operation."}
                 </p>
               </div>
             </motion.div>
