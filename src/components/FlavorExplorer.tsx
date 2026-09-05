@@ -180,8 +180,8 @@ const frenchProducts: Product[] = [
     category: "SIGNATURE",
     description: "Un assortiment généreux de nos saveurs les plus populaires.",
     basePrice: 17.50,
-    basePriceINR: 379,
-    image: "/flavor_himalayan_salt_new.png",
+    basePriceINR: 295,
+    image: "/products/six-pack-promo.png",
   },
   {
     id: "nine-pack-bundle",
