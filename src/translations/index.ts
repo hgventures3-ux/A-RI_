@@ -70,7 +70,7 @@ const t: Record<string, Record<string, any>> = {
       subtitle: "Chaque grain AÉRI parcourt un voyage de 8 000 km, de l'eau pure du Bihar jusqu'à votre apéro parisien.",
       stages: [
         { label: "Récolte", headline: "La Récolte Artisanale", body: "Cueillie à la main dans les zones humides préservées du Bihar, chaque graine d'Euryale Ferox est récoltée avec un savoir-faire transmis de génération en génération. Un geste millénaire, respectueux de la terre et de l'eau.", stat: { value: "1 000", unit: "acres", desc: "de zones humides préservées" }, benefit: "Plaisir sans Culpabilité" },
-        { label: "Transformation", headline: "Le Pop Ancestral", body: "Les graines noires sont séchées au soleil, puis éclatées à la chaleur — sans huile, sans machine industrielle. Ce procédé traditionnel révèle la texture aérienne et le goût délicat du Makhana.", stat: { value: "0", unit: "huile", desc: "ajoutée lors du popping" }, benefit: "Énergie Durable" },
+        { label: "Transformation", headline: "Le Pop Ancestral", body: "Les graines noires sont séchées au soleil, puis éclatées à la chaleur — sans huile, sans huile ni friture. Ce procédé traditionnel révèle la texture aérienne et le goût délicat du Makhana.", stat: { value: "0", unit: "huile", desc: "ajoutée lors du popping" }, benefit: "Énergie Durable" },
         { label: "Assaisonnement", headline: "La Touche Française", body: "Légèrement enrobé d'huile d'olive extra-vierge et assaisonné de manière artisanale avec des épices sélectionnées. Le résultat : un apéro gastronomique, croustillant et irrésistiblement léger.", stat: { value: "9,5g", unit: "protéines", desc: "par portion de 30g" }, benefit: "Plaisir sans Culpabilité" },
       ],
       traceLabel: "Traçabilité",
@@ -84,7 +84,7 @@ const t: Record<string, Record<string, any>> = {
       subtitle: "Every AÉRI grain travels 8,000 km, from the pure waters of Bihar to your table.",
       stages: [
         { label: "Harvesting", headline: "Artisanal Harvesting", body: "Hand-picked from the preserved wetlands of Bihar, every Euryale Ferox (Makhana) seed is harvested with ancestral know-how passed down through generations. A thousand-year-old gesture, respectful of land and water.", stat: { value: "1,000", unit: "acres", desc: "of preserved wetlands" }, benefit: "Guilt-Free Pleasure" },
-        { label: "Popping", headline: "The Ancestral Pop", body: "The black seeds are sun-dried, then popped using heat alone — no oil, no industrial machines. This traditional process reveals the airy texture and delicate taste of Makhana.", stat: { value: "0", unit: "oil", desc: "added during popping" }, benefit: "Sustained Energy" },
+        { label: "Popping", headline: "The Ancestral Pop", body: "The black seeds are sun-dried, then popped using heat alone — no oil, never fried, zero oil added. This traditional process reveals the airy texture and delicate taste of Makhana.", stat: { value: "0", unit: "oil", desc: "added during popping" }, benefit: "Sustained Energy" },
         { label: "Flavoring", headline: "The French Touch", body: "Lightly coated in extra-virgin olive oil and artisanally seasoned with selected spices. The result: a gourmet snack, crunchy and irresistibly light.", stat: { value: "9.5g", unit: "protein", desc: "per 30g serving" }, benefit: "Guilt-Free Pleasure" },
       ],
       traceLabel: "Traceability",
@@ -98,7 +98,7 @@ const t: Record<string, Record<string, any>> = {
       subtitle: "हर AÉRI दाना 8,000 किमी का सफर तय करता है, बिहार के शुद्ध पानी से आपके पेरिसियन एपेरो (Apéro) तक।",
       stages: [
         { label: "कटाई", headline: "पारंपरिक कटाई", body: "बिहार की संरक्षित आर्द्रभूमि (wetlands) से हाथों से चुना गया, Euryale Ferox (मखाना) का हर बीज पीढ़ियों से चले आ रहे पारंपरिक ज्ञान के साथ काटा जाता है। यह भूमि और पानी का सम्मान करने वाली एक हज़ार साल पुरानी प्रथा है।", stat: { value: "1,000", unit: "एकड़", desc: "संरक्षित आर्द्रभूमि" }, benefit: "अपराध-मुक्त आनंद" },
-        { label: "पॉपिंग", headline: "पारंपरिक पॉप", body: "काले बीजों को धूप में सुखाया जाता है, फिर केवल गर्मी का उपयोग करके पॉप (फोड़ा) किया जाता है — कोई तेल नहीं, कोई औद्योगिक मशीन नहीं। यह पारंपरिक प्रक्रिया मखाने की हल्की बनावट और नाज़ुक स्वाद को बाहर लाती है।", stat: { value: "0", unit: "तेल", desc: "पॉपिंग के दौरान मिलाया गया" }, benefit: "निरंतर ऊर्जा" },
+        { label: "पॉपिंग", headline: "पारंपरिक पॉप", body: "काले बीजों को धूप में सुखाया जाता है, फिर केवल गर्मी का उपयोग करके पॉप (फोड़ा) किया जाता है — कोई तेल नहीं, बिना किसी तेल या तलने के। यह पारंपरिक प्रक्रिया मखाने की हल्की बनावट और नाज़ुक स्वाद को बाहर लाती है।", stat: { value: "0", unit: "तेल", desc: "पॉपिंग के दौरान मिलाया गया" }, benefit: "निरंतर ऊर्जा" },
         { label: "स्वाद", headline: "द फ्रेंच टच", body: "एक्स्ट्रा-वर्जिन जैतून के तेल की हल्की परत और चुने हुए मसालों के साथ पारंपरिक रूप से स्वादिष्ट बनाया गया। परिणाम: एक लजीज स्नैक, जो कुरकुरा और बेहद हल्का है।", stat: { value: "9.5g", unit: "प्रोटीन", desc: "प्रति 30g सर्विंग" }, benefit: "अपराध-मुक्त आनंद" },
       ],
       traceLabel: "ट्रैसेबिलिटी (पता लगाने की योग्यता)",

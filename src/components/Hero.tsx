@@ -17,24 +17,24 @@ const FRAME_COUNT = VALID_FRAMES.length;
 
 const heroText = {
   fr: {
-    ticker: "• Livraison gratuite sur votre première commande • Livraison gratuite sur votre première commande •",
-    headline: "AÉRI Makhana: The Art de l'Apéro.",
-    subheadline: "Croustillant, noble, et naturellement sain. Découvrez la super-graine d'origine indienne qui réinvente vos débuts de soirée.",
-    cta: "ACHETER MAINTENANT",
+    ticker: "• Export-grade Phool Makhana · FOB Mundra · Demande de Devis • Export-grade Phool Makhana · FOB Mundra · Demande de Devis •",
+    headline: "Makhana Phool Cru et Makhana Torréfié Marque Privée, Exportés depuis l'Inde",
+    subheadline: "4 à 6 grades suta. Installations partenaires certifiées. MOQ faible.",
+    cta: "DEMANDER UN DEVIS",
     disclaimer: "Représentation visuelle illustrative.",
   },
   en: {
-    ticker: "• Free shipping on your first delivery • Free shipping on your first delivery •",
-    headline: "AÉRI Makhana: The Art of Snacking.",
-    subheadline: "Crunchy, noble, and naturally healthy. Discover the Indian super-seed that reinvents your evening rituals.",
-    cta: "SHOP NOW",
+    ticker: "• Export-grade Phool Makhana · FOB Mundra · Request a Quote • Export-grade Phool Makhana · FOB Mundra · Request a Quote •",
+    headline: "Raw Phool Makhana and Private-Label Roasted Makhana, Exported from India",
+    subheadline: "4 to 6 suta grades. Certified partner facilities. Low MOQ.",
+    cta: "REQUEST A QUOTE",
     disclaimer: "Illustrative visual representation.",
   },
   hi: {
-    ticker: "• आपके पहले ऑर्डर पर मुफ़्त डिलीवरी • आपके पहले ऑर्डर पर मुफ़्त डिलीवरी •",
-    headline: "AÉRI मखाना: स्नैकिंग की कला।",
-    subheadline: "कुरकुरा, शानदार, और प्राकृतिक रूप से स्वस्थ। भारतीय सुपर-सीड की खोज करें जो आपकी शाम को बदल दे。",
-    cta: "अभी खरीदें",
+    ticker: "• एक्सपोर्ट-ग्रेड फूल मखाना · FOB मुंद्रा · कोटेशन अनुरोध • एक्सपोर्ट-ग्रेड फूल मखाना · FOB मुंद्रा · कोटेशन अनुरोध •",
+    headline: "कच्चा फूल मखाना और प्राइवेट-लेबल रोस्टेड मखाना, भारत से निर्यात",
+    subheadline: "4 से 6 सुता ग्रेड। प्रमाणित साझेदार सुविधाएं। कम MOQ।",
+    cta: "कोटेशन अनुरोध करें",
     disclaimer: "सचित्र वानस्पतिक प्रतिनिधित्व।",
   },
 };
@@ -245,7 +245,7 @@ export default function Hero() {
 
           {/* CTA Button - always visible */}
           <motion.a
-            href="/products"
+            href="/espace-pro"
             whileHover={{ scale: 1.04, backgroundColor: '#333' }}
             whileTap={{ scale: 0.96 }}
             className="pointer-events-auto inline-block px-6 py-3 md:px-9 md:py-4 bg-[#1C1C1C] text-[#FAF8F5] text-[11px] font-bold tracking-[0.3em] uppercase rounded-xl shadow-xl transition-colors duration-200 mt-2"

@@ -4,98 +4,63 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import t from "@/translations";
-import { useState, useEffect } from "react";
+
+// Static footer link columns
+const footerColumns = [
+  {
+    heading: "Services",
+    links: [
+      { label: "Raw Phool Makhana", href: "/raw-phool-makhana" },
+      { label: "Private Label", href: "/private-label" },
+      { label: "Manufacturing Network", href: "/manufacturing-network" },
+      { label: "Export & Shipping", href: "/export-shipping" },
+    ],
+  },
+  {
+    heading: "Brand",
+    links: [
+      { label: "AÉRI Brand", href: "/brand" },
+      { label: "Products", href: "/products" },
+      { label: "Our Story", href: "/brand" },
+      { label: "Request a Quote", href: "/espace-pro" },
+    ],
+  },
+  {
+    heading: "Legal",
+    links: [
+      { label: "Legal Notice", href: "/legal/legal-notice" },
+      { label: "Terms & Conditions", href: "/legal/t-c" },
+      { label: "Return Policy", href: "/legal/return-policy" },
+      { label: "Privacy Policy", href: "/legal/privacy" },
+      { label: "Grievance Officer", href: "/legal/legal-notice" },
+    ],
+  },
+];
 
 export default function Footer() {
   const { lang } = useLanguage();
   const s = t.pro[lang];
-  const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useState(false);
-  const [dynamicProducts, setDynamicProducts] = useState<any[]>([]);
-
-  useEffect(() => {
-    fetch("/api/products")
-      .then(res => res.json())
-      .then(data => {
-        if (data.success && data.data) {
-          setDynamicProducts(data.data.slice(0, 6)); // Display up to 6 products
-        }
-      })
-      .catch(console.error);
-  }, []);
-
-  const handleSubscribe = async () => {
-    if (!email) return;
-    setLoading(true);
-    try {
-      const res = await fetch("/api/subscribers", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, source: "Footer Newsletter" }),
-      });
-      const data = await res.json();
-      if (data.success) {
-        setSuccess(true);
-        setEmail("");
-        setTimeout(() => setSuccess(false), 4000);
-      } else {
-        console.error("Failed to subscribe");
-      }
-    } catch (error) {
-      console.error("Error subscribing", error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <footer className="relative w-full bg-[#1C1C1C] text-[#FFFFFF] overflow-hidden">
-      {/* Waitlist banner */}
+      {/* Request a Quote CTA strip */}
       <div className="border-b border-[#FFFFFF]/8">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 md:py-10 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <span
-              className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.3em] uppercase text-[#8E8E93] mb-2"
+          <p
+            className="text-lg md:text-xl font-semibold text-[#FFFFFF]"
+            style={{ fontFamily: "var(--font-montserrat)" }}
+          >
+            Ready to place an order or request samples?
+          </p>
+          <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
+            <Link
+              href="/espace-pro"
+              className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-[#FAF8F5] text-[#1C1C1C] text-sm font-semibold tracking-wide transition-colors hover:bg-[#e8e6e3] cursor-pointer shrink-0 whitespace-nowrap"
               style={{ fontFamily: "var(--font-montserrat)" }}
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-[#8E8E93] animate-pulse" />
-              {s.waitlistLabel}
-            </span>
-            <h4
-              className="text-lg md:text-xl font-bold text-[#FFFFFF]"
-              style={{ fontFamily: "var(--font-montserrat)" }}
-            >
-              {s.waitlistTitle}
-            </h4>
-            <p
-              className="text-sm text-[#FFFFFF]/45 mt-1"
-              style={{ fontFamily: "var(--font-lora)" }}
-            >
-              {s.waitlistSub}
-            </p>
-          </div>
-
-          <div className="flex gap-2 w-full md:w-auto">
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder={s.waitlistPh}
-              className="flex-1 md:w-64 px-4 py-3 rounded-xl bg-[#FFFFFF]/8 border border-[#FFFFFF]/12 text-sm text-[#FFFFFF] placeholder:text-[#FFFFFF]/30 focus:outline-none focus:border-[#FFFFFF]/25 transition-all"
-              style={{ fontFamily: "var(--font-lora)" }}
-            />
-            <motion.button
-              onClick={handleSubscribe}
-              disabled={loading}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              className="px-5 py-3 rounded-xl bg-[#8E8E93] text-[#111111] text-sm font-semibold tracking-wide transition-colors hover:bg-[#8E8E93]/90 cursor-pointer shrink-0 disabled:opacity-70"
-              style={{ fontFamily: "var(--font-montserrat)" }}
-            >
-              {loading ? "..." : success ? "✓" : s.waitlistBtn}
-            </motion.button>
-          </div>
+              Request a Quote
+            </Link>
+          </motion.div>
         </div>
       </div>
 
@@ -111,38 +76,89 @@ export default function Footer() {
               AÉRI
             </h3>
             <p
-              className="text-sm text-[#FFFFFF]/70 font-light leading-relaxed mb-5"
+              className="text-sm text-[#FFFFFF]/70 font-light leading-relaxed mb-3"
               style={{ fontFamily: "var(--font-lora)" }}
             >
-              {s.brandTagline1}
+              Raw &amp; Private-Label Makhana Exporter
               <br />
-              {s.brandTagline2}
+              H&amp;G Ventures Private Limited, India
             </p>
-            {/* Social icons */}
-            <div className="flex flex-wrap gap-3">
+            <div
+              className="text-xs text-[#FFFFFF]/70 font-light space-y-1 mb-5"
+              style={{ fontFamily: "var(--font-montserrat)" }}
+            >
+              <div>
+                <span className="text-[#FFFFFF]/40 uppercase tracking-wider text-[10px]">WhatsApp:</span>{" "}
+                <a
+                  href="https://wa.me/919499729424"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors underline underline-offset-2"
+                >
+                  +91 94997 29424
+                </a>
+              </div>
+              <div>
+                <span className="text-[#FFFFFF]/40 uppercase tracking-wider text-[10px]">Call (Alternate):</span>{" "}
+                <a
+                  href="tel:+918460058916"
+                  className="hover:text-white transition-colors underline underline-offset-2"
+                >
+                  +91 84600 58916
+                </a>
+              </div>
+            </div>
+            {/* Social & Contact icons */}
+            <div className="flex flex-wrap gap-2.5">
               {[
-                { 
-                  name: "Instagram", 
-                  href: "https://www.instagram.com/aeri.makhana", 
-                  icon: <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                {
+                  name: "Instagram",
+                  href: "https://www.instagram.com/aeri.makhana",
+                  icon: (
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                    </svg>
+                  ),
                 },
-                { 
-                  name: "LinkedIn", 
-                  href: "https://www.linkedin.com/company/aeri-snacks/", 
-                  icon: <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                {
+                  name: "LinkedIn",
+                  href: "https://www.linkedin.com/company/aeri-snacks/",
+                  icon: (
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                      <rect width="4" height="12" x="2" y="9" />
+                      <circle cx="4" cy="4" r="2" />
+                    </svg>
+                  ),
                 },
-                { 
-                  name: "WhatsApp", 
-                  href: "https://wa.me/919499729424", 
-                  icon: <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" /><path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" /></svg>
+                {
+                  name: "WhatsApp",
+                  href: "https://wa.me/919499729424",
+                  icon: (
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
+                      <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1a5 5 0 0 0 5 5h1a.5.5 0 0 0 0-1h-1a.5.5 0 0 0 0 1" />
+                    </svg>
+                  ),
+                },
+                {
+                  name: "Call",
+                  href: "tel:+918460058916",
+                  icon: (
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                    </svg>
+                  ),
                 },
               ].map((social) => (
                 <a
                   key={social.name}
                   href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#FFFFFF]/6 border border-[#FFFFFF]/10 text-[#FFFFFF]/70 transition-colors hover:bg-[#FFFFFF]/12 hover:text-[#FFFFFF]"
+                  target={social.href.startsWith("http") ? "_blank" : undefined}
+                  rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#FFFFFF]/6 border border-[#FFFFFF]/10 text-[#FFFFFF]/70 transition-colors hover:bg-[#FFFFFF]/12 hover:text-[#FFFFFF]"
                 >
                   {social.icon}
                   <span
@@ -156,101 +172,30 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Links — एक्सप्लिसिट रूट मैपिंग (Explicit route mapping to prevent broken links) */}
-          {(() => {
-            // हर लिंक के लिए सही href मैपिंग
-            const getRoutes = (currentLang: string): Record<string, string[]> => {
-              if (currentLang === 'en') {
-                return {
-                  products: [
-                    "/products",
-                    "/products/signature",
-                    "/products/gourmet",
-                    "/espace-pro"
-                  ],
-                  company: [
-                    "/company/our-story",
-                    "/mission",
-                    "/company/transparency",
-                    "/company/certifications",
-                    "/company/pro-portal"
-                  ],
-                  legal: [
-                    "/legal/legal-notice",
-                    "/legal/t-c",
-                    "/legal/return-policy",
-                    "/legal/retractation"
-                  ]
-                };
-              }
-              return {
-                products: [
-                  "/products",
-                  "/products/signature",
-                  "/products/gourmet",
-                  "/espace-pro"
-                ],
-                company: [
-                  "/company/notre-histoire",
-                  "/mission",
-                  "/company/transparence",
-                  "/company/certifications",
-                  "/company/espace-pro"
-                ],
-                legal: [
-                  "/legal/mentions-legales",
-                  "/legal/cgv",
-                  "/legal/politique-de-retour",
-                  "/legal/retractation"
-                ]
-              };
-            };
-
-            const linkRoutes = getRoutes(lang);
-
-            const categories = Object.keys(s.footerLinks) as string[];
-            return categories.map((category, i) => (
-              <div key={category}>
-                <h5
-                  className="text-xs font-semibold tracking-[0.25em] uppercase text-[#FFFFFF]/80 mb-4"
-                  style={{ fontFamily: "var(--font-montserrat)" }}
-                >
-                  {s.footerCats[i]}
-                </h5>
-                <ul className="space-y-2.5">
-                  {category === "products" && dynamicProducts.length > 0 ? (
-                    dynamicProducts.map((prod) => (
-                      <li key={prod._id || prod.slug}>
-                        <Link
-                          href={`/products/${prod.slug}`}
-                          className="text-sm text-[#FFFFFF]/70 font-light transition-colors hover:text-[#FFFFFF]"
-                          style={{ fontFamily: "var(--font-lora)" }}
-                        >
-                          {prod.name}
-                        </Link>
-                      </li>
-                    ))
-                  ) : (
-                    (s.footerLinks[category as keyof typeof s.footerLinks] as string[]).map((link: string, j: number) => {
-                      const routeKey = category === "products" ? "products" : category === "company" || category === "entreprise" ? "company" : "legal";
-                      const href = linkRoutes[routeKey]?.[j] || "#";
-                      return (
-                        <li key={link}>
-                          <Link
-                            href={href}
-                            className="text-sm text-[#FFFFFF]/70 font-light transition-colors hover:text-[#FFFFFF]"
-                            style={{ fontFamily: "var(--font-lora)" }}
-                          >
-                            {link}
-                          </Link>
-                        </li>
-                      );
-                    })
-                  )}
-                </ul>
-              </div>
-            ));
-          })()}
+          {/* Static link columns */}
+          {footerColumns.map((col) => (
+            <div key={col.heading}>
+              <h5
+                className="text-xs font-semibold tracking-[0.25em] uppercase text-[#FFFFFF]/80 mb-4"
+                style={{ fontFamily: "var(--font-montserrat)" }}
+              >
+                {col.heading}
+              </h5>
+              <ul className="space-y-2.5">
+                {col.links.map((link) => (
+                  <li key={link.label + link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-sm text-[#FFFFFF]/70 font-light transition-colors hover:text-[#FFFFFF]"
+                      style={{ fontFamily: "var(--font-lora)" }}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -274,12 +219,12 @@ export default function Footer() {
               className="text-xs text-[#FFFFFF]/75 font-light"
               style={{ fontFamily: "var(--font-lora)" }}
             >
-              FSSAI: [TO BE PROVIDED]
+              FSSAI Central License: 24724001000135
             </p>
           </div>
           <div className="flex items-center gap-4">
             <Link
-              href={lang === 'en' ? "/legal/return-policy" : "/legal/politique-de-retour"}
+              href="/legal/return-policy"
               className="text-xs text-[#FFFFFF]/75 font-light transition-colors hover:text-[#FFFFFF]"
               style={{ fontFamily: "var(--font-lora)" }}
             >
@@ -287,7 +232,7 @@ export default function Footer() {
             </Link>
             <span className="text-[#FFFFFF]/40">·</span>
             <Link
-              href={lang === 'en' ? "/legal/privacy" : "/legal/confidentialite"}
+              href="/legal/privacy"
               className="text-xs text-[#FFFFFF]/75 font-light transition-colors hover:text-[#FFFFFF]"
               style={{ fontFamily: "var(--font-lora)" }}
             >
@@ -295,11 +240,11 @@ export default function Footer() {
             </Link>
             <span className="text-[#FFFFFF]/40">·</span>
             <Link
-              href={lang === 'en' ? "/legal/legal-notice" : "/legal/mentions-legales"}
+              href="/legal/legal-notice"
               className="text-xs text-[#FFFFFF]/75 font-light transition-colors hover:text-[#FFFFFF]"
               style={{ fontFamily: "var(--font-lora)" }}
             >
-              {lang === 'en' ? "Grievance Officer" : "Agent de Griefs"}
+              Grievance Officer
             </Link>
           </div>
         </div>

@@ -208,7 +208,7 @@ export default function EspacePro() {
               className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-[#1C1C1C] mb-6"
               style={{ fontFamily: "var(--font-montserrat)" }}
             >
-              {s.header.title}
+              {lang === "fr" ? s.header.title : "Request a Quote"}
             </motion.h2>
 
             <motion.p

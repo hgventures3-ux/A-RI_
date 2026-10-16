@@ -7,6 +7,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import InstitutionalNav from "@/components/InstitutionalNav";
 import Image from "next/image";
+import Link from "next/link";
+import FlavorExplorer from "@/components/FlavorExplorer";
+import SocialProofGrid from "@/components/SocialProofGrid";
+import Blog from "@/components/Blog";
+import InstagramFeed from "@/components/InstagramFeed";
 
 // भाषा के अनुसार अनुवाद (Translations for French, English, and Hindi)
 const pageTranslations = {
@@ -285,6 +290,34 @@ export default function BrandPage() {
           </div>
         </div>
       </section>
+
+            {/* ── Sign In & Account Banner ── */}
+      <section className="bg-[#FAF8F5] py-8 border-b border-[#1C1C1C]/10 text-center">
+        <div className="max-w-4xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-[#1C1C1C]/70" style={{ fontFamily: "var(--font-lora)" }}>
+            {lang === "fr" ? "Déjà client ? Accédez à vos commandes et à votre compte." : "Existing customer? Access your orders and account."}
+          </p>
+          <Link
+            href="/login"
+            className="px-5 py-2.5 rounded-xl border border-[#1C1C1C] text-[#1C1C1C] text-xs font-semibold tracking-wider uppercase hover:bg-[#1C1C1C] hover:text-white transition-all"
+            style={{ fontFamily: "var(--font-montserrat)" }}
+          >
+            {lang === "fr" ? "Se connecter" : "Sign In to Account"}
+          </Link>
+        </div>
+      </section>
+
+      {/* ── Shop Collection (4 Core Products) ── */}
+      <FlavorExplorer />
+
+      {/* ── Testimonials ── */}
+      <SocialProofGrid />
+
+      {/* ── AÉRI Journal (Blog) ── */}
+      <Blog />
+
+      {/* ── Instagram Community ── */}
+      <InstagramFeed />
 
       {/* फुटर (Footer) */}
       <Footer />

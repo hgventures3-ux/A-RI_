@@ -7,43 +7,6 @@ import { useCart } from "@/context/CartContext";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 
-// नेवबार के सभी भाषा-टेक्स्ट
-const navText = {
-  fr: {
-    brand: "La Marque AÉRI",
-    products: "Produits",
-    mission: "Notre Raison d'Être",
-    contact: "Nous Contacter",
-    findUs: "Où nous trouver",
-    pro: "Espace Professionnel",
-    admin: "Administrateur",
-    account: "Mon Compte",
-    login: "Se connecter",
-  },
-  en: {
-    brand: "The Brand",
-    products: "Products",
-    mission: "Our Mission",
-    contact: "Contact Us",
-    findUs: "Where to Find Us",
-    pro: "Pro Portal",
-    admin: "Admin",
-    account: "Account",
-    login: "Sign In",
-  },
-  hi: {
-    brand: "ब्रांड",
-    products: "उत्पाद",
-    mission: "हमारा उद्देश्य",
-    contact: "संपर्क करें",
-    findUs: "हमें कहाँ खोजें",
-    pro: "प्रो पोर्टल",
-    admin: "एडमिन",
-    account: "खाता",
-    login: "लॉगिन करें",
-  },
-};
-
 // भाषा लेबल — साफ़ दिखने वाला
 const langLabel: Record<string, string> = {
   fr: "FR",
@@ -56,10 +19,18 @@ const langCycle: Record<string, "fr" | "en"> = {
   en: "fr",
 };
 
+// Static nav links — hardcoded, no translation needed
+const navLinks = [
+  { href: "/raw-phool-makhana", label: "Raw Phool Makhana" },
+  { href: "/private-label", label: "Private Label" },
+  { href: "/manufacturing-network", label: "Manufacturing Network" },
+  { href: "/export-shipping", label: "Export & Shipping" },
+  { href: "/brand", label: "AÉRI Brand" },
+];
+
 export default function Navbar() {
   const { lang, setLang } = useLanguage();
   const { cartCount, setIsCartOpen } = useCart();
-  const s = navText[lang as keyof typeof navText] || navText.fr;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [user, setUser] = useState<{ name: string } | null>(null);
@@ -99,13 +70,6 @@ export default function Navbar() {
   const navBg = scrolled
     ? "rgba(250, 248, 245, 0.98)"
     : "rgba(250, 248, 245, 0.94)";
-
-  const navLinks = [
-    { href: "/brand", label: s.brand },
-    { href: "/products", label: s.products },
-    { href: "/ou-nous-trouver", label: s.findUs },
-    { href: "/mission", label: s.mission },
-  ];
 
   return (
     <header
@@ -151,12 +115,12 @@ export default function Navbar() {
           </Link>
         ))}
 
-        {/* ── Espace Professionnel — styled CTA ── */}
+        {/* ── Request a Quote — styled CTA ── */}
         <Link
           href="/espace-pro"
           className="px-5 py-2 rounded-lg bg-[#1C1C1C] text-[#FAF8F5] hover:bg-[#333] transition-all duration-200 whitespace-nowrap text-[12px] font-semibold tracking-[0.05em]"
         >
-          {s.pro}
+          Request a Quote
         </Link>
 
         {/* ── User Auth Link ── */}
@@ -180,7 +144,7 @@ export default function Navbar() {
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
               <circle cx="12" cy="7" r="4" />
             </svg>
-            <span>{s.login}</span>
+            <span>Sign In</span>
           </Link>
         )}
 
@@ -343,7 +307,7 @@ export default function Navbar() {
                 onClick={() => setMobileOpen(false)}
                 className="text-[11px] tracking-[0.2em] uppercase font-bold text-[#D4AF37] hover:text-[#1C1C1C] transition-colors"
               >
-                {s.account} ({user.name.split(" ")[0]})
+                Account ({user.name.split(" ")[0]})
               </Link>
             ) : (
               <Link
@@ -351,17 +315,17 @@ export default function Navbar() {
                 onClick={() => setMobileOpen(false)}
                 className="text-[11px] tracking-[0.2em] uppercase font-bold text-[#D4AF37] hover:text-[#1C1C1C] transition-colors"
               >
-                {s.login}
+                Sign In
               </Link>
             )}
 
-            {/* Espace Pro comme CTA dans le menu mobile */}
+            {/* Request a Quote CTA in mobile menu */}
             <Link
               href="/espace-pro"
               onClick={() => setMobileOpen(false)}
               className="mt-1 inline-flex items-center justify-center px-4 py-2.5 rounded-lg bg-[#1C1C1C] text-[#FAF8F5] text-[12px] font-semibold tracking-[0.05em] transition-all hover:bg-[#333]"
             >
-              {s.pro}
+              Request a Quote
             </Link>
           </motion.div>
         )}

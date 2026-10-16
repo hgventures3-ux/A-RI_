@@ -35,23 +35,23 @@ const steps = [
     image: "/journey/step3_v2.jpg",
     fr: {
       title: "Séchage naturel & torréfaction maîtrisée",
-      desc: "Séchées au soleil, puis torréfiées à la main en 8 cycles pour révéler toute leur finesse.",
+      desc: "Séchées au soleil, puis soigneusement transformées en plusieurs étapes pour révéler toute leur finesse.",
     },
     en: {
       title: "Natural Drying & Controlled Roasting",
-      desc: "Sun-dried, then hand-roasted in 8 cycles to reveal all their delicacy.",
+      desc: "Sun-dried, then carefully processed through quality-controlled roasting stages to reveal all their delicacy.",
     },
   },
   {
     num: 4,
     image: "/journey/step4_v2.jpg",
     fr: {
-      title: "Éclatées à la main, une à une",
-      desc: "Chaque graine est ouverte manuellement avec précision. Un geste minutieux qu'aucune machine ne peut reproduire.",
+      title: "Soufflées avec précision",
+      desc: "Chaque graine est soufflée avec précision selon un procédé contrôlé garantissant une texture légère et homogène.",
     },
     en: {
-      title: "Popped by Hand, One by One",
-      desc: "Each seed is manually opened with precision. A meticulous gesture no machine can replicate.",
+      title: "Precision Popping",
+      desc: "Each seed is carefully popped through a quality-controlled process, ensuring a consistently light and uniform texture.",
     },
   },
   {
@@ -167,8 +167,8 @@ export default function CraftJourney() {
 
   const heading =
     lang === "fr"
-      ? { eyebrow: "Savoir-faire", title: "Le chemin de chaque graine", subtitle: "Ce savoir-faire ne peut pas être industrialisé." }
-      : { eyebrow: "Craftsmanship", title: "The journey of every seed", subtitle: "This craftsmanship cannot be industrialized." };
+      ? { eyebrow: "Savoir-faire", title: "Le chemin de chaque graine", subtitle: "Chaque étape est maîtrisée pour garantir une qualité constante." }
+      : { eyebrow: "Craftsmanship", title: "The journey of every seed", subtitle: "Every step is quality-controlled to deliver consistent excellence." };
 
   return (
     <section

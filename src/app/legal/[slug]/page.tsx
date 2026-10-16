@@ -13,7 +13,7 @@ const REG_ADDRESS = "TF-302, Shanti Heights, Jawahar Nagar, Halol-389350, Gujara
 const OFFICE_ADDRESS = "1602/E GIDC, Nr. Safari Chowkdi, Halol-389350, Gujarat, India";
 const GST = "24AAICH6172R1ZX";
 const EMAIL = "kriya@aerisnacks.com";
-const PHONE = "+91 84600 58916 / +33 7 45 69 37 74";
+const PHONE = "+91 94997 29424 (WhatsApp) / +91 84600 58916 (Call - Alternate)";
 const WEBSITE = "aerisnacks.com";
 const DIRECTOR = "Kriya Kanunga";
 

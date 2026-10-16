@@ -20,9 +20,11 @@ const pageTranslations = {
     formSuccess: "✓ Message envoyé avec succès !",
     contactInfo: {
       title: "Nos Coordonnées",
-      address: "H&G Ventures Private Limited\n15 rue du Louvre\n75001 Paris, France",
-      email: "bonjour@aeri-snack.com",
-      phone: "+33 1 23 45 67 89"
+      address: "H&G Ventures Private Limited\n1602/E GIDC HALOL-389350, Gujarat, India",
+      email: "kriya@aerisnacks.com",
+      whatsapp: "+91 94997 29424",
+      callAlt: "+91 84600 58916",
+      instagram: "@aeri.makhana"
     },
     b2b: {
       title: "Espace Professionnel (B2B)",
@@ -41,9 +43,11 @@ const pageTranslations = {
     formSuccess: "✓ Message sent successfully!",
     contactInfo: {
       title: "Our Contact Info",
-      address: "H&G Ventures Private Limited\n15 rue du Louvre\n75001 Paris, France",
-      email: "hello@aeri-snack.com",
-      phone: "+33 1 23 45 67 89"
+      address: "H&G Ventures Private Limited\n1602/E GIDC HALOL-389350, Gujarat, India",
+      email: "kriya@aerisnacks.com",
+      whatsapp: "+91 94997 29424",
+      callAlt: "+91 84600 58916",
+      instagram: "@aeri.makhana"
     },
     b2b: {
       title: "Professional Portal (B2B)",
@@ -62,9 +66,11 @@ const pageTranslations = {
     formSuccess: "✓ संदेश सफलतापूर्वक भेजा गया!",
     contactInfo: {
       title: "हमारा संपर्क विवरण",
-      address: "H&G Ventures Private Limited\n15 rue du Louvre\n75001 Paris, France",
-      email: "hello@aeri-snack.com",
-      phone: "+33 1 23 45 67 89"
+      address: "H&G Ventures Private Limited\n1602/E GIDC HALOL-389350, Gujarat, India",
+      email: "kriya@aerisnacks.com",
+      whatsapp: "+91 94997 29424",
+      callAlt: "+91 84600 58916",
+      instagram: "@aeri.makhana"
     },
     b2b: {
       title: "व्यावसायिक पोर्टल (B2B)",
@@ -168,10 +174,31 @@ export default function ContactPage() {
           {/* Info Block */}
           <div>
             <h3 className="text-2xl font-bold mb-6 text-[#111111]">{t.contactInfo.title}</h3>
-            <div className="flex flex-col gap-4 text-[#6E6E73] text-lg">
+            <div className="flex flex-col gap-4 text-[#6E6E73] text-base sm:text-lg">
               <p className="whitespace-pre-line leading-relaxed">{t.contactInfo.address}</p>
-              <a href={`mailto:${t.contactInfo.email}`} className="text-[#111111] hover:underline transition-all">{t.contactInfo.email}</a>
-              <p>{t.contactInfo.phone}</p>
+              <div>
+                <span className="text-xs font-semibold uppercase tracking-wider text-[#111111]/50 block">Email:</span>
+                <a href={`mailto:${t.contactInfo.email}`} className="text-[#111111] hover:underline transition-all font-medium">{t.contactInfo.email}</a>
+              </div>
+              <div>
+                <span className="text-xs font-semibold uppercase tracking-wider text-[#111111]/50 block">WhatsApp:</span>
+                <a href="https://wa.me/919499729424" target="_blank" rel="noopener noreferrer" className="text-[#111111] hover:underline transition-all font-medium inline-flex items-center gap-1.5">
+                  <span className="inline-block w-2.5 h-2.5 rounded-full bg-[#25D366]"></span>
+                  {t.contactInfo.whatsapp}
+                </a>
+              </div>
+              <div>
+                <span className="text-xs font-semibold uppercase tracking-wider text-[#111111]/50 block">Call (Alternate):</span>
+                <a href="tel:+918460058916" className="text-[#111111] hover:underline transition-all font-medium">
+                  {t.contactInfo.callAlt}
+                </a>
+              </div>
+              <div>
+                <span className="text-xs font-semibold uppercase tracking-wider text-[#111111]/50 block">Instagram:</span>
+                <a href="https://www.instagram.com/aeri.makhana/" target="_blank" rel="noopener noreferrer" className="text-[#111111] hover:underline transition-all font-medium">
+                  {t.contactInfo.instagram} ↗
+                </a>
+              </div>
             </div>
           </div>
 

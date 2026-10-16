@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { cookies, headers } from "next/headers";
 import Providers from "@/components/Providers";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import "./globals.css";
 import { GEO_COUNTRY_COOKIE, normalizeCountryCode } from "@/lib/pricing";
 
@@ -92,6 +93,7 @@ export default async function RootLayout({
       </head>
       <body className="min-h-full flex flex-col">
         <Providers initialCountry={initialCountry}>{children}</Providers>
+        <WhatsAppButton />
       </body>
     </html>
   );

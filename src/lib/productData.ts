@@ -25,7 +25,7 @@ export const productData: Record<
     image: "/flavor_himalayan_salt_new.png",
     color: "#FDF6F0",
     story: "Sourced from the ancient Khewra salt mines at the foothills of the Himalayas, our pink salt carries over 84 trace minerals that have been preserved for 250 million years. When paired with the delicate, air-popped texture of Bihar's finest Makhana seeds, it creates a snack that is both profoundly simple and deeply satisfying. This is the flavor that started our journey — a tribute to the philosophy that the finest ingredients need nothing more than each other.",
-    process: "Each Makhana seed is hand-harvested from the pristine ponds of Bihar, sun-dried for 48 hours, and then popped using traditional heat methods — no oil, no machines. The seeds are then lightly misted with cold-pressed extra virgin olive oil and dusted with finely ground Himalayan pink salt. The result is a snack with less than 2% fat content that delivers a satisfying crunch in every bite.",
+    process: "Each Makhana seed is hand-harvested from the pristine ponds of Bihar, sun-dried for 48 hours, and then popped using traditional heat methods — no oil, never fried. The seeds are then lightly misted with cold-pressed extra virgin olive oil and dusted with finely ground Himalayan pink salt. The result is a snack with less than 2% fat content that delivers a satisfying crunch in every bite.",
     ingredients: "Popped Euryale Ferox seeds (Makhana) (92%), cold-pressed extra virgin olive oil (5%), Himalayan pink salt (3%).",
     allergens: "Naturally gluten-free. No nuts. No soy. No dairy. Produced in a facility that handles tree nuts and sesame.",
     nutrition: [
@@ -207,7 +207,7 @@ export const productData: Record<
     image: "/flavor_lemon_mint.png",
     color: "#F4FAEB",
     story: "Inspired by the refreshing lemonades of Mediterranean summers, this flavor profile is designed to awaken the senses. The sharp, vibrant zest of natural lemon oil is beautifully counterbalanced by the cooling finish of dried spearmint. It is a bold, unexpected take on savory snacking that leaves you feeling energized.",
-    process: "After our zero-oil roasting, the Makhana is lightly misted with extra virgin olive oil infused with cold-pressed lemon rind extract and dusted with finely milled organic mint leaves.",
+    process: "After our zero-oil roasting, the Makhana is lightly misted with extra virgin olive oil infused with cold-pressed lemon rind extract and dusted with finely milled selected mint leaves.",
     ingredients: "Popped Euryale Ferox seeds (Makhana) (88%), extra virgin olive oil (6%), natural lemon extract (3%), dried mint (2%), sea salt (1%).",
     allergens: "Naturally gluten-free. No nuts. No soy. No dairy. Produced in a facility that handles tree nuts and sesame.",
     nutrition: [
@@ -416,7 +416,7 @@ export const productData: Record<
     image: "/flavor_lemon_mint.png",
     color: "#F4FAEB",
     story: "Inspiré des limonades rafraîchissantes des étés méditerranéens, ce profil de saveur est conçu pour éveiller les sens. Le zeste vif et vibrant de l'huile de citron naturelle est magnifiquement contrebalancé par la finale rafraîchissante de la menthe verte séchée. C'est une interprétation audacieuse et inattendue du grignotage salé qui vous laisse plein d'énergie.",
-    process: "Après notre torréfaction sans huile, le Makhana est légèrement vaporisé d'huile d'olive extra vierge infusée d'extrait d'écorce de citron pressée à froid et saupoudré de feuilles de menthe bio finement moulues.",
+    process: "Après notre torréfaction sans huile, le Makhana est légèrement vaporisé d'huile d'olive extra vierge infusée d'extrait d'écorce de citron pressée à froid et saupoudré de feuilles de menthe sélectionnées finement moulues.",
     ingredients: "Graines d'Euryale Ferox soufflées (Makhana) (88%), huile d'olive extra vierge (6%), extrait naturel de citron (3%), menthe séchée (2%), sel de mer (1%).",
     allergens: "Naturellement sans gluten. Sans noix. Sans soja. Sans produits laitiers. Fabriqué dans un établissement qui traite des noix et du sésame.",
     nutrition: [

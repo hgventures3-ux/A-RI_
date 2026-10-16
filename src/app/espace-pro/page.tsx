@@ -12,7 +12,7 @@ export default function EspaceProPage() {
   const s = lang === "fr" ? espaceProFr : espaceProEn;
 
   useEffect(() => {
-    document.title = `${s.header.title} | AÉRI Makhana`;
+    document.title = lang === "fr" ? `${s.header.title} | AÉRI Makhana Export` : `Request a Quote | AÉRI Makhana Export`;
     const metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.setAttribute("content", s.header.hook);

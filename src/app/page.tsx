@@ -1,77 +1,19 @@
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import BadgeStrip from "@/components/BadgeStrip";
-import ThreeFlavorLineup from "@/components/ThreeFlavorLineup";
-import CraftJourney from "@/components/CraftJourney";
-import FlavorExplorer from "@/components/FlavorExplorer";
-import SocialProofGrid from "@/components/SocialProofGrid";
-import B2BTeaser from "@/components/B2BTeaser";
-import Blog from "@/components/Blog";
-import InstagramFeed from "@/components/InstagramFeed";
-import Footer from "@/components/Footer";
-
 import type { Metadata } from "next";
+import B2BHomePage from "@/components/B2BHomePage";
 
 export const metadata: Metadata = {
-  title: "AÉRI — Makhana Graines Soufflées Premium | L'Apéro Réinventé.",
-  description: "Découvrez AÉRI, le snack d'exception aux graines de makhana soufflées. Un makhana France idéal pour un snack sain apéro. Nos graines soufflées bio sont l'alternative parfaite pour l'apéritif.",
+  title: "Phool Makhana Exporter India | Raw Makhana & Private Label | AÉRI",
+  description:
+    "Export-grade raw Phool Makhana (fox nuts, 4 to 6 suta) and private-label roasted makhana from certified partner facilities in India. FOB Mundra. Request a quote.",
   keywords: [
-    "makhana France",
-    "snack sain apéro",
-    "graines soufflées bio",
-    "AÉRI snacks",
+    "phool makhana exporter",
+    "fox nuts export India",
+    "private label makhana",
+    "raw makhana bulk",
+    "makhana supplier India",
   ],
 };
 
 export default function Home() {
-  const schemaOrgJSONLD = {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "AÉRI Snacks",
-    "url": "https://aerisnacks.com",
-    "logo": "https://aerisnacks.com/logo.png",
-    "sameAs": [
-      "https://www.instagram.com/aerisnacks",
-      "https://www.linkedin.com/company/aeri-snacks"
-    ]
-  };
-
-  return (
-    <main className="flex flex-col">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrgJSONLD) }}
-      />
-      <Navbar />
-      {/* 1. Hero animation with headline, sub-headline, CTA */}
-      <Hero />
-      
-      {/* 2. Badge strip — health claims */}
-      <BadgeStrip />
-      
-      {/* 3. Craft Journey — 6-step visual timeline */}
-      <CraftJourney />
-
-      {/* 4. Signature Himalayan Salt collection visual */}
-      <ThreeFlavorLineup />
-
-      {/* 5. Product grid with "Ajouter au Panier" buttons */}
-      <FlavorExplorer />
-      
-      {/* 5. Consumer review grid */}
-      <SocialProofGrid />
-      
-      {/* 6. B2B Teaser banner */}
-      <B2BTeaser />
-      
-      {/* 7. Journal d'AÉRI blog preview */}
-      <Blog />
-      
-      {/* Instagram Feed */}
-      <InstagramFeed />
-      
-      {/* 8. Footer */}
-      <Footer />
-    </main>
-  );
+  return <B2BHomePage />;
 }
