@@ -55,9 +55,9 @@ function OrderConfirmationContent() {
   const orderCurrency = (searchParams.get("currency") || "EUR") as Currency;
 
   const steps = [
-    { icon: "✉️", title: s.step1, desc: s.step1Desc },
-    { icon: "📦", title: s.step2, desc: s.step2Desc },
-    { icon: "🚚", title: s.step3, desc: s.step3Desc },
+    { icon: "01", title: s.step1, desc: s.step1Desc },
+    { icon: "02", title: s.step2, desc: s.step2Desc },
+    { icon: "03", title: s.step3, desc: s.step3Desc },
   ];
 
   return (

@@ -2,20 +2,23 @@ import { Metadata } from "next";
 import ProductsClient from "./ProductsClient";
 
 export const metadata: Metadata = {
-  title: "Boutique | AÉRI Snacks",
-  description: "Découvrez notre collection de Makhana premium. L'équilibre parfait entre tradition millénaire et plaisir instantané.",
+  title: "AÉRI Makhana | Premium Roasted Makhana Range",
+  description:
+    "AÉRI Makhana: premium roasted makhana in Himalayan Salt & Pepper, Gourmet Truffle and Dark Chocolate. For distributors and importers.",
   openGraph: {
-    title: "Boutique | AÉRI Snacks",
-    description: "Découvrez notre collection de Makhana premium. L'équilibre parfait entre tradition millénaire et plaisir instantané.",
-    url: "https://aerisnacks.com/products",
+    title: "AÉRI Makhana | Premium Roasted Makhana Range",
+    description:
+      "AÉRI Makhana: premium roasted makhana in Himalayan Salt & Pepper, Gourmet Truffle and Dark Chocolate. For distributors and importers.",
+    url: "https://www.aerisnacks.com/products",
     images: [
       {
-        url: "https://aerisnacks.com/flavor_himalayan_salt_new.png",
+        url: "/flavor_himalayan_salt_new.png",
         width: 1200,
         height: 630,
-        alt: "AÉRI Snacks Boutique",
+        alt: "AÉRI Makhana Products",
       },
     ],
+    locale: "en_US",
   },
 };
 

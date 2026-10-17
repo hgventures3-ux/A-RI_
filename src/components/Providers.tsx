@@ -4,6 +4,10 @@ import { useEffect } from "react";
 import { LanguageProvider, useLanguage } from "@/context/LanguageContext";
 import { CurrencyProvider, useCurrency } from "@/context/CurrencyContext";
 import { CartProvider } from "@/context/CartContext";
+import { ContactModalProvider } from "@/context/ContactModalContext";
+import ContactModal from "@/components/ContactModal";
+import MobileBottomBar from "@/components/MobileBottomBar";
+import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import CartDrawer from "@/components/CartDrawer";
 import { Toaster } from "react-hot-toast";
 
@@ -14,7 +18,7 @@ import { Toaster } from "react-hot-toast";
  */
 function LanguageCurrencyBridge() {
   const { lang } = useLanguage();
-  const { isIndia, setCurrencyOverride } = useCurrency();
+  const { setCurrencyOverride } = useCurrency();
 
   useEffect(() => {
     if (lang === "fr") {
@@ -40,9 +44,14 @@ export default function Providers({
       <CurrencyProvider initialCountry={initialCountry}>
         <LanguageCurrencyBridge />
         <CartProvider>
-          {children}
-          <CartDrawer />
-          <Toaster position="bottom-right" toastOptions={{ style: { fontFamily: "var(--font-montserrat), sans-serif", borderRadius: '10px', background: '#333', color: '#fff' } }} />
+          <ContactModalProvider>
+            {children}
+            <ContactModal />
+            <MobileBottomBar />
+            <FloatingWhatsApp />
+            <CartDrawer />
+            <Toaster position="bottom-right" toastOptions={{ style: { fontFamily: "var(--font-montserrat), sans-serif", borderRadius: '10px', background: '#333', color: '#fff' } }} />
+          </ContactModalProvider>
         </CartProvider>
       </CurrencyProvider>
     </LanguageProvider>

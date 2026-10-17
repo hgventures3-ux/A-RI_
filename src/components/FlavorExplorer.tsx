@@ -6,8 +6,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/context/LanguageContext";
 import { useCart } from "@/context/CartContext";
+import { useContactModal } from "@/context/ContactModalContext";
 import toast from "react-hot-toast";
-
 import { useCurrency } from "@/context/CurrencyContext";
 
 type Product = {
@@ -21,6 +21,7 @@ type Product = {
   basePriceINR?: number;
   customPriceLabel?: string;
   image: string;
+  altText: string;
   isB2B?: boolean;
   inStock?: boolean;
 };
@@ -47,6 +48,7 @@ const frenchProducts: Product[] = [
     basePrice: 2.99,
     basePriceINR: 59,
     image: "/flavor_himalayan_salt_new.png",
+    altText: "AÉRI Himalayan Salt & Pepper makhana pack",
   },
   {
     id: "truffle",
@@ -57,6 +59,7 @@ const frenchProducts: Product[] = [
     basePrice: 2.99,
     basePriceINR: 79,
     image: "/products/product2.png",
+    altText: "AÉRI Gourmet Truffle makhana pack",
   },
   {
     id: "dark-chocolate",
@@ -68,145 +71,91 @@ const frenchProducts: Product[] = [
     basePrice: 2.99,
     basePriceINR: 99,
     image: "/flavor_dark_chocolate.png",
+    altText: "AÉRI 70% Dark Chocolate makhana pack",
   },
   {
     id: "raw",
     slug: "raw-phool-makhana",
     name: "Raw Phool Makhana",
-    category: "B2B / VRAC",
+    category: "BULK EXPORT",
     description:
-      "Graines de Phool Makhana de qualité export (4 à 6 suta). Devis sur demande.",
-    customPriceLabel: "Devis sur demande",
+      "Graines de Phool Makhana de qualité export (4 à 6 suta).",
+    customPriceLabel: "Bulk quantities available.",
     image: "/bulk makhana.png",
+    altText: "Raw Phool Makhana bulk export kernels",
     isB2B: true,
   },
 ];
 
-const englishProducts: Product[] = frenchProducts.map((product) => {
-  const localized: Record<string, Partial<Product>> = {
-    "himalayan-salt": {
-      name: "Himalayan Salt & Pepper",
-      description: "Puffed Makhana - Pink Himalayan salt and pepper.",
-    },
-    "truffle": {
-      name: "Gourmet Truffle Fusion",
-      description: "Puffed Makhana - Black Truffle flavor.",
-    },
-    "herb": {
-      name: "Mediterranean Herb Fusion",
-      description: "Puffed Makhana - Herbes de Provence.",
-    },
-    "caramel-salt": {
-      name: "Caramel & Sea Salt",
-      description: "Puffed Makhana - Golden caramel with a touch of sea salt.",
-      category: "SWEET",
-    },
-    "dark-chocolate": {
-      name: "Dark Chocolate 70%",
-      description: "Puffed Makhana - Delicately coated in 70% dark chocolate.",
-      category: "SWEET",
-    },
-    "lemon-mint": {
-      name: "Lemon & Mint",
-      description: "Puffed Makhana - Bright lemon and cooling mint.",
-      category: "PLANT-BASED",
-    },
-    "peanut-butter": {
-      name: "Peanut Butter",
-      description: "Puffed Makhana - Roasted peanut flavor.",
-    },
-    "peri-peri": {
-      name: "Peri-Peri",
-      description: "Puffed Makhana - Chili, citrus, and garlic.",
-      category: "SPICY",
-    },
-    "smokey-bbq": {
-      name: "Smokey BBQ",
-      description: "Puffed Makhana - Deep smoky notes and savory spices.",
-    },
-    "tangy-tomato": {
-      name: "Tangy Tomato",
-      description: "Puffed Makhana - Sun-ripened tomato and herbs.",
-      category: "PLANT-BASED",
-    },
-    "raw": {
-      name: "Raw Phool Makhana",
-      description:
-        "Premium bulk Makhana for wholesalers, distributors, and private labels.",
-      customPriceLabel: "Tiered container pricing - Quote on request.",
-    },
-    "trio-bundle": {
-      name: "Trio Discovery Pack",
-      description: "Himalayan Salt & Pepper, Gourmet Truffle, and Dark Chocolate 70%.",
-    },
-    "six-pack-bundle": {
-      name: "Family Pack - 6 Bags (Himalayan Salt)",
-      description: "6 Pack Offer: Buy 5, Get 1 Free!",
-    },
-    "six-pack-mixed": {
-      name: "6 Pack Combo Offer",
-      description: "2 Dark Chocolate + 2 Peri Peri + 2 Himalayan Pink Salt.",
-      image: "/products/six-pack-mixed-promo.jpg",
-    },
-  };
-
-  return { ...product, ...localized[product.id] };
-});
-
-/* ─── Bilingual helper for DB-sourced products ───────────────────────────
-   When an admin adds a product with both EN and FR fields, this function
-   returns the correct localized name/description based on current language.
-   Falls back to English if French translation is missing.
-─────────────────────────────────────────────────────────────────────── */
-export function getLocalizedProduct(
-  product: {
-    name?: string;
-    nameFr?: string;
-    description?: string;
-    descriptionFr?: string;
-    shortDescription?: string;
-    shortDescriptionFr?: string;
-    [key: string]: any;
+const englishProducts: Product[] = [
+  {
+    id: "himalayan-salt",
+    slug: "himalayan-salt",
+    name: "Himalayan Salt & Pepper",
+    category: "SIGNATURE",
+    description: "Puffed Makhana - Pink Himalayan salt and pepper (30g).",
+    basePrice: 2.99,
+    basePriceINR: 59,
+    image: "/flavor_himalayan_salt_new.png",
+    altText: "AÉRI Himalayan Salt & Pepper makhana pack",
   },
-  lang: string
-): { name: string; description: string; shortDescription: string } {
-  const isFrench = lang === "fr";
-  return {
-    name: isFrench
-      ? (product.nameFr?.trim() || product.name || "")
-      : (product.name || ""),
-    description: isFrench
-      ? (product.descriptionFr?.trim() || product.description || "")
-      : (product.description || ""),
-    shortDescription: isFrench
-      ? (product.shortDescriptionFr?.trim() || product.shortDescription || "")
-      : (product.shortDescription || ""),
-  };
-}
+  {
+    id: "truffle",
+    slug: "black-truffle",
+    name: "Gourmet Truffle Fusion",
+    category: "GOURMET",
+    description: "Puffed Makhana - Black truffle flavor (30g).",
+    basePrice: 2.99,
+    basePriceINR: 79,
+    image: "/products/product2.png",
+    altText: "AÉRI Gourmet Truffle makhana pack",
+  },
+  {
+    id: "dark-chocolate",
+    slug: "dark-chocolate",
+    name: "Dark Chocolate 70%",
+    category: "SWEET",
+    description: "Puffed Makhana - Delicately coated in 70% dark chocolate (30g).",
+    basePrice: 2.99,
+    basePriceINR: 99,
+    image: "/flavor_dark_chocolate.png",
+    altText: "AÉRI 70% Dark Chocolate makhana pack",
+  },
+  {
+    id: "raw",
+    slug: "raw-phool-makhana",
+    name: "Raw Phool Makhana",
+    category: "BULK EXPORT",
+    description:
+      "Export-grade raw Phool Makhana in 4, 5 and 6+ suta, handpicked.",
+    customPriceLabel: "Bulk quantities available.",
+    image: "/bulk makhana.png",
+    altText: "Raw Phool Makhana bulk export kernels",
+    isB2B: true,
+  },
+];
 
 const copy: Record<"fr" | "en", LocaleCopy> = {
   fr: {
     title: "Notre Gamme de Makhana",
-    subtitle:
-      "Les trois créations fondatrices AÉRI, notre gamme complète de saveurs et une offre vrac dédiée aux acheteurs professionnels.",
+    subtitle: "Our current range.",
     collectionLabel: "Collection AÉRI",
     addToCart: "Ajouter au Panier",
     addedToCart: "Ajouté au panier !",
     outOfStock: "Rupture de stock",
-    b2bButton: "Formulaire B2B",
-    roastBadge: "Torréfié à l'huile d'olive - Jamais frit",
+    b2bButton: "Contact Us",
+    roastBadge: "Slow roasted - Never fried",
     products: frenchProducts,
   },
   en: {
     title: "Our Makhana Range",
-    subtitle:
-      "The three founding AÉRI creations, our complete flavor range, and a bulk offer for professional buyers.",
+    subtitle: "Our current range.",
     collectionLabel: "AÉRI Collection",
     addToCart: "Add to Cart",
     addedToCart: "Added to cart!",
     outOfStock: "Out of Stock",
-    b2bButton: "B2B Form",
-    roastBadge: "Roasted in olive oil - Never fried",
+    b2bButton: "Contact Us",
+    roastBadge: "Slow roasted - Never fried",
     products: englishProducts,
   },
 };
@@ -214,13 +163,9 @@ const copy: Record<"fr" | "en", LocaleCopy> = {
 const categoryColors: Record<string, string> = {
   SIGNATURE: "bg-amber-100 text-amber-900",
   GOURMET: "bg-stone-200 text-stone-800",
-  VÉGÉTAL: "bg-emerald-100 text-emerald-900",
-  "PLANT-BASED": "bg-emerald-100 text-emerald-900",
   SUCRÉ: "bg-orange-100 text-orange-900",
   SWEET: "bg-orange-100 text-orange-900",
-  ÉPICÉ: "bg-red-100 text-red-900",
-  SPICY: "bg-red-100 text-red-900",
-  "B2B / VRAC": "bg-sky-100 text-sky-900",
+  "BULK EXPORT": "bg-sky-100 text-sky-900",
 };
 
 const fadeUp = {
@@ -241,6 +186,7 @@ export default function FlavorExplorer() {
   const { getPrice, formatAmount } = useCurrency();
   const content = copy[lang === "en" ? "en" : "fr"];
   const { addToCart } = useCart();
+  const { openModal } = useContactModal();
   const [addedIds, setAddedIds] = useState<Set<string>>(new Set());
 
   const handleAddToCart = (product: Product) => {
@@ -256,7 +202,6 @@ export default function FlavorExplorer() {
     setAddedIds((prev) => new Set([...prev, product.id]));
     toast.success(content.addedToCart, { duration: 2000 });
 
-    // Reset button after 2s
     setTimeout(() => {
       setAddedIds((prev) => {
         const next = new Set(prev);
@@ -298,7 +243,7 @@ export default function FlavorExplorer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.15 }}
-          className="mx-auto mt-5 max-w-3xl text-sm leading-7 text-[#4C463E] md:text-base"
+          className="mx-auto mt-5 max-w-3xl text-sm leading-7 text-[#4C463E] md:text-base font-medium"
           style={{ fontFamily: "var(--font-montserrat)" }}
         >
           {content.subtitle}
@@ -316,24 +261,20 @@ export default function FlavorExplorer() {
             key={product.id}
             custom={index}
             variants={fadeUp}
-            className={`group flex h-full flex-col overflow-hidden rounded-[1.5rem] border bg-white transition duration-300 hover:-translate-y-1 hover:shadow-[0_20px_55px_-30px_rgba(28,28,28,0.45)] ${
+            className={`group flex h-full flex-col overflow-hidden rounded-[1.5rem] border bg-white transition duration-300 hover:-translate-y-1 hover:shadow-lg ${
               product.isB2B
                 ? "border-sky-900/20"
                 : "border-[#1C1C1C]/10"
             }`}
           >
             <Link
-              href={`/products/${product.slug}`}
+              href={product.isB2B ? "/raw-phool-makhana" : `/products/${product.slug}`}
               className="relative block aspect-square overflow-hidden bg-[#F7F2EB]"
               aria-label={product.name}
             >
               <Image
                 src={product.image}
-                alt={
-                  product.isB2B
-                    ? "Raw premium bulk Makhana kernels"
-                    : `Sachet AÉRI ${product.name}`
-                }
+                alt={product.altText}
                 fill
                 sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 25vw"
                 className="object-contain p-5 transition-transform duration-500 group-hover:scale-[1.035]"
@@ -361,7 +302,10 @@ export default function FlavorExplorer() {
                 </p>
               )}
 
-              <Link href={`/products/${product.slug}`} className="block">
+              <Link
+                href={product.isB2B ? "/raw-phool-makhana" : `/products/${product.slug}`}
+                className="block"
+              >
                 <h3
                   className="text-xl font-semibold leading-tight text-[#1D1B1A]"
                   style={{ fontFamily: "var(--font-didot)" }}
@@ -369,15 +313,6 @@ export default function FlavorExplorer() {
                   {product.name}
                 </h3>
               </Link>
-
-              {product.flavor && (
-                <p
-                  className="mt-2 text-sm font-semibold leading-5 text-[#6A5B49]"
-                  style={{ fontFamily: "var(--font-montserrat)" }}
-                >
-                  {product.flavor}
-                </p>
-              )}
 
               <p
                 className="mt-3 flex-1 text-sm leading-6 text-[#4C463E]/80"
@@ -396,54 +331,41 @@ export default function FlavorExplorer() {
                     : "var(--font-didot)",
                 }}
               >
-                {product.isB2B 
-                  ? product.customPriceLabel 
-                  : product.inStock === false
-                      ? ""
-                      : (product.basePrice !== undefined || product.basePriceINR !== undefined)
-                          ? `${formatAmount(getPrice(product))} / ${product.id.includes("bundle") ? "pack" : "30g"}`
-                          : ""
-                }
+                {product.isB2B
+                  ? product.customPriceLabel
+                  : (product.basePrice !== undefined || product.basePriceINR !== undefined)
+                  ? `${formatAmount(getPrice(product))} / 30g`
+                  : ""}
               </p>
 
               {product.isB2B ? (
-                <Link
-                  href="/espace-pro#demande-professionnelle"
-                  className="mt-5 inline-flex min-h-11 items-center justify-center rounded-xl bg-[#1C1C1C] px-5 py-3 text-center text-xs font-bold uppercase tracking-[0.13em] text-white transition-colors hover:bg-[#343434]"
-                  style={{ fontFamily: "var(--font-montserrat)" }}
-                >
-                  {content.b2bButton}
-                </Link>
-              ) : product.inStock === false ? (
                 <button
                   type="button"
-                  disabled
-                  className="mt-5 min-h-11 rounded-xl px-5 py-3 text-xs font-bold uppercase tracking-[0.13em] text-white transition-all duration-300 bg-stone-400 cursor-not-allowed"
+                  onClick={() => openModal("Raw Phool Makhana")}
+                  className="mt-5 inline-flex min-h-[44px] items-center justify-center rounded-xl bg-[#1C1C1C] px-5 py-3 text-center text-xs font-bold uppercase tracking-[0.13em] text-white transition-colors hover:bg-black active:scale-95 cursor-pointer shadow-sm"
                   style={{ fontFamily: "var(--font-montserrat)" }}
                 >
-                  {content.outOfStock}
+                  Contact Us
                 </button>
               ) : (
                 <button
                   type="button"
                   onClick={() => handleAddToCart(product)}
                   disabled={addedIds.has(product.id)}
-                  className={`mt-5 min-h-11 rounded-xl px-5 py-3 text-xs font-bold uppercase tracking-[0.13em] text-white transition-all duration-300 ${
+                  className={`mt-5 min-h-[44px] rounded-xl px-5 py-3 text-xs font-bold uppercase tracking-[0.13em] text-white transition-all duration-300 ${
                     addedIds.has(product.id)
                       ? "bg-green-700 scale-95"
-                      : "bg-[#1C1C1C] hover:bg-[#343434]"
+                      : "bg-[#1C1C1C] hover:bg-black active:scale-95"
                   }`}
                   style={{ fontFamily: "var(--font-montserrat)" }}
                 >
-                  {addedIds.has(product.id) ? "✓ " + content.addedToCart : content.addToCart}
+                  {addedIds.has(product.id) ? content.addedToCart : content.addToCart}
                 </button>
               )}
             </div>
           </motion.article>
         ))}
       </motion.div>
-
-
     </section>
   );
 }

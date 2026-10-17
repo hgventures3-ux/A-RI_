@@ -143,7 +143,7 @@ export async function POST(req: Request) {
         });
         return NextResponse.json({ success: true, message: "OTP sent successfully via Resend SMTP" });
       } catch (error: any) {
-        console.error("❌ Resend SMTP Error:", error);
+        console.error("[ERROR] Resend SMTP Error:", error);
         return NextResponse.json({ error: "Failed to send OTP via Resend. Please try again." }, { status: 500 });
       }
     }
@@ -165,7 +165,7 @@ export async function POST(req: Request) {
     try {
       await transporter.verify();
     } catch (smtpAuthError: any) {
-      console.error("❌ SMTP Authentication Failed:", smtpAuthError.message);
+      console.error("[ERROR] SMTP Authentication Failed:", smtpAuthError.message);
       
       // Give a helpful response if it's the specific Google WebLoginRequired error
       if (smtpAuthError.message.includes("534-5.7.9")) {
@@ -192,7 +192,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ success: true, message: "OTP sent successfully via SMTP" });
 
   } catch (error: any) {
-    console.error("❌ General Send OTP Error:", error);
+    console.error("[ERROR] General Send OTP Error:", error);
     return NextResponse.json({ error: "Failed to send OTP. Please try again later." }, { status: 500 });
   }
 }

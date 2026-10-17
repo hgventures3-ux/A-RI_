@@ -42,7 +42,7 @@ export default function WhatsAppButton() {
       {/* WhatsApp Button */}
       <div className="relative group">
         <a
-          href="https://wa.me/919499729424?text=Hello%2C%20I%20am%20interested%20in%20Phool%20Makhana%20export."
+          href="https://wa.me/919499729424?text=Hello%20A%C3%89RI%20Team%2C%20I%27m%20interested%20in%20your%20products%20and%20would%20like%20to%20know%20more.%20Could%20you%20please%20assist%20me%3F"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat on WhatsApp (+91 94997 29424)"

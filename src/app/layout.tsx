@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { cookies, headers } from "next/headers";
 import Providers from "@/components/Providers";
-import WhatsAppButton from "@/components/WhatsAppButton";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import "./globals.css";
 import { GEO_COUNTRY_COOKIE, normalizeCountryCode } from "@/lib/pricing";
 
@@ -28,35 +28,33 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "AÉRI - Le snacking qui vous élève",
-  description: "L'équilibre parfait entre tradition millénaire et plaisir instantané",
-  alternates: {
-    languages: {
-      "fr": "https://aerisnacks.com",
-      "en": "https://aerisnacks.com",
-    },
-  },
+  metadataBase: new URL("https://www.aerisnacks.com"),
+  title: "Phool Makhana Exporter India | Raw Makhana & Private Label | AÉRI",
+  description:
+    "Export-grade raw Phool Makhana (fox nuts) and private-label roasted makhana from certified partner facilities in India. Part of KHT Group.",
   openGraph: {
-    title: "AÉRI - Le snacking qui vous élève",
-    description: "L'équilibre parfait entre tradition millénaire et plaisir instantané",
-    url: "https://aerisnacks.com",
-    siteName: "AÉRI Snacks",
+    title: "Phool Makhana Exporter India | Raw Makhana & Private Label | AÉRI",
+    description:
+      "Export-grade raw Phool Makhana (fox nuts) and private-label roasted makhana from certified partner facilities in India. Part of KHT Group.",
+    url: "https://www.aerisnacks.com",
+    siteName: "AÉRI Makhana",
     images: [
       {
-        url: "https://aerisnacks.com/flavor_himalayan_salt_new.png",
+        url: "/hero-makhana-bag.webp",
         width: 1200,
-        height: 630,
-        alt: "AÉRI Snacks - Makhana Premium",
+        height: 1200,
+        alt: "Raw Phool Makhana Export - AÉRI Makhana",
       },
     ],
-    locale: "fr_FR",
+    locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AÉRI - Le snacking qui vous élève",
-    description: "L'équilibre parfait entre tradition millénaire et plaisir instantané",
-    images: ["https://aerisnacks.com/flavor_himalayan_salt_new.png"],
+    title: "Phool Makhana Exporter India | Raw Makhana & Private Label | AÉRI",
+    description:
+      "Export-grade raw Phool Makhana (fox nuts) and private-label roasted makhana from certified partner facilities in India. Part of KHT Group.",
+    images: ["/hero-makhana-bag.webp"],
   },
 };
 
@@ -72,11 +70,12 @@ export default async function RootLayout({
 
   return (
     <html
-      lang="fr"
+      lang="en"
       className={`${inter.variable} ${montserrat.variable} ${playfair.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <head>
+        <GoogleAnalytics />
         <Script
           id="microsoft-clarity"
           strategy="afterInteractive"
@@ -91,9 +90,8 @@ export default async function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col font-montserrat">
         <Providers initialCountry={initialCountry}>{children}</Providers>
-        <WhatsAppButton />
       </body>
     </html>
   );

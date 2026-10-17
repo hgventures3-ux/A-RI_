@@ -1,30 +1,36 @@
 import { MetadataRoute } from 'next';
-import { productData } from '@/lib/productData';
+import { initialArticles } from '@/lib/journalData';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://aerisnacks.com';
+  const baseUrl = 'https://www.aerisnacks.com';
 
-  const staticRoutes = [
+  const staticPages = [
     '',
-    '/products',
+    '/raw-phool-makhana',
+    '/private-label',
+    '/about-us',
     '/brand',
-    '/mission',
-    '/ou-nous-trouver',
-    '/contact',
-    '/espace-pro'
-  ].map((route) => ({
+    '/products',
+    '/journal',
+    '/legal/legal-notice',
+    '/legal/t-c',
+    '/legal/return-policy',
+    '/legal/privacy',
+  ];
+
+  const staticEntries: MetadataRoute.Sitemap = staticPages.map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: route === '' ? 1 : 0.8,
+    changeFrequency: route === '' ? 'weekly' : 'monthly',
+    priority: route === '' ? 1.0 : route.startsWith('/legal') ? 0.3 : 0.8,
   }));
 
-  const productRoutes = Object.keys(productData).map((slug) => ({
-    url: `${baseUrl}/products/${slug}`,
+  const journalEntries: MetadataRoute.Sitemap = initialArticles.map((article) => ({
+    url: `${baseUrl}/journal/${article.slug}`,
     lastModified: new Date(),
-    changeFrequency: 'weekly' as const,
-    priority: 0.9,
+    changeFrequency: 'monthly',
+    priority: 0.7,
   }));
 
-  return [...staticRoutes, ...productRoutes];
+  return [...staticEntries, ...journalEntries];
 }
