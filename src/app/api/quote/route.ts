@@ -121,7 +121,7 @@ function buildBuyerConfirmationHtml(name: string): string {
           <strong>Direct Contact:</strong><br/>
           Export Inquiries: <a href="mailto:kriya@aerisnacks.com" style="color:#1c1c1c;">kriya@aerisnacks.com</a><br/>
           Distributor Inquiries: <a href="mailto:info@aerisnacks.com" style="color:#1c1c1c;">info@aerisnacks.com</a><br/>
-          WhatsApp: <a href="https://wa.me/919499729424" style="color:#1c1c1c;">+91 94997 29424</a><br/>
+          WhatsApp: <a href="https://wa.me/919499729424?text=Hello%20A%C3%89RI%20Team%2C%20I%27m%20interested%20in%20your%20products%20and%20would%20like%20to%20know%20more.%20Could%20you%20please%20assist%20me%3F" style="color:#1c1c1c;">+91 94997 29424</a><br/>
           Phone: +91 84600 58916
         </div>
       </td>
