@@ -13,6 +13,26 @@ export interface JournalArticle {
 
 export const initialArticles: JournalArticle[] = [
   {
+    slug: 'makhana-export-certifications-guide',
+    title:
+      'Makhana Export from India: Certifications, Quality Standards and Documents International Buyers Should Know',
+    subtitle:
+      'A complete guide to food safety certifications, laboratory testing parameters, and export documentation required when sourcing Phool Makhana from India.',
+    date: 'October 26, 2026',
+    author: 'AÉRI Team',
+    image: '/raw-makhana-bowl.webp',
+    summary:
+      'Essential guide for international food buyers, importers, and retail brands on mandatory food safety certifications, product testing parameters, and export documentation when sourcing Phool Makhana from India.',
+    metaTitle: 'Makhana Export from India: Certifications & Quality Standards | AÉRI',
+    metaDescription:
+      'Learn the food safety certifications, lab testing requirements, and export documentation needed to import Phool Makhana from India into the USA, Europe, Canada, and Australia.',
+    paragraphs: [
+      "India is the world's leading producer of Makhana (Fox Nuts), supplying raw, roasted and flavoured products to international food brands, importers and distributors.",
+      "For international buyers, selecting a Makhana exporter involves more than comparing prices. Food safety certifications, product testing, manufacturing standards and export documentation are essential when importing food products into markets such as the USA, Canada, Switzerland, Australia and Europe.",
+      "This guide covers the key certifications, quality documents and export requirements buyers should verify when sourcing Makhana from India.",
+    ],
+  },
+  {
     slug: 'apero',
     title: 'The Art of the Apéro: Pairing Makhana for Modern Entertaining',
     subtitle: 'How to elevate social snacking with premium roasted fox nuts.',

@@ -1,9 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -47,6 +44,11 @@ const nextConfig: NextConfig = {
       {
         source: "/products/raw-bulk-kernels",
         destination: "/raw-phool-makhana",
+        permanent: true,
+      },
+      {
+        source: "/journal/makhana-export-certifications",
+        destination: "/journal/makhana-export-certifications-guide",
         permanent: true,
       },
     ];

@@ -7,9 +7,14 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { useContactModal } from '@/context/ContactModalContext';
 import { JournalArticle } from '@/lib/journalData';
+import ExportGuideArticle from '@/components/ExportGuideArticle';
 
 export default function JournalArticleClient({ article }: { article: JournalArticle }) {
   const { openModal } = useContactModal();
+
+  if (article.slug === 'makhana-export-certifications-guide') {
+    return <ExportGuideArticle article={article} />;
+  }
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-[#1C1C1C] flex flex-col font-montserrat">
