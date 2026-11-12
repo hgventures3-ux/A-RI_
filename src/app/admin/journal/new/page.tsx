@@ -212,7 +212,7 @@ export default function AdminNewJournalPage() {
             </label>
             <select
               value={status}
-              onChange={(e: any) => setStatus(e.target.value)}
+              onChange={(e) => setStatus(e.target.value as "Published" | "Draft")}
               className="w-full border border-[#e8e0d8] rounded-xl px-4 py-3 text-sm text-[#1d1b1a] bg-white focus:outline-none focus:border-[#1d1b1a]"
             >
               <option value="Published">Published (Live on Website)</option>

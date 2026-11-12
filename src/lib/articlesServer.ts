@@ -9,19 +9,19 @@ export async function getAllArticles(): Promise<JournalArticle[]> {
     
     // Find any deleted slugs (including deleted static articles)
     const deletedDocs = await Article.find({ status: "Deleted" }).select("slug").lean();
-    const deletedSlugs = new Set(deletedDocs.map((d: any) => d.slug));
+    const deletedSlugs = new Set(deletedDocs.map((d: Record<string, unknown>) => String(d.slug || "")));
 
-    const dbArticles: JournalArticle[] = dbDocs.map((doc: any) => ({
-      slug: doc.slug,
-      title: doc.title,
-      subtitle: doc.subtitle || "",
-      date: doc.date || new Date(doc.createdAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }),
-      author: doc.author || "AÉRI Team",
-      image: doc.image || "/hero-makhana-bag.webp",
-      summary: doc.summary || doc.subtitle || "",
-      metaTitle: doc.metaTitle || doc.title,
-      metaDescription: doc.metaDescription || doc.subtitle || "",
-      paragraphs: Array.isArray(doc.paragraphs) ? doc.paragraphs : [],
+    const dbArticles: JournalArticle[] = dbDocs.map((doc: Record<string, unknown>) => ({
+      slug: String(doc.slug || ""),
+      title: String(doc.title || ""),
+      subtitle: String(doc.subtitle || ""),
+      date: String(doc.date || (doc.createdAt ? new Date(String(doc.createdAt)).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "")),
+      author: String(doc.author || "AÉRI Team"),
+      image: String(doc.image || "/hero-makhana-bag.webp"),
+      summary: String(doc.summary || doc.subtitle || ""),
+      metaTitle: String(doc.metaTitle || doc.title || ""),
+      metaDescription: String(doc.metaDescription || doc.subtitle || ""),
+      paragraphs: Array.isArray(doc.paragraphs) ? (doc.paragraphs as string[]) : [],
     }));
 
     const existingSlugs = new Set([...dbArticles.map((a) => a.slug), ...deletedSlugs]);
@@ -37,20 +37,20 @@ export async function getAllArticles(): Promise<JournalArticle[]> {
 export async function getArticleBySlug(slug: string): Promise<JournalArticle | null> {
   try {
     await connectDB();
-    const doc: any = await Article.findOne({ slug }).lean();
+    const doc = (await Article.findOne({ slug }).lean()) as Record<string, unknown> | null;
     if (doc) {
       if (doc.status === "Deleted") return null;
       return {
-        slug: doc.slug,
-        title: doc.title,
-        subtitle: doc.subtitle || "",
-        date: doc.date || new Date(doc.createdAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }),
-        author: doc.author || "AÉRI Team",
-        image: doc.image || "/hero-makhana-bag.webp",
-        summary: doc.summary || doc.subtitle || "",
-        metaTitle: doc.metaTitle || doc.title,
-        metaDescription: doc.metaDescription || doc.subtitle || "",
-        paragraphs: Array.isArray(doc.paragraphs) ? doc.paragraphs : [],
+        slug: String(doc.slug || ""),
+        title: String(doc.title || ""),
+        subtitle: String(doc.subtitle || ""),
+        date: String(doc.date || (doc.createdAt ? new Date(String(doc.createdAt)).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "")),
+        author: String(doc.author || "AÉRI Team"),
+        image: String(doc.image || "/hero-makhana-bag.webp"),
+        summary: String(doc.summary || doc.subtitle || ""),
+        metaTitle: String(doc.metaTitle || doc.title || ""),
+        metaDescription: String(doc.metaDescription || doc.subtitle || ""),
+        paragraphs: Array.isArray(doc.paragraphs) ? (doc.paragraphs as string[]) : [],
       };
     }
   } catch (error) {

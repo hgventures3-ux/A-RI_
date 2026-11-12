@@ -1,13 +1,13 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { getArticleBySlug, getAllArticles } from '@/lib/articlesServer';
+import { getArticleBySlug } from '@/lib/articlesServer';
+import { initialArticles } from '@/lib/journalData';
 import JournalArticleClient from '@/components/JournalArticleClient';
 
 export const dynamicParams = true;
 
 export async function generateStaticParams() {
-  const articles = await getAllArticles();
-  return articles.map((article) => ({
+  return initialArticles.map((article) => ({
     slug: article.slug,
   }));
 }

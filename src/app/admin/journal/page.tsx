@@ -26,41 +26,49 @@ export default function AdminJournalPage() {
   const [articleToDelete, setArticleToDelete] = useState<ArticleItem | null>(null);
   const [isDeleting, setIsDeleting] = useState(false);
 
-  const fetchArticles = async () => {
-    setLoading(true);
-    try {
-      const res = await fetch("/api/admin/articles");
-      if (res.ok) {
-        const data = await res.json();
-        const dbList = (data.articles || []).map((a: any) => ({ ...a, isStatic: false }));
-        const staticList = (data.staticArticles || []).map((a: any) => ({
-          slug: a.slug,
-          title: a.title,
-          subtitle: a.subtitle,
-          date: a.date,
-          author: a.author,
-          image: a.image,
-          status: "Published",
-          isStatic: true,
-        }));
-
-        // Avoid duplicate slugs
-        const dbSlugs = new Set(dbList.map((d: any) => d.slug));
-        const filteredStatic = staticList.filter((s: any) => !dbSlugs.has(s.slug));
-
-        setArticles([...dbList, ...filteredStatic]);
-      }
-    } catch (err) {
-      console.error("Failed to fetch articles:", err);
-      toast.error("Failed to load blog articles");
-    } finally {
-      setLoading(false);
-    }
-  };
+  const [refreshIndex, setRefreshIndex] = useState(0);
 
   useEffect(() => {
-    fetchArticles();
-  }, []);
+    let ignore = false;
+    fetch("/api/admin/articles")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (!ignore && data) {
+          const dbList = (data.articles || []).map((a: ArticleItem) => ({ ...a, isStatic: false }));
+          const staticList = (data.staticArticles || []).map((a: ArticleItem) => ({
+            slug: a.slug,
+            title: a.title,
+            subtitle: a.subtitle,
+            date: a.date,
+            author: a.author,
+            image: a.image,
+            status: "Published" as const,
+            isStatic: true,
+          }));
+
+          const dbSlugs = new Set(dbList.map((d: ArticleItem) => d.slug));
+          const filteredStatic = staticList.filter((s: ArticleItem) => !dbSlugs.has(s.slug));
+
+          setArticles([...dbList, ...filteredStatic]);
+          setLoading(false);
+        }
+      })
+      .catch(() => {
+        if (!ignore) {
+          toast.error("Failed to load blog articles");
+          setLoading(false);
+        }
+      });
+
+    return () => {
+      ignore = true;
+    };
+  }, [refreshIndex]);
+
+  const refreshArticles = () => {
+    setLoading(true);
+    setRefreshIndex((prev) => prev + 1);
+  };
 
   const confirmDelete = async () => {
     if (!articleToDelete) return;
@@ -77,11 +85,11 @@ export default function AdminJournalPage() {
       if (res.ok && data.success) {
         toast.success(`"${articleToDelete.title}" deleted successfully`);
         setArticleToDelete(null);
-        fetchArticles();
+        refreshArticles();
       } else {
         toast.error(data.error || "Failed to delete article");
       }
-    } catch (err) {
+    } catch {
       toast.error("Failed to delete article");
     } finally {
       setIsDeleting(false);
@@ -113,7 +121,7 @@ export default function AdminJournalPage() {
 
         <div className="flex items-center gap-3">
           <button
-            onClick={fetchArticles}
+            onClick={refreshArticles}
             className="p-2.5 rounded-xl border border-[#e8e0d8] bg-white text-[#4c463e] hover:bg-[#f5ede3] transition-colors"
             title="Refresh articles"
           >
