@@ -13,6 +13,26 @@ export interface JournalArticle {
 
 export const initialArticles: JournalArticle[] = [
   {
+    slug: 'private-label-makhana-manufacturing-guide',
+    title:
+      'Private Label Makhana Manufacturing in India: Launch Your Own Fox Nuts Snack Brand',
+    subtitle:
+      'A complete guide to private-label contract manufacturing, custom flavour formulation, retail packaging formats, and bulk export supply from India.',
+    date: 'October 27, 2026',
+    author: 'AÉRI Team',
+    image: '/private-label-mockup-pouch.webp',
+    summary:
+      'Comprehensive guide for food brands, supermarket chains, and snack distributors looking to launch their own private-label fox nuts brand with contract manufacturing in India.',
+    metaTitle: 'Private Label Makhana Manufacturing in India | AÉRI Journal',
+    metaDescription:
+      'Learn how to launch your own private-label Makhana snack brand in India. Explore raw and flavoured makhana, packaging options, MOQ, quality control, and export workflow.',
+    paragraphs: [
+      'The global demand for healthier snack alternatives is creating opportunities for food brands, distributors and retailers to introduce Makhana (Fox Nuts) to their product portfolios.',
+      'Private-label Makhana manufacturing allows businesses to sell premium roasted and flavoured Makhana under their own brand name without setting up manufacturing facilities.',
+      'AÉRI Makhana provides private-label Makhana manufacturing in India, offering product customisation, flavour development, packaging and bulk supply for your food brand.',
+    ],
+  },
+  {
     slug: 'makhana-export-certifications-guide',
     title:
       'Makhana Export from India: Certifications, Quality Standards and Documents International Buyers Should Know',

@@ -39,7 +39,7 @@ export async function middleware(request: NextRequest) {
   const country = resolveCountry(request);
 
   // Sirf /admin or /api/admin routes ko protect karte hain
-  if (path.startsWith('/admin') || path.startsWith('/api/admin')) {
+  if (path.startsWith('/admin') || path.startsWith('/api/admin') || path.startsWith('/journal/new')) {
     // Agar login page ya setup API pe hain, toh skip karte hain validation
     if (path === '/admin/login' || path === '/api/admin/auth/login' || path === '/api/admin/auth/setup') {
       const response = NextResponse.next({

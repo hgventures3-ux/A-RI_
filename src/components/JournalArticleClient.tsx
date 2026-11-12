@@ -8,12 +8,17 @@ import Footer from '@/components/Footer';
 import { useContactModal } from '@/context/ContactModalContext';
 import { JournalArticle } from '@/lib/journalData';
 import ExportGuideArticle from '@/components/ExportGuideArticle';
+import PrivateLabelGuideArticle from '@/components/PrivateLabelGuideArticle';
 
 export default function JournalArticleClient({ article }: { article: JournalArticle }) {
   const { openModal } = useContactModal();
 
   if (article.slug === 'makhana-export-certifications-guide') {
     return <ExportGuideArticle article={article} />;
+  }
+
+  if (article.slug === 'private-label-makhana-manufacturing-guide') {
+    return <PrivateLabelGuideArticle article={article} />;
   }
 
   return (

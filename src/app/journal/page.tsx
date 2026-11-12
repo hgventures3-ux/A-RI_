@@ -3,7 +3,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { initialArticles } from '@/lib/journalData';
+import { getAllArticles } from '@/lib/articlesServer';
+
+export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {
   title: 'Journal | Guides and Insights on Phool Makhana | AÉRI',
@@ -35,7 +37,9 @@ export const metadata: Metadata = {
   },
 };
 
-export default function JournalPage() {
+export default async function JournalPage() {
+  const articles = await getAllArticles();
+
   return (
     <div className="min-h-screen bg-[#FAF8F5] text-[#1C1C1C] flex flex-col font-montserrat">
       <Navbar />
@@ -60,16 +64,16 @@ export default function JournalPage() {
         {/* ── Articles Section ── */}
         <section className="max-w-6xl mx-auto px-4 sm:px-6">
           {/* Featured Article Card */}
-          {initialArticles.length > 0 && (
+          {articles.length > 0 && (
             <article className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow mb-12">
               <div className="grid grid-cols-1 lg:grid-cols-12 items-stretch">
                 <Link
-                  href={`/journal/${initialArticles[0].slug}`}
+                  href={`/journal/${articles[0].slug}`}
                   className="lg:col-span-5 relative min-h-[260px] lg:min-h-full bg-[#F5F3F0] block overflow-hidden group"
                 >
                   <Image
-                    src={initialArticles[0].image}
-                    alt={initialArticles[0].title}
+                    src={articles[0].image}
+                    alt={articles[0].title}
                     fill
                     priority
                     sizes="(max-width: 1024px) 100vw, 500px"
@@ -85,27 +89,27 @@ export default function JournalPage() {
                 <div className="lg:col-span-7 p-6 sm:p-8 lg:p-10 flex flex-col justify-between">
                   <div>
                     <p className="text-xs font-semibold tracking-wider uppercase text-gray-500 mb-2">
-                      {initialArticles[0].date} · By {initialArticles[0].author}
+                      {articles[0].date} · By {articles[0].author}
                     </p>
                     <h2
                       className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#1C1C1C] mb-3 leading-snug"
                       style={{ fontFamily: 'var(--font-didot)' }}
                     >
                       <Link
-                        href={`/journal/${initialArticles[0].slug}`}
+                        href={`/journal/${articles[0].slug}`}
                         className="hover:underline"
                       >
-                        {initialArticles[0].title}
+                        {articles[0].title}
                       </Link>
                     </h2>
                     <p className="text-sm sm:text-base text-gray-600 font-normal leading-relaxed mb-6">
-                      {initialArticles[0].summary}
+                      {articles[0].summary}
                     </p>
                   </div>
 
                   <div>
                     <Link
-                      href={`/journal/${initialArticles[0].slug}`}
+                      href={`/journal/${articles[0].slug}`}
                       className="inline-flex items-center min-h-[44px] px-6 py-2.5 bg-[#1C1C1C] text-white text-xs font-semibold uppercase tracking-wider rounded-lg hover:bg-black transition-colors"
                     >
                       Read Full Guide →
@@ -125,7 +129,7 @@ export default function JournalPage() {
 
           {/* Remaining Articles Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {initialArticles.slice(1).map((article) => (
+            {articles.slice(1).map((article) => (
               <article
                 key={article.slug}
                 className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between"

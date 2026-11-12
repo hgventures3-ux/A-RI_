@@ -204,6 +204,7 @@ export async function POST(req: NextRequest) {
         company: company || "N/A",
         country,
         phone: phone || undefined,
+        quantity: "Quote Inquiry",
         channel: product,
         notes: message || undefined,
         email,

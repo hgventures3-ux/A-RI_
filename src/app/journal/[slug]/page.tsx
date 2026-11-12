@@ -1,10 +1,13 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { initialArticles } from '@/lib/journalData';
+import { getArticleBySlug, getAllArticles } from '@/lib/articlesServer';
 import JournalArticleClient from '@/components/JournalArticleClient';
 
-export function generateStaticParams() {
-  return initialArticles.map((article) => ({
+export const dynamicParams = true;
+
+export async function generateStaticParams() {
+  const articles = await getAllArticles();
+  return articles.map((article) => ({
     slug: article.slug,
   }));
 }
@@ -15,7 +18,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const article = initialArticles.find((a) => a.slug === slug);
+  const article = await getArticleBySlug(slug);
 
   if (!article) {
     return {
@@ -57,7 +60,7 @@ export default async function ArticlePage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const article = initialArticles.find((a) => a.slug === slug);
+  const article = await getArticleBySlug(slug);
 
   if (!article) {
     notFound();

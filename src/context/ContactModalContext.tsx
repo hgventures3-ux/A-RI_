@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 
 export type ProductOption =
   | 'Raw Phool Makhana'
@@ -50,6 +50,33 @@ export function ContactModalProvider({ children }: { children: ReactNode }) {
   const closeModal = () => {
     setIsOpen(false);
   };
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const checkHashAndQuery = () => {
+      const hash = window.location.hash.toLowerCase();
+      const search = window.location.search.toLowerCase();
+      if (
+        hash === '#inquiry' ||
+        hash === '#inquire' ||
+        hash === '#quote' ||
+        hash === '#contact' ||
+        search.includes('inquiry=true') ||
+        search.includes('quote=true')
+      ) {
+        if (window.location.pathname.includes('private-label')) {
+          openModal('Private Label: Raw');
+        } else {
+          openModal();
+        }
+      }
+    };
+
+    checkHashAndQuery();
+    window.addEventListener('hashchange', checkHashAndQuery);
+    return () => window.removeEventListener('hashchange', checkHashAndQuery);
+  }, []);
 
   return (
     <ContactModalContext.Provider value={{ isOpen, defaultProduct, openModal, closeModal }}>
