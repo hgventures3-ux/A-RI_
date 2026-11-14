@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Plus, Search, Eye, Trash2, BookOpen, ExternalLink, RefreshCw, AlertTriangle, Loader2 } from "lucide-react";
+import { Plus, Search, Eye, Trash2, BookOpen, ExternalLink, RefreshCw, AlertTriangle, Loader2, Edit3 } from "lucide-react";
 import SkeletonLoader from "@/components/admin/SkeletonLoader";
 import toast from "react-hot-toast";
 
@@ -230,21 +230,31 @@ export default function AdminJournalPage() {
                 </div>
               </div>
 
-              <div className="p-5 pt-0 flex items-center justify-between border-t border-gray-100 mt-2">
-                <Link
-                  href={`/journal/${item.slug}`}
-                  target="_blank"
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1d1b1a] hover:underline"
-                >
-                  <Eye size={14} /> View Live Article
-                </Link>
+              <div className="p-4 pt-3 flex items-center justify-between border-t border-gray-100 mt-2 bg-gray-50/50 rounded-b-2xl">
+                <div className="flex items-center gap-2">
+                  <Link
+                    href={`/admin/journal/edit/${item.slug}`}
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1d1b1a] text-white hover:bg-[#383330] text-xs font-semibold shadow-sm transition-colors"
+                  >
+                    <Edit3 size={13} /> Edit
+                  </Link>
+
+                  <Link
+                    href={`/journal/${item.slug}`}
+                    target="_blank"
+                    className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg border border-[#e8e0d8] bg-white text-gray-700 hover:bg-gray-100 text-xs font-medium transition-colors"
+                    title="View live article"
+                  >
+                    <Eye size={13} /> View
+                  </Link>
+                </div>
 
                 <button
                   onClick={() => setArticleToDelete(item)}
-                  className="text-red-500 hover:text-red-700 p-2 rounded-lg hover:bg-red-50 transition-colors flex items-center gap-1 text-xs font-medium"
+                  className="text-red-500 hover:text-red-700 p-1.5 rounded-lg hover:bg-red-50 transition-colors flex items-center gap-1 text-xs font-medium"
                   title="Delete article"
                 >
-                  <Trash2 size={14} /> Delete
+                  <Trash2 size={13} /> Delete
                 </button>
               </div>
             </div>

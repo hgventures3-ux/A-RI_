@@ -4,6 +4,18 @@ const nextConfig: NextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+      {
+        protocol: "http",
+        hostname: "**",
+      },
+    ],
+  },
   async redirects() {
     return [
       {
@@ -50,6 +62,66 @@ const nextConfig: NextConfig = {
         source: "/journal/makhana-export-certifications",
         destination: "/journal/makhana-export-certifications-guide",
         permanent: true,
+      },
+      {
+        source: "/admin/products/:path*",
+        destination: "/admin/journal",
+        permanent: false,
+      },
+      {
+        source: "/admin/categories/:path*",
+        destination: "/admin/journal",
+        permanent: false,
+      },
+      {
+        source: "/admin/orders/:path*",
+        destination: "/admin/journal",
+        permanent: false,
+      },
+      {
+        source: "/admin/customers/:path*",
+        destination: "/admin/journal",
+        permanent: false,
+      },
+      {
+        source: "/admin/leads/:path*",
+        destination: "/admin/journal",
+        permanent: false,
+      },
+      {
+        source: "/admin/inventory/:path*",
+        destination: "/admin/journal",
+        permanent: false,
+      },
+      {
+        source: "/admin/coupons/:path*",
+        destination: "/admin/journal",
+        permanent: false,
+      },
+      {
+        source: "/admin/reviews/:path*",
+        destination: "/admin/journal",
+        permanent: false,
+      },
+      {
+        source: "/admin/settings/:path*",
+        destination: "/admin/journal",
+        permanent: false,
+      },
+      {
+        source: "/admin/users/:path*",
+        destination: "/admin/journal",
+        permanent: false,
+      },
+      {
+        source: "/admin/content/:path*",
+        destination: "/admin/journal",
+        permanent: false,
+      },
+      {
+        source: "/admin/analytics/:path*",
+        destination: "/admin/journal",
+        permanent: false,
       },
     ];
   },

@@ -5,41 +5,28 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useLanguage } from "@/context/LanguageContext";
 import {
-  LayoutDashboard,
-  Package,
-  FolderTree,
-  ShoppingCart,
-  Users,
-  Briefcase,
-  Warehouse,
-  Ticket,
-  Star,
-  BarChart3,
-  FileText,
   BookOpen,
-  Settings,
-  UserCog,
+  PlusCircle,
+  Globe,
   LogOut,
   ChevronLeft,
   Menu,
 } from "lucide-react";
 
-/* Sidebar Navigation Items */
+/* Sidebar Navigation Items - Only Blog / Journal features kept as requested */
 const navItems = [
-  { labelEn: "Dashboard", labelFr: "Tableau de bord", href: "/admin", icon: LayoutDashboard },
-  { labelEn: "Products", labelFr: "Produits", href: "/admin/products", icon: Package },
-  { labelEn: "Categories", labelFr: "Catégories", href: "/admin/categories", icon: FolderTree },
-  { labelEn: "Orders", labelFr: "Commandes", href: "/admin/orders", icon: ShoppingCart },
-  { labelEn: "Customers", labelFr: "Clients", href: "/admin/customers", icon: Users },
-  { labelEn: "B2B Leads", labelFr: "Prospects B2B", href: "/admin/leads", icon: Briefcase },
-  { labelEn: "Inventory", labelFr: "Inventaire", href: "/admin/inventory", icon: Warehouse },
-  { labelEn: "Coupons", labelFr: "Bons de réduction", href: "/admin/coupons", icon: Ticket },
-  { labelEn: "Reviews", labelFr: "Avis", href: "/admin/reviews", icon: Star },
-  { labelEn: "Analytics", labelFr: "Analyses", href: "/admin/analytics", icon: BarChart3 },
-  { labelEn: "Blogs / Journal", labelFr: "Blogs / Journal", href: "/admin/journal", icon: BookOpen },
-  { labelEn: "Content", labelFr: "Contenu", href: "/admin/content", icon: FileText },
-  { labelEn: "Settings", labelFr: "Paramètres", href: "/admin/settings", icon: Settings },
-  { labelEn: "Users", labelFr: "Utilisateurs", href: "/admin/users", icon: UserCog },
+  {
+    labelEn: "All Blogs / Articles",
+    labelFr: "Tous les blogs / Articles",
+    href: "/admin/journal",
+    icon: BookOpen,
+  },
+  {
+    labelEn: "Add New Blog",
+    labelFr: "Ajouter un blog",
+    href: "/admin/journal/new",
+    icon: PlusCircle,
+  },
 ];
 
 export default function AdminSidebar() {
@@ -60,9 +47,10 @@ export default function AdminSidebar() {
     }
   };
 
-  /* Check karo ki current route active hai ya nahi */
   const isActive = (href: string) => {
-    if (href === "/admin") return pathname === "/admin";
+    if (href === "/admin/journal") {
+      return pathname === "/admin/journal" || pathname === "/admin";
+    }
     return pathname.startsWith(href);
   };
 
@@ -99,7 +87,7 @@ export default function AdminSidebar() {
         {/* Logo / Brand */}
         <div className="h-16 flex items-center justify-between px-4 border-b border-white/10">
           {!collapsed && (
-            <Link href="/admin" className="flex items-center gap-2">
+            <Link href="/admin/journal" className="flex items-center gap-2">
               <span
                 className="text-xl font-bold tracking-wider"
                 style={{ fontFamily: "var(--font-montserrat, sans-serif)" }}
@@ -112,7 +100,7 @@ export default function AdminSidebar() {
             </Link>
           )}
           {collapsed && (
-            <Link href="/admin" className="mx-auto">
+            <Link href="/admin/journal" className="mx-auto">
               <span className="text-lg font-bold">A</span>
             </Link>
           )}
@@ -131,7 +119,10 @@ export default function AdminSidebar() {
         </div>
 
         {/* Navigation Links */}
-        <nav className="flex-1 py-4 px-2 space-y-1 overflow-y-auto scrollbar-thin">
+        <nav className="flex-1 py-4 px-2 space-y-1.5 overflow-y-auto scrollbar-thin">
+          <div className="px-3 pb-2 text-[10px] font-bold uppercase tracking-wider text-white/40">
+            {!collapsed && (isFrench ? "Gestion du contenu" : "Content Management")}
+          </div>
           {navItems.map((item) => {
             const Icon = item.icon;
             const active = isActive(item.href);
@@ -146,7 +137,7 @@ export default function AdminSidebar() {
                   text-sm font-medium transition-all duration-200
                   ${
                     active
-                      ? "bg-[#675d4e] text-white shadow-md"
+                      ? "bg-[#675d4e] text-white shadow-md font-semibold"
                       : "text-[#fef8f6]/70 hover:text-[#fef8f6] hover:bg-white/8"
                   }
                   ${collapsed ? "justify-center px-2" : ""}
@@ -160,8 +151,23 @@ export default function AdminSidebar() {
           })}
         </nav>
 
-        {/* Footer: Logout */}
-        <div className="p-2 border-t border-white/10">
+        {/* Footer: Live Website & Logout */}
+        <div className="p-2 border-t border-white/10 space-y-1">
+          <Link
+            href="/journal"
+            target="_blank"
+            className={`
+              flex items-center gap-3 px-3 py-2 rounded-xl w-full
+              text-xs font-medium text-[#fef8f6]/70 hover:text-white hover:bg-white/8
+              transition-all duration-200
+              ${collapsed ? "justify-center px-2" : ""}
+            `}
+            title={collapsed ? (isFrench ? "Voir le Journal" : "Live Journal") : undefined}
+          >
+            <Globe size={16} className="shrink-0" />
+            {!collapsed && <span>{isFrench ? "Voir le Journal en direct" : "View Live Journal"}</span>}
+          </Link>
+
           <button
             onClick={handleLogout}
             className={`
